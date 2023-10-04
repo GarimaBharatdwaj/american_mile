@@ -1,4 +1,5 @@
 import 'package:american_mile/core/components/rect_icon.dart';
+import 'package:american_mile/core/components/small_button.dart';
 import '../../../../common_lib.dart';
 import '../../../../core/components/index.dart';
 import '../../../../core/utils/index.dart';
@@ -46,12 +47,47 @@ class ProfileView extends GetView<ProfileController> {
                     children: [
                       Row(
                         children: [
-                          Text(
-                            "MOBILE PHONE #",
-                            style: Get.textTheme.titleMedium,
-                          ),
+                          Text("MOBILE PHONE #",
+                              style: Get.textTheme.titleMedium),
                         ],
-                      )
+                      ),
+                      Gap(6.h),
+                      Text(
+                        "480-678-7444",
+                        style: Get.textTheme.titleLarge?.copyWith(
+                          fontSize: 24.sp,
+                        ),
+                      ),
+                      Gap(12.h),
+                      Text("HOME PHONE #", style: Get.textTheme.titleMedium),
+                      Gap(6.h),
+                      Text(
+                        "480-678-7444",
+                        style: Get.textTheme.titleLarge?.copyWith(
+                          fontSize: 24.sp,
+                        ),
+                      ),
+                      Gap(8.h),
+                      Text(
+                        "✓ PREFERRED NUMBER",
+                        style: Get.textTheme.bodySmall?.copyWith(
+                          fontSize: 11.sp,
+                        ),
+                      ),
+                      Gap(8.h),
+                      Text("WORK PHONE #", style: Get.textTheme.titleMedium),
+                      Gap(6.h),
+                      Text(
+                        "480-678-7444",
+                        style: Get.textTheme.titleLarge?.copyWith(
+                          fontSize: 24.sp,
+                        ),
+                      ),
+                      Gap(16.h),
+                      RectSmallButton(
+                        buttonText: "Edit",
+                        onTap: () {},
+                      ),
                     ],
                   ),
                 ),
