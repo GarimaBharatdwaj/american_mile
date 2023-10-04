@@ -4,6 +4,8 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/home_policy/bindings/home_policy_binding.dart';
 import '../modules/home_policy/views/home_policy_view.dart';
+import '../modules/life_policy/bindings/life_policy_binding.dart';
+import '../modules/life_policy/views/life_policy_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/onboard/bindings/onboard_binding.dart';
@@ -57,6 +59,11 @@ class AppPages {
       name: _Paths.HOME_POLICY,
       page: () => const HomePolicyView(),
       binding: HomePolicyBinding(),
+    ),
+    GetPage(
+      name: _Paths.LIFE_POLICY,
+      page: () => const LifePolicyView(),
+      binding: LifePolicyBinding(),
     ),
   ];
 }
