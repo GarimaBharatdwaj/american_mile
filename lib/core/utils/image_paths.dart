@@ -7,6 +7,8 @@ class ImagePaths {
 //**************************************************************//
 
   static String onboardOne = "$imagePath/onboard1.png";
+  static String onboardTwo = "$imagePath/onboard2.png";
+  static String onboardThree = "$imagePath/onboard3.png";
 
 //**************************************************************//
 //************************ Icons ******************************//

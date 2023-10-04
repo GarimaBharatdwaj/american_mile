@@ -1,30 +1,40 @@
-import 'dart:async';
-
 import 'package:american_mile/common_lib.dart';
 
 class OnboardController extends GetxController {
   late PageController pageController;
+  late PageController pageControllerTwo;
   int _pageIndex = 0;
-  Timer? _timer;
+  RxBool isLastPage = false.obs;
 
   @override
   void onInit() {
     pageController = PageController(initialPage: 0);
+    pageControllerTwo = PageController(initialPage: 0);
 
-    _timer = Timer.periodic(const Duration(seconds: 5), (Timer timer) {
-      if (_pageIndex < 3) {
-        _pageIndex++;
-      } else {
-        _pageIndex = 0;
-      }
+    // _timer = Timer.periodic(const Duration(seconds: 5), (Timer timer) {
+    //   if (_pageIndex < 3) {
+    //     _pageIndex++;
+    //   } else {
+    //     _pageIndex = 0;
+    //   }
+    // });
+    super.onInit();
+  }
 
-      pageController.animateToPage(
-        _pageIndex,
+  onNextPage() {
+    if (_pageIndex < 2) {
+      pageController.nextPage(
         duration: const Duration(milliseconds: 350),
         curve: Curves.easeIn,
       );
-    });
-    super.onInit();
+      pageControllerTwo.nextPage(
+        duration: const Duration(milliseconds: 350),
+        curve: Curves.easeIn,
+      );
+      isLastPage.value = _pageIndex == 1;
+    } else {
+      Get.offAllNamed(Routes.HOME);
+    }
   }
 
   onPageChanged(index) {
@@ -34,7 +44,8 @@ class OnboardController extends GetxController {
   @override
   void onClose() {
     pageController.dispose();
-    _timer!.cancel();
+    pageControllerTwo.dispose();
+
     super.onClose();
   }
 }

@@ -2,15 +2,44 @@ import 'package:american_mile/common_lib.dart';
 import 'package:american_mile/core/components/profile_image_circle.dart';
 import 'package:american_mile/core/components/rect_icon.dart';
 import 'package:american_mile/core/utils/index.dart';
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    var bottomNavIndex = 0;
+    final iconList = <IconData>[
+      Icons.home,
+      Icons.brightness_4,
+      Icons.brightness_6,
+      Icons.person,
+    ];
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.background,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(100),
+          ),
+          child: const Icon(Icons.add),
+        ),
+        bottomNavigationBar: AnimatedBottomNavigationBar(
+          icons: iconList,
+          activeIndex: bottomNavIndex,
+          gapLocation: GapLocation.center,
+          height: 70,
+          notchSmoothness: NotchSmoothness.defaultEdge,
+          leftCornerRadius: 24,
+          rightCornerRadius: 24,
+          onTap: (index) {},
+          //other params
+        ),
         body: Padding(
           padding: EdgeInsets.all(15.w),
           child: Column(
@@ -100,7 +129,7 @@ class HomeView extends GetView<HomeController> {
                           Expanded(
                             child: Text(
                               "Good Morning. Have a nice\nday man",
-                              style: Get.textTheme.titleMedium,
+                              style: Get.textTheme.titleSmall,
                             ),
                           )
                         ],

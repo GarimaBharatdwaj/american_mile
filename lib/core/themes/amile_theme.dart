@@ -1,4 +1,5 @@
 import 'package:american_mile/common_lib.dart';
+import 'package:american_mile/core/utils/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 final themeDataDark = ThemeData(
@@ -30,9 +31,12 @@ final themeDataLight = ThemeData(
     color: Colors.black12,
     thickness: 0.5,
   ),
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+    backgroundColor: AppColors.primary,
+  ),
   filledButtonTheme: FilledButtonThemeData(
     style: FilledButton.styleFrom(
-      backgroundColor: const Color(0xFF089DED),
+      backgroundColor: AppColors.primary,
     ),
   ),
 );
