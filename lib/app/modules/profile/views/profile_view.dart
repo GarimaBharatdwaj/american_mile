@@ -18,7 +18,7 @@ class ProfileView extends GetView<ProfileController> {
                 Row(
                   children: [
                     RRectIcon(
-                      image: ImagePaths.menu,
+                      image: ImagePaths.arrow,
                       onTap: () {},
                     ),
                     Expanded(
@@ -96,93 +96,225 @@ class ProfileView extends GetView<ProfileController> {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                      ShadowContainer(
-                        child: Column(
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('EMAIL INFROMATION',
-                                    style: Get.textTheme.titleMedium),
-                                Gap(8.h),
-                                Text('COMMUNICATION EMAIL',
-                                    style: Get.textTheme.titleMedium),
-                                Gap(8.h),
-                                Text('adambrettrobbins@gmail.com',
-                                    style: Get.textTheme.titleMedium?.copyWith(
-                                        fontWeight: FontWeight.w600)),
-                              ],
-                            ),
-                            Gap(16.h),
-                            RectSmallButton(
-                              buttonText: "Edit",
-                              onTap: () {},
-                            ),
-                            Gap(32.h),
-                          ],
-                        ),
+                      _rowWidget(
+                        context,
+                        text1: 'EMAIL INFROMATION',
+                        text2: 'COMMUNICATION EMAIL',
+                        email: 'adambrettrobbins@gmail.com',
                       ),
                       Gap(32.w),
-                      ShadowContainer(
-                        child: Column(
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('YOUR ACCOUNT',
-                                    style: Get.textTheme.titleMedium),
-                                Gap(8.h),
-                                Text('USERNAME',
-                                    style: Get.textTheme.titleMedium),
-                                Gap(8.h),
-                                Text('adambrettrobbins@gmail.com',
-                                    style: Get.textTheme.titleMedium?.copyWith(
-                                        fontWeight: FontWeight.w600)),
-                              ],
-                            ),
-                            Gap(16.h),
-                            RectSmallButton(
-                              buttonText: "Edit",
-                              onTap: () {},
-                            ),
-                            Gap(32.h),
-                          ],
-                        ),
+                      _rowWidget(
+                        context,
+                        text1: 'YOUR ACCOUNT',
+                        text2: 'USERNAME',
+                        email: 'adambrettrobbins@gmail.com',
                       ),
                       Gap(32.w),
-                      ShadowContainer(
-                        child: Column(
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('PASSWORD',
-                                    style: Get.textTheme.titleMedium),
-                                Gap(8.h),
-                                Text('CURRENT PASSWORD',
-                                    style: Get.textTheme.titleMedium),
-                                Gap(8.h),
-                                Text('adambrettrobbins@gmail.com',
-                                    style: Get.textTheme.titleMedium?.copyWith(
-                                        fontWeight: FontWeight.w600)),
-                              ],
-                            ),
-                            Gap(16.h),
-                            RectSmallButton(
-                              buttonText: "Edit",
-                              onTap: () {},
-                            ),
-                            Gap(32.h),
-                          ],
-                        ),
+                      _rowWidget(
+                        context,
+                        text1: 'PASSWORD',
+                        text2: 'CURRENT PASSWORD',
+                        email: 'adambrettrobbins@gmail.com',
                       ),
-                      Gap(32.w),
                     ],
                   ),
                 ),
+                Gap(40.h),
+                ShadowContainer(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Email preferences",
+                          style: Get.textTheme.titleMedium
+                              ?.copyWith(fontWeight: FontWeight.w600)),
+                      Gap(6.h),
+                      Text(
+                          "CHOOSE TO RECEIVE AN EMAIL\nNOTICE FOR YOUR BILLING\nACCOUNT(S).",
+                          style: Get.textTheme.titleMedium),
+                      Gap(6.h),
+                      Text(
+                        "AUTO POLICY",
+                        style: Get.textTheme.titleLarge?.copyWith(
+                          fontSize: 24.sp,
+                        ),
+                      ),
+                      Gap(6.h),
+                      Text(
+                        "#52520-66-55",
+                        style: Get.textTheme.titleLarge?.copyWith(
+                          fontSize: 24.sp,
+                        ),
+                      ),
+                      Gap(8.h),
+                      Text("2 Autos on Policy",
+                          style: Get.textTheme.titleMedium
+                              ?.copyWith(fontWeight: FontWeight.w600)),
+                      Gap(8.h),
+                      Text(
+                        "HOME POLICY",
+                        style: Get.textTheme.titleLarge?.copyWith(
+                          fontSize: 24.sp,
+                        ),
+                      ),
+                      Gap(6.h),
+                      Text(
+                        "#52520-66-55",
+                        style: Get.textTheme.titleLarge?.copyWith(
+                          fontSize: 24.sp,
+                        ),
+                      ),
+                      Gap(8.h),
+                      Text("9926 N 16th PIE",
+                          style: Get.textTheme.titleMedium
+                              ?.copyWith(fontWeight: FontWeight.w600)),
+                      Gap(8.h),
+                      Text(
+                        "BILLING ACCOUNT ",
+                        style: Get.textTheme.titleLarge?.copyWith(
+                          fontSize: 24.sp,
+                        ),
+                      ),
+                      Gap(6.h),
+                      Text(
+                        "#0525999243",
+                        style: Get.textTheme.titleLarge?.copyWith(
+                          fontSize: 24.sp,
+                        ),
+                      ),
+                      Gap(6.h),
+                      Text(
+                          "THIS BILLING ACCOUNT IS NOT ELIGIBLE TO RECEIVE EMAIL NOTICES.",
+                          style: Get.textTheme.titleMedium),
+                      Gap(18.h),
+                    ],
+                  ),
+                ),
+                Gap(40.h),
+                ShadowContainer(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Policy nicknames",
+                        style: Get.textTheme.titleLarge?.copyWith(
+                          fontSize: 24.sp,
+                        ),
+                      ),
+                      Gap(6.h),
+                      Text(
+                        "AUTO POLICY",
+                        style: Get.textTheme.titleLarge?.copyWith(
+                          fontSize: 24.sp,
+                        ),
+                      ),
+                      Gap(6.h),
+                      Text(
+                        "#52520-66-55",
+                        style: Get.textTheme.titleLarge?.copyWith(
+                          fontSize: 24.sp,
+                        ),
+                      ),
+                      Gap(16.h),
+                      Text(
+                        "2 Autos on Policy",
+                        style: Get.textTheme.titleLarge?.copyWith(
+                          fontSize: 24.sp,
+                        ),
+                      ),
+                      Gap(6.h),
+                      Text(
+                        "HOME POLICY",
+                        style: Get.textTheme.titleLarge?.copyWith(
+                          fontSize: 24.sp,
+                        ),
+                      ),
+                      Gap(6.h),
+                      Text(
+                        "#52520-66-55",
+                        style: Get.textTheme.titleLarge?.copyWith(
+                          fontSize: 24.sp,
+                        ),
+                      ),
+                      Gap(16.h),
+                      Text(
+                        "9926 N 16th PIE",
+                        style: Get.textTheme.titleLarge?.copyWith(
+                          fontSize: 24.sp,
+                        ),
+                      ),
+                      Gap(6.h),
+                      Text(
+                        "LIFE POLICY",
+                        style: Get.textTheme.titleLarge?.copyWith(
+                          fontSize: 24.sp,
+                        ),
+                      ),
+                      Gap(6.h),
+                      Text(
+                        "#52520-66-55",
+                        style: Get.textTheme.titleLarge?.copyWith(
+                          fontSize: 24.sp,
+                        ),
+                      ),
+                      Gap(16.h),
+                      Text(
+                        "Simple Whole Life -",
+                        style: Get.textTheme.titleLarge?.copyWith(
+                          fontSize: 24.sp,
+                        ),
+                      ),
+                      Gap(6.h),
+                      Text(
+                        "Adam Robbins",
+                        style: Get.textTheme.titleLarge?.copyWith(
+                          fontSize: 24.sp,
+                        ),
+                      ),
+                      Gap(16.h),
+                    ],
+                  ),
+                ),
+                Gap(40.h),
               ],
             ),
           )),
+    );
+  }
+
+  _rowWidget(
+    BuildContext context, {
+    required String text1,
+    required String text2,
+    required String email,
+  }) {
+    return ShadowContainer(
+      width: context.width * .75,
+      child: Column(
+        children: [
+          Gap(10.h),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(text1, style: Get.textTheme.titleMedium),
+                Gap(8.h),
+                Text(text2, style: Get.textTheme.titleMedium),
+                Gap(8.h),
+                Text(email,
+                    style: Get.textTheme.titleMedium
+                        ?.copyWith(fontWeight: FontWeight.w600)),
+              ],
+            ),
+          ),
+          Gap(16.h),
+          RectSmallButton(
+            buttonText: "Edit",
+            onTap: () {},
+          ),
+          Gap(20.h),
+        ],
+      ),
     );
   }
 }

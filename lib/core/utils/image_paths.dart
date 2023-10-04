@@ -13,6 +13,7 @@ class ImagePaths {
 //**************************************************************//
   static String threeDots = "$iconPath/dots.png";
   static String arrowBack = "$iconPath/arrow_back.png";
+  static String arrow = "$iconPath/arrow.png";
   static String menu = "$iconPath/menu.png";
   static String car = "$iconPath/car.png";
   static String beg = "$iconPath/beg.png";
