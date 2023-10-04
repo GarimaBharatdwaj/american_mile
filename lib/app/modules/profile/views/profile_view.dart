@@ -1,4 +1,3 @@
-import 'package:american_mile/core/components/rect_icon.dart';
 import 'package:american_mile/core/components/small_button.dart';
 import '../../../../common_lib.dart';
 import '../../../../core/components/index.dart';
@@ -88,6 +87,96 @@ class ProfileView extends GetView<ProfileController> {
                         buttonText: "Edit",
                         onTap: () {},
                       ),
+                      Gap(32.h),
+                    ],
+                  ),
+                ),
+                Gap(40.h),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      ShadowContainer(
+                        child: Column(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('EMAIL INFROMATION',
+                                    style: Get.textTheme.titleMedium),
+                                Gap(8.h),
+                                Text('COMMUNICATION EMAIL',
+                                    style: Get.textTheme.titleMedium),
+                                Gap(8.h),
+                                Text('adambrettrobbins@gmail.com',
+                                    style: Get.textTheme.titleMedium?.copyWith(
+                                        fontWeight: FontWeight.w600)),
+                              ],
+                            ),
+                            Gap(16.h),
+                            RectSmallButton(
+                              buttonText: "Edit",
+                              onTap: () {},
+                            ),
+                            Gap(32.h),
+                          ],
+                        ),
+                      ),
+                      Gap(32.w),
+                      ShadowContainer(
+                        child: Column(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('YOUR ACCOUNT',
+                                    style: Get.textTheme.titleMedium),
+                                Gap(8.h),
+                                Text('USERNAME',
+                                    style: Get.textTheme.titleMedium),
+                                Gap(8.h),
+                                Text('adambrettrobbins@gmail.com',
+                                    style: Get.textTheme.titleMedium?.copyWith(
+                                        fontWeight: FontWeight.w600)),
+                              ],
+                            ),
+                            Gap(16.h),
+                            RectSmallButton(
+                              buttonText: "Edit",
+                              onTap: () {},
+                            ),
+                            Gap(32.h),
+                          ],
+                        ),
+                      ),
+                      Gap(32.w),
+                      ShadowContainer(
+                        child: Column(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('PASSWORD',
+                                    style: Get.textTheme.titleMedium),
+                                Gap(8.h),
+                                Text('CURRENT PASSWORD',
+                                    style: Get.textTheme.titleMedium),
+                                Gap(8.h),
+                                Text('adambrettrobbins@gmail.com',
+                                    style: Get.textTheme.titleMedium?.copyWith(
+                                        fontWeight: FontWeight.w600)),
+                              ],
+                            ),
+                            Gap(16.h),
+                            RectSmallButton(
+                              buttonText: "Edit",
+                              onTap: () {},
+                            ),
+                            Gap(32.h),
+                          ],
+                        ),
+                      ),
+                      Gap(32.w),
                     ],
                   ),
                 ),

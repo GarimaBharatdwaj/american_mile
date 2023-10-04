@@ -3,14 +3,17 @@ import '../utils/app_colors.dart';
 
 class ShadowContainer extends StatelessWidget {
   final Widget child;
+  final double? width;
   const ShadowContainer({
     super.key,
     required this.child,
+    this.width,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: width ?? context.width,
       padding: EdgeInsets.all(20.w),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
