@@ -1,12 +1,12 @@
 class ImagePaths {
-  static String imagePath = "assets/images";
+  static String imagePath = "assets/img";
   static String iconPath = "assets/icons";
 
 //**************************************************************//
 //************************ Images ******************************//
 //**************************************************************//
 
-  static String splashImage = "$imagePath/splash_image.png";
+  static String onboardOne = "$imagePath/onboard1.png";
 
 //**************************************************************//
 //************************ Icons ******************************//

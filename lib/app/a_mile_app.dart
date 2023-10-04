@@ -1,4 +1,5 @@
 import 'package:american_mile/common_lib.dart';
+import 'package:american_mile/core/themes/amile_theme.dart';
 import '../core/utils/index.dart';
 
 class AMileApp extends StatelessWidget {
@@ -14,9 +15,11 @@ class AMileApp extends StatelessWidget {
           return GestureDetector(
             onTap: () => KeyboardUtil.hideKeyboard(context),
             child: GetMaterialApp(
-              title: "Application",
+              title: "Americal Mile",
               initialRoute: AppPages.INITIAL,
               getPages: AppPages.routes,
+              darkTheme: themeDataDark,
+              theme: themeDataLight,
               debugShowCheckedModeBanner: false,
             ),
           );

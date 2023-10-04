@@ -12,15 +12,15 @@ class SplashController extends GetxController {
 
   RxDouble value = 0.0.obs;
   void determinateIndicator() {
-    Timer.periodic(300.milliseconds, (Timer timer) {
+    Timer.periodic(150.milliseconds, (Timer timer) {
       if (value.value == 1) {
         timer.cancel();
       } else {
         value.value = value.value + 0.1;
       }
     });
-    Future.delayed(2200.milliseconds).then((value) {
-      Get.toNamed(Routes.HOME);
+    Future.delayed(1500.milliseconds).then((value) {
+      Get.toNamed(Routes.ONBOARD);
     });
   }
 }
