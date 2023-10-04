@@ -12,6 +12,11 @@ final themeDataDark = ThemeData(
     color: Colors.black12,
     thickness: 0.5,
   ),
+  filledButtonTheme: FilledButtonThemeData(
+    style: FilledButton.styleFrom(
+      backgroundColor: const Color(0xFF089DED),
+    ),
+  ),
 );
 
 final themeDataLight = ThemeData(
@@ -25,9 +30,9 @@ final themeDataLight = ThemeData(
     color: Colors.black12,
     thickness: 0.5,
   ),
-  switchTheme: SwitchThemeData(
-    // trackOutlineColor: MaterialStatePropertyAll(Colors.black26),
-    trackColor: MaterialStatePropertyAll(Colors.black12),
-    thumbColor: MaterialStatePropertyAll(Color(0xFF373464)),
+  filledButtonTheme: FilledButtonThemeData(
+    style: FilledButton.styleFrom(
+      backgroundColor: const Color(0xFF089DED),
+    ),
   ),
 );
