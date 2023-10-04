@@ -1,5 +1,9 @@
 import 'package:get/get.dart';
 
+import '../modules/auto_policy/bindings/auto_policy_binding.dart';
+import '../modules/auto_policy/views/auto_policy_view.dart';
+import '../modules/connect_car/bindings/connect_car_binding.dart';
+import '../modules/connect_car/views/connect_car_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/home_policy/bindings/home_policy_binding.dart';
@@ -64,6 +68,16 @@ class AppPages {
       name: _Paths.LIFE_POLICY,
       page: () => const LifePolicyView(),
       binding: LifePolicyBinding(),
+    ),
+    GetPage(
+      name: _Paths.CONNECT_CAR,
+      page: () => const ConnectCarView(),
+      binding: ConnectCarBinding(),
+    ),
+    GetPage(
+      name: _Paths.AUTO_POLICY,
+      page: () => const AutoPolicyView(),
+      binding: AutoPolicyBinding(),
     ),
   ];
 }

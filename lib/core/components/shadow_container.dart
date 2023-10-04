@@ -4,10 +4,12 @@ import '../utils/app_colors.dart';
 class ShadowContainer extends StatelessWidget {
   final Widget child;
   final double? width;
+  final Color? backgroundColor;
   const ShadowContainer({
     super.key,
     required this.child,
     this.width,
+    this.backgroundColor,
   });
 
   @override
@@ -19,7 +21,7 @@ class ShadowContainer extends StatelessWidget {
         borderRadius: BorderRadius.circular(
           20.r,
         ),
-        color: AppColors.white,
+        color: backgroundColor ?? AppColors.white,
         boxShadow: [
           BoxShadow(
             color: AppColors.shadowColor,

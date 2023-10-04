@@ -11,6 +11,8 @@ abstract class Routes {
   static const STATEMENT_NOTICE = _Paths.STATEMENT_NOTICE;
   static const HOME_POLICY = _Paths.HOME_POLICY;
   static const LIFE_POLICY = _Paths.LIFE_POLICY;
+  static const CONNECT_CAR = _Paths.CONNECT_CAR;
+  static const AUTO_POLICY = _Paths.AUTO_POLICY;
 }
 
 abstract class _Paths {
@@ -23,4 +25,6 @@ abstract class _Paths {
   static const STATEMENT_NOTICE = '/statement-notice';
   static const HOME_POLICY = '/home-policy';
   static const LIFE_POLICY = '/life-policy';
+  static const CONNECT_CAR = '/connect-car';
+  static const AUTO_POLICY = '/auto-policy';
 }

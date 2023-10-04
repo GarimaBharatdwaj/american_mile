@@ -22,4 +22,8 @@ class ImagePaths {
   static String pets = "$iconPath/pets.png";
   static String heart = "$iconPath/heart.png";
   static String house = "$iconPath/house.png";
+  static String steering = "$iconPath/steering.png";
+  static String speedometer = "$iconPath/speedometer.png";
+  static String camera = "$iconPath/camera.png";
+  static String imagePlace = "$iconPath/image_place.png";
 }
