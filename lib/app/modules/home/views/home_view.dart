@@ -92,6 +92,9 @@ class HomeView extends GetView<HomeController> {
                                 "https://d38b044pevnwc9.cloudfront.net/cutout-nuxt/enhancer/1.jpg",
                             circleRadius: 25.r,
                             imageSize: 75.w,
+                            onTap: () {
+                              Get.toNamed(Routes.PROFILE);
+                            },
                           ),
                           Gap(20.w),
                           Expanded(
