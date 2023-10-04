@@ -8,6 +8,8 @@ abstract class Routes {
   static const LOGIN = _Paths.LOGIN;
   static const PROFILE = _Paths.PROFILE;
   static const ONBOARD = _Paths.ONBOARD;
+  static const STATEMENT_NOTICE = _Paths.STATEMENT_NOTICE;
+  static const HOME_POLICY = _Paths.HOME_POLICY;
 }
 
 abstract class _Paths {
@@ -17,4 +19,6 @@ abstract class _Paths {
   static const LOGIN = '/login';
   static const PROFILE = '/profile';
   static const ONBOARD = '/onboard';
+  static const STATEMENT_NOTICE = '/statement-notice';
+  static const HOME_POLICY = '/home-policy';
 }

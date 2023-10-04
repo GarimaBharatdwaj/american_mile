@@ -44,12 +44,8 @@ class ProfileView extends GetView<ProfileController> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        children: [
-                          Text("MOBILE PHONE #",
-                              style: Get.textTheme.titleMedium),
-                        ],
-                      ),
+                      Text("MOBILE PHONE #",
+                          style: Get.textTheme.titleMedium),
                       Gap(6.h),
                       Text(
                         "480-678-7444",

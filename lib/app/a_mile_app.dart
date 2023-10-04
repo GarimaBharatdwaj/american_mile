@@ -18,8 +18,8 @@ class AMileApp extends StatelessWidget {
               title: "Americal Mile",
               initialRoute: AppPages.INITIAL,
               getPages: AppPages.routes,
-              darkTheme: themeDataDark,
-              theme: themeDataLight,
+              // darkTheme: themeDataDark,
+              // theme: themeDataLight,
               debugShowCheckedModeBanner: false,
             ),
           );

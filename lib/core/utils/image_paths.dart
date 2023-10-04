@@ -19,4 +19,5 @@ class ImagePaths {
   static String beg = "$iconPath/beg.png";
   static String pets = "$iconPath/pets.png";
   static String heart = "$iconPath/heart.png";
+  static String house = "$iconPath/house.png";
 }
