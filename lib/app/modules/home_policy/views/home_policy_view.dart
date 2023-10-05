@@ -1,5 +1,7 @@
 import 'package:american_mile/common_lib.dart';
+import 'package:american_mile/core/components/request_change.dart';
 import '../../../../core/components/index.dart';
+import '../../../../core/components/secondry_button.dart';
 import '../../../../core/utils/index.dart';
 import '../controllers/home_policy_controller.dart';
 
@@ -108,26 +110,7 @@ class HomePolicyView extends GetView<HomePolicyController> {
                               fontSize: 18.sp,
                             ),
                           ),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 12.w, vertical: 6.h),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(50.w),
-                                  bottomLeft: Radius.circular(50.w),
-                                ),
-                                gradient: LinearGradient(colors: [
-                                  AppColors.primaryDark,
-                                  AppColors.primary,
-                                ])),
-                            child: Text(
-                              "Request Change",
-                              style: Get.textTheme.titleMedium?.copyWith(
-                                color: AppColors.white,
-                                fontSize: 14.sp,
-                              ),
-                            ),
-                          ),
+                          const RequestChange(),
                         ],
                       ),
                       Text(
@@ -305,16 +288,20 @@ class HomePolicyView extends GetView<HomePolicyController> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          _button(context, buttonText: 'Pay Options'),
-                          _button(context, buttonText: 'Manage Autopay'),
+                          SecondryButton(
+                              onTap: () {}, buttonText: 'Pay Options'),
+                          SecondryButton(
+                              onTap: () {}, buttonText: 'Manage Autopay'),
                         ],
                       ),
                       Gap(15.h),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          _button(context, buttonText: 'Current ID Cards'),
-                          _button(context, buttonText: 'Policy Documents'),
+                          SecondryButton(
+                              onTap: () {}, buttonText: 'Current ID Cards'),
+                          SecondryButton(
+                              onTap: () {}, buttonText: 'Policy Documents'),
                         ],
                       ),
                       Gap(20.h),
@@ -422,7 +409,7 @@ class HomePolicyView extends GetView<HomePolicyController> {
                       value: "COVERED",
                     ),
                     Gap(12.h),
-                    _button(context, buttonText: "Request Change"),
+                    SecondryButton(onTap: () {}, buttonText: "Request Change"),
                   ],
                 )),
               ],
@@ -454,34 +441,6 @@ class HomePolicyView extends GetView<HomePolicyController> {
         ),
         Gap(12.h),
       ],
-    );
-  }
-
-  _button(
-    BuildContext context, {
-    required String buttonText,
-  }) {
-    return Container(
-      alignment: Alignment.center,
-      padding: EdgeInsets.symmetric(
-        vertical: 14.h,
-      ),
-      width: context.width * .38,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15.r),
-        gradient: LinearGradient(
-          colors: [
-            AppColors.primaryDark,
-            AppColors.primary,
-          ],
-        ),
-      ),
-      child: Text(
-        buttonText,
-        style: Get.textTheme.titleMedium?.copyWith(
-          color: AppColors.white,
-        ),
-      ),
     );
   }
 }

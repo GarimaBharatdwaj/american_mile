@@ -3,21 +3,10 @@ import 'package:get/get.dart';
 class AutoPolicyController extends GetxController {
   //TODO: Implement AutoPolicyController
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
+  RxInt type = 0.obs;
 }
