@@ -22,12 +22,16 @@ class HomeView extends GetView<HomeController> {
         backgroundColor: AppColors.background,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () => Get.toNamed(Routes.LOGIN),
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(100),
           ),
-          child: const Icon(Icons.add),
+          child: Image.asset(
+            ImagePaths.carKey,
+            height: 24,
+            width: 24,
+          ),
         ),
         bottomNavigationBar: AnimatedBottomNavigationBar(
           icons: iconList,

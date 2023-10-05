@@ -16,17 +16,15 @@ class RRectIcon extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: EdgeInsets.all(15.w),
+        padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: AppColors.white,
-          borderRadius: BorderRadius.circular(
-            12.r,
-          ),
+          borderRadius: BorderRadius.circular(12),
         ),
         child: Image.asset(
           image,
-          height: 20.w,
-          width: 20.w,
+          height: 22.w,
+          width: 22.w,
           color: AppColors.primary,
         ),
       ),

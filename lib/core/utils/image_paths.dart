@@ -26,4 +26,5 @@ class ImagePaths {
   static String speedometer = "$iconPath/speedometer.png";
   static String camera = "$iconPath/camera.png";
   static String imagePlace = "$iconPath/image_place.png";
+  static String carKey = "$iconPath/car-rental.png";
 }
