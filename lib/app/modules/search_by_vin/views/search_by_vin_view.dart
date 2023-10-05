@@ -29,7 +29,7 @@ class SearchByVinView extends GetView<SearchByVinController> {
           TextFormField(
             decoration: const InputDecoration(
               label: Text('VIN'),
-              hintText: 'Enter VIN',
+              hintText: 'Enter VIN', 
             ),
           ),
           Padding(
