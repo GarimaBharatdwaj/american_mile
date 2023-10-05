@@ -16,5 +16,15 @@ class AppColors {
   static Color background = const Color(0xFFF8F8F8);
   static Color shadowColor = const Color(0xFFE6E6E6);
   static Color indicatorBackground = const Color(0xFF4E54C833);
+  static Color autoPolicyLightColor = const Color(0xFF7D69FF);
+  static Color autoPolicyDarkColor = const Color(0xFF422EC5);
+  static Color homePolicyLightColor = const Color(0xFFFF9370);
+  static Color homePolicyDarkColor = const Color(0xFFF6521D);
+  static Color businessPolicyLightColor = const Color(0xFFFFDC5C);
+  static Color businessPolicyDarkColor = const Color(0xFFF9CA1C);
+  static Color lifePolicyLightColor = const Color(0xFF69F2A7);
+  static Color lifePolicyDarkColor = const Color(0xFF008B74);
+  static Color petPolicyLightColor = const Color(0xFF6992F2);
+  static Color petPolicyDarkColor = const Color(0xFF3C008B);
 }
 //#4E54C833

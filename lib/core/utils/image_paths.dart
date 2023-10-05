@@ -31,6 +31,11 @@ class ImagePaths {
   static String pdf = "$iconPath/pdf.png";
   static String fax = "$iconPath/fax.png";
   static String mail = "$iconPath/mail.png";
+  static String phone = "$iconPath/phone.png";
+  static String sms = "$iconPath/sms.png";
+  static String user = "$iconPath/user.png";
+  static String more = "$iconPath/more.png";
+  static String petPolicy = "$iconPath/pet_policy.png";
   static String imagePlace = "$iconPath/image_place.png";
   static String carKey = "$iconPath/car-rental.png";
 }

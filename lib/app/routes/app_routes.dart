@@ -14,6 +14,8 @@ abstract class Routes {
   static const CONNECT_CAR = _Paths.CONNECT_CAR;
   static const AUTO_POLICY = _Paths.AUTO_POLICY;
   static const SEARCH_BY_VIN = _Paths.SEARCH_BY_VIN;
+  static const USER_PROFILE = _Paths.USER_PROFILE;
+  static const POLICY_DASHBOARD = _Paths.POLICY_DASHBOARD;
 }
 
 abstract class _Paths {
@@ -29,4 +31,6 @@ abstract class _Paths {
   static const CONNECT_CAR = '/connect-car';
   static const AUTO_POLICY = '/auto-policy';
   static const SEARCH_BY_VIN = '/search-by-vin';
+  static const USER_PROFILE = '/user-profile';
+  static const POLICY_DASHBOARD = '/policy-dashboard';
 }

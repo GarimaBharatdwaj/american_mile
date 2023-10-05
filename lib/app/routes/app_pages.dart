@@ -14,6 +14,8 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/onboard/bindings/onboard_binding.dart';
 import '../modules/onboard/views/onboard_view.dart';
+import '../modules/policy_dashboard/bindings/policy_dashboard_binding.dart';
+import '../modules/policy_dashboard/views/policy_dashboard_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/search_by_vin/bindings/search_by_vin_binding.dart';
@@ -22,6 +24,8 @@ import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 import '../modules/statement_notice/bindings/statement_notice_binding.dart';
 import '../modules/statement_notice/views/statement_notice_view.dart';
+import '../modules/user_profile/bindings/user_profile_binding.dart';
+import '../modules/user_profile/views/user_profile_view.dart';
 
 part 'app_routes.dart';
 
@@ -85,6 +89,16 @@ class AppPages {
       name: _Paths.SEARCH_BY_VIN,
       page: () => const SearchByVinView(),
       binding: SearchByVinBinding(),
+    ),
+    GetPage(
+      name: _Paths.USER_PROFILE,
+      page: () => const UserProfileView(),
+      binding: UserProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.POLICY_DASHBOARD,
+      page: () => const PolicyDashboardView(),
+      binding: PolicyDashboardBinding(),
     ),
   ];
 }
