@@ -762,10 +762,14 @@ class AutoPolicyView extends GetView<AutoPolicyController> {
           children: [
             Image.asset(
               carImage,
-              height: 200.w,
-              width: 200.w,
+              height: 175.w,
+              width: 175.w,
             ),
             Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: 20.w,
+                vertical: 10.h,
+              ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(
                   80.r,
@@ -775,6 +779,12 @@ class AutoPolicyView extends GetView<AutoPolicyController> {
                     AppColors.primaryDark,
                     AppColors.primary,
                   ],
+                ),
+              ),
+              child: Text(
+                "Connect Car",
+                style: Get.textTheme.bodySmall?.copyWith(
+                  color: AppColors.white,
                 ),
               ),
             )
