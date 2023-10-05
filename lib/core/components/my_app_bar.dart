@@ -20,7 +20,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
           const Gap(8),
           RRectIcon(
             image: ImagePaths.arrow,
-            onTap: () {},
+            onTap: () => Get.back(),
           ),
           Expanded(
             child: Text(

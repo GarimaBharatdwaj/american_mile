@@ -40,7 +40,7 @@ class LoginView extends GetView<LoginController> {
           ),
           const Gap(24),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () => Get.toNamed(Routes.SEARCH_BY_VIN),
             child: const Text('Log In'),
           )
         ],

@@ -16,6 +16,8 @@ import '../modules/onboard/bindings/onboard_binding.dart';
 import '../modules/onboard/views/onboard_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
+import '../modules/search_by_vin/bindings/search_by_vin_binding.dart';
+import '../modules/search_by_vin/views/search_by_vin_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 import '../modules/statement_notice/bindings/statement_notice_binding.dart';
@@ -78,6 +80,11 @@ class AppPages {
       name: _Paths.AUTO_POLICY,
       page: () => const AutoPolicyView(),
       binding: AutoPolicyBinding(),
+    ),
+    GetPage(
+      name: _Paths.SEARCH_BY_VIN,
+      page: () => const SearchByVinView(),
+      binding: SearchByVinBinding(),
     ),
   ];
 }
