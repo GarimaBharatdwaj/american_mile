@@ -1,5 +1,5 @@
 import 'package:american_mile/common_lib.dart';
-import 'package:american_mile/core/utils/app_colors.dart';
+import 'package:american_mile/core/utils/index.dart';
 import '../controllers/splash_controller.dart';
 
 class SplashView extends GetView<SplashController> {
@@ -12,6 +12,11 @@ class SplashView extends GetView<SplashController> {
           body: Obx(
             () => Stack(
               children: [
+                Center(
+                  child: Image.asset(
+                    ImagePaths.mile,
+                  ),
+                ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 70.w),
                   child: Column(

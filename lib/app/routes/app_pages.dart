@@ -2,8 +2,14 @@ import 'package:get/get.dart';
 
 import '../modules/auto_policy/bindings/auto_policy_binding.dart';
 import '../modules/auto_policy/views/auto_policy_view.dart';
+import '../modules/car_details/bindings/car_details_binding.dart';
+import '../modules/car_details/views/car_details_view.dart';
+import '../modules/check_offer/bindings/check_offer_binding.dart';
+import '../modules/check_offer/views/check_offer_view.dart';
 import '../modules/connect_car/bindings/connect_car_binding.dart';
 import '../modules/connect_car/views/connect_car_view.dart';
+import '../modules/driver_licence/bindings/driver_licence_binding.dart';
+import '../modules/driver_licence/views/driver_licence_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/home_policy/bindings/home_policy_binding.dart';
@@ -12,6 +18,8 @@ import '../modules/life_policy/bindings/life_policy_binding.dart';
 import '../modules/life_policy/views/life_policy_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+import '../modules/manual_vehical_details/bindings/manual_vehical_details_binding.dart';
+import '../modules/manual_vehical_details/views/manual_vehical_details_view.dart';
 import '../modules/onboard/bindings/onboard_binding.dart';
 import '../modules/onboard/views/onboard_view.dart';
 import '../modules/policy_dashboard/bindings/policy_dashboard_binding.dart';
@@ -99,6 +107,26 @@ class AppPages {
       name: _Paths.POLICY_DASHBOARD,
       page: () => const PolicyDashboardView(),
       binding: PolicyDashboardBinding(),
+    ),
+    GetPage(
+      name: _Paths.DRIVER_LICENCE,
+      page: () => const DriverLicenceView(),
+      binding: DriverLicenceBinding(),
+    ),
+    GetPage(
+      name: _Paths.CAR_DETAILS,
+      page: () => const CarDetailsView(),
+      binding: CarDetailsBinding(),
+    ),
+    GetPage(
+      name: _Paths.MANUAL_VEHICAL_DETAILS,
+      page: () => const ManualVehicalDetailsView(),
+      binding: ManualVehicalDetailsBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHECK_OFFER,
+      page: () => const CheckOfferView(),
+      binding: CheckOfferBinding(),
     ),
   ];
 }

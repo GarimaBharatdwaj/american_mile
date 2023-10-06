@@ -9,7 +9,6 @@ class AppColors {
   static Color formBackground = const Color(0xFFF1F1F1);
   static Color white = const Color(0xFFFFFFFF);
   static Color black = const Color(0xFF000000);
-  // static Color textLight = const Color(0xFF626262);
   static Color textLight = const Color(0xFF9B9B9B);
   static Color textBlackColor = const Color(0xFF363543);
   static Color dangerRed = const Color(0xFFEB4545);
@@ -26,5 +25,6 @@ class AppColors {
   static Color lifePolicyDarkColor = const Color(0xFF008B74);
   static Color petPolicyLightColor = const Color(0xFF6992F2);
   static Color petPolicyDarkColor = const Color(0xFF3C008B);
+  static Color borderColor = const Color(0xFFEBEBEB);
 }
-//#4E54C833
+//#4E54C833#

@@ -4,11 +4,13 @@ import '../utils/index.dart';
 class PrimaryButton extends StatelessWidget {
   final String buttonText;
   final double? buttonWidth;
+  final Color? backgroundColor;
   final void Function()? onTap;
   const PrimaryButton({
     super.key,
     required this.buttonText,
     this.buttonWidth,
+    this.backgroundColor,
     this.onTap,
   });
 
@@ -24,7 +26,7 @@ class PrimaryButton extends StatelessWidget {
         width: buttonWidth ?? context.width,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(100.w),
-          color: AppColors.primaryDark,
+          color: backgroundColor ?? AppColors.primaryDark,
         ),
         child: Text(
           buttonText,

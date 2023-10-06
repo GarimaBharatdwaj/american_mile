@@ -16,6 +16,10 @@ abstract class Routes {
   static const SEARCH_BY_VIN = _Paths.SEARCH_BY_VIN;
   static const USER_PROFILE = _Paths.USER_PROFILE;
   static const POLICY_DASHBOARD = _Paths.POLICY_DASHBOARD;
+  static const DRIVER_LICENCE = _Paths.DRIVER_LICENCE;
+  static const CAR_DETAILS = _Paths.CAR_DETAILS;
+  static const MANUAL_VEHICAL_DETAILS = _Paths.MANUAL_VEHICAL_DETAILS;
+  static const CHECK_OFFER = _Paths.CHECK_OFFER;
 }
 
 abstract class _Paths {
@@ -33,4 +37,8 @@ abstract class _Paths {
   static const SEARCH_BY_VIN = '/search-by-vin';
   static const USER_PROFILE = '/user-profile';
   static const POLICY_DASHBOARD = '/policy-dashboard';
+  static const DRIVER_LICENCE = '/driver-licence';
+  static const CAR_DETAILS = '/car-details';
+  static const MANUAL_VEHICAL_DETAILS = '/manual-vehical-details';
+  static const CHECK_OFFER = '/check-offer';
 }

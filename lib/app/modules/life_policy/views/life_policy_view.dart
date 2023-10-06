@@ -13,29 +13,8 @@ class LifePolicyView extends GetView<LifePolicyController> {
         body: SingleChildScrollView(
           padding: EdgeInsets.all(15.w),
           child: Column(children: [
-            Row(
-              children: [
-                RRectIcon(
-                  image: ImagePaths.arrow,
-                  onTap: () {},
-                ),
-                Expanded(
-                  child: Text(
-                    'Life Policy',
-                    textAlign: TextAlign.center,
-                    style: Get.textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-                Opacity(
-                  opacity: 0,
-                  child: RRectIcon(
-                    image: ImagePaths.menu,
-                    onTap: () {},
-                  ),
-                ),
-              ],
+            const MyAppBar(
+              title: 'Life Policy',
             ),
             Gap(40.h),
             ShadowContainer(

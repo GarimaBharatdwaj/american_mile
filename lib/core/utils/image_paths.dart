@@ -35,7 +35,13 @@ class ImagePaths {
   static String sms = "$iconPath/sms.png";
   static String user = "$iconPath/user.png";
   static String more = "$iconPath/more.png";
+  static String licence = "$iconPath/licence.png";
+  static String right = "$iconPath/right.png";
+  static String mile = "$iconPath/mile.png";
+  static String offerPlace = "$iconPath/offer_place.png";
+  static String carSlide = "$iconPath/car_slide.png";
   static String petPolicy = "$iconPath/pet_policy.png";
   static String imagePlace = "$iconPath/image_place.png";
+  static String userAlt = "$iconPath/user_alt.png";
   static String carKey = "$iconPath/car-rental.png";
 }
