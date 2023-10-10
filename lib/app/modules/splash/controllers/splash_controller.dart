@@ -1,6 +1,6 @@
 import 'dart:async';
-
 import 'package:american_mile/app/routes/app_pages.dart';
+import 'package:american_mile/core/helpers/device_helper.dart';
 import 'package:get/get.dart';
 
 class SplashController extends GetxController {
@@ -20,7 +20,11 @@ class SplashController extends GetxController {
       }
     });
     Future.delayed(1500.milliseconds).then((value) {
-      Get.toNamed(Routes.ONBOARD);
+      if (DeviceHelper.getOnBoard() == "1") {
+        Get.offAllNamed(Routes.HOME);
+      } else {
+        Get.offAllNamed(Routes.ONBOARD);
+      }
     });
   }
 }

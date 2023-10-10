@@ -1,11 +1,11 @@
+import 'package:american_mile/app/modules/canopy_login/controllers/canopy_login_controller.dart';
 import 'package:american_mile/common_lib.dart';
 import 'package:american_mile/core/components/index.dart';
 import 'package:american_mile/core/components/primary_button.dart';
 import '../../../../core/utils/index.dart';
-import '../controllers/login_controller.dart';
 
-class LoginView extends GetView<LoginController> {
-  const LoginView({Key? key}) : super(key: key);
+class CanopyLoginView extends GetView<CanopyLoginController> {
+  const CanopyLoginView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -38,12 +38,12 @@ class LoginView extends GetView<LoginController> {
               ],
             ),
             Gap(40.h),
-            // Text(
-            //   'Enter your progressive credentials to enable Canopy\nConnect to securely retrieve your insurance information.',
-            //   style: Get.textTheme.titleSmall?.copyWith(
-            //     fontSize: 14.sp,
-            //   ),
-            // ),
+            Text(
+              'Enter your progressive credentials to enable Canopy\nConnect to securely retrieve your insurance information.',
+              style: Get.textTheme.titleSmall?.copyWith(
+                fontSize: 14.sp,
+              ),
+            ),
             Gap(24.h),
             LoginTextField(
               hintText: "Enter Email Address",

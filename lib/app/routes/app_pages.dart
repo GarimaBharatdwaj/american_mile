@@ -2,6 +2,10 @@ import 'package:get/get.dart';
 
 import '../modules/auto_policy/bindings/auto_policy_binding.dart';
 import '../modules/auto_policy/views/auto_policy_view.dart';
+import '../modules/canopy_login/bindings/canopy_login_binding.dart';
+import '../modules/canopy_login/views/canopy_login_view.dart';
+import '../modules/car_dashboard/bindings/car_dashboard_binding.dart';
+import '../modules/car_dashboard/views/car_dashboard_view.dart';
 import '../modules/car_details/bindings/car_details_binding.dart';
 import '../modules/car_details/views/car_details_view.dart';
 import '../modules/check_offer/bindings/check_offer_binding.dart';
@@ -14,6 +18,8 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/home_policy/bindings/home_policy_binding.dart';
 import '../modules/home_policy/views/home_policy_view.dart';
+import '../modules/insurance_provider/bindings/insurance_provider_binding.dart';
+import '../modules/insurance_provider/views/insurance_provider_view.dart';
 import '../modules/life_policy/bindings/life_policy_binding.dart';
 import '../modules/life_policy/views/life_policy_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -127,6 +133,21 @@ class AppPages {
       name: _Paths.CHECK_OFFER,
       page: () => const CheckOfferView(),
       binding: CheckOfferBinding(),
+    ),
+    GetPage(
+      name: _Paths.INSURANCE_PROVIDER,
+      page: () => const InsuranceProviderView(),
+      binding: InsuranceProviderBinding(),
+    ),
+    GetPage(
+      name: _Paths.CAR_DASHBOARD,
+      page: () => const CarDashboardView(),
+      binding: CarDashboardBinding(),
+    ),
+    GetPage(
+      name: _Paths.CANOPY_LOGIN,
+      page: () => const CanopyLoginView(),
+      binding: CanopyLoginBinding(),
     ),
   ];
 }

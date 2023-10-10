@@ -20,6 +20,9 @@ abstract class Routes {
   static const CAR_DETAILS = _Paths.CAR_DETAILS;
   static const MANUAL_VEHICAL_DETAILS = _Paths.MANUAL_VEHICAL_DETAILS;
   static const CHECK_OFFER = _Paths.CHECK_OFFER;
+  static const INSURANCE_PROVIDER = _Paths.INSURANCE_PROVIDER;
+  static const CAR_DASHBOARD = _Paths.CAR_DASHBOARD;
+  static const CANOPY_LOGIN = _Paths.CANOPY_LOGIN;
 }
 
 abstract class _Paths {
@@ -41,4 +44,7 @@ abstract class _Paths {
   static const CAR_DETAILS = '/car-details';
   static const MANUAL_VEHICAL_DETAILS = '/manual-vehical-details';
   static const CHECK_OFFER = '/check-offer';
+  static const INSURANCE_PROVIDER = '/insurance-provider';
+  static const CAR_DASHBOARD = '/car-dashboard';
+  static const CANOPY_LOGIN = '/canopy-login';
 }

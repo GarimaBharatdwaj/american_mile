@@ -1,4 +1,6 @@
 import 'package:american_mile/common_lib.dart';
+import 'package:american_mile/core/helpers/device_helper.dart';
+import 'package:american_mile/core/utils/storage_util.dart';
 
 class OnboardController extends GetxController {
   late PageController pageController;
@@ -10,14 +12,6 @@ class OnboardController extends GetxController {
   void onInit() {
     pageController = PageController(initialPage: 0);
     pageControllerTwo = PageController(initialPage: 0);
-
-    // _timer = Timer.periodic(const Duration(seconds: 5), (Timer timer) {
-    //   if (_pageIndex < 3) {
-    //     _pageIndex++;
-    //   } else {
-    //     _pageIndex = 0;
-    //   }
-    // });
     super.onInit();
   }
 
@@ -33,6 +27,7 @@ class OnboardController extends GetxController {
       );
       isLastPage.value = _pageIndex == 1;
     } else {
+      DeviceHelper.saveOnBoard("1");
       Get.offAllNamed(Routes.HOME);
     }
   }
@@ -45,7 +40,6 @@ class OnboardController extends GetxController {
   void onClose() {
     pageController.dispose();
     pageControllerTwo.dispose();
-
     super.onClose();
   }
 }

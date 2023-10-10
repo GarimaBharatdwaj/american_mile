@@ -1,6 +1,7 @@
 import 'package:american_mile/common_lib.dart';
 import 'package:american_mile/core/utils/index.dart';
 
+import '../../../../core/helpers/device_helper.dart';
 import '../controllers/onboard_controller.dart';
 
 class OnboardView extends GetView<OnboardController> {
@@ -68,19 +69,33 @@ class OnboardView extends GetView<OnboardController> {
                       ),
                     ),
                     Obx(
-                      () => Visibility(
-                        visible: controller.isLastPage.isFalse,
-                        child: TextButton(
-                          onPressed: () => Get.offAllNamed(Routes.HOME),
-                          child: const Text('Skip'),
+                      () => FilledButton(
+                        onPressed: controller.onNextPage,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 35.w,
+                          ),
+                          child: Text(
+                            controller.isLastPage.isTrue
+                                ? 'Get Started'
+                                : 'Next',
+                          ),
                         ),
                       ),
                     ),
                     Obx(
-                      () => FilledButton(
-                        onPressed: controller.onNextPage,
-                        child: Text(
-                          controller.isLastPage.isTrue ? 'Get Started' : 'Next',
+                      () => Visibility(
+                        visible: controller.isLastPage.isFalse,
+                        child: TextButton(
+                          onPressed: () {
+                            DeviceHelper.saveOnBoard("1");
+                            Get.offAllNamed(Routes.HOME);
+                          },
+                          child: Text(
+                            'Skip',
+                            style: Get.textTheme.titleMedium
+                                ?.copyWith(color: AppColors.textLight),
+                          ),
                         ),
                       ),
                     ),

@@ -38,6 +38,8 @@ class ImagePaths {
   static String licence = "$iconPath/licence.png";
   static String right = "$iconPath/right.png";
   static String mile = "$iconPath/mile.png";
+  static String eye = "$iconPath/eye.png";
+  static String shield = "$iconPath/shield.png";
   static String offerPlace = "$iconPath/offer_place.png";
   static String carSlide = "$iconPath/car_slide.png";
   static String petPolicy = "$iconPath/pet_policy.png";
