@@ -60,6 +60,7 @@ class InsuranceProviderView extends GetView<InsuranceProviderController> {
                   ),
                 );
               }),
+
             ],
           ),
         ),

@@ -1,6 +1,7 @@
 import 'package:american_mile/common_lib.dart';
 import 'package:american_mile/core/components/request_change.dart';
 import '../../../../core/components/index.dart';
+import '../../../../core/components/primary_button.dart';
 import '../../../../core/components/secondry_button.dart';
 import '../../../../core/utils/index.dart';
 import '../controllers/home_policy_controller.dart';
@@ -412,6 +413,14 @@ class HomePolicyView extends GetView<HomePolicyController> {
                     SecondryButton(onTap: () {}, buttonText: "Request Change"),
                   ],
                 )),
+
+                Gap(22.h),
+                PrimaryButton(
+                  buttonText: "Flow",
+                  onTap: () {
+                    Get.toNamed(Routes.STATEMENT_NOTICE);
+                  },
+                ),
               ],
             ),
           )),

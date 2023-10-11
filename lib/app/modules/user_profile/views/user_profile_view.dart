@@ -67,7 +67,10 @@ class UserProfileView extends GetView<UserProfileController> {
                     Gap(36.h),
                     PrimaryButton(
                       buttonText: 'Update Profile',
-                      onTap: () {},
+                      onTap: () {
+                        Get.toNamed(Routes.AUTO_POLICY);
+
+                      },
                     ),
                   ],
                 ),

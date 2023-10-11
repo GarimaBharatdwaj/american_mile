@@ -1,4 +1,5 @@
 import 'package:american_mile/common_lib.dart';
+import 'package:american_mile/core/components/primary_button.dart';
 import 'package:american_mile/core/utils/app_colors.dart';
 import 'package:american_mile/core/utils/index.dart';
 import '../../../../core/components/index.dart';
@@ -19,8 +20,32 @@ class ManualVehicalDetailsView extends GetView<ManualVehicalDetailsController> {
               const MyAppBar(
                 title: 'Manually Detail',
               ),
+
               Gap(30.h),
-              _reviewComponent(context)
+              _yearComponent(context),
+              Gap(20.h),
+              _makeComponent(context),
+              Gap(20.h),
+              _modelComponent(context),
+              Gap(20.h),
+              _payTypeComponent(context),
+              Gap(20.h),
+              _carComponent(context),
+              Gap(20.h),
+              _driverComponent(context),
+              Gap(20.h),
+              _driverPayTypeComponent(context),
+              Gap(20.h),
+              _driverAmountComponent(context),
+              Gap(20.h),
+
+              _reviewComponent(context),
+              PrimaryButton(
+                buttonText: "Flow",
+                onTap: () {
+                  Get.toNamed(Routes.CHECK_OFFER);
+                },
+              ),
             ],
           ),
         ),

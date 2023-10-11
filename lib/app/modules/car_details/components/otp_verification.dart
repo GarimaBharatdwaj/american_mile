@@ -1,4 +1,5 @@
 import 'package:american_mile/app/modules/car_details/components/details.dart';
+import 'package:american_mile/app/modules/car_details/components/vehicle_details.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -9,8 +10,8 @@ import '../../../../core/components/primary_button.dart';
 import '../../../../core/utils/index.dart';
 import '../controllers/car_details_controller.dart';
 
-class CarDetailsView extends GetView<CarDetailsController> {
-  const CarDetailsView({Key? key}) : super(key: key);
+class OtpVerification extends GetView<CarDetailsController> {
+  const OtpVerification({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -27,7 +28,7 @@ class CarDetailsView extends GetView<CarDetailsController> {
                   ),
                   Expanded(
                     child: Text(
-                      "Vin",
+                      "Otp Verification",
                       textAlign: TextAlign.center,
                       style: Get.textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.w700,
@@ -44,47 +45,30 @@ class CarDetailsView extends GetView<CarDetailsController> {
                 ],
               ),
               Gap(40.h),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                child: Text(
+                  "Enter your Mobile Number, We will sent you an OTP to Verify",
+                  textAlign: TextAlign.start,
+                  style: Get.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.textBlackColor),
+                ),
+              ),
+              Gap(40.h),
               LoginTextField(
-                hintText: "Enter VIN",
-                labelText: "VIN",
-                controller: controller.vinController,
+                hintText: "Enter mobile number",
+                labelText: "Mobile Number",
+                controller: controller.otpController,
               ),
               Gap(24.h),
-              LoginTextField(
-                  hintText: "Enter Year",
-                  labelText: "Year",
-                  controller: controller.yearController),
-              Gap(24.h),
-              LoginTextField(
-                  hintText: "Enter Make",
-                  labelText: "Make",
-                  controller: controller.makeController),
-              Gap(24.h),
-              LoginTextField(
-                  hintText: "Enter Model",
-                  labelText: "Model",
-                  controller: controller.modelController),
-              Gap(24.h),
-              LoginTextField(
-                  hintText: "Enter Body Class",
-                  labelText: "Body Class",
-                  controller: controller.bodyController),
-              Gap(30.h),
               Padding(
                 padding: EdgeInsets.all(30.w),
                 child: PrimaryButton(
-                  buttonText: "Continue",
+                  buttonText: "Send OTP",
                   onTap: () {
-                    Get.to(() => const Details());
+                    Get.to(() => const VehicleDetails());
                   },
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30.w),
-                child: PrimaryButton(
-                  backgroundColor: AppColors.textBlackColor,
-                  buttonText: "No, i need  to change",
-                  onTap: () {},
                 ),
               ),
             ],

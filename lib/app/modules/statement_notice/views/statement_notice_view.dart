@@ -1,5 +1,6 @@
 import 'package:american_mile/common_lib.dart';
 import '../../../../core/components/index.dart';
+import '../../../../core/components/primary_button.dart';
 import '../../../../core/utils/index.dart';
 import '../controllers/statement_notice_controller.dart';
 
@@ -49,6 +50,13 @@ class StatementNoticeView extends GetView<StatementNoticeController> {
                   context,
                   policyTitle: "9926 N 16TH PIE",
                   policyNumber: "#D525999243",
+                ),
+                Gap(22.h),
+                PrimaryButton(
+                  buttonText: "Flow",
+                  onTap: () {
+                    Get.toNamed(Routes.PROFILE);
+                  },
                 ),
               ],
             ),

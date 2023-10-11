@@ -35,7 +35,9 @@ class OfferSelectionPage extends StatelessWidget {
                 padding: EdgeInsets.all(30.w),
                 child: PrimaryButton(
                   buttonText: "No Thanks",
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed(Routes.USER_PROFILE);
+                  },
                 ),
               ),
               Padding(

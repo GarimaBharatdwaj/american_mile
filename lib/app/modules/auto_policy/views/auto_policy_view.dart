@@ -1,5 +1,6 @@
 import 'package:american_mile/common_lib.dart';
 import 'package:american_mile/core/components/icon_button.dart';
+import 'package:american_mile/core/components/primary_button.dart';
 import '../../../../core/components/index.dart';
 import '../../../../core/components/request_change.dart';
 import '../../../../core/components/secondry_button.dart';
@@ -243,6 +244,17 @@ class AutoPolicyView extends GetView<AutoPolicyController> {
                               ? _autoIdCards(context)
                               : _autoDocuments(context),
                       Gap(40.h),
+
+                      Gap(40.h),
+
+
+                      PrimaryButton(
+                        buttonText: "Flow",
+                        onTap: () {
+                          Get.toNamed(Routes.CONNECT_CAR);
+                        },
+                      ),
+
                     ],
                   ),
                 ),

@@ -1,4 +1,5 @@
 import 'package:american_mile/common_lib.dart';
+import 'package:american_mile/core/components/primary_button.dart';
 import 'package:american_mile/core/components/profile_image_circle.dart';
 import 'package:american_mile/core/components/rect_icon.dart';
 import 'package:american_mile/core/utils/index.dart';
@@ -186,6 +187,12 @@ class HomeView extends GetView<HomeController> {
                     image: ImagePaths.heart,
                   )),
                 ],
+              ),
+              PrimaryButton(
+                buttonText: "Flow",
+                onTap: () {
+                  Get.toNamed(Routes.INSURANCE_PROVIDER);
+                },
               ),
             ],
           ),

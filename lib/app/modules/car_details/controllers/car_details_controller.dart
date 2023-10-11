@@ -6,6 +6,8 @@ class CarDetailsController extends GetxController {
   late TextEditingController makeController;
   late TextEditingController modelController;
   late TextEditingController bodyController;
+  late TextEditingController otpController;
+
 
   final count = 0.obs;
   @override
@@ -15,6 +17,7 @@ class CarDetailsController extends GetxController {
     makeController = TextEditingController(text: 'Land Rover');
     modelController = TextEditingController(text: 'Range Rover Sports');
     bodyController = TextEditingController(text: 'Sport Utility Vehicle (SUV)');
+    otpController = TextEditingController(text: '9000000002');
     super.onInit();
   }
 

@@ -1,4 +1,5 @@
 import 'package:american_mile/common_lib.dart';
+import 'package:american_mile/core/components/primary_button.dart';
 import 'package:american_mile/core/components/small_button.dart';
 import '../../../../core/components/index.dart';
 import '../../../../core/utils/index.dart';
@@ -133,6 +134,13 @@ class ConnectCarView extends GetView<ConnectCarController> {
                 onTap: () {},
               ),
               Gap(30.h),
+
+              PrimaryButton(
+                buttonText: "Flow",
+                onTap: () {
+                  Get.toNamed(Routes.LIFE_POLICY);
+                },
+              ),
             ],
           ),
         ),

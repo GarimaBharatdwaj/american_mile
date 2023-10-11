@@ -1,3 +1,5 @@
+import 'package:american_mile/core/components/primary_button.dart';
+
 import '../../../../common_lib.dart';
 import '../../../../core/components/index.dart';
 import '../../../../core/utils/index.dart';
@@ -74,6 +76,14 @@ class PolicyDashboardView extends GetView<PolicyDashboardController> {
                   AppColors.petPolicyDarkColor
                 ],
               ),
+              Gap(20.h),
+              PrimaryButton(
+                buttonText: "Flow",
+                onTap: () {
+                  Get.toNamed(Routes.MANUAL_VEHICAL_DETAILS);
+
+                },
+              )
             ],
           ),
         ),

@@ -9,8 +9,8 @@ import '../../../../core/components/primary_button.dart';
 import '../../../../core/utils/index.dart';
 import '../controllers/car_details_controller.dart';
 
-class CarDetailsView extends GetView<CarDetailsController> {
-  const CarDetailsView({Key? key}) : super(key: key);
+class VehicleDetails extends GetView<CarDetailsController> {
+  const VehicleDetails({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -27,7 +27,7 @@ class CarDetailsView extends GetView<CarDetailsController> {
                   ),
                   Expanded(
                     child: Text(
-                      "Vin",
+                      "Vehicle Details",
                       textAlign: TextAlign.center,
                       style: Get.textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.w700,
@@ -71,20 +71,34 @@ class CarDetailsView extends GetView<CarDetailsController> {
                   controller: controller.bodyController),
               Gap(30.h),
               Padding(
-                padding: EdgeInsets.all(30.w),
+                padding: EdgeInsets.symmetric(horizontal: 30.w),
                 child: PrimaryButton(
-                  buttonText: "Continue",
+                  buttonText: "Check Info",
                   onTap: () {
-                    Get.to(() => const Details());
+                    Get.toNamed(Routes.POLICY_DASHBOARD);
                   },
                 ),
               ),
+              Gap(10.h),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30.w),
                 child: PrimaryButton(
+                  buttonText: "Get Quotes",
                   backgroundColor: AppColors.textBlackColor,
-                  buttonText: "No, i need  to change",
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed(Routes.POLICY_DASHBOARD);
+                  },
+                ),
+              ),
+              Gap(10.h),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 30.w),
+                child: PrimaryButton(
+                  buttonText: "I want to change the Vehicle",
+                  backgroundColor: AppColors.textBlackColor,
+                  onTap: () {
+                    Get.toNamed(Routes.POLICY_DASHBOARD);
+                  },
                 ),
               ),
             ],

@@ -71,7 +71,9 @@ class LoginView extends GetView<LoginController> {
               padding: EdgeInsets.all(30.w),
               child: PrimaryButton(
                 buttonText: "Log In",
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed(Routes.DRIVER_LICENCE);
+                },
               ),
             ),
           ],

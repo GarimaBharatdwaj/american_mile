@@ -12,7 +12,7 @@ class InsuranceSecurityMesaures extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.background,
-        body: Padding(
+        body: SingleChildScrollView(
           padding: EdgeInsets.all(15.w),
           child: Column(
             children: [
@@ -51,9 +51,7 @@ class InsuranceSecurityMesaures extends StatelessWidget {
                 child: PrimaryButton(
                   buttonText: "Scan & Snap",
                   onTap: () {
-                    Get.to(
-                      () => const InsuranceSecurityMesaures(),
-                    );
+                    Get.toNamed(Routes.LOGIN);
                   },
                 ),
               ),

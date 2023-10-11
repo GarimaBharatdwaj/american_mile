@@ -1,5 +1,6 @@
 import '../../../../common_lib.dart';
 import '../../../../core/components/index.dart';
+import '../../../../core/components/primary_button.dart';
 import '../../../../core/utils/index.dart';
 import '../controllers/life_policy_controller.dart';
 
@@ -394,6 +395,13 @@ class LifePolicyView extends GetView<LifePolicyController> {
                   Gap(8.h),
                 ],
               ),
+            ),
+            Gap(20.h),
+            PrimaryButton(
+              buttonText: "Flow",
+              onTap: () {
+                Get.toNamed(Routes.HOME_POLICY);
+              },
             ),
           ]),
         ),

@@ -73,7 +73,9 @@ class DriverDetails extends StatelessWidget {
                 padding: EdgeInsets.all(30.w),
                 child: PrimaryButton(
                   buttonText: "Yes, It's Correct",
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed(Routes.SEARCH_BY_VIN);
+                  },
                 ),
               ),
               Padding(
