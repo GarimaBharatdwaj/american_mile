@@ -23,11 +23,8 @@ class InsuranceProviderController extends GetxController {
 
   getInsuranceProviderData() async {
     isLoading = true;
-
     try {
-      var response =
-          await API().get('http://137.184.181.160/api/v3/insurance-list');
-
+      var response = await API().get('insurance-list');
       Map<String, dynamic>? mapData = jsonDecode(response.data);
 
       if (mapData != null) {
@@ -38,9 +35,7 @@ class InsuranceProviderController extends GetxController {
     } catch (e) {
       debugPrint(e.toString());
     }
-
     isLoading = false;
-
     update();
   }
 
