@@ -1,5 +1,5 @@
 import 'package:american_mile/core/components/primary_button.dart';
-
+import 'package:american_mile/core/utils/divider.dart';
 import '../../../../common_lib.dart';
 import '../../../../core/components/index.dart';
 import '../../../../core/utils/index.dart';
@@ -10,83 +10,86 @@ class PolicyDashboardView extends GetView<PolicyDashboardController> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
-          padding: EdgeInsets.all(15.w),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  RRectIcon(
-                    image: ImagePaths.menu,
-                    onTap: () {},
-                  ),
-                  Expanded(
-                    child: Text(
-                      "Profile",
-                      textAlign: TextAlign.center,
-                      style: Get.textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.w700,
+      child: Obx(
+        () => controller.isLoading.value == true
+            ? showProgressIndicator()
+            : Scaffold(
+                body: SingleChildScrollView(
+                  padding: EdgeInsets.all(15.w),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          RRectIcon(
+                            image: ImagePaths.menu,
+                            onTap: () {},
+                          ),
+                          Expanded(
+                            child: Text(
+                              "Profile",
+                              textAlign: TextAlign.center,
+                              style: Get.textTheme.titleLarge?.copyWith(
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ),
+                          RRectIcon(
+                            image: ImagePaths.menu,
+                            onTap: () {},
+                          ),
+                        ],
                       ),
-                    ),
+                      Gap(30.h),
+                      _policyItem(
+                        policyName: "AUTO ON POLICY",
+                        colors: [
+                          AppColors.autoPolicyLightColor,
+                          AppColors.autoPolicyDarkColor
+                        ],
+                      ),
+                      Gap(30.h),
+                      _policyItem(
+                        policyName: "HOME POLICY",
+                        colors: [
+                          AppColors.homePolicyLightColor,
+                          AppColors.homePolicyDarkColor
+                        ],
+                      ),
+                      Gap(30.h),
+                      _policyItem(
+                        policyName: "BUSINESS POLICY",
+                        colors: [
+                          AppColors.businessPolicyDarkColor,
+                          AppColors.businessPolicyLightColor
+                        ],
+                      ),
+                      Gap(30.h),
+                      _policyItem(
+                        policyName: "LIFE POLICY",
+                        colors: [
+                          AppColors.lifePolicyLightColor,
+                          AppColors.lifePolicyDarkColor
+                        ],
+                      ),
+                      Gap(30.h),
+                      _policyItem(
+                        policyName: "PET POLICY",
+                        colors: [
+                          AppColors.petPolicyLightColor,
+                          AppColors.petPolicyDarkColor
+                        ],
+                      ),
+                      Gap(20.h),
+                      PrimaryButton(
+                        buttonText: "Flow",
+                        onTap: () {
+                          Get.toNamed(Routes.MANUAL_VEHICAL_DETAILS);
+                        },
+                      )
+                    ],
                   ),
-                  RRectIcon(
-                    image: ImagePaths.menu,
-                    onTap: () {},
-                  ),
-                ],
+                ),
               ),
-              Gap(30.h),
-              _policyItem(
-                policyName: "AUTO ON POLICY",
-                colors: [
-                  AppColors.autoPolicyLightColor,
-                  AppColors.autoPolicyDarkColor
-                ],
-              ),
-              Gap(30.h),
-              _policyItem(
-                policyName: "HOME POLICY",
-                colors: [
-                  AppColors.homePolicyLightColor,
-                  AppColors.homePolicyDarkColor
-                ],
-              ),
-              Gap(30.h),
-              _policyItem(
-                policyName: "BUSINESS POLICY",
-                colors: [
-                  AppColors.businessPolicyDarkColor,
-                  AppColors.businessPolicyLightColor
-                ],
-              ),
-              Gap(30.h),
-              _policyItem(
-                policyName: "LIFE POLICY",
-                colors: [
-                  AppColors.lifePolicyLightColor,
-                  AppColors.lifePolicyDarkColor
-                ],
-              ),
-              Gap(30.h),
-              _policyItem(
-                policyName: "PET POLICY",
-                colors: [
-                  AppColors.petPolicyLightColor,
-                  AppColors.petPolicyDarkColor
-                ],
-              ),
-              Gap(20.h),
-              PrimaryButton(
-                buttonText: "Flow",
-                onTap: () {
-                  Get.toNamed(Routes.MANUAL_VEHICAL_DETAILS);
-
-                },
-              )
-            ],
-          ),
-        ),
       ),
     );
   }

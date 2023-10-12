@@ -5,22 +5,10 @@ import 'package:get/get.dart';
 import '../../../../core/network/api_service.dart';
 
 class PolicyDashboardController extends GetxController {
-  //TODO: Implement PolicyDashboardController
-
-  final count = 0.obs;
   @override
   void onInit() {
+    policiesAPI();
     super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
   }
 
   //*********************************************************************//
@@ -29,12 +17,12 @@ class PolicyDashboardController extends GetxController {
 
   RxBool isLoading = false.obs;
   Map<String, dynamic>? policies;
-  userProfileAPI() {
+  policiesAPI() {
     isLoading.value = true;
-    API().get(
+    API().post(
       "policy-dashboard",
-      queryParameters: {
-        'userid': "14",
+      data: {
+        'user_id': "14",
       },
     ).then((value) async {
       Get.log("Value  :  $value");
@@ -55,6 +43,4 @@ class PolicyDashboardController extends GetxController {
       isLoading.value = false;
     });
   }
-
-  void increment() => count.value++;
 }

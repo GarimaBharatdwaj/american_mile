@@ -11,8 +11,8 @@ class API {
       InterceptorsWrapper(
         onRequest: (options, handler) {
           // Set your Bearer token here
-          const token = 'atl7458z3ntr6predQTD94569kagdt67g';
-          options.headers['Authorization'] = 'Apikey $token';
+          const token = 'your_bearer_token';
+          options.headers['Authorization'] = 'Bearer $token';
           return handler.next(options);
         },
       ),
@@ -28,6 +28,9 @@ class API {
       final response = await _dio.get<T>(
         path,
         queryParameters: queryParameters,
+        options: Options(headers: <String, String>{
+          'Apikey': 'atl7458z3ntr6predQTD94569kagdt67g'
+        }),
       );
       return response;
     } on DioException catch (e) {
@@ -43,8 +46,13 @@ class API {
 
   Future<Response<T>> post<T>(String path, {dynamic data}) async {
     try {
-      final response =
-          await _dio.post<T>(path, data: FormData.fromMap(data ?? {}));
+      final response = await _dio.post<T>(
+        path,
+        data: FormData.fromMap(data ?? {}),
+        options: Options(headers: <String, String>{
+          'Apikey': 'atl7458z3ntr6predQTD94569kagdt67g'
+        }),
+      );
       return response;
     } on DioException catch (e) {
       if (e.response != null) {
