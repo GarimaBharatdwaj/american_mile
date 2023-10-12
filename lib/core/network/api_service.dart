@@ -22,13 +22,16 @@ class API {
 
   final Dio _dio;
 
-  Future<Response<T>> get<T>(
-    String path, {
-    Map<String, dynamic>? queryParameters,
-  }) async {
+  Future<Response<T>> get<T>(String path,
+      {Map<String, dynamic>? queryParameters}) async {
     try {
-      final response =
-          await _dio.get<T>(path, queryParameters: queryParameters);
+      final response = await _dio.get<T>(
+        path,
+        queryParameters: queryParameters,
+        options: Options(headers: <String, String>{
+          'Apikey': 'atl7458z3ntr6predQTD94569kagdt67g'
+        }),
+      );
       return response;
     } on DioException catch (e) {
       if (e.response != null) {
