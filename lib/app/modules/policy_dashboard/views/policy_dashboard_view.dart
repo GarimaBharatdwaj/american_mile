@@ -11,10 +11,10 @@ class PolicyDashboardView extends GetView<PolicyDashboardController> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Obx(
-        () => controller.isLoading.value == true
-            ? showProgressIndicator()
-            : Scaffold(
-                body: SingleChildScrollView(
+        () => Scaffold(
+          body: controller.isLoading.value == true
+              ? showProgressIndicator()
+              : SingleChildScrollView(
                   padding: EdgeInsets.all(15.w),
                   child: Column(
                     children: [
@@ -26,7 +26,7 @@ class PolicyDashboardView extends GetView<PolicyDashboardController> {
                           ),
                           Expanded(
                             child: Text(
-                              "Profile",
+                              "Policy Dashboard",
                               textAlign: TextAlign.center,
                               style: Get.textTheme.titleLarge?.copyWith(
                                 fontWeight: FontWeight.w700,
@@ -40,45 +40,100 @@ class PolicyDashboardView extends GetView<PolicyDashboardController> {
                         ],
                       ),
                       Gap(30.h),
-                      _policyItem(
-                        policyName: "AUTO ON POLICY",
-                        colors: [
-                          AppColors.autoPolicyLightColor,
-                          AppColors.autoPolicyDarkColor
-                        ],
-                      ),
-                      Gap(30.h),
-                      _policyItem(
-                        policyName: "HOME POLICY",
-                        colors: [
-                          AppColors.homePolicyLightColor,
-                          AppColors.homePolicyDarkColor
-                        ],
-                      ),
-                      Gap(30.h),
-                      _policyItem(
-                        policyName: "BUSINESS POLICY",
-                        colors: [
-                          AppColors.businessPolicyDarkColor,
-                          AppColors.businessPolicyLightColor
-                        ],
-                      ),
-                      Gap(30.h),
-                      _policyItem(
-                        policyName: "LIFE POLICY",
-                        colors: [
-                          AppColors.lifePolicyLightColor,
-                          AppColors.lifePolicyDarkColor
-                        ],
-                      ),
-                      Gap(30.h),
-                      _policyItem(
-                        policyName: "PET POLICY",
-                        colors: [
-                          AppColors.petPolicyLightColor,
-                          AppColors.petPolicyDarkColor
-                        ],
-                      ),
+                      ...List.generate(
+                          controller.policies!['data']['auto_policies'].length,
+                          (index) {
+                        var policy = controller.policies!['data']
+                            ['auto_policies'][index];
+                        return Column(
+                          children: [
+                            _policyItem(
+                              onTap: () {},
+                              policyName: "AUTO ON POLICY",
+                              colors: [
+                                AppColors.autoPolicyLightColor,
+                                AppColors.autoPolicyDarkColor
+                              ],
+                              policy: policy,
+                            ),
+                            Gap(30.h),
+                          ],
+                        );
+                      }),
+                      ...List.generate(
+                          controller.policies!['data']['home_policies'].length,
+                          (index) {
+                        var policy = controller.policies!['data']
+                            ['home_policies'][index];
+                        return Column(
+                          children: [
+                            _policyItem(
+                              onTap: () {
+                                Get.toNamed(Routes.AUTO_POLICY);
+                              },
+                              policyName: "HOME POLICY",
+                              colors: [
+                                AppColors.homePolicyLightColor,
+                                AppColors.homePolicyDarkColor
+                              ],
+                              policy: policy,
+                            ),
+                            Gap(30.h),
+                          ],
+                        );
+                      }),
+                      ...List.generate(
+                          controller.policies!['data']['life_policies'].length,
+                          (index) {
+                        var policy = controller.policies!['data']
+                            ['life_policies'][index];
+                        return Column(
+                          children: [
+                            _policyItem(
+                              onTap: () {},
+                              policyName: "LIFE POLICY",
+                              colors: [
+                                AppColors.lifePolicyLightColor,
+                                AppColors.lifePolicyDarkColor
+                              ],
+                              policy: policy,
+                              isAuto: false,
+                            ),
+                            Gap(30.h),
+                          ],
+                        );
+                      }),
+                      // _policyItem(
+                      //   policyName: "HOME POLICY",
+                      //   colors: [
+                      //     AppColors.homePolicyLightColor,
+                      //     AppColors.homePolicyDarkColor
+                      //   ],
+                      // ),
+                      // Gap(30.h),
+                      // _policyItem(
+                      //   policyName: "BUSINESS POLICY",
+                      //   colors: [
+                      //     AppColors.businessPolicyDarkColor,
+                      //     AppColors.businessPolicyLightColor
+                      //   ],
+                      // ),
+                      // Gap(30.h),
+                      // _policyItem(
+                      //   policyName: "LIFE POLICY",
+                      //   colors: [
+                      //     AppColors.lifePolicyLightColor,
+                      //     AppColors.lifePolicyDarkColor
+                      //   ],
+                      // ),
+                      // Gap(30.h),
+                      // _policyItem(
+                      //   policyName: "PET POLICY",
+                      //   colors: [
+                      //     AppColors.petPolicyLightColor,
+                      //     AppColors.petPolicyDarkColor
+                      //   ],
+                      // ),
                       Gap(20.h),
                       PrimaryButton(
                         buttonText: "Flow",
@@ -89,7 +144,7 @@ class PolicyDashboardView extends GetView<PolicyDashboardController> {
                     ],
                   ),
                 ),
-              ),
+        ),
       ),
     );
   }
@@ -97,124 +152,125 @@ class PolicyDashboardView extends GetView<PolicyDashboardController> {
   _policyItem({
     required String policyName,
     required List<Color> colors,
+    required Map<String, dynamic> policy,
+    required void Function() onTap,
+    bool isAuto = true,
   }) {
-    return ShadowContainer(
-      padding: EdgeInsets.symmetric(
-        horizontal: 15.w,
-        vertical: 10.h,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Gap(10.h),
-          Align(
-            alignment: Alignment.centerRight,
-            child: Image.asset(
-              ImagePaths.more,
-              width: 30.w,
-              color: AppColors.textLight,
-            ),
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                height: 35.w,
-                width: 35.w,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
-                  gradient: LinearGradient(
-                    colors: colors,
+    return GestureDetector(
+      onTap: onTap,
+      child: ShadowContainer(
+        padding: EdgeInsets.symmetric(
+          horizontal: 15.w,
+          vertical: 10.h,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Gap(10.h),
+            // Align(
+            //   alignment: Alignment.centerRight,
+            //   child: Image.asset(
+            //     ImagePaths.more,
+            //     width: 30.w,
+            //     color: AppColors.textLight,
+            //   ),
+            // ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  height: 35.w,
+                  width: 35.w,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.r),
+                    gradient: LinearGradient(
+                      colors: colors,
+                    ),
                   ),
                 ),
-              ),
-              Gap(10.w),
-              Expanded(
-                child: Text(
-                  policyName,
-                  style: Get.textTheme.titleSmall?.copyWith(
+                Gap(10.w),
+                Expanded(
+                  child: Text(
+                    policyName,
+                    style: Get.textTheme.titleSmall?.copyWith(
+                      fontSize: 14.sp,
+                    ),
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Gap(25.w),
+                    Text(
+                      "PAYMENT DUE",
+                      style: Get.textTheme.titleMedium?.copyWith(
+                        fontSize: 12.sp,
+                      ),
+                    ),
+                    Gap(4.h),
+                    Text(
+                      "\$${policy['total_premium_usd']}",
+                      style: Get.textTheme.titleSmall?.copyWith(
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Gap(4.h),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  policy['name'],
+                  style: Get.textTheme.titleMedium?.copyWith(
                     fontSize: 14.sp,
                   ),
                 ),
-              ),
-              Column(
-                children: [
-                  Gap(25.w),
+                if (isAuto)
                   Text(
-                    "PAYMENT DUE",
+                    "MONTHLY AUTOMATIC",
                     style: Get.textTheme.titleMedium?.copyWith(
                       fontSize: 12.sp,
                     ),
                   ),
-                  Gap(4.h),
-                  Text(
-                    "\$95.595",
-                    style: Get.textTheme.titleSmall?.copyWith(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          Gap(4.h),
-          Row(
-            children: [
-              Text(
-                "AUTO POLICY ",
-                style: Get.textTheme.titleMedium?.copyWith(
-                  fontSize: 14.sp,
-                ),
-              ),
-              Expanded(
-                child: Text(
-                  "#53520-65-55",
-                  style: Get.textTheme.titleMedium?.copyWith(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              Text(
-                "MONTHLY AUTOMATIC",
-                style: Get.textTheme.titleMedium?.copyWith(
-                  fontSize: 12.sp,
-                ),
-              ),
-            ],
-          ),
-          Gap(10.h),
-          Text(
-            "EFFECTIVE DATE",
-            style: Get.textTheme.titleMedium?.copyWith(
-              fontSize: 12.sp,
+              ],
             ),
-          ),
-          Gap(8.h),
-          Text(
-            "03/11/2023 - 09/11/2023",
-            style: Get.textTheme.titleMedium?.copyWith(
-              fontSize: 12.sp,
-              fontWeight: FontWeight.w600,
+            Gap(10.h),
+            Text(
+              "EFFECTIVE DATE",
+              style: Get.textTheme.titleMedium?.copyWith(
+                fontSize: 12.sp,
+              ),
             ),
-          ),
-          Gap(10.h),
-          Text(
-            "DUE DATE",
-            style: Get.textTheme.titleMedium?.copyWith(
-              fontSize: 12.sp,
+            Gap(8.h),
+            Text(
+              policy['description'],
+              style: Get.textTheme.titleMedium?.copyWith(
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w600,
+              ),
             ),
-          ),
-          Gap(8.h),
-          Text(
-            "09/11/2023",
-            style: Get.textTheme.titleMedium?.copyWith(
-              fontSize: 12.sp,
-              fontWeight: FontWeight.w600,
+            Gap(10.h),
+            Text(
+              "DUE DATE",
+              style: Get.textTheme.titleMedium?.copyWith(
+                fontSize: 12.sp,
+              ),
             ),
-          ),
-        ],
+            Gap(8.h),
+            Text(
+              policy['renewal_date'],
+              style: Get.textTheme.titleMedium?.copyWith(
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            Gap(15.h),
+          ],
+        ),
       ),
     );
   }

@@ -23,7 +23,7 @@ class HomeView extends GetView<HomeController> {
         backgroundColor: AppColors.background,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
-          onPressed: () => Get.toNamed(Routes.POLICY_DASHBOARD),
+          onPressed: () => Get.toNamed(Routes.CAR_DASHBOARD),
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(100),

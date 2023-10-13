@@ -29,7 +29,7 @@ class PolicyDashboardController extends GetxController {
       try {
         Map<String, dynamic>? res = json.decode(value.data);
         if (res != null) {
-          if (res['flag'] == "1") {
+          if (res['status'].toString() == "1") {
             policies = res;
           } else {
             // Constants.showErrorDialogRevise();

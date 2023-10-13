@@ -46,4 +46,5 @@ class ImagePaths {
   static String imagePlace = "$iconPath/image_place.png";
   static String userAlt = "$iconPath/user_alt.png";
   static String carKey = "$iconPath/car-rental.png";
+  static String carWhite = "$iconPath/car_white.png";
 }
