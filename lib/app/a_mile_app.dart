@@ -13,8 +13,9 @@ class AMileApp extends StatelessWidget {
         splitScreenMode: true,
         builder: (context, child) {
           return GestureDetector(
-            onTap: () =>  Get.toNamed(Routes.USER_PROFILE),
-           /// onTap: () => KeyboardUtil.hideKeyboard(context),
+            onTap: () => Get.toNamed(Routes.USER_PROFILE),
+
+            /// onTap: () => KeyboardUtil.hideKeyboard(context),
             child: GetMaterialApp(
               title: "American Mile",
               initialRoute: AppPages.INITIAL,
