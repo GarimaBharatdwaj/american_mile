@@ -47,4 +47,13 @@ class ImagePaths {
   static String userAlt = "$iconPath/user_alt.png";
   static String carKey = "$iconPath/car-rental.png";
   static String carWhite = "$iconPath/car_white.png";
+  static String sunroof = "$iconPath/sunroof.png";
+  static String carDoor = "$iconPath/car-door.png";
+  static String trunck = "$iconPath/trunck.png";
+  static String battery = "$iconPath/battery.png";
+  static String tyre = "$iconPath/tyre.png";
+  static String horiRoad = "$iconPath/hori_road.png";
+  static String verRoad = "$iconPath/ver_road.png";
+  static String chipRoad = "$iconPath/chip_rod.png";
+  static String typeCenter = "$iconPath/type_center.png";
 }
