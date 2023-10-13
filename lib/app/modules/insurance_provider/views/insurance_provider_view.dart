@@ -13,23 +13,28 @@ class InsuranceProviderView extends GetView<InsuranceProviderController> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.background,
-        body: GetBuilder<InsuranceProviderController>(builder: (_) {
-          return controller.isLoading
-              ? showProgressIndicator()
-              : SingleChildScrollView(
-                  padding: EdgeInsets.all(15.w),
-                  child: Column(
-                    children: [
-                      const MyAppBar(
-                        title: 'Insurance provider',
-                      ),
-                      Gap(30.h),
-                      if (controller.insuranceProviderListNew.isNotEmpty)
-                        ...List.generate(
-                            controller.insuranceProviderListNew.length,
-                            (index) {
-                          var item = controller.insuranceProviderListNew[index];
-                          return Padding(
+        body: Obx(() => controller.isLoading.value
+            ? showProgressIndicator()
+            : SingleChildScrollView(
+                padding: EdgeInsets.all(15.w),
+                child: Column(
+                  children: [
+                    const MyAppBar(
+                      title: 'Insurance provider',
+                    ),
+                    Gap(30.h),
+                    if (controller.insuranceProviderList.isNotEmpty)
+                      ...List.generate(controller.insuranceProviderList.length,
+                          (index) {
+                        var item = controller.insuranceProviderList[index];
+                        return GestureDetector(
+                          onTap: () {
+                            controller.carrierId = item['carrier_id'];
+                            Get.to(
+                              () => InsuranceSecurityMeasures(),
+                            );
+                          },
+                          child: Padding(
                             padding: EdgeInsets.only(bottom: 20.h),
                             child: ShadowContainer(
                               child: Row(
@@ -64,20 +69,20 @@ class InsuranceProviderView extends GetView<InsuranceProviderController> {
                                 ],
                               ),
                             ),
-                          );
-                        })
-                      else
-                        Text(
-                          'No data available',
-                          style: Get.textTheme.titleLarge?.copyWith(
-                            fontSize: 18.sp,
-                            fontWeight: FontWeight.w500,
                           ),
+                        );
+                      })
+                    else
+                      Text(
+                        'No data available',
+                        style: Get.textTheme.titleLarge?.copyWith(
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w500,
                         ),
-                    ],
-                  ),
-                );
-        }),
+                      ),
+                  ],
+                ),
+              )),
         bottomNavigationBar: Padding(
           padding: EdgeInsets.all(15.w),
           child: Column(
@@ -96,7 +101,7 @@ class InsuranceProviderView extends GetView<InsuranceProviderController> {
                   buttonText: "Scan & Snap",
                   onTap: () {
                     Get.to(
-                      () => const InsuranceSecurityMesaures(),
+                      () => InsuranceSecurityMeasures(),
                     );
                   },
                 ),

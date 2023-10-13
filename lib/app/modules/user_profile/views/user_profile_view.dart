@@ -51,17 +51,17 @@ class UserProfileView extends GetView<UserProfileController> {
                     Gap(20.h),
                     _profileComponent(
                       label: "Full Name",
-                      value: "Chris Alex",
+                      value: controller.userData!['fullname'],
                       icon: ImagePaths.user,
                     ),
                     _profileComponent(
                       label: "Email Address",
-                      value: "chrisalex@gmail.com",
+                      value: controller.userData!['email'],
                       icon: ImagePaths.sms,
                     ),
                     _profileComponent(
                       label: "Phone Number",
-                      value: "+1 (908) 1234 567",
+                      value: controller.userData!['mobile'],
                       icon: ImagePaths.phone,
                     ),
                     Gap(36.h),
@@ -69,7 +69,6 @@ class UserProfileView extends GetView<UserProfileController> {
                       buttonText: 'Update Profile',
                       onTap: () {
                         Get.toNamed(Routes.AUTO_POLICY);
-
                       },
                     ),
                   ],

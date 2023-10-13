@@ -1,23 +1,15 @@
-import 'package:get/get.dart';
+import '../../../../common_lib.dart';
 
 class CanopyLoginController extends GetxController {
-  //TODO: Implement CanopyLoginController
+  RxBool isLoading = false.obs;
+  String? carrierId;
 
-  final count = 0.obs;
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
   @override
   void onInit() {
+    carrierId = Get.arguments;
     super.onInit();
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

@@ -1,23 +1,48 @@
-import 'package:get/get.dart';
+import 'dart:convert';
+import 'package:american_mile/core/helpers/device_helper.dart';
+import 'package:american_mile/core/network/api_service.dart';
+import '../../../../common_lib.dart';
+
+enum LoginViaEmailOrPhone { email, phone }
 
 class LoginController extends GetxController {
-  //TODO: Implement LoginController
-
   final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
+  RxBool isLoading = false.obs;
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
+  RxBool isLoginTypeEmail = true.obs;
+  Rx<LoginViaEmailOrPhone> loginViaEmailOrPhone =
+      LoginViaEmailOrPhone.email.obs;
+  final TextEditingController emailController =
+      TextEditingController(text: 'adambrettrobbins@gmail.com');
+  final TextEditingController mobileController =
+      TextEditingController(text: '4806787444');
+  final TextEditingController passwordController =
+      TextEditingController(text: 'Farmers1!');
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
+  // *********************************************************************** //
+  // ******************************* Login ********************************* //
+  // *********************************************************************** //
 
-  void increment() => count.value++;
+  login() async {
+    isLoading.value = true;
+    try {
+      var response = await API().post('sign-in', data: {
+        'email': emailController.text.trim(),
+        'password': passwordController.text.trim(),
+        'mobile': mobileController.text.trim(),
+        'type': isLoginTypeEmail.value ? 'email' : 'mobile'
+      });
+      Map<String, dynamic>? mapData = jsonDecode(response.data);
+
+      if (mapData != null) {
+        if (mapData['status'] == 1) {
+          DeviceHelper.saveId(mapData['user_data']['user_id']);
+        }
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      isLoading.value = false;
+    }
+    isLoading.value = false;
+  }
 }

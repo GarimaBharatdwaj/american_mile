@@ -6,6 +6,7 @@ import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
   const LoginView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -38,23 +39,55 @@ class LoginView extends GetView<LoginController> {
               ],
             ),
             Gap(40.h),
-            // Text(
-            //   'Enter your progressive credentials to enable Canopy\nConnect to securely retrieve your insurance information.',
-            //   style: Get.textTheme.titleSmall?.copyWith(
-            //     fontSize: 14.sp,
-            //   ),
-            // ),
-            Gap(24.h),
-            LoginTextField(
-              hintText: "Enter Email Address",
-              labelText: "Email Address",
-              controller: TextEditingController(),
+            Obx(
+              () => Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ToggleEmailPhone(
+                      text: 'Email',
+                      value: true,
+                      groupValue: controller.isLoginTypeEmail.value,
+                      onChange: (val) {
+                        controller.isLoginTypeEmail.value = true;
+                      }),
+                  Gap(8.w),
+                  ToggleEmailPhone(
+                      text: 'Phone',
+                      value: false,
+                      groupValue: controller.isLoginTypeEmail.value,
+                      onChange: (val) {
+                        controller.isLoginTypeEmail.value = false;
+                      }),
+                ],
+              ),
             ),
-            Gap(24.h),
+            Gap(48.h),
+            Obx(
+              () => Visibility(
+                visible: controller.isLoginTypeEmail.value,
+                child: LoginTextField(
+                  hintText: "Enter Email Address",
+                  labelText: "Email Address",
+                  controller: controller.emailController,
+                ),
+              ),
+            ),
+            Obx(
+              () => Visibility(
+                visible: !controller.isLoginTypeEmail.value,
+                child: LoginTextField(
+                  hintText: "Enter Mobile Number",
+                  labelText: "Mobile Number",
+                  controller: controller.mobileController,
+                ),
+              ),
+            ),
+            Gap(28.h),
             LoginTextField(
               hintText: "Enter Password",
               labelText: "Password",
-              controller: TextEditingController(),
+              controller: controller.passwordController,
             ),
             Align(
               alignment: Alignment.centerRight,
@@ -72,11 +105,58 @@ class LoginView extends GetView<LoginController> {
               child: PrimaryButton(
                 buttonText: "Log In",
                 onTap: () {
-                  Get.toNamed(Routes.DRIVER_LICENCE);
+                  controller.login();
+
+                  /// Get.toNamed(Routes.DRIVER_LICENCE);
                 },
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class ToggleEmailPhone<T> extends StatelessWidget {
+  const ToggleEmailPhone({
+    super.key,
+    required this.text,
+    required this.value,
+    this.groupValue,
+    required this.onChange,
+  });
+
+  final String text;
+  final T value;
+  final T? groupValue;
+  final ValueChanged<T> onChange;
+
+  @override
+  Widget build(BuildContext context) {
+    bool isSelected = value == groupValue;
+
+    return Expanded(
+      child: InkWell(
+        onTap: () => onChange(value),
+        child: Container(
+          alignment: Alignment.center,
+          padding: EdgeInsets.symmetric(vertical: 12.h),
+          decoration: BoxDecoration(
+              color: isSelected ? AppColors.primary : AppColors.white,
+              border: Border.all(
+                width: 0.7,
+                color: AppColors.primary,
+              ),
+              borderRadius: BorderRadius.circular(15.r)),
+          width: context.width / 2,
+          child: Text(
+            text,
+            style: Get.textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.w600,
+              color: isSelected ? AppColors.white : AppColors.primary,
+            ),
+          ),
         ),
       ),
     );

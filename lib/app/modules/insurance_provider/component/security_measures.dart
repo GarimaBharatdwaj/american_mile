@@ -1,11 +1,14 @@
+import 'package:american_mile/app/modules/insurance_provider/controllers/insurance_provider_controller.dart';
 import 'package:american_mile/core/utils/index.dart';
 
 import '../../../../common_lib.dart';
 import '../../../../core/components/index.dart';
 import '../../../../core/components/primary_button.dart';
 
-class InsuranceSecurityMesaures extends StatelessWidget {
-  const InsuranceSecurityMesaures({super.key});
+class InsuranceSecurityMeasures extends StatelessWidget {
+  InsuranceSecurityMeasures({super.key});
+
+  final controller = Get.find<InsuranceProviderController>();
 
   @override
   Widget build(BuildContext context) {
@@ -49,9 +52,10 @@ class InsuranceSecurityMesaures extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 15.h),
                 child: PrimaryButton(
-                  buttonText: "Scan & Snap",
+                  buttonText: "Continue",
                   onTap: () {
-                    Get.toNamed(Routes.LOGIN);
+                    Get.toNamed(Routes.CANOPY_LOGIN,
+                        arguments: controller.carrierId);
                   },
                 ),
               ),

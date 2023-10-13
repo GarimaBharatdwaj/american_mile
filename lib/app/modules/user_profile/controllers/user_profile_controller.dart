@@ -1,23 +1,36 @@
-import 'package:get/get.dart';
+import 'dart:convert';
+
+import 'package:american_mile/common_lib.dart';
+import 'package:american_mile/core/helpers/device_helper.dart';
+import 'package:american_mile/core/network/api_service.dart';
 
 class UserProfileController extends GetxController {
-  //TODO: Implement UserProfileController
+  RxBool isLoading = false.obs;
+  Map<String, dynamic>? userData;
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
+    getUserProfile();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
+  getUserProfile() async {
+    String? id = DeviceHelper.getId();
 
-  @override
-  void onClose() {
-    super.onClose();
+    debugPrint(id.toString());
+    isLoading.value = true;
+    try {
+      var response = await API().post('get-profile', data: {
+        'user_id': int.parse(id!),
+      });
+      Map<String, dynamic>? mapData = jsonDecode(response.data);
+      if (mapData != null) {
+        userData = mapData['user_data'];
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      isLoading.value = false;
+    }
+    isLoading.value = false;
   }
-
-  void increment() => count.value++;
 }
