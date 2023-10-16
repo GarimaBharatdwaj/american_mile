@@ -1,5 +1,4 @@
 import 'package:american_mile/common_lib.dart';
-import 'package:american_mile/core/themes/amile_theme.dart';
 import '../core/utils/index.dart';
 
 class AMileApp extends StatelessWidget {
@@ -13,9 +12,7 @@ class AMileApp extends StatelessWidget {
         splitScreenMode: true,
         builder: (context, child) {
           return GestureDetector(
-            onTap: () => Get.toNamed(Routes.USER_PROFILE),
-
-            /// onTap: () => KeyboardUtil.hideKeyboard(context),
+            onTap: () => KeyboardUtil.hideKeyboard(context),
             child: GetMaterialApp(
               title: "American Mile",
               initialRoute: AppPages.INITIAL,
