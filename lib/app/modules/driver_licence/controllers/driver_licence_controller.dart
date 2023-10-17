@@ -47,7 +47,7 @@ class DriverLicenceController extends GetxController {
     isLoading.value = true;
     try {
       var response = await API().post('add-edit-driver', data: {
-        'user_id': int.parse(userId!),
+        'user_id': "14",
         'name': nameController.text.trim(),
         'gender': genderController.text.trim(),
         'dob': dobController.text.trim(),

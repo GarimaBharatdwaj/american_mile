@@ -92,7 +92,8 @@ class DriverDetails extends StatelessWidget {
                     labelText: "Driver's License Number",
                     controller: controller.dlController,
                     validator: (value) => FormValidation.addressLineValidator(
-                        controller.dlController.text,"Driver's license is required"),
+                        controller.dlController.text,
+                        "Driver's license is required"),
                   ),
                   Gap(24.h),
                   LoginTextField(
@@ -101,7 +102,8 @@ class DriverDetails extends StatelessWidget {
                     labelText: "Address",
                     controller: controller.addressController,
                     validator: (value) => FormValidation.addressLineValidator(
-                        controller.addressController.text,'Address is required'),
+                        controller.addressController.text,
+                        'Address is required'),
                   ),
                   Gap(30.h),
                   Padding(
@@ -110,13 +112,7 @@ class DriverDetails extends StatelessWidget {
                       buttonText: controller.isAddingManually.value
                           ? "Submit"
                           : "Yes, It's Correct",
-                      onTap: () {
-                        controller.isAddingManually.value
-                            ? controller.validateMethode()
-                            : () {};
-
-                        /// Get.toNamed(Routes.SEARCH_BY_VIN);
-                      },
+                      onTap: controller.validateMethode,
                     ),
                   ),
                   if (!controller.isAddingManually.value)
