@@ -127,7 +127,7 @@ class HomeView extends GetView<HomeController> {
                             circleRadius: 25.r,
                             imageSize: 75.w,
                             onTap: () {
-                              Get.toNamed(Routes.HOME_POLICY);
+                              Get.toNamed(Routes.AUTO_POLICY);
                             },
                           ),
                           Gap(20.w),
