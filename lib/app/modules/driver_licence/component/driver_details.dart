@@ -109,6 +109,7 @@ class DriverDetails extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.all(30.w),
                     child: PrimaryButton(
+                      isLoading: controller.isLoading.value,
                       buttonText: controller.isAddingManually.value
                           ? "Submit"
                           : "Yes, It's Correct",

@@ -1,7 +1,4 @@
-import 'package:american_mile/app/modules/car_details/components/details.dart';
-import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
+import 'package:american_mile/core/utils/form_validation.dart';
 
 import '../../../../common_lib.dart';
 import '../../../../core/components/index.dart';
@@ -17,77 +14,114 @@ class CarDetailsView extends GetView<CarDetailsController> {
       child: Scaffold(
         body: SingleChildScrollView(
           padding: EdgeInsets.all(15.w),
-          child: Column(
-            children: [
-              Row(
+          child: Obx(
+            () => Form(
+              key: controller.formKey,
+              child: Column(
                 children: [
-                  RRectIcon(
-                    image: ImagePaths.arrow,
-                    onTap: () {},
+                  Row(
+                    children: [
+                      RRectIcon(
+                        image: ImagePaths.arrow,
+                        onTap: () {},
+                      ),
+                      Expanded(
+                        child: Text(
+                          "Vin",
+                          textAlign: TextAlign.center,
+                          style: Get.textTheme.titleLarge?.copyWith(
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                      Opacity(
+                        opacity: 0,
+                        child: RRectIcon(
+                          image: ImagePaths.menu,
+                          onTap: () {},
+                        ),
+                      ),
+                    ],
                   ),
-                  Expanded(
-                    child: Text(
-                      "Vin",
-                      textAlign: TextAlign.center,
-                      style: Get.textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.w700,
+                  Gap(40.h),
+                  LoginTextField(
+                    enabled: controller.isAddingManually.value,
+                    hintText: "Enter VIN",
+                    labelText: "VIN",
+                    controller: controller.vinController,
+                    validator: (value) => FormValidation.addressLineValidator(
+                        controller.vinController.text,
+                        "Please enter vin"),
+                  ),
+                  Gap(24.h),
+                  GestureDetector(
+                    onTap: controller.isAddingManually.value
+                        ? () {
+                      controller.showDatePickerMethod(
+                          context, controller.yearController);
+                    }
+                        : () {},
+                    child: LoginTextField(
+                        enabled: false,
+                        hintText: "Enter Year",
+                        labelText: "Year",
+                        validator: (value) => FormValidation.addressLineValidator(
+                            controller.yearController.text,
+                            "Please enter year"),
+                        controller: controller.yearController),
+                  ),
+                  Gap(24.h),
+                  LoginTextField(
+                      enabled: controller.isAddingManually.value,
+                      hintText: "Enter Make",
+                      labelText: "Make",
+                      validator: (value) => FormValidation.addressLineValidator(
+                          controller.makeController.text,
+                          "Please enter make"),
+                      controller: controller.makeController),
+                  Gap(24.h),
+                  LoginTextField(
+                      enabled: controller.isAddingManually.value,
+                      hintText: "Enter Model",
+                      labelText: "Model",
+                      validator: (value) => FormValidation.addressLineValidator(
+                          controller.modelController.text,
+                          "Please enter model"),
+                      controller: controller.modelController),
+                  Gap(24.h),
+                  LoginTextField(
+                      enabled: controller.isAddingManually.value,
+                      hintText: "Enter Body Class",
+                      labelText: "Body Class",
+                      validator: (value) => FormValidation.addressLineValidator(
+                          controller.bodyController.text,
+                          "Please enter body class"),
+                      controller: controller.bodyController),
+                  Gap(30.h),
+                  Padding(
+                    padding: EdgeInsets.all(30.w),
+                    child: PrimaryButton(
+                      isLoading: controller.isLoading.value,
+                      buttonText: controller.isAddingManually.value
+                          ? "Submit"
+                          : "Continue",
+                      onTap: controller.validateMethode,
+                    ),
+                  ),
+                  if (!controller.isAddingManually.value)
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 30.w),
+                      child: PrimaryButton(
+                        backgroundColor: AppColors.textBlackColor,
+                        buttonText: "No, i need  to change",
+                        onTap: () {
+                          controller.makeFormEditable();
+                        },
                       ),
                     ),
-                  ),
-                  Opacity(
-                    opacity: 0,
-                    child: RRectIcon(
-                      image: ImagePaths.menu,
-                      onTap: () {},
-                    ),
-                  ),
                 ],
               ),
-              Gap(40.h),
-              LoginTextField(
-                hintText: "Enter VIN",
-                labelText: "VIN",
-                controller: controller.vinController,
-              ),
-              Gap(24.h),
-              LoginTextField(
-                  hintText: "Enter Year",
-                  labelText: "Year",
-                  controller: controller.yearController),
-              Gap(24.h),
-              LoginTextField(
-                  hintText: "Enter Make",
-                  labelText: "Make",
-                  controller: controller.makeController),
-              Gap(24.h),
-              LoginTextField(
-                  hintText: "Enter Model",
-                  labelText: "Model",
-                  controller: controller.modelController),
-              Gap(24.h),
-              LoginTextField(
-                  hintText: "Enter Body Class",
-                  labelText: "Body Class",
-                  controller: controller.bodyController),
-              Gap(30.h),
-              Padding(
-                padding: EdgeInsets.all(30.w),
-                child: PrimaryButton(
-                  buttonText: "Continue",
-                  onTap: () {
-                    Get.to(() => const Details());
-                  },
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30.w),
-                child: PrimaryButton(
-                  backgroundColor: AppColors.textBlackColor,
-                  buttonText: "No, i need  to change",
-                  onTap: () {},
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),

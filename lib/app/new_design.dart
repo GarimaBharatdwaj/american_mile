@@ -1,3 +1,5 @@
+/// Modified
+
 import 'package:american_mile/common_lib.dart';
 import 'package:american_mile/core/utils/index.dart';
 
@@ -107,65 +109,57 @@ class _SpeedMeterState extends State<SpeedMeter> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      fit: StackFit.expand,
-      alignment: Alignment.center,
-      children: [
-        Image.asset(
-          ImagePaths.speedMeterScale,
-          fit: BoxFit.contain,
-          filterQuality: FilterQuality.high,
-        ),
-        Positioned(
-            bottom: 450.h,
-            child: Text("MPH",
+    return Padding(
+      padding: const EdgeInsets.all(80.0),
+      child: Container(
+        color: Colors.red,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Image.asset(
+              ImagePaths.speedMeterScale,
+              fit: BoxFit.contain,
+              filterQuality: FilterQuality.high,
+            ),
+            Text("MPH",
                 style: Get.textTheme.titleLarge?.copyWith(
                     color: AppColors.textBlackColor,
-                    fontWeight: FontWeight.w700))),
-        Positioned(
-          bottom: 270.h,
-          right: 0.h,
-          left: 0.h,
-          child: kiloMeterDial(),
+                    fontWeight: FontWeight.w700)),
+            kiloMeterDial(),
+            kiloMetersDriven(),
+          ],
         ),
-        Positioned(
-            bottom: 190.h, right: 0.h, left: 0.h, child: kiloMetersDriven()),
-      ],
+      ),
     );
   }
 
-  Padding kiloMeterDial() {
-    return Padding(
-      padding: EdgeInsets.only(
-          left: leftPadding.w, right: rightPadding.w, bottom: bottomPadding.h),
+  kiloMeterDial() {
+    return Container(
+      margin: EdgeInsets.all(100.w),
       child: RotationTransition(
         turns: AlwaysStoppedAnimation(rotationValue),
         child: Image.asset(
           ImagePaths.speedDial,
           fit: BoxFit.contain,
-          height: 155.h,
-          width: 155.h,
           filterQuality: FilterQuality.high,
         ),
       ),
     );
   }
 
-  Stack kiloMetersDriven() {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Image.asset(
-          ImagePaths.kiloMeterContainer,
-          fit: BoxFit.contain,
-          height: 160.h,
-          width: 300.w,
-          filterQuality: FilterQuality.high,
-        ),
-        Padding(
-          padding: EdgeInsets.only(bottom: 6.h),
-          child: IntrinsicWidth(
+  kiloMetersDriven() {
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Image.asset(
+            ImagePaths.kiloMeterContainer,
+          ),
+          Padding(
+            padding: EdgeInsets.only(bottom: 6.h),
             child: Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 ...List.generate(
                   7,
@@ -175,25 +169,21 @@ class _SpeedMeterState extends State<SpeedMeter> {
                       Image.asset(
                         ImagePaths.kiloMeterItem,
                         fit: BoxFit.contain,
-                        height: 32.h,
-                        filterQuality: FilterQuality.high,
+                        height: 30.h,
                       ),
-                      Positioned(
-                          child: Text(
-                              kiloMeters.isEmpty
-                                  ? '0'
-                                  : kiloMeters[index].toString(),
-                              style: Get.textTheme.titleMedium?.copyWith(
-                                  color: AppColors.textBlackColor,
-                                  fontWeight: FontWeight.w700))),
+                      Text(
+                          kiloMeters.isEmpty ? '0' : kiloMeters[index].toString(),
+                          style: Get.textTheme.titleMedium?.copyWith(
+                              color: AppColors.textBlackColor,
+                              fontWeight: FontWeight.w700)),
                     ],
                   ),
                 ),
               ],
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

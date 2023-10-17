@@ -111,31 +111,36 @@ class _SpeedMeterState extends State<SpeedMeter> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(80.0),
-      child: Container(
-        color: Colors.red,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Image.asset(
-              ImagePaths.speedMeterScale,
-              fit: BoxFit.contain,
-              filterQuality: FilterQuality.high,
-            ),
-            Text("MPH",
-                style: Get.textTheme.titleLarge?.copyWith(
-                    color: AppColors.textBlackColor,
-                    fontWeight: FontWeight.w700)),
-            kiloMeterDial(),
-            kiloMetersDriven(),
-          ],
-        ),
+      child: Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          Image.asset(
+            ImagePaths.speedMeterScale,
+            fit: BoxFit.contain,
+            filterQuality: FilterQuality.high,
+          ),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text("MPH",
+                  style: Get.textTheme.titleMedium?.copyWith(
+                      color: AppColors.textBlackColor,
+                      fontWeight: FontWeight.w700)),
+              kiloMeterDial(),
+            ],
+          ),
+          Positioned(
+            bottom: 0,
+            child: kiloMetersDriven(),
+          ),
+        ],
       ),
     );
   }
 
   kiloMeterDial() {
     return Container(
-      margin: EdgeInsets.all(100.w),
+      padding: EdgeInsets.symmetric(horizontal: 80.w),
       child: RotationTransition(
         turns: AlwaysStoppedAnimation(rotationValue),
         child: Image.asset(
@@ -148,8 +153,9 @@ class _SpeedMeterState extends State<SpeedMeter> {
   }
 
   kiloMetersDriven() {
-    return Align(
-      alignment: Alignment.bottomCenter,
+    return SizedBox(
+      height: 95.h,
+      width: 170.w,
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -157,7 +163,7 @@ class _SpeedMeterState extends State<SpeedMeter> {
             ImagePaths.kiloMeterContainer,
           ),
           Padding(
-            padding: EdgeInsets.only(bottom: 6.h),
+            padding: EdgeInsets.only(bottom: 4.h),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -169,13 +175,15 @@ class _SpeedMeterState extends State<SpeedMeter> {
                       Image.asset(
                         ImagePaths.kiloMeterItem,
                         fit: BoxFit.contain,
-                        height: 30.h,
+                        height: 20.h,
                       ),
                       Text(
-                          kiloMeters.isEmpty ? '0' : kiloMeters[index].toString(),
-                          style: Get.textTheme.titleMedium?.copyWith(
+                          kiloMeters.isEmpty
+                              ? '0'
+                              : kiloMeters[index].toString(),
+                          style: Get.textTheme.titleSmall?.copyWith(
                               color: AppColors.textBlackColor,
-                              fontWeight: FontWeight.w700)),
+                              fontWeight: FontWeight.w600)),
                     ],
                   ),
                 ),

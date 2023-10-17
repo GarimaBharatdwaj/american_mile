@@ -85,7 +85,7 @@ class DriverLicenceController extends GetxController {
       initialDate: DateTime.now(),
       firstDate: DateTime(1960),
       lastDate: DateTime.now(),
-      dateFormat: "MMMM-dd-yyyy",
+      dateFormat: "yyyy",
       locale: DateTimePickerLocale.en_us,
       looping: true,
       itemTextStyle: Get.textTheme.bodyLarge?.copyWith(
@@ -96,7 +96,7 @@ class DriverLicenceController extends GetxController {
     );
     if (picked != null && picked != pickedBirthDate) {
       pickedBirthDate = picked;
-      String formattedDate = DateFormat('MM-dd-yyyy').format(pickedBirthDate!);
+      String formattedDate = DateFormat('yyyy').format(pickedBirthDate!);
       controller.text = formattedDate;
       Get.log("ALpha Date : $formattedDate");
       update();

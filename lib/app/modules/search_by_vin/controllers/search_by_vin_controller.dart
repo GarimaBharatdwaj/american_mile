@@ -1,23 +1,19 @@
-import 'package:get/get.dart';
-
-import '../../../../core/network/api_service.dart';
+import '../../../../common_lib.dart';
 
 class SearchByVinController extends GetxController {
-  //TODO: Implement SearchByVinController
-
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
+  sendArgumentsToCarDetails() {
+    Get.toNamed(Routes.CAR_DETAILS, arguments: {
+      'isAddingManually': true,
+      'vinNumber': '',
+      'year': '',
+      'make': '',
+      'model': '',
+      'body': ''
+    });
   }
 }

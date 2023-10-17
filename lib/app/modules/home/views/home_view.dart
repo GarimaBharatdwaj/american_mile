@@ -4,6 +4,7 @@ import 'package:american_mile/core/components/profile_image_circle.dart';
 import 'package:american_mile/core/components/rect_icon.dart';
 import 'package:american_mile/core/utils/index.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import '../../../../ddd.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -127,7 +128,8 @@ class HomeView extends GetView<HomeController> {
                             circleRadius: 25.r,
                             imageSize: 75.w,
                             onTap: () {
-                              Get.toNamed(Routes.LIFE_POLICY);
+                              Get.toNamed(Routes.SEARCH_BY_VIN);
+                            ///  Get.toNamed(Routes.LIFE_POLICY);
                             },
                           ),
                           Gap(20.w),
@@ -192,8 +194,9 @@ class HomeView extends GetView<HomeController> {
                 buttonText: "Flow",
                 onTap: () {
                   /// Get.toNamed(Routes.USER_PROFILE);
-                  Get.toNamed(Routes.DRIVER_LICENCE);
+                 /// Get.toNamed(Routes.DRIVER_LICENCE);
 
+                  Get.to(()=>D());
                   ///  Get.toNamed(Routes.INSURANCE_PROVIDER);
                 },
               ),

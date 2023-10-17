@@ -65,6 +65,16 @@ class SearchByVinView extends GetView<SearchByVinController> {
                 },
               ),
             ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal:30.w),
+              child: PrimaryButton(
+                buttonText: "Add Manually",
+                onTap: () {
+                  controller.sendArgumentsToCarDetails();
+                },
+              ),
+            ),
+
           ],
         ),
       ),
