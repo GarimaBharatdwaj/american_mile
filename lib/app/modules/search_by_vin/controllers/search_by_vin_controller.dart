@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../../../../core/network/api_service.dart';
+
 class SearchByVinController extends GetxController {
   //TODO: Implement SearchByVinController
 
@@ -18,6 +20,4 @@ class SearchByVinController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }

@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import '../../../../common_lib.dart';
+import '../../../../core/network/api_service.dart';
 
 class CarDetailsController extends GetxController {
   late TextEditingController vinController;
@@ -7,7 +10,6 @@ class CarDetailsController extends GetxController {
   late TextEditingController modelController;
   late TextEditingController bodyController;
   late TextEditingController otpController;
-
 
   final count = 0.obs;
   @override
@@ -31,5 +33,29 @@ class CarDetailsController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+  //***********************************************************************//
+  //****************** Add Driver's License *******************************//
+  //***********************************************************************//
+  RxBool isLoading = false.obs;
+  addDriverDetails() async {
+    isLoading.value = true;
+    try {
+      var response = await API().post('add-edit-driver', data: {
+        'user_id': "14",
+        'vin_number': vinController.text.trim(),
+        'year': yearController.text.trim(),
+        'make': makeController.text.trim(),
+        'model': modelController.text.trim(),
+        'body': bodyController.text.trim()
+      });
+      Map<String, dynamic>? mapData = jsonDecode(response.data);
+      if (mapData != null) {
+        if (mapData['status'] == 1) {}
+      } else {}
+    } catch (e) {
+      debugPrint(e.toString());
+      isLoading.value = false;
+    }
+    isLoading.value = false;
+  }
 }
