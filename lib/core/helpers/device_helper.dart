@@ -16,16 +16,29 @@ class DeviceHelper {
   }
 
   // ****************** Device Id Setup *********************** //
-  static const String _deviceIdKey = "device_id";
+  static const String _userIdKey = "user_id";
 
-  static String? getId() {
-    String? id = StorageUtil.read<String>(_deviceIdKey);
+  static String? getUserId() {
+    String? id = StorageUtil.read<String>(_userIdKey);
     return id;
   }
 
-  static Future<void> saveId(String id) async {
-    await StorageUtil.write(_deviceIdKey, id);
-    debugPrint("Device id $id is saved.");
+  static Future<void> saveUserId(String id) async {
+    await StorageUtil.write(_userIdKey, id);
+    debugPrint("user id $id is saved.");
+  }
+
+  // ****************** Driver Id Setup *********************** //
+  static const String _driverIdKey = "driver_id";
+
+  static String? getDriverId() {
+    String? id = StorageUtil.read<String>(_driverIdKey);
+    return id;
+  }
+
+  static Future<void> saveDriverId(String id) async {
+    await StorageUtil.write(_driverIdKey, id);
+    debugPrint("driver id $id is saved.");
   }
 
   // ****************** User Token Setup *********************** //

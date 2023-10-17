@@ -36,7 +36,7 @@ class LoginController extends GetxController {
 
       if (mapData != null) {
         if (mapData['status'] == 1) {
-          DeviceHelper.saveId(mapData['user_data']['user_id']);
+          DeviceHelper.saveUserId(mapData['user_data']['user_id']);
         }
       }
     } catch (e) {

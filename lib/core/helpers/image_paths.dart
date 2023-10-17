@@ -56,4 +56,8 @@ class ImagePaths {
   static String verRoad = "$iconPath/ver_road.png";
   static String chipRoad = "$iconPath/chip_rod.png";
   static String typeCenter = "$iconPath/type_center.png";
+  static String speedMeterScale = "$iconPath/scale.png";
+  static String speedDial = "$iconPath/dial.png";
+  static String kiloMeterContainer = "$iconPath/kilo_meter_container.png";
+  static String kiloMeterItem = "$iconPath/kilo_meter_item.png";
 }

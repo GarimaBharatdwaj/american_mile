@@ -54,12 +54,26 @@ class DriverLicenceView extends GetView<DriverLicenceController> {
                 style: Get.textTheme.titleLarge?.copyWith(fontSize: 18.sp),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 50.w, vertical: 24.h),
+                padding: EdgeInsets.only(
+                    left: 50.w, right: 50.w, top: 24.h, bottom: 12.h),
                 child: PrimaryButton(
                   buttonText: "Ready to Scan",
                   onTap: () {
+                    controller.isAddingManually.value = false;
                     Get.to(
-                      () => const DriverDetails(),
+                      () => DriverDetails(),
+                    );
+                  },
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 50.w, right: 50.w, bottom: 24.h),
+                child: PrimaryButton(
+                  buttonText: "Add Manually",
+                  onTap: () {
+                    controller.isAddingManually.value = true;
+                    Get.to(
+                      () => DriverDetails(),
                     );
                   },
                 ),

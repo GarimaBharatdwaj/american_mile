@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:american_mile/app/ui/widgets/view_picture.dart';
 import 'package:american_mile/common_lib.dart';
 import 'package:american_mile/core/components/primary_button.dart';
 import 'package:american_mile/core/utils/divider.dart';
@@ -71,6 +72,12 @@ class UserProfileView extends GetView<UserProfileController> {
                                       if (controller
                                           .profileImagePath.value.isEmpty)
                                         profileImage(
+                                          onTap: () {
+                                            Get.to(() => ViewPicture(
+                                                  imageUrl: controller
+                                                      .userData!['image'],
+                                                ));
+                                          },
                                           imageUrl: controller.userData !=
                                                       null &&
                                                   controller

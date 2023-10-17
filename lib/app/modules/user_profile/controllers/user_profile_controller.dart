@@ -21,7 +21,7 @@ class UserProfileController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    userId = DeviceHelper.getId();
+    userId = DeviceHelper.getUserId();
     getUserProfile();
   }
 

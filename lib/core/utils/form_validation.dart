@@ -108,6 +108,17 @@ class FormValidation {
     return null;
   }
 
+  //**************************************Full Gender Validator*********************************//
+  static String? genderValidator(value, {bool isMandatory = true}) {
+    if (value.length == 0) {
+      return isMandatory ? 'Please enter gender' : null;
+    } else if (value.toString().toLowerCase() == "male" ||
+        value.toString().toLowerCase() == "female") {
+      return null;
+    }
+    return 'Gender should be male or female';
+  }
+
   //**************************************Full Name Validator*********************************//
   static String? nameValidator(value, {bool isMandatory = true, tag}) {
     String patttern = r"^(?:[a-z A-Z]|\P{L})+$";
@@ -164,7 +175,7 @@ class FormValidation {
 
   static String? addressLineValidator(value) {
     if (value.length == 0) {
-      return 'Address line is required';
+      return 'Address is required';
     }
     return null;
   }
