@@ -1,20 +1,17 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:american_mile/app/ui/widgets/error_dialog.dart';
 import 'package:dio/dio.dart' as dio;
-
 import 'package:american_mile/common_lib.dart';
 import 'package:american_mile/core/components/app_bottomsheet.dart';
-import 'package:american_mile/core/helpers/device_helper.dart';
 import 'package:american_mile/core/network/api_service.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
-class UserProfileController extends GetxController {
-  RxBool isLoading = false.obs;
-  Map<String, dynamic>? userData;
-  String? userId;
+import '../../../../core/helpers/device_helper.dart';
 
+class UserProfileController extends GetxController {
+  String? userId;
+  RxBool edit = false.obs;
   var formKey = GlobalKey<FormState>();
 
   final TextEditingController fullName = TextEditingController();
@@ -24,32 +21,48 @@ class UserProfileController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    userId = DeviceHelper.getId();
     getUserProfile();
   }
 
-  getUserProfile() async {
-    userId = DeviceHelper.getId();
+  //*********************************************************************//
+  //************************* User Profile API **************************//
+  //*********************************************************************//
 
-    debugPrint(userId.toString());
+  RxBool isLoading = false.obs;
+  Map<String, dynamic>? userData;
+  getUserProfile() {
     isLoading.value = true;
-    try {
-      var response = await API().post('get-profile', data: {
-        'user_id': int.parse(userId!),
-      });
-      Map<String, dynamic>? mapData = jsonDecode(response.data);
-      if (mapData != null) {
-        userData = mapData['user_data'];
-        fullName.text = userData!['fullname'] ?? "";
-        email.text = userData!['email'] ?? "";
-        phone.text = userData!['mobile'] ?? "";
+    API().post(
+      "get-profile",
+      data: {
+        'user_id': "14", //DeviceHelper.getId()
+      },
+    ).then((value) async {
+      Get.log("Value  :  $value");
+      try {
+        Map<String, dynamic>? res = json.decode(value.data);
+        if (res != null) {
+          if (res['status'].toString() == "1") {
+            profileImagePath.value = "";
+            userData = res['user_data'];
+            fullName.text = userData!['fullname'] ?? "";
+            email.text = userData!['email'] ?? "";
+            phone.text = userData!['mobile'] ?? "";
+          } else {
+            // Constants.showErrorDialogRevise();
+          }
+        } else {
+          // Constants.showErrorDialogRevise();
+        }
+      } catch (e) {
+        // Constants.showErrorDialogRevise();
       }
-    } catch (e) {
-      debugPrint(e.toString());
       isLoading.value = false;
-    }
-    isLoading.value = false;
+    });
   }
 
+  RxString profileImagePath = "".obs;
   void onProfileImageTap(BuildContext context) {
     AppBottomSheet.kImagePickerBottomSheet(
       context,
@@ -88,43 +101,35 @@ class UserProfileController extends GetxController {
 
     if (cropped != null) {
       final path = cropped.path;
-      File file = File(path);
-      updateUserDetails(file: file);
+      profileImagePath.value = path;
     }
   }
-
 
   void validateMethode() {
     final isValid = formKey.currentState!.validate();
     if (!isValid) {
       return;
     } else {
-      // updateUserDetails();
+      updateUserDetails();
     }
     formKey.currentState!.save();
   }
 
-  updateUserDetails({File? file}) async {
+  updateUserDetails() async {
     final Map<String, dynamic> data = {
-      'user_id': int.parse(userId!),
+      'user_id': "14",
       'fullname': fullName.text,
       'email': email.text,
       'mobile': phone.text,
     };
-
-    if (file != null) {
-      data['image'] = await dio.MultipartFile.fromFile(file.path);
-    }
-
+    data['image'] = await dio.MultipartFile.fromFile(profileImagePath.value);
     isLoading.value = true;
     final apiResult = await API().postData(
       endPoint: 'update-profile',
       data: data,
     );
-
     if (apiResult is ApiSuccess) {
       final result = apiResult.data;
-
       if (result['status'] == 1) {
         getUserProfile();
       } else {
@@ -138,5 +143,18 @@ class UserProfileController extends GetxController {
       isLoading.value = false;
       errorDialog("Some error occurred");
     }
+  }
+
+  String? nameValidator(
+    String? value,
+  ) {
+    String patttern = r'^[a-zA-Z ]*$';
+    RegExp regExp = RegExp(patttern, unicode: true);
+    if (value!.isEmpty) {
+      return 'Please enter fullname';
+    } else if (!regExp.hasMatch(value)) {
+      return 'Only alphabets are allowed';
+    }
+    return null;
   }
 }

@@ -218,15 +218,14 @@ class FormValidation {
 
   static String? phoneValidator(String? value, {bool isMandatory = true}) {
     RegExp regExp = RegExp(r'^(\+91[\-\s]?)?[1234]\d{9}$');
-    if (value != null) {
-      if (value!.isEmpty) {
-        return isMandatory ? 'Phone number is required' : null;
-      } else if (value.length < 10) {
-        return 'Please enter 10 digit number';
-      } else if (!regExp.hasMatch(value)) {
-        return 'Please enter valid mobile number';
-      }
-    }else{ return isMandatory ? 'Phone number is required' : null;}
+
+    if (value!.isEmpty) {
+      return isMandatory ? 'Phone number is required' : null;
+    } else if (value.length < 10) {
+      return 'Please enter 10 digit number';
+    } else if (!regExp.hasMatch(value)) {
+      return 'Please enter valid mobile number';
+    }
     return null;
   }
 
