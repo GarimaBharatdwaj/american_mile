@@ -1,5 +1,8 @@
 import 'dart:convert';
 import 'package:american_mile/core/network/api_service.dart';
+import 'package:american_mile/core/utils/index.dart';
+import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
+import 'package:intl/intl.dart';
 import '../../../../common_lib.dart';
 import '../../../../core/helpers/device_helper.dart';
 
@@ -17,24 +20,6 @@ class DriverLicenceController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    getDriverLicense();
-  }
-
-  //***********************************************************************//
-  //****************** Get Driver's License by Scanning *******************//
-  //***********************************************************************//
-
-  getDriverLicense() async {
-    isLoading.value = true;
-    try {
-      var response = await API().get('');
-      Map<String, dynamic>? mapData = jsonDecode(response.data);
-
-      if (mapData != null) {}
-    } catch (e) {
-      debugPrint(e.toString());
-    }
-    isLoading.value = false;
   }
 
   //***********************************************************************//
@@ -86,5 +71,35 @@ class DriverLicenceController extends GetxController {
 
   makeFormEditable() {
     isAddingManually.value = true;
+  }
+
+  //******************************************************************//
+  //************************* Date Picker ****************************//
+  //******************************************************************//
+
+  DateTime? pickedBirthDate;
+  showDatePickerMethod(
+      BuildContext context, TextEditingController controller) async {
+    var picked = await DatePicker.showSimpleDatePicker(
+      context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1960),
+      lastDate: DateTime.now(),
+      dateFormat: "MMMM-dd-yyyy",
+      locale: DateTimePickerLocale.en_us,
+      looping: true,
+      itemTextStyle: Get.textTheme.bodyLarge?.copyWith(
+        color: AppColors.primary,
+        fontWeight: FontWeight.w600,
+      ),
+      textColor: AppColors.primary,
+    );
+    if (picked != null && picked != pickedBirthDate) {
+      pickedBirthDate = picked;
+      String formattedDate = DateFormat('MM-dd-yyyy').format(pickedBirthDate!);
+      controller.text = formattedDate;
+      Get.log("ALpha Date : $formattedDate");
+      update();
+    }
   }
 }

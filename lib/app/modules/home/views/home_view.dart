@@ -191,10 +191,10 @@ class HomeView extends GetView<HomeController> {
               PrimaryButton(
                 buttonText: "Flow",
                 onTap: () {
-
-
+                  /// Get.toNamed(Routes.USER_PROFILE);
                   Get.toNamed(Routes.DRIVER_LICENCE);
-                 /// Get.toNamed(Routes.INSURANCE_PROVIDER);
+
+                  ///  Get.toNamed(Routes.INSURANCE_PROVIDER);
                 },
               ),
             ],

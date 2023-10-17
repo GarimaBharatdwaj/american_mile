@@ -173,9 +173,9 @@ class FormValidation {
 
   //**************************************Address Line Validator*********************************//
 
-  static String? addressLineValidator(value) {
+  static String? addressLineValidator(value,tag) {
     if (value.length == 0) {
-      return 'Address is required';
+      return tag;
     }
     return null;
   }

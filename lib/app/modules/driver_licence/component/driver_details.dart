@@ -68,13 +68,21 @@ class DriverDetails extends StatelessWidget {
                         isMandatory: true),
                   ),
                   Gap(24.h),
-                  LoginTextField(
-                    enabled: controller.isAddingManually.value,
-                    hintText: "Enter Date Of Birth",
-                    labelText: "Date Of Birth",
-                    controller: controller.dobController,
-                    validator: (value) => FormValidation.dobValidator(
-                      controller.dobController.text,
+                  GestureDetector(
+                    onTap: controller.isAddingManually.value
+                        ? () {
+                            controller.showDatePickerMethod(
+                                context, controller.dobController);
+                          }
+                        : () {},
+                    child: LoginTextField(
+                      enabled: false,
+                      hintText: "Enter Date Of Birth",
+                      labelText: "Date Of Birth",
+                      controller: controller.dobController,
+                      validator: (value) => FormValidation.dobValidator(
+                        controller.dobController.text,
+                      ),
                     ),
                   ),
                   Gap(24.h),
@@ -84,7 +92,7 @@ class DriverDetails extends StatelessWidget {
                     labelText: "Driver's License Number",
                     controller: controller.dlController,
                     validator: (value) => FormValidation.addressLineValidator(
-                        controller.dlController.text),
+                        controller.dlController.text,"Driver's license is required"),
                   ),
                   Gap(24.h),
                   LoginTextField(
@@ -93,7 +101,7 @@ class DriverDetails extends StatelessWidget {
                     labelText: "Address",
                     controller: controller.addressController,
                     validator: (value) => FormValidation.addressLineValidator(
-                        controller.dlController.text),
+                        controller.addressController.text,'Address is required'),
                   ),
                   Gap(30.h),
                   Padding(
@@ -127,41 +135,6 @@ class DriverDetails extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  void _showDialog(Widget child, {required void Function() onTap}) {
-    showCupertinoModalPopup<void>(
-      context: Get.context!,
-      builder: (BuildContext context) => Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            height: 300.h,
-            padding: const EdgeInsets.only(top: 6.0),
-            margin: EdgeInsets.only(
-              bottom: MediaQuery.of(context).viewInsets.bottom,
-            ),
-            color: AppColors.textLight,
-            child: SafeArea(
-              top: false,
-              child: child,
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.all(8.w),
-            color: AppColors.textLight,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30.w),
-              child: PrimaryButton(
-                backgroundColor: AppColors.textBlackColor,
-                buttonText: "Done",
-                onTap: onTap,
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
