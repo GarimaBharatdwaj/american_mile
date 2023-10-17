@@ -1,5 +1,4 @@
 import 'package:american_mile/core/utils/divider.dart';
-
 import '../../../../common_lib.dart';
 import '../../../../core/components/index.dart';
 import '../../../../core/components/primary_button.dart';
