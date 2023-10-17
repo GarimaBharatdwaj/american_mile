@@ -127,7 +127,7 @@ class HomeView extends GetView<HomeController> {
                             circleRadius: 25.r,
                             imageSize: 75.w,
                             onTap: () {
-                              Get.toNamed(Routes.CAR_DASHBOARD);
+                              Get.toNamed(Routes.SEARCH_BY_VIN);
                             },
                           ),
                           Gap(20.w),

@@ -12,25 +12,28 @@ class SecondryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      padding: EdgeInsets.symmetric(
-        vertical: 14.h,
-      ),
-      width: context.width * .38,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15.r),
-        gradient: LinearGradient(
-          colors: [
-            AppColors.primaryDark,
-            AppColors.primary,
-          ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.symmetric(
+          vertical: 14.h,
         ),
-      ),
-      child: Text(
-        buttonText,
-        style: Get.textTheme.titleMedium?.copyWith(
-          color: AppColors.white,
+        width: context.width * .38,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15.r),
+          gradient: LinearGradient(
+            colors: [
+              AppColors.primaryDark,
+              AppColors.primary,
+            ],
+          ),
+        ),
+        child: Text(
+          buttonText,
+          style: Get.textTheme.titleMedium?.copyWith(
+            color: AppColors.white,
+          ),
         ),
       ),
     );

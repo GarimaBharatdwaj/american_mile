@@ -4,6 +4,7 @@ import 'package:american_mile/core/components/primary_button.dart';
 import '../../../../core/components/index.dart';
 import '../../../../core/components/request_change.dart';
 import '../../../../core/components/secondry_button.dart';
+import '../../../../core/utils/divider.dart';
 import '../../../../core/utils/index.dart';
 import '../controllers/auto_policy_controller.dart';
 
@@ -15,252 +16,286 @@ class AutoPolicyView extends GetView<AutoPolicyController> {
       child: Obx(
         () => Scaffold(
           backgroundColor: AppColors.background,
-          body: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(vertical: 15.w),
-            child: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15.w),
-                  child: const MyAppBar(title: 'Auto Policy Details'),
-                ),
-                Gap(40.h),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      Gap(15.w),
-                      ShadowContainer(
-                        width: context.width * .75,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Named Insured",
-                              style: Get.textTheme.titleMedium?.copyWith(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 18.sp,
-                              ),
-                            ),
-                            Gap(6.h),
-                            Text(
-                              "NAMED INSURED",
-                              style: Get.textTheme.bodyMedium?.copyWith(
-                                fontSize: 12.sp,
-                              ),
-                            ),
-                            Gap(6.h),
-                            Text(
-                              "Adam Robbins, 37",
-                              style: Get.textTheme.titleMedium?.copyWith(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16.sp,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Gap(15.w),
-                      Container(
-                        width: context.width * .75,
-                        padding: EdgeInsets.only(
-                          top: 20.h,
-                          bottom: 20.h,
-                          left: 20.h,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(
-                            20.r,
-                          ),
-                          color: AppColors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: AppColors.shadowColor,
-                              blurRadius: 10.w,
-                              offset: Offset(
-                                0,
-                                3.h,
-                              ),
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Drivers",
-                                  style: Get.textTheme.titleMedium?.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 18.sp,
-                                  ),
-                                ),
-                                const RequestChange(),
-                              ],
-                            ),
-                            Text(
-                              "DRIVERS",
-                              style: Get.textTheme.bodyMedium?.copyWith(
-                                fontSize: 12.sp,
-                              ),
-                            ),
-                            Gap(6.h),
-                            Text(
-                              "Adam Robbins, 37",
-                              style: Get.textTheme.titleMedium?.copyWith(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16.sp,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Gap(15.w),
-                      Container(
-                        width: context.width * .75,
-                        padding: EdgeInsets.only(
-                          top: 20.h,
-                          bottom: 20.h,
-                          left: 20.h,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(
-                            20.r,
-                          ),
-                          color: AppColors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: AppColors.shadowColor,
-                              blurRadius: 10.w,
-                              offset: Offset(
-                                0,
-                                3.h,
-                              ),
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Addressess",
-                                  style: Get.textTheme.titleMedium?.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 18.sp,
-                                  ),
-                                ),
-                                const RequestChange(),
-                              ],
-                            ),
-                            Text(
-                              "RESIDENTIALS",
-                              style: Get.textTheme.bodyMedium?.copyWith(
-                                fontSize: 12.sp,
-                              ),
-                            ),
-                            Gap(6.h),
-                            Text(
-                              "9926 N 16th PI E Phoneix, AZ 85020",
-                              style: Get.textTheme.titleMedium?.copyWith(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16.sp,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Gap(15.w),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15.w),
+          body: controller.isLoading.value == true
+              ? showProgressIndicator()
+              : SingleChildScrollView(
+                  padding: EdgeInsets.symmetric(vertical: 15.w),
                   child: Column(
                     children: [
-                      Gap(40.h),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              controller.type.value = 0;
-                            },
-                            child: Text(
-                              "DETAILS",
-                              style: Get.textTheme.titleMedium?.copyWith(
-                                fontWeight: FontWeight.w600,
-                                height: 1.4,
-                                color: controller.type.value == 0
-                                    ? AppColors.primaryDark
-                                    : AppColors.textLight,
-                                fontSize: 18.sp,
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              controller.type.value = 1;
-                            },
-                            child: Text(
-                              "ID CARDS",
-                              style: Get.textTheme.titleMedium?.copyWith(
-                                fontWeight: FontWeight.w600,
-                                height: 1.4,
-                                color: controller.type.value == 1
-                                    ? AppColors.primaryDark
-                                    : AppColors.textLight,
-                                fontSize: 18.sp,
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              controller.type.value = 2;
-                            },
-                            child: Text(
-                              "DOCUMENTS",
-                              style: Get.textTheme.titleMedium?.copyWith(
-                                fontWeight: FontWeight.w600,
-                                height: 1.4,
-                                color: controller.type.value == 2
-                                    ? AppColors.primaryDark
-                                    : AppColors.textLight,
-                                fontSize: 18.sp,
-                              ),
-                            ),
-                          ),
-                        ],
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 15.w),
+                        child: const MyAppBar(title: 'Auto Policy Details'),
                       ),
                       Gap(40.h),
-                      controller.type.value == 0
-                          ? _autoDetails(context)
-                          : controller.type.value == 1
-                              ? _autoIdCards(context)
-                              : _autoDocuments(context),
-                      Gap(40.h),
-
-                      Gap(40.h),
-
-
-                      PrimaryButton(
-                        buttonText: "Flow",
-                        onTap: () {
-                          Get.toNamed(Routes.CONNECT_CAR);
-                        },
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            Gap(15.w),
+                            ShadowContainer(
+                              width: context.width * .75,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Named Insured",
+                                    style: Get.textTheme.titleMedium?.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 18.sp,
+                                    ),
+                                  ),
+                                  ...List.generate(
+                                      controller
+                                          .autoDetails!['data']
+                                              ['named_insureds']
+                                          .length, (index) {
+                                    return Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Gap(6.h),
+                                        Text(
+                                          "NAMED INSURED",
+                                          style: Get.textTheme.bodyMedium
+                                              ?.copyWith(
+                                            fontSize: 12.sp,
+                                          ),
+                                        ),
+                                        Gap(6.h),
+                                        Text(
+                                          controller.autoDetails!['data']
+                                              ['named_insureds'][index],
+                                          style: Get.textTheme.titleMedium
+                                              ?.copyWith(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 16.sp,
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  }),
+                                ],
+                              ),
+                            ),
+                            Gap(15.w),
+                            Container(
+                              width: context.width * .75,
+                              padding: EdgeInsets.only(
+                                top: 20.h,
+                                bottom: 20.h,
+                                left: 20.h,
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  20.r,
+                                ),
+                                color: AppColors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: AppColors.shadowColor,
+                                    blurRadius: 10.w,
+                                    offset: Offset(
+                                      0,
+                                      3.h,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Drivers",
+                                        style:
+                                            Get.textTheme.titleMedium?.copyWith(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 18.sp,
+                                        ),
+                                      ),
+                                      const RequestChange(),
+                                    ],
+                                  ),
+                                  ...List.generate(
+                                      controller
+                                          .autoDetails!['data']['driver_data']
+                                          .length, (index) {
+                                    var driver = controller.autoDetails!['data']
+                                        ['driver_data'][index];
+                                    return Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "DRIVERS",
+                                          style: Get.textTheme.bodyMedium
+                                              ?.copyWith(
+                                            fontSize: 12.sp,
+                                          ),
+                                        ),
+                                        Gap(6.h),
+                                        Text(
+                                          driver['name'],
+                                          style: Get.textTheme.titleMedium
+                                              ?.copyWith(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 16.sp,
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  }),
+                                ],
+                              ),
+                            ),
+                            Gap(15.w),
+                            Container(
+                              width: context.width * .75,
+                              padding: EdgeInsets.only(
+                                top: 20.h,
+                                bottom: 20.h,
+                                left: 20.h,
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  20.r,
+                                ),
+                                color: AppColors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: AppColors.shadowColor,
+                                    blurRadius: 10.w,
+                                    offset: Offset(
+                                      0,
+                                      3.h,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Addressess",
+                                        style:
+                                            Get.textTheme.titleMedium?.copyWith(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 18.sp,
+                                        ),
+                                      ),
+                                      const RequestChange(),
+                                    ],
+                                  ),
+                                  Text(
+                                    "RESIDENTIALS",
+                                    style: Get.textTheme.bodyMedium?.copyWith(
+                                      fontSize: 12.sp,
+                                    ),
+                                  ),
+                                  Gap(6.h),
+                                  Text(
+                                    controller.autoDetails!['data']['address'],
+                                    style: Get.textTheme.titleMedium?.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 16.sp,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Gap(15.w),
+                          ],
+                        ),
                       ),
-
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 15.w),
+                        child: Column(
+                          children: [
+                            Gap(40.h),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    controller.type.value = 0;
+                                  },
+                                  child: Text(
+                                    "DETAILS",
+                                    style: Get.textTheme.titleMedium?.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      height: 1.4,
+                                      color: controller.type.value == 0
+                                          ? AppColors.primaryDark
+                                          : AppColors.textLight,
+                                      fontSize: 18.sp,
+                                    ),
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    controller.type.value = 1;
+                                  },
+                                  child: Text(
+                                    "ID CARDS",
+                                    style: Get.textTheme.titleMedium?.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      height: 1.4,
+                                      color: controller.type.value == 1
+                                          ? AppColors.primaryDark
+                                          : AppColors.textLight,
+                                      fontSize: 18.sp,
+                                    ),
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    controller.type.value = 2;
+                                  },
+                                  child: Text(
+                                    "DOCUMENTS",
+                                    style: Get.textTheme.titleMedium?.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      height: 1.4,
+                                      color: controller.type.value == 2
+                                          ? AppColors.primaryDark
+                                          : AppColors.textLight,
+                                      fontSize: 18.sp,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Gap(40.h),
+                            controller.type.value == 0
+                                ? _autoDetails(context)
+                                : controller.type.value == 1
+                                    ? _autoIdCards(context)
+                                    : _autoDocuments(context),
+                            Gap(40.h),
+                            Gap(40.h),
+                            PrimaryButton(
+                              buttonText: "Flow",
+                              onTap: () {
+                                Get.toNamed(Routes.CONNECT_CAR);
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
-              ],
-            ),
-          ),
         ),
       ),
     );
@@ -268,7 +303,9 @@ class AutoPolicyView extends GetView<AutoPolicyController> {
 
   _autoDocuments(BuildContext context) {
     return Column(
-      children: List.generate(6, (index) {
+      children: List.generate(
+          controller.autoDetails!['data']['auto_id_docs'].length, (index) {
+        var doc = controller.autoDetails!['data']['auto_id_docs'][index];
         return Padding(
           padding: EdgeInsets.only(bottom: 30.h),
           child: ShadowContainer(
@@ -317,7 +354,7 @@ class AutoPolicyView extends GetView<AutoPolicyController> {
                         ),
                         Gap(6.h),
                         Text(
-                          "07/17/2023",
+                          doc['date_added'],
                           style: Get.textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.w600,
                             fontSize: 12.sp,
@@ -329,7 +366,7 @@ class AutoPolicyView extends GetView<AutoPolicyController> {
                 ),
                 Gap(8.h),
                 Text(
-                  "AUTO INSURANCE- RENEWAL",
+                  doc['document_type'],
                   style: Get.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.w600,
                     fontSize: 14.sp,
@@ -337,7 +374,7 @@ class AutoPolicyView extends GetView<AutoPolicyController> {
                 ),
                 Gap(8.h),
                 Text(
-                  "DOCUMENT 01",
+                  doc['title'],
                   style: Get.textTheme.titleMedium?.copyWith(
                     fontSize: 14.sp,
                   ),
@@ -354,8 +391,6 @@ class AutoPolicyView extends GetView<AutoPolicyController> {
     return Column(
       children: [
         _idCardItem(context),
-        Gap(40.h),
-        _idCardItem(context),
       ],
     );
   }
@@ -364,127 +399,134 @@ class AutoPolicyView extends GetView<AutoPolicyController> {
     return ShadowContainer(
       child: Column(
         children: [
-          ShadowContainer(
-            child: Column(
-              children: [
-                Text(
-                  "EVIDENCE OF INSURANCE",
-                  style: Get.textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 14.sp,
+          controller.autoDetails!['data']['auto_id_cards']['doc_type'] !=
+                  'INSURANCE_ID_CARD'
+              ? ShadowContainer(
+                  child: Column(
+                    children: [
+                      Text(
+                        controller.autoDetails!['data']['auto_id_cards']
+                            ['title'],
+                        style: Get.textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14.sp,
+                        ),
+                      ),
+                      Gap(10.h),
+                      Text(
+                        controller.autoDetails!['data']['auto_id_cards']
+                            ['desc'],
+                        style: Get.textTheme.titleMedium?.copyWith(
+                          fontSize: 12.sp,
+                        ),
+                      ),
+                      Gap(10.h),
+                      _pdfComponent(
+                        context,
+                        'Paper Size',
+                      ),
+                      // Row(
+                      //   children: [
+                      //     Expanded(
+                      //       child: Column(
+                      //         children: [
+                      //           _pdfComponent(
+                      //             context,
+                      //             'Paper Size',
+                      //           ),
+                      //           Gap(12.h),
+                      //           Text(
+                      //             '2019 LAND ROVER RANGE\nROVER SPORT 4D 4X4 LUX',
+                      //             textAlign: TextAlign.center,
+                      //             style: Get.textTheme.bodySmall?.copyWith(
+                      //               fontSize: 8.sp,
+                      //             ),
+                      //           )
+                      //         ],
+                      //       ),
+                      //     ),
+                      //     Gap(20.w),
+                      //     Expanded(
+                      //       child: Column(
+                      //         children: [
+                      //           _pdfComponent(
+                      //             context,
+                      //             'Paper Size',
+                      //           ),
+                      //           Gap(12.h),
+                      //           Text(
+                      //             '2016 JEEP GRAND CHEROKEE\n4D 4X4 LIMITED',
+                      //             textAlign: TextAlign.center,
+                      //             style: Get.textTheme.bodySmall?.copyWith(
+                      //               fontSize: 8.sp,
+                      //             ),
+                      //           )
+                      //         ],
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
+                    ],
                   ),
-                ),
-                Gap(10.h),
-                Text(
-                  "LIENHOLDER INTEREST FROM: BINDER",
-                  style: Get.textTheme.titleMedium?.copyWith(
-                    fontSize: 12.sp,
-                  ),
-                ),
-                Gap(10.h),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Column(
+                )
+              : ShadowContainer(
+                  child: Column(
+                    children: [
+                      Text(
+                        "ID CARD",
+                        style: Get.textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14.sp,
+                        ),
+                      ),
+                      Gap(10.h),
+                      Text(
+                        "DOWNLOAD/PRINT",
+                        style: Get.textTheme.titleMedium?.copyWith(
+                          fontSize: 12.sp,
+                        ),
+                      ),
+                      Gap(10.h),
+                      Row(
                         children: [
-                          _pdfComponent(
-                            context,
-                            'Paper Size',
-                          ),
-                          Gap(12.h),
-                          Text(
-                            '2019 LAND ROVER RANGE\nROVER SPORT 4D 4X4 LUX',
-                            textAlign: TextAlign.center,
-                            style: Get.textTheme.bodySmall?.copyWith(
-                              fontSize: 8.sp,
+                          Expanded(
+                            child: Column(
+                              children: [
+                                _pdfComponent(
+                                  context,
+                                  'Paper Size',
+                                ),
+                                Gap(12.h),
+                                AppIconButton(
+                                  buttonText: "Fax",
+                                  icon: ImagePaths.fax,
+                                  onTap: () {},
+                                ),
+                              ],
                             ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Gap(20.w),
-                    Expanded(
-                      child: Column(
-                        children: [
-                          _pdfComponent(
-                            context,
-                            'Paper Size',
                           ),
-                          Gap(12.h),
-                          Text(
-                            '2016 JEEP GRAND CHEROKEE\n4D 4X4 LIMITED',
-                            textAlign: TextAlign.center,
-                            style: Get.textTheme.bodySmall?.copyWith(
-                              fontSize: 8.sp,
+                          Gap(20.w),
+                          Expanded(
+                            child: Column(
+                              children: [
+                                _pdfComponent(
+                                  context,
+                                  'Paper Size',
+                                ),
+                                Gap(12.h),
+                                AppIconButton(
+                                  buttonText: "Mail",
+                                  icon: ImagePaths.mail,
+                                  onTap: () {},
+                                ),
+                              ],
                             ),
-                          )
+                          ),
                         ],
                       ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          Gap(40.h),
-          ShadowContainer(
-            child: Column(
-              children: [
-                Text(
-                  "ID CARD",
-                  style: Get.textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 14.sp,
+                    ],
                   ),
                 ),
-                Gap(10.h),
-                Text(
-                  "DOWNLOAD/PRINT",
-                  style: Get.textTheme.titleMedium?.copyWith(
-                    fontSize: 12.sp,
-                  ),
-                ),
-                Gap(10.h),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        children: [
-                          _pdfComponent(
-                            context,
-                            'Paper Size',
-                          ),
-                          Gap(12.h),
-                          AppIconButton(
-                            buttonText: "Fax",
-                            icon: ImagePaths.fax,
-                            onTap: () {},
-                          ),
-                        ],
-                      ),
-                    ),
-                    Gap(20.w),
-                    Expanded(
-                      child: Column(
-                        children: [
-                          _pdfComponent(
-                            context,
-                            'Paper Size',
-                          ),
-                          Gap(12.h),
-                          AppIconButton(
-                            buttonText: "Mail",
-                            icon: ImagePaths.mail,
-                            onTap: () {},
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
           Gap(40.h),
           ShadowContainer(
             child: Column(
@@ -519,7 +561,8 @@ class AutoPolicyView extends GetView<AutoPolicyController> {
                         ),
                         Gap(6.h),
                         Text(
-                          "09/11/2023",
+                          controller.autoDetails!['data']['auto_id_cards']
+                              ['effective_date'],
                           style: Get.textTheme.titleMedium?.copyWith(
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w600,
@@ -538,7 +581,8 @@ class AutoPolicyView extends GetView<AutoPolicyController> {
                         ),
                         Gap(6.h),
                         Text(
-                          "09/11/2023",
+                          controller.autoDetails!['data']['auto_id_cards']
+                              ['expiry_date'],
                           style: Get.textTheme.titleMedium?.copyWith(
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w600,
@@ -557,22 +601,23 @@ class AutoPolicyView extends GetView<AutoPolicyController> {
                     fontSize: 14.sp,
                   ),
                 ),
-                Gap(10.h),
-                Text(
-                  "2019 LAND ROVER RANGE ROVER SPORT 4D 4X4 LUX\n(VIN #SALWRZREXKA226211)",
-                  style: Get.textTheme.titleMedium?.copyWith(
-                    fontSize: 12.sp,
-                    height: 1.3,
-                  ),
-                ),
-                Gap(4.h),
-                Text(
-                  "2016 JEEP GRAND CHEROKEE 4D 4X4 LIMITED\n(VIN#1C4RJFBT4GC312961)",
-                  style: Get.textTheme.titleMedium?.copyWith(
-                    fontSize: 12.sp,
-                    height: 1.3,
-                  ),
-                ),
+                Gap(8.h),
+                ...List.generate(
+                    controller.autoDetails!['data']['auto_id_cards']['vehicles']
+                        .length, (index) {
+                  var item = controller.autoDetails!['data']['auto_id_cards']
+                      ['vehicles'][index];
+                  return Padding(
+                    padding: EdgeInsets.only(bottom: 6.h),
+                    child: Text(
+                      "${item['year']} ${item['make']} ${item['model']}\n${item['vin_number']}",
+                      style: Get.textTheme.titleMedium?.copyWith(
+                        fontSize: 12.sp,
+                        height: 1.3,
+                      ),
+                    ),
+                  );
+                }),
               ],
             ),
           ),
@@ -624,22 +669,12 @@ class AutoPolicyView extends GetView<AutoPolicyController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  Text(
-                    "AUTO POLICY ",
-                    style: Get.textTheme.titleMedium?.copyWith(
-                      fontSize: 18.sp,
-                    ),
-                  ),
-                  Text(
-                    "#53520-65-55",
-                    style: Get.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18.sp,
-                    ),
-                  ),
-                ],
+              Text(
+                controller.autoDetails!['data']['car_policy_data'][0]['name'],
+                style: Get.textTheme.titleMedium?.copyWith(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               Gap(10.h),
               Text(
@@ -650,13 +685,37 @@ class AutoPolicyView extends GetView<AutoPolicyController> {
               ),
               Gap(10.h),
               Text(
-                "03/11/2023 - 09/11/2023",
+                controller.autoDetails!['data']['car_policy_data'][0]
+                    ['description'],
                 style: Get.textTheme.titleMedium?.copyWith(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
                 ),
               ),
               Gap(10.h),
+              Text(
+                "EXPIRATION DATE",
+                style: Get.textTheme.titleMedium?.copyWith(
+                  fontSize: 14.sp,
+                ),
+              ),
+              Gap(10.h),
+              Text(
+                controller.autoDetails!['data']['car_policy_data'][0]
+                    ['expiry_date'],
+                style: Get.textTheme.titleMedium?.copyWith(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              Gap(10.h),
+              // Text(
+              //   '**** 7555 Bank Account',
+              //   style: Get.textTheme.bodySmall?.copyWith(
+              //     color: AppColors.textLight,
+              //   ),
+              // ),
+              // Gap(10.h),
               Text(
                 "NEXT RENEWAL DATE",
                 style: Get.textTheme.titleMedium?.copyWith(
@@ -665,29 +724,8 @@ class AutoPolicyView extends GetView<AutoPolicyController> {
               ),
               Gap(10.h),
               Text(
-                "09/11/2023",
-                style: Get.textTheme.titleMedium?.copyWith(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              Gap(10.h),
-              Text(
-                '**** 7555 Bank Account',
-                style: Get.textTheme.bodySmall?.copyWith(
-                  color: AppColors.textLight,
-                ),
-              ),
-              Gap(10.h),
-              Text(
-                "NEXT RENEWAL DATE",
-                style: Get.textTheme.titleMedium?.copyWith(
-                  fontSize: 14.sp,
-                ),
-              ),
-              Gap(10.h),
-              Text(
-                "09/11/2023",
+                controller.autoDetails!['data']['car_policy_data'][0]
+                    ['renewal_date'],
                 style: Get.textTheme.titleMedium?.copyWith(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.w600,
@@ -702,7 +740,7 @@ class AutoPolicyView extends GetView<AutoPolicyController> {
               ),
               Gap(4.h),
               Text(
-                "\$2,263.00",
+                "\$${controller.autoDetails!['data']['car_policy_data'][0]['total_premium_usd']}",
                 style: Get.textTheme.titleMedium?.copyWith(
                   fontSize: 20.sp,
                   fontWeight: FontWeight.bold,
@@ -718,15 +756,20 @@ class AutoPolicyView extends GetView<AutoPolicyController> {
               ),
               Gap(20.h),
               Center(
-                child: Column(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SecondryButton(
-                        onTap: () {}, buttonText: 'Current ID Cards'),
+                        onTap: () {
+                          controller.type.value = 1;
+                        },
+                        buttonText: 'Current ID Cards'),
                     Gap(15.h),
                     SecondryButton(
-                        onTap: () {}, buttonText: 'Policy Documents'),
-                    Gap(15.h),
-                    SecondryButton(onTap: () {}, buttonText: 'Manage Autopay'),
+                        onTap: () {
+                          controller.type.value = 2;
+                        },
+                        buttonText: 'Policy Documents'),
                   ],
                 ),
               ),
@@ -735,121 +778,94 @@ class AutoPolicyView extends GetView<AutoPolicyController> {
           ),
         ),
         Gap(40.h),
-        _carDetails(
-          context,
-          carTitle: "2019 LAND ROVER RANGE ROVER\nSPORT 4D 4X4 LUX",
-          carVin: "(VIN #SALWR2REXKA826211)",
-          carImage: ImagePaths.car2,
-        ),
+        ...List.generate(controller.autoDetails!['data']['vehicles'].length,
+            (index) {
+          return _carDetails(context,
+              carImage: ImagePaths.car2,
+              car: controller.autoDetails!['data']['vehicles'][index]);
+        }),
         Gap(40.h),
-        _carDetails(
-          context,
-          carTitle: "2016 JEEP GRAND CHEROKEE\n4D 4X4 LIMITED",
-          carVin: "(VIN #1C4RJFBT4GC312961)",
-          carImage: ImagePaths.car1,
-        ),
       ],
     );
   }
 
   _carDetails(
     BuildContext context, {
-    required String carTitle,
-    required String carVin,
     required String carImage,
+    required Map<String, dynamic> car,
   }) {
-    return ShadowContainer(
-        child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          carTitle,
-          style: Get.textTheme.titleMedium?.copyWith(
-              fontSize: 18.sp,
-              fontWeight: FontWeight.w600,
-              color: AppColors.primaryDark),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Image.asset(
-              carImage,
-              height: 175.w,
-              width: 175.w,
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: 20.w,
-                vertical: 10.h,
+    return Padding(
+      padding: EdgeInsets.only(bottom: 40.h),
+      child: ShadowContainer(
+          child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "${car['year']} ${car['make']} ${car['model']}",
+            style: Get.textTheme.titleMedium?.copyWith(
+                fontSize: 18.sp,
+                fontWeight: FontWeight.w600,
+                color: AppColors.primaryDark),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Image.asset(
+                carImage,
+                height: 175.w,
+                width: 175.w,
               ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  80.r,
+              Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 20.w,
+                  vertical: 10.h,
                 ),
-                gradient: LinearGradient(
-                  colors: [
-                    AppColors.primaryDark,
-                    AppColors.primary,
-                  ],
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(
+                    80.r,
+                  ),
+                  gradient: LinearGradient(
+                    colors: [
+                      AppColors.primaryDark,
+                      AppColors.primary,
+                    ],
+                  ),
                 ),
-              ),
-              child: Text(
-                "Connect Car",
-                style: Get.textTheme.bodySmall?.copyWith(
-                  color: AppColors.white,
+                child: Text(
+                  "Connect Car",
+                  style: Get.textTheme.bodySmall?.copyWith(
+                    color: AppColors.white,
+                  ),
                 ),
-              ),
-            )
-          ],
-        ),
-        Text(
-          carVin,
-          style: Get.textTheme.titleMedium
-              ?.copyWith(fontSize: 14.sp, color: AppColors.textLight),
-        ),
-        Gap(12.h),
-        _carItem(
-          key: "ACCIDENT FORGIVENESS",
-          value: "YES",
-        ),
-        _carItem(
-          key: "BODILY INJURY",
-          value: "\$100,000/\$300,000",
-        ),
-        _carItem(
-          key: "PROPERTY DAMAGE",
-          value: "\$100,000",
-        ),
-        _carItem(
-          key: "UNINSURED MOTORIST",
-          value: "\$100,000/\$300,000",
-        ),
-        _carItem(
-          key: "UNDERINSURED MOTORIST",
-          value: "\$100,000/\$300,000",
-        ),
-        _carItem(
-          key: "COMPREHENSIVE",
-          value: "\$500",
-        ),
-        _carItem(
-          key: "COLLISION",
-          value: "\$500",
-        ),
-        _carItem(
-          key: "ENHANCED ROADSIDE AND RIDE ASSISTANCE",
-          value: "YES",
-        ),
-        _carItem(
-          key: "NEW ORIGINAL PARTS",
-          value: "NA",
-        ),
-        _carItem(
-          key: "VECHILE REPLACEMENT PLUS",
-          value: "NA",
-        ),
-      ],
-    ));
+              )
+            ],
+          ),
+          Text(
+            "VIN #${car['vin_number']}",
+            style: Get.textTheme.titleMedium
+                ?.copyWith(fontSize: 14.sp, color: AppColors.textLight),
+          ),
+          Gap(12.h),
+          // _carItem(key: "ACCIDENT FORGIVENESS", value: "YES"),
+          _carItem(key: "BODILY INJURY", value: car['bodily_injury']),
+          _carItem(key: "PROPERTY DAMAGE", value: car['proper_damage']),
+          _carItem(key: "UNINSURED MOTORIST", value: car['unnisured_motorist']),
+          _carItem(
+              key: "UNDERINSURED MOTORIST",
+              value: car['underinsured_motorist']),
+          _carItem(
+              key: "SAFETY GLASS-WAIVER OF DEDUCTIBLE",
+              value: car['safety_glass']),
+          _carItem(key: "COMPREHENSIVE", value: car['comprehensiv']),
+          _carItem(key: "COLLISION", value: car['collision']),
+          _carItem(
+              key: "ENHANCED ROADSIDE AND RIDE ASSISTANCE",
+              value: car['roadside_ride']),
+          // _carItem(key: "NEW ORIGINAL PARTS", value: "NA"),
+          // _carItem(key: "VECHILE REPLACEMENT PLUS", value: "NA"),
+        ],
+      )),
+    );
   }
 
   _carItem({
