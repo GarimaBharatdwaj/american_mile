@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import '../../common_lib.dart';
 import '../utils/index.dart';
 
@@ -7,13 +8,14 @@ class LoginTextField extends StatelessWidget {
   final String labelText;
   final bool? enabled;
   final String? Function(String?)? validator;
+  final List<TextInputFormatter>? inputFormatters;
   const LoginTextField({
     super.key,
     required this.hintText,
     required this.controller,
     required this.labelText,
     this.enabled = true,
-    this.validator,
+    this.validator, this.inputFormatters,
   });
 
   @override
@@ -40,6 +42,7 @@ class LoginTextField extends StatelessWidget {
                         color: AppColors.white),
                     child: TextFormField(
                       enabled: enabled,
+                      inputFormatters: inputFormatters,
                       style: Get.textTheme.titleMedium
                           ?.copyWith(color: AppColors.textBlackColor),
                       controller: controller,

@@ -4,6 +4,7 @@ import '../../../../common_lib.dart';
 import '../../../../core/components/index.dart';
 import '../../../../core/components/primary_button.dart';
 import '../../../../core/utils/index.dart';
+import '../../../../core/utils/text_capitalization_formatter.dart';
 import '../controllers/car_details_controller.dart';
 
 class CarDetailsView extends GetView<CarDetailsController> {
@@ -49,25 +50,25 @@ class CarDetailsView extends GetView<CarDetailsController> {
                     hintText: "Enter VIN",
                     labelText: "VIN",
                     controller: controller.vinController,
-                    validator: (value) => FormValidation.addressLineValidator(
-                        controller.vinController.text,
-                        "Please enter vin"),
+                    validator: (value) => FormValidation.vinValidator(
+                        controller.vinController.text),
                   ),
                   Gap(24.h),
                   GestureDetector(
                     onTap: controller.isAddingManually.value
                         ? () {
-                      controller.showDatePickerMethod(
-                          context, controller.yearController);
-                    }
+                            controller.showDatePickerMethod(
+                                context, controller.yearController);
+                          }
                         : () {},
                     child: LoginTextField(
                         enabled: false,
                         hintText: "Enter Year",
                         labelText: "Year",
-                        validator: (value) => FormValidation.addressLineValidator(
-                            controller.yearController.text,
-                            "Please enter year"),
+                        validator: (value) =>
+                            FormValidation.addressLineValidator(
+                                controller.yearController.text,
+                                "Please enter year"),
                         controller: controller.yearController),
                   ),
                   Gap(24.h),
@@ -75,15 +76,16 @@ class CarDetailsView extends GetView<CarDetailsController> {
                       enabled: controller.isAddingManually.value,
                       hintText: "Enter Make",
                       labelText: "Make",
+                      inputFormatters: [UpperCaseTextFormatter()],
                       validator: (value) => FormValidation.addressLineValidator(
-                          controller.makeController.text,
-                          "Please enter make"),
+                          controller.makeController.text, "Please enter make"),
                       controller: controller.makeController),
                   Gap(24.h),
                   LoginTextField(
                       enabled: controller.isAddingManually.value,
                       hintText: "Enter Model",
                       labelText: "Model",
+                      inputFormatters: [UpperCaseTextFormatter()],
                       validator: (value) => FormValidation.addressLineValidator(
                           controller.modelController.text,
                           "Please enter model"),

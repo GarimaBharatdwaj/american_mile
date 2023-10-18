@@ -8,6 +8,7 @@ import 'package:american_mile/core/utils/form_validation.dart';
 import 'package:flutter/services.dart';
 import '../../../../core/components/index.dart';
 import '../../../../core/utils/index.dart';
+import '../../../../core/utils/text_capitalization_formatter.dart';
 import '../controllers/user_profile_controller.dart';
 
 class UserProfileView extends GetView<UserProfileController> {
@@ -117,6 +118,7 @@ class UserProfileView extends GetView<UserProfileController> {
                                 Gap(20.h),
                                 _profileComponent(
                                   context,
+                                  inputFormatters: [UpperCaseTextFormatter()],
                                   validator: (value) =>
                                       FormValidation.nameValidator(
                                           controller.fullName.text,

@@ -173,9 +173,20 @@ class FormValidation {
 
   //**************************************Address Line Validator*********************************//
 
-  static String? addressLineValidator(value,tag) {
+  static String? addressLineValidator(value, tag) {
     if (value.length == 0) {
       return tag;
+    }
+    return null;
+  }
+
+  //**************************************Address Line Validator*********************************//
+
+  static String? vinValidator(value) {
+    if (value.length == 0) {
+      return 'Please enter vin!';
+    } else if (value.length != 17) {
+      return 'Vin should be of 17 characters!';
     }
     return null;
   }

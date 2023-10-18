@@ -111,28 +111,46 @@ class _SpeedMeterState extends State<SpeedMeter> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(80.0),
-      child: Stack(
-        alignment: Alignment.bottomCenter,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Image.asset(
-            ImagePaths.speedMeterScale,
-            fit: BoxFit.contain,
-            filterQuality: FilterQuality.high,
-          ),
-          Column(
-            mainAxisSize: MainAxisSize.min,
+          Stack(
+            alignment: Alignment.bottomCenter,
             children: [
-              Text("MPH",
-                  style: Get.textTheme.titleMedium?.copyWith(
-                      color: AppColors.textBlackColor,
-                      fontWeight: FontWeight.w700)),
-              kiloMeterDial(),
+              Image.asset(
+                ImagePaths.speedMeterScale,
+                fit: BoxFit.contain,
+                filterQuality: FilterQuality.high,
+              ),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+
+                  SizedBox(height: 50.h,),
+
+                  Text("MPH",
+                      style: Get.textTheme.titleMedium?.copyWith(
+                          color: AppColors.textBlackColor,
+                          fontWeight: FontWeight.w700)),
+                  kiloMeterDial(),
+                  Image.asset(
+                    ImagePaths.kiloMeterContainer,
+                    height: 90.w,
+                    width: 180.h,
+                  ),
+                ],
+              ),
             ],
           ),
-          Positioned(
-            bottom: 0,
-            child: kiloMetersDriven(),
-          ),
+
+          // Positioned(
+          //   top: 100,
+          //   bottom: 10,
+          //   right: 50,
+          //   left: 50,
+          //   child: Container(
+          //     color:Colors.red,child: kiloMetersDriven(),),
+          // ),
         ],
       ),
     );
@@ -146,6 +164,8 @@ class _SpeedMeterState extends State<SpeedMeter> {
         child: Image.asset(
           ImagePaths.speedDial,
           fit: BoxFit.contain,
+          height: 85.h,
+          width: 85.h,
           filterQuality: FilterQuality.high,
         ),
       ),

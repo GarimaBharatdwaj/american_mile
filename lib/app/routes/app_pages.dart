@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-
 import '../modules/auto_policy/bindings/auto_policy_binding.dart';
 import '../modules/auto_policy/views/auto_policy_view.dart';
 import '../modules/canopy_login/bindings/canopy_login_binding.dart';

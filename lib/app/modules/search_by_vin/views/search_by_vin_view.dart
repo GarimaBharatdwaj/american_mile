@@ -1,8 +1,10 @@
 import 'package:american_mile/common_lib.dart';
 import 'package:american_mile/core/components/index.dart';
 import 'package:american_mile/core/utils/index.dart';
+import 'package:american_mile/core/utils/text_capitalization_formatter.dart';
 
 import '../../../../core/components/primary_button.dart';
+import '../../../../core/utils/form_validation.dart';
 import '../controllers/search_by_vin_controller.dart';
 
 class SearchByVinView extends GetView<SearchByVinController> {
@@ -51,22 +53,25 @@ class SearchByVinView extends GetView<SearchByVinController> {
               height: 260,
             ),
             Gap(16.h),
-            LoginTextField(
-              hintText: "Enter VIN",
-              labelText: "VIN",
-              controller: TextEditingController(),
-            ),
+             Form(
+                  key: controller.formKey,
+                  child: LoginTextField(
+                    hintText: "Enter VIN",
+                    labelText: "VIN",
+                    validator: (value) => FormValidation.vinValidator(
+                        controller.vinController.text),
+                    controller: controller.vinController,
+                  ),
+                ),
             Padding(
               padding: EdgeInsets.all(30.w),
               child: PrimaryButton(
                 buttonText: "Check Info",
-                onTap: () {
-                  Get.toNamed(Routes.CAR_DETAILS);
-                },
+                onTap: controller.validateMethod,
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal:30.w),
+              padding: EdgeInsets.symmetric(horizontal: 30.w),
               child: PrimaryButton(
                 buttonText: "Add Manually",
                 onTap: () {
@@ -74,7 +79,6 @@ class SearchByVinView extends GetView<SearchByVinController> {
                 },
               ),
             ),
-
           ],
         ),
       ),

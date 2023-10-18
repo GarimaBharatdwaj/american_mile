@@ -5,6 +5,7 @@ import '../../../../common_lib.dart';
 import '../../../../core/components/index.dart';
 import '../../../../core/components/primary_button.dart';
 import '../../../../core/utils/index.dart';
+import '../../../../core/utils/text_capitalization_formatter.dart';
 
 class DriverDetails extends StatelessWidget {
   DriverDetails({super.key});
@@ -51,6 +52,7 @@ class DriverDetails extends StatelessWidget {
                     enabled: controller.isAddingManually.value,
                     hintText: "Enter Name",
                     labelText: "Name",
+                    inputFormatters: [UpperCaseTextFormatter()],
                     validator: (value) => FormValidation.nameValidator(
                         controller.nameController.text,
                         tag: 'Enter Name',
@@ -62,6 +64,7 @@ class DriverDetails extends StatelessWidget {
                     enabled: controller.isAddingManually.value,
                     hintText: "Enter Gender",
                     labelText: "Gender",
+                    inputFormatters: [UpperCaseTextFormatter()],
                     controller: controller.genderController,
                     validator: (value) => FormValidation.genderValidator(
                         controller.genderController.text,

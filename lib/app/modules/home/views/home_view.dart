@@ -129,7 +129,7 @@ class HomeView extends GetView<HomeController> {
                             imageSize: 75.w,
                             onTap: () {
                               Get.toNamed(Routes.SEARCH_BY_VIN);
-                            ///  Get.toNamed(Routes.LIFE_POLICY);
+                              /// Get.toNamed(Routes.LIFE_POLICY);
                             },
                           ),
                           Gap(20.w),
@@ -194,9 +194,7 @@ class HomeView extends GetView<HomeController> {
                 buttonText: "Flow",
                 onTap: () {
                   /// Get.toNamed(Routes.USER_PROFILE);
-                 /// Get.toNamed(Routes.DRIVER_LICENCE);
-
-                  Get.to(()=>D());
+                  /// Get.toNamed(Routes.DRIVER_LICENCE);
                   ///  Get.toNamed(Routes.INSURANCE_PROVIDER);
                 },
               ),
