@@ -26,6 +26,8 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/manual_vehical_details/bindings/manual_vehical_details_binding.dart';
 import '../modules/manual_vehical_details/views/manual_vehical_details_view.dart';
+import '../modules/my_family/bindings/my_family_binding.dart';
+import '../modules/my_family/views/my_family_view.dart';
 import '../modules/onboard/bindings/onboard_binding.dart';
 import '../modules/onboard/views/onboard_view.dart';
 import '../modules/policy_dashboard/bindings/policy_dashboard_binding.dart';
@@ -148,6 +150,11 @@ class AppPages {
       name: _Paths.CANOPY_LOGIN,
       page: () => const CanopyLoginView(),
       binding: CanopyLoginBinding(),
+    ),
+    GetPage(
+      name: _Paths.MY_FAMILY,
+      page: () => const MyFamilyView(),
+      binding: MyFamilyBinding(),
     ),
   ];
 }
