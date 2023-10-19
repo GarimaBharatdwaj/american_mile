@@ -28,6 +28,10 @@ class DeviceHelper {
     debugPrint("user id $id is saved.");
   }
 
+  static Future<void> removeUserId() async {
+    await StorageUtil.clearKey(_userIdKey);
+  }
+
   // ****************** Driver Id Setup *********************** //
   static const String _driverIdKey = "driver_id";
 

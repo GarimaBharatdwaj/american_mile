@@ -33,10 +33,10 @@ class LoginController extends GetxController {
         'type': isLoginTypeEmail.value ? 'email' : 'mobile'
       });
       Map<String, dynamic>? mapData = jsonDecode(response.data);
-
       if (mapData != null) {
         if (mapData['status'] == 1) {
           DeviceHelper.saveUserId(mapData['user_data']['user_id']);
+          Get.offAllNamed(Routes.HOME);
         }
       }
     } catch (e) {

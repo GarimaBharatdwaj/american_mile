@@ -45,20 +45,22 @@ class LoginView extends GetView<LoginController> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   ToggleEmailPhone(
-                      text: 'Email',
-                      value: true,
-                      groupValue: controller.isLoginTypeEmail.value,
-                      onChange: (val) {
-                        controller.isLoginTypeEmail.value = true;
-                      }),
+                    text: 'Email',
+                    value: true,
+                    groupValue: controller.isLoginTypeEmail.value,
+                    onChange: (val) {
+                      controller.isLoginTypeEmail.value = true;
+                    },
+                  ),
                   Gap(8.w),
                   ToggleEmailPhone(
-                      text: 'Phone',
-                      value: false,
-                      groupValue: controller.isLoginTypeEmail.value,
-                      onChange: (val) {
-                        controller.isLoginTypeEmail.value = false;
-                      }),
+                    text: 'Phone',
+                    value: false,
+                    groupValue: controller.isLoginTypeEmail.value,
+                    onChange: (val) {
+                      controller.isLoginTypeEmail.value = false;
+                    },
+                  ),
                 ],
               ),
             ),
@@ -102,13 +104,14 @@ class LoginView extends GetView<LoginController> {
             Gap(30.h),
             Padding(
               padding: EdgeInsets.all(30.w),
-              child: PrimaryButton(
-                buttonText: "Log In",
-                onTap: () {
-                  controller.login();
-
-                  /// Get.toNamed(Routes.DRIVER_LICENCE);
-                },
+              child: Obx(
+                () => PrimaryButton(
+                  buttonText: "Log In",
+                  isLoading: controller.isLoading.value,
+                  onTap: () {
+                    controller.login();
+                  },
+                ),
               ),
             ),
           ],

@@ -21,6 +21,11 @@ class SplashController extends GetxController {
     });
     Future.delayed(1500.milliseconds).then((value) {
       if (DeviceHelper.getOnBoard() == "1") {
+        // if (DeviceHelper.getUserId() != null) {
+        //   Get.offAllNamed(Routes.POLICY_DASHBOARD);
+        // } else {
+        //   Get.offAllNamed(Routes.HOME);
+        // }
         Get.offAllNamed(Routes.HOME);
       } else {
         Get.offAllNamed(Routes.ONBOARD);

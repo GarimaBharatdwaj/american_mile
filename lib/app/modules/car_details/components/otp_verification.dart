@@ -59,7 +59,7 @@ class OtpVerification extends GetView<CarDetailsController> {
               LoginTextField(
                 hintText: "Enter mobile number",
                 labelText: "Mobile Number",
-                controller: controller.otpController,
+                controller: TextEditingController(),
               ),
               Gap(24.h),
               Padding(

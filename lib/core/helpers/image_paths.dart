@@ -60,4 +60,7 @@ class ImagePaths {
   static String speedDial = "$iconPath/dial.png";
   static String kiloMeterContainer = "$iconPath/kilo_meter_container.png";
   static String kiloMeterItem = "$iconPath/kilo_meter_item.png";
+  static String houseIcon = "$iconPath/house-chimney.png";
+  static String userIcon = "$iconPath/profile-icon-male.png";
+  static String carIcon = "$iconPath/vehicle-icon.png";
 }

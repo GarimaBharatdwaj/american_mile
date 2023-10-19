@@ -4,9 +4,11 @@ import 'index.dart';
 
 class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final void Function()? onTap;
   const MyAppBar({
     super.key,
     required this.title,
+    this.onTap,
   });
 
   @override
@@ -20,7 +22,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
           const Gap(8),
           RRectIcon(
             image: ImagePaths.arrow,
-            onTap: () => Get.back(),
+            onTap: onTap ?? () => Get.back(),
           ),
           Expanded(
             child: Text(

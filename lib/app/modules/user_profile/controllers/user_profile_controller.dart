@@ -12,6 +12,7 @@ import '../../../../core/helpers/device_helper.dart';
 class UserProfileController extends GetxController {
   String? userId;
   RxBool edit = false.obs;
+  bool isBack = false;
   var formKey = GlobalKey<FormState>();
 
   final TextEditingController fullName = TextEditingController();
@@ -36,7 +37,7 @@ class UserProfileController extends GetxController {
     API().post(
       "get-profile",
       data: {
-        'user_id': "14", //DeviceHelper.getId()
+        'user_id': DeviceHelper.getUserId(), //DeviceHelper.getId()
       },
     ).then((value) async {
       Get.log("Value  :  $value");
@@ -132,6 +133,7 @@ class UserProfileController extends GetxController {
       final result = apiResult.data;
       if (result['status'] == 1) {
         getUserProfile();
+        isBack = true;
       } else {
         isLoading.value = false;
         errorDialog(result['msg']);

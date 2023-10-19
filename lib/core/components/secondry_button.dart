@@ -4,10 +4,12 @@ import '../utils/index.dart';
 class SecondryButton extends StatelessWidget {
   final String buttonText;
   final void Function() onTap;
+  final double? width;
   const SecondryButton({
     super.key,
     required this.buttonText,
     required this.onTap,
+    this.width,
   });
 
   @override
@@ -19,7 +21,7 @@ class SecondryButton extends StatelessWidget {
         padding: EdgeInsets.symmetric(
           vertical: 14.h,
         ),
-        width: context.width * .38,
+        width: width ?? context.width * .38,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15.r),
           gradient: LinearGradient(

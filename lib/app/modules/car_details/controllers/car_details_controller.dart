@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:american_mile/app/ui/widgets/error_dialog.dart';
+import 'package:american_mile/core/helpers/device_helper.dart';
 import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
 import 'package:intl/intl.dart';
 
@@ -14,7 +15,6 @@ class CarDetailsController extends GetxController {
   late TextEditingController makeController;
   late TextEditingController modelController;
   late TextEditingController bodyController;
-  late TextEditingController otpController;
 
   var formKey = GlobalKey<FormState>();
 
@@ -32,13 +32,11 @@ class CarDetailsController extends GetxController {
   setArgumentsValue() {
     if (args != null) {
       isAddingManually.value = args!['isAddingManually'];
-
       vinController = TextEditingController(text: args!['vinNumber']);
       yearController = TextEditingController(text: args!['year']);
       makeController = TextEditingController(text: args!['make']);
       modelController = TextEditingController(text: args!['model']);
       bodyController = TextEditingController(text: args!['body']);
-      otpController = TextEditingController(text: '');
     } else {
       vinController = TextEditingController(text: 'SALWR2REXKA826211');
       yearController = TextEditingController(text: '2019');
@@ -46,7 +44,6 @@ class CarDetailsController extends GetxController {
       modelController = TextEditingController(text: 'Range Rover Sports');
       bodyController =
           TextEditingController(text: 'Sport Utility Vehicle (SUV)');
-      otpController = TextEditingController(text: '9000000002');
     }
   }
 
@@ -59,7 +56,11 @@ class CarDetailsController extends GetxController {
     if (!isValid) {
       return;
     } else {
-      addVinDetails();
+      if (args!['type'] == "1") {
+        editVehicalDetails();
+      } else {
+        addVinDetails();
+      }
     }
     formKey.currentState!.save();
   }
@@ -73,7 +74,7 @@ class CarDetailsController extends GetxController {
     isLoading.value = true;
     try {
       var response = await API().post('add-vehicle', data: {
-        'user_id': "14",
+        'user_id': DeviceHelper.getUserId(),
         'vin_number': vinController.text.trim(),
         'year': yearController.text.trim(),
         'make': makeController.text.trim(),
@@ -83,6 +84,38 @@ class CarDetailsController extends GetxController {
       Map<String, dynamic>? mapData = jsonDecode(response.data);
       if (mapData != null) {
         if (mapData['status'] == 1) {
+          Get.back(result: true);
+          Get.back(result: true);
+        } else {
+          errorDialog(mapData['msg']);
+        }
+      } else {
+        errorDialog('some error occurred');
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      isLoading.value = false;
+      errorDialog('some error occurred');
+    }
+    isLoading.value = false;
+  }
+
+  editVehicalDetails() async {
+    isLoading.value = true;
+    try {
+      var response = await API().post('edit-vehicle', data: {
+        'user_id': DeviceHelper.getUserId(),
+        'vehicle_id': args!['vehical_id'],
+        'vin_number': vinController.text.trim(),
+        'year': yearController.text.trim(),
+        'make': makeController.text.trim(),
+        'model': modelController.text.trim(),
+        'body': bodyController.text.trim()
+      });
+      Map<String, dynamic>? mapData = jsonDecode(response.data);
+      if (mapData != null) {
+        if (mapData['status'] == 1) {
+          Get.back(result: true);
         } else {
           errorDialog(mapData['msg']);
         }

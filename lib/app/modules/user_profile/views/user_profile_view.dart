@@ -16,162 +16,154 @@ class UserProfileView extends GetView<UserProfileController> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        body: Obx(
-          () => controller.isLoading.value
-              ? showProgressIndicator()
-              : SingleChildScrollView(
-                  child: Form(
-                    key: controller.formKey,
-                    child: Padding(
-                      padding: EdgeInsets.all(15.w),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              RRectIcon(
-                                image: ImagePaths.menu,
-                                onTap: () {},
-                              ),
-                              Expanded(
-                                child: Text(
-                                  "Profile",
-                                  textAlign: TextAlign.center,
-                                  style: Get.textTheme.titleLarge?.copyWith(
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                              ),
-                              RRectIcon(
-                                image: ImagePaths.menu,
-                                onTap: () {},
-                              ),
-                            ],
-                          ),
-                          Gap(40.h),
-                          ShadowContainer(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Gap(20.h),
-                                Center(
-                                  child: Stack(
-                                    alignment: Alignment.center,
-                                    children: [
-                                      if (controller
-                                          .profileImagePath.value.isNotEmpty)
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(100.r),
-                                          child: Image.file(
-                                            File(controller
-                                                .profileImagePath.value),
-                                            height: 110.w,
-                                            width: 110.w,
-                                          ),
-                                        ),
-                                      if (controller
-                                          .profileImagePath.value.isEmpty)
-                                        profileImage(
-                                          onTap: () {
-                                            Get.to(() => ViewPicture(
-                                                  imageUrl: controller
-                                                      .userData!['image'],
-                                                ));
-                                          },
-                                          imageUrl: controller.userData !=
-                                                      null &&
-                                                  controller
-                                                          .userData!['image'] !=
-                                                      null &&
-                                                  controller
-                                                          .userData!['image'] !=
-                                                      ""
-                                              ? controller.userData!['image']
-                                              : "https://image.shutterstock.com/image-photo/young-handsome-man-beard-wearing-260nw-1768126784.jpg",
-                                          circleRadius: 110.w,
-                                        ),
-                                      if (controller.edit.isTrue)
-                                        Container(
-                                          padding: EdgeInsets.all(12.w),
-                                          decoration: BoxDecoration(
-                                            color: AppColors.black.withOpacity(
-                                              .2,
-                                            ),
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: InkWell(
-                                            onTap: () {
-                                              controller
-                                                  .onProfileImageTap(context);
-                                            },
-                                            child: Icon(
-                                              Icons.camera_alt_outlined,
-                                              color: AppColors.white,
-                                              size: 25.w,
-                                            ),
-                                          ),
-                                        ),
-                                    ],
-                                  ),
-                                ),
-                                Gap(20.h),
-                                _profileComponent(
-                                  context,
-                                  inputFormatters: [UpperCaseTextFormatter()],
-                                  validator: (value) =>
-                                      FormValidation.nameValidator(
-                                          controller.fullName.text,
-                                          tag: 'Enter Full Name',
-                                          isMandatory: true),
-                                  label: "Full Name",
-                                  value: controller.fullName,
-                                  keyboardType: TextInputType.name,
-                                  icon: ImagePaths.user,
-                                ),
-                                _profileComponent(
-                                  context,
-                                  validator: (value) =>
-                                      FormValidation.emailValidatorRegistration(
-                                    controller.email.text,
-                                  ),
-                                  label: "Email Address",
-                                  value: controller.email,
-                                  keyboardType: TextInputType.emailAddress,
-                                  icon: ImagePaths.sms,
-                                ),
-                                _profileComponent(
-                                  context,
-                                  validator: (value) =>
-                                      FormValidation.phoneValidator(
-                                    controller.phone.text,
-                                  ),
-                                  label: "Phone Number",
-                                  value: controller.phone,
-                                  keyboardType: TextInputType.number,
-                                  icon: ImagePaths.phone,
-                                ),
-                                Gap(36.h),
-                                PrimaryButton(
-                                  buttonText: controller.edit.isFalse
-                                      ? "Edit Profile"
-                                      : 'Update Profile',
-                                  onTap: () {
-                                    if (controller.edit.isTrue) {
-                                      controller.validateMethode();
-                                    } else {
-                                      controller.edit.value = true;
-                                    }
-                                  },
-                                ),
-                              ],
+      child: WillPopScope(
+        onWillPop: () {
+          Get.back(result: controller.isBack);
+          return Future.value(false);
+        },
+        child: Scaffold(
+          body: Obx(
+            () => controller.isLoading.value
+                ? showProgressIndicator()
+                : SingleChildScrollView(
+                    child: Form(
+                      key: controller.formKey,
+                      child: Padding(
+                        padding: EdgeInsets.all(15.w),
+                        child: Column(
+                          children: [
+                            MyAppBar(
+                              title: "Profile",
+                              onTap: () {
+                                Get.back(result: controller.isBack);
+                              },
                             ),
-                          ),
-                        ],
+                            Gap(20.h),
+                            ShadowContainer(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Gap(20.h),
+                                  Center(
+                                    child: Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        if (controller
+                                            .profileImagePath.value.isNotEmpty)
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(100.r),
+                                            child: Image.file(
+                                              File(controller
+                                                  .profileImagePath.value),
+                                              height: 110.w,
+                                              width: 110.w,
+                                            ),
+                                          ),
+                                        if (controller
+                                            .profileImagePath.value.isEmpty)
+                                          profileImage(
+                                            onTap: () {
+                                              Get.to(() => ViewPicture(
+                                                    imageUrl: controller
+                                                        .userData!['image'],
+                                                  ));
+                                            },
+                                            imageUrl: controller.userData !=
+                                                        null &&
+                                                    controller.userData![
+                                                            'image'] !=
+                                                        null &&
+                                                    controller.userData![
+                                                            'image'] !=
+                                                        ""
+                                                ? controller.userData!['image']
+                                                : "https://image.shutterstock.com/image-photo/young-handsome-man-beard-wearing-260nw-1768126784.jpg",
+                                            circleRadius: 110.w,
+                                          ),
+                                        if (controller.edit.isTrue)
+                                          Container(
+                                            padding: EdgeInsets.all(12.w),
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  AppColors.black.withOpacity(
+                                                .2,
+                                              ),
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: InkWell(
+                                              onTap: () {
+                                                controller
+                                                    .onProfileImageTap(context);
+                                              },
+                                              child: Icon(
+                                                Icons.camera_alt_outlined,
+                                                color: AppColors.white,
+                                                size: 25.w,
+                                              ),
+                                            ),
+                                          ),
+                                      ],
+                                    ),
+                                  ),
+                                  Gap(20.h),
+                                  _profileComponent(
+                                    context,
+                                    inputFormatters: [UpperCaseTextFormatter()],
+                                    validator: (value) =>
+                                        FormValidation.nameValidator(
+                                            controller.fullName.text,
+                                            tag: 'Enter Full Name',
+                                            isMandatory: true),
+                                    label: "Full Name",
+                                    value: controller.fullName,
+                                    keyboardType: TextInputType.name,
+                                    icon: ImagePaths.user,
+                                  ),
+                                  _profileComponent(
+                                    context,
+                                    validator: (value) => FormValidation
+                                        .emailValidatorRegistration(
+                                      controller.email.text,
+                                    ),
+                                    label: "Email Address",
+                                    value: controller.email,
+                                    keyboardType: TextInputType.emailAddress,
+                                    icon: ImagePaths.sms,
+                                  ),
+                                  _profileComponent(
+                                    context,
+                                    validator: (value) =>
+                                        FormValidation.phoneValidator(
+                                      controller.phone.text,
+                                    ),
+                                    label: "Phone Number",
+                                    value: controller.phone,
+                                    keyboardType: TextInputType.number,
+                                    icon: ImagePaths.phone,
+                                  ),
+                                  Gap(36.h),
+                                  PrimaryButton(
+                                    buttonText: controller.edit.isFalse
+                                        ? "Edit Profile"
+                                        : 'Update Profile',
+                                    onTap: () {
+                                      if (controller.edit.isTrue) {
+                                        controller.validateMethode();
+                                      } else {
+                                        controller.edit.value = true;
+                                      }
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
+          ),
         ),
       ),
     );

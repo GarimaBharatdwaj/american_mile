@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+
 import '../modules/auto_policy/bindings/auto_policy_binding.dart';
 import '../modules/auto_policy/views/auto_policy_view.dart';
 import '../modules/canopy_login/bindings/canopy_login_binding.dart';
@@ -35,6 +36,8 @@ import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/search_by_vin/bindings/search_by_vin_binding.dart';
 import '../modules/search_by_vin/views/search_by_vin_view.dart';
+import '../modules/set_mile_password/bindings/set_mile_password_binding.dart';
+import '../modules/set_mile_password/views/set_mile_password_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 import '../modules/statement_notice/bindings/statement_notice_binding.dart';
@@ -154,6 +157,11 @@ class AppPages {
       name: _Paths.MY_FAMILY,
       page: () => const MyFamilyView(),
       binding: MyFamilyBinding(),
+    ),
+    GetPage(
+      name: _Paths.SET_MILE_PASSWORD,
+      page: () => const SetMilePasswordView(),
+      binding: SetMilePasswordBinding(),
     ),
   ];
 }

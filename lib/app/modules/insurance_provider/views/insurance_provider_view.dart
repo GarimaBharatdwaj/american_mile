@@ -1,5 +1,4 @@
 import 'package:american_mile/app/modules/insurance_provider/component/security_measures.dart';
-import 'package:american_mile/core/components/primary_button.dart';
 import 'package:american_mile/core/utils/divider.dart';
 import '../../../../common_lib.dart';
 import '../../../../core/components/index.dart';
@@ -83,32 +82,32 @@ class InsuranceProviderView extends GetView<InsuranceProviderController> {
                   ],
                 ),
               )),
-        bottomNavigationBar: Padding(
-          padding: EdgeInsets.all(15.w),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                "Don't know your Credential?",
-                style: Get.textTheme.titleLarge?.copyWith(
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 15.h),
-                child: PrimaryButton(
-                  buttonText: "Scan & Snap",
-                  onTap: () {
-                    Get.to(
-                      () => InsuranceSecurityMeasures(),
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
+        // bottomNavigationBar: Padding(
+        //   padding: EdgeInsets.all(15.w),
+        //   child: Column(
+        //     mainAxisSize: MainAxisSize.min,
+        //     children: [
+        //       Text(
+        //         "Don't know your Credential?",
+        //         style: Get.textTheme.titleLarge?.copyWith(
+        //           fontSize: 18.sp,
+        //           fontWeight: FontWeight.w700,
+        //         ),
+        //       ),
+        //       Padding(
+        //         padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 15.h),
+        //         child: PrimaryButton(
+        //           buttonText: "Scan & Snap",
+        //           onTap: () {
+        //             Get.to(
+        //               () => InsuranceSecurityMeasures(),
+        //             );
+        //           },
+        //         ),
+        //       ),
+        //     ],
+        //   ),
+        // ),
       ),
     );
   }

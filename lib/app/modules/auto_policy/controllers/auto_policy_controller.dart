@@ -1,14 +1,16 @@
 import 'dart:convert';
 
+import 'package:american_mile/core/helpers/device_helper.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/network/api_service.dart';
 
 class AutoPolicyController extends GetxController {
-  //TODO: Implement AutoPolicyController
+  String policyId = "";
 
   @override
   void onInit() {
+    policyId = Get.arguments;
     autoPolicyAPI();
     super.onInit();
   }
@@ -25,8 +27,8 @@ class AutoPolicyController extends GetxController {
     API().post(
       "coverage-vehicle",
       data: {
-        'user_id': "14",
-        'auto_policy_id': "163",
+        'user_id': DeviceHelper.getUserId(),
+        'auto_policy_id': policyId,
       },
     ).then((value) async {
       Get.log("Value  :  $value");

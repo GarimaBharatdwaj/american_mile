@@ -72,6 +72,11 @@ class DriverLicenceView extends GetView<DriverLicenceController> {
                   buttonText: "Add Manually",
                   onTap: () {
                     controller.isAddingManually.value = true;
+                    controller.addressController.clear();
+                    controller.nameController.clear();
+                    controller.dlController.clear();
+                    controller.dobController.clear();
+                    controller.genderController.clear();
                     Get.to(
                       () => DriverDetails(),
                     );

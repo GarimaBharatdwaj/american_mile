@@ -1,13 +1,16 @@
 import 'dart:convert';
 
+import 'package:american_mile/core/helpers/device_helper.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/network/api_service.dart';
 
 class HomePolicyController extends GetxController {
   RxInt type = 0.obs;
+  String policyId = "";
   @override
   void onInit() {
+    policyId = Get.arguments;
     homePolicyAPI();
     super.onInit();
   }
@@ -23,8 +26,8 @@ class HomePolicyController extends GetxController {
     API().post(
       "coverage-homeowners",
       data: {
-        'user_id': "14",
-        'home_policy_id': "85",
+        'user_id': DeviceHelper.getUserId(),
+        'home_policy_id': policyId,
       },
     ).then((value) async {
       Get.log("Value  :  $value");

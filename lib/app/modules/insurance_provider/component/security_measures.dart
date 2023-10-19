@@ -54,7 +54,7 @@ class InsuranceSecurityMeasures extends StatelessWidget {
                 child: PrimaryButton(
                   buttonText: "Continue",
                   onTap: () {
-                    Get.toNamed(Routes.CANOPY_LOGIN,
+                    Get.offNamed(Routes.CANOPY_LOGIN,
                         arguments: controller.carrierId);
                   },
                 ),

@@ -1,13 +1,14 @@
 import 'dart:convert';
-
-import 'package:get/get.dart';
-
+import '../../../../common_lib.dart';
+import '../../../../core/helpers/device_helper.dart';
 import '../../../../core/network/api_service.dart';
 
 class PolicyDashboardController extends GetxController {
+  final GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
   @override
   void onInit() {
     policiesAPI();
+    getUserProfile();
     super.onInit();
   }
 
@@ -41,6 +42,41 @@ class PolicyDashboardController extends GetxController {
         // Constants.showErrorDialogRevise();
       }
       isLoading.value = false;
+    });
+  }
+  //*********************************************************************//
+  //************************* User Profile API **************************//
+  //*********************************************************************//
+
+  RxBool isProfileLoading = false.obs;
+  Map<String, dynamic>? userData;
+  getUserProfile() {
+    isProfileLoading.value = true;
+    API().post(
+      "get-profile",
+      data: {
+        'user_id': DeviceHelper.getUserId(), //DeviceHelper.getId()
+      },
+    ).then((value) async {
+      Get.log("Value  :  $value");
+      try {
+        Map<String, dynamic>? res = json.decode(value.data);
+        if (res != null) {
+          if (res['status'].toString() == "1") {
+            userData = res['user_data'];
+            isProfileLoading.value = false;
+          } else {
+            // Constants.showErrorDialogRevise();
+            isProfileLoading.value = false;
+          }
+        } else {
+          // Constants.showErrorDialogRevise();
+          isProfileLoading.value = false;
+        }
+      } catch (e) {
+        // Constants.showErrorDialogRevise();
+        isProfileLoading.value = false;
+      }
     });
   }
 }

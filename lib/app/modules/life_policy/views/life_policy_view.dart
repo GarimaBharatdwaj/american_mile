@@ -225,12 +225,20 @@ class LifePolicyView extends GetView<LifePolicyController> {
                           Gap(12.h),
                           _policyItem(
                               key: 'PLAN DESCRIPTION',
-                              value: 'SIMPLE WHOLE LIFE'),
+                              value: controller.lifeDetails!['life_policy_data']
+                                  [0]['plan_desc']),
                           _policyItem(
-                              key: 'POLICY ISSUE DATE', value: '01/03/2012'),
-                          _policyItem(key: 'POLICY STATUS', value: 'ACTIVE'),
+                              key: 'POLICY ISSUE DATE',
+                              value: controller.lifeDetails!['life_policy_data']
+                                  [0]['policy_issue_date']),
                           _policyItem(
-                              key: 'MATURITY DATE', value: '01/03/2017'),
+                              key: 'POLICY STATUS',
+                              value: controller.lifeDetails!['life_policy_data']
+                                  [0]['policy_status']),
+                          _policyItem(
+                              key: 'MATURITY DATE',
+                              value: controller.lifeDetails!['life_policy_data']
+                                  [0]['maturity_date']),
                           Text(
                             "THE DATE ON WHICH A POLICY REACHES THE END\nOF ITS TERM WHILE THE INSURED IS STILL LIVING.",
                             style: Get.textTheme.bodyMedium?.copyWith(
@@ -240,15 +248,29 @@ class LifePolicyView extends GetView<LifePolicyController> {
                           ),
                           Gap(12.h),
                           _policyItem(
-                              key: 'INSURED STATUS', value: 'NON - NICOTINE'),
+                              key: 'INSURED STATUS',
+                              value: controller.lifeDetails!['life_policy_data']
+                                  [0]['insured_status']),
                           _policyItem(
-                              key: 'FACE AMOUNT', value: '\$100,000.00'),
-                          _policyItem(key: 'INSURED ISSUE AGE', value: '26'),
-                          _policyItem(key: 'POLICY TYPE', value: 'WHOLE LIFE'),
-                          _policyItem(key: 'PAID UP DATE', value: '01/03/2086'),
+                              key: 'FACE AMOUNT',
+                              value:
+                                  '\$${controller.lifeDetails!['life_policy_data'][0]['face_amt']}'),
+                          _policyItem(
+                              key: 'INSURED ISSUE AGE',
+                              value: controller.lifeDetails!['life_policy_data']
+                                  [0]['insured_issue_age']),
+                          _policyItem(
+                              key: 'POLICY TYPE',
+                              value: controller.lifeDetails!['life_policy_data']
+                                  [0]['policy_type']),
+                          _policyItem(
+                              key: 'PAID UP DATE',
+                              value: controller.lifeDetails!['life_policy_data']
+                                  [0]['paidup_date']),
                           _policyItem(
                               key: 'EXCESS CREDIT OPTION',
-                              value: 'PAID-UP ADDITIONS'),
+                              value: controller.lifeDetails!['life_policy_data']
+                                  [0]['excess_credit_option']),
                           Text(
                             "EXCESS CREDITS ARE NAN GUARANTEED AMOUNTS OF MONEY\nTHAT MAY BE PAID AT THE DISCRETION OF FAMERS LIFE.",
                             style: Get.textTheme.bodyMedium?.copyWith(
@@ -435,7 +457,7 @@ class LifePolicyView extends GetView<LifePolicyController> {
                     PrimaryButton(
                       buttonText: "Flow",
                       onTap: () {
-                        Get.toNamed(Routes.HOME_POLICY);
+                        Get.toNamed(Routes.MY_FAMILY);
                       },
                     ),
                   ]),

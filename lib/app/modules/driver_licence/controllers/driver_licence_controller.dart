@@ -8,9 +8,7 @@ import '../../../../core/helpers/device_helper.dart';
 
 class DriverLicenceController extends GetxController {
   RxBool isLoading = false.obs;
-
   var formKey = GlobalKey<FormState>();
-
   TextEditingController nameController = TextEditingController();
   TextEditingController genderController = TextEditingController();
   TextEditingController dobController = TextEditingController();

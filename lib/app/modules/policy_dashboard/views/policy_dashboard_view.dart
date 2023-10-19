@@ -1,4 +1,4 @@
-import 'package:american_mile/core/components/primary_button.dart';
+import 'package:american_mile/core/helpers/device_helper.dart';
 import 'package:american_mile/core/utils/divider.dart';
 import '../../../../common_lib.dart';
 import '../../../../core/components/index.dart';
@@ -12,7 +12,8 @@ class PolicyDashboardView extends GetView<PolicyDashboardController> {
     return SafeArea(
       child: Obx(
         () => Scaffold(
-          body: controller.isLoading.value == true
+          body: controller.isLoading.value == true ||
+                  controller.isProfileLoading.value == true
               ? showProgressIndicator()
               : SingleChildScrollView(
                   padding: EdgeInsets.all(15.w),
@@ -22,7 +23,9 @@ class PolicyDashboardView extends GetView<PolicyDashboardController> {
                         children: [
                           RRectIcon(
                             image: ImagePaths.menu,
-                            onTap: () {},
+                            onTap: () {
+                              // controller.scaffoldkey.currentState!.openDrawer();
+                            },
                           ),
                           Expanded(
                             child: Text(
@@ -33,9 +36,12 @@ class PolicyDashboardView extends GetView<PolicyDashboardController> {
                               ),
                             ),
                           ),
-                          RRectIcon(
-                            image: ImagePaths.menu,
-                            onTap: () {},
+                          Opacity(
+                            opacity: 0,
+                            child: RRectIcon(
+                              image: ImagePaths.menu,
+                              onTap: () {},
+                            ),
                           ),
                         ],
                       ),
@@ -48,7 +54,12 @@ class PolicyDashboardView extends GetView<PolicyDashboardController> {
                         return Column(
                           children: [
                             _policyItem(
-                              onTap: () {},
+                              onTap: () {
+                                Get.toNamed(
+                                  Routes.AUTO_POLICY,
+                                  arguments: policy['id'].toString(),
+                                );
+                              },
                               policyName: "AUTO ON POLICY",
                               colors: [
                                 AppColors.autoPolicyLightColor,
@@ -69,7 +80,10 @@ class PolicyDashboardView extends GetView<PolicyDashboardController> {
                           children: [
                             _policyItem(
                               onTap: () {
-                                Get.toNamed(Routes.AUTO_POLICY);
+                                Get.toNamed(
+                                  Routes.HOME_POLICY,
+                                  arguments: policy['id'].toString(),
+                                );
                               },
                               policyName: "HOME POLICY",
                               colors: [
@@ -90,7 +104,12 @@ class PolicyDashboardView extends GetView<PolicyDashboardController> {
                         return Column(
                           children: [
                             _policyItem(
-                              onTap: () {},
+                              onTap: () {
+                                Get.toNamed(
+                                  Routes.LIFE_POLICY,
+                                  arguments: policy['id'].toString(),
+                                );
+                              },
                               policyName: "LIFE POLICY",
                               colors: [
                                 AppColors.lifePolicyLightColor,
@@ -103,44 +122,7 @@ class PolicyDashboardView extends GetView<PolicyDashboardController> {
                           ],
                         );
                       }),
-                      // _policyItem(
-                      //   policyName: "HOME POLICY",
-                      //   colors: [
-                      //     AppColors.homePolicyLightColor,
-                      //     AppColors.homePolicyDarkColor
-                      //   ],
-                      // ),
-                      // Gap(30.h),
-                      // _policyItem(
-                      //   policyName: "BUSINESS POLICY",
-                      //   colors: [
-                      //     AppColors.businessPolicyDarkColor,
-                      //     AppColors.businessPolicyLightColor
-                      //   ],
-                      // ),
-                      // Gap(30.h),
-                      // _policyItem(
-                      //   policyName: "LIFE POLICY",
-                      //   colors: [
-                      //     AppColors.lifePolicyLightColor,
-                      //     AppColors.lifePolicyDarkColor
-                      //   ],
-                      // ),
-                      // Gap(30.h),
-                      // _policyItem(
-                      //   policyName: "PET POLICY",
-                      //   colors: [
-                      //     AppColors.petPolicyLightColor,
-                      //     AppColors.petPolicyDarkColor
-                      //   ],
-                      // ),
                       Gap(20.h),
-                      PrimaryButton(
-                        buttonText: "Flow",
-                        onTap: () {
-                          Get.toNamed(Routes.MANUAL_VEHICAL_DETAILS);
-                        },
-                      )
                     ],
                   ),
                 ),
@@ -166,15 +148,6 @@ class PolicyDashboardView extends GetView<PolicyDashboardController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Gap(10.h),
-            // Align(
-            //   alignment: Alignment.centerRight,
-            //   child: Image.asset(
-            //     ImagePaths.more,
-            //     width: 30.w,
-            //     color: AppColors.textLight,
-            //   ),
-            // ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -269,6 +242,42 @@ class PolicyDashboardView extends GetView<PolicyDashboardController> {
               ),
             ),
             Gap(15.h),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _drawerItem({
+    required String title,
+    required IconData icon,
+    void Function()? onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap ?? () {},
+      child: Container(
+        margin: EdgeInsets.only(bottom: 24.h),
+        padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.w),
+        decoration: BoxDecoration(
+            border: Border.all(
+              width: 1.w,
+              color: AppColors.black,
+            ),
+            borderRadius: BorderRadius.circular(8.r)),
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              size: 25.w,
+            ),
+            Gap(15.w),
+            Text(
+              title,
+              style: Get.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.w500,
+                fontSize: 14.sp,
+              ),
+            ),
           ],
         ),
       ),

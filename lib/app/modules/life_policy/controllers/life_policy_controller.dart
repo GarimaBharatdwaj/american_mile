@@ -1,12 +1,15 @@
 import 'dart:convert';
 
+import 'package:american_mile/core/helpers/device_helper.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/network/api_service.dart';
 
 class LifePolicyController extends GetxController {
+  String policyId = "";
   @override
   void onInit() {
+    policyId = Get.arguments;
     homePolicyAPI();
     super.onInit();
   }
@@ -22,8 +25,8 @@ class LifePolicyController extends GetxController {
     API().post(
       "coverage-life",
       data: {
-        'user_id': "14",
-        'life_policy_id': "45",
+        'user_id': DeviceHelper.getUserId(),
+        'life_policy_id': policyId,
       },
     ).then((value) async {
       Get.log("Value  :  $value");
