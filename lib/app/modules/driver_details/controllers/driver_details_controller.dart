@@ -76,12 +76,19 @@ class DriverDetailsController extends GetxController {
         'gender': genderController.text.trim(),
         'dob': dobController.text.trim(),
         'license_number': dlController.text.trim(),
-        'address': addressController.text.trim()
+        'address': addressController.text.trim(),
+        'driver_id': args!['driverId'] ?? '',
       });
       Map<String, dynamic>? mapData = jsonDecode(response.data);
       if (mapData != null) {
         if (mapData['status'] == 1) {
           debugPrint(mapData['msg']);
+          if (args!['driverId'] != null) {
+            Get.back(result: true);
+          } else {
+            Get.back(result: true);
+            Get.back(result: true);
+          }
         }
       }
     } catch (e) {

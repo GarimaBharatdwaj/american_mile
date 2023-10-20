@@ -1,6 +1,6 @@
 import 'package:american_mile/common_lib.dart';
+import '../../../../core/components/index.dart';
 import '../../../../core/components/primary_button.dart';
-import '../../../../core/components/rect_icon.dart';
 import '../../../../core/utils/index.dart';
 import '../controllers/driver_licence_controller.dart';
 
@@ -14,29 +14,8 @@ class DriverLicenceView extends GetView<DriverLicenceController> {
           padding: EdgeInsets.all(15.w),
           child: Column(
             children: [
-              Row(
-                children: [
-                  RRectIcon(
-                    image: ImagePaths.arrow,
-                    onTap: () {},
-                  ),
-                  Expanded(
-                    child: Text(
-                      "Driver's License",
-                      textAlign: TextAlign.center,
-                      style: Get.textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
-                  Opacity(
-                    opacity: 0,
-                    child: RRectIcon(
-                      image: ImagePaths.menu,
-                      onTap: () {},
-                    ),
-                  ),
-                ],
+              const MyAppBar(
+                title: "Driver's License",
               ),
               Gap(20.h),
               Image.asset(

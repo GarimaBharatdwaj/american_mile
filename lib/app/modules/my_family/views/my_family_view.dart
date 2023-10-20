@@ -276,13 +276,21 @@ class MyFamilyView extends GetView<MyFamilyController> {
                           SecondryButton(
                             buttonText: "Edit",
                             onTap: () {
-                              Get.toNamed(Routes.DRIVER_DETAILS, arguments: {
-                                'isAddingManually': true,
-                                'name': driver['name'],
-                                'gender': driver['gender'],
-                                'dob': driver['dob'],
-                                'dl': driver['license_number'],
-                                'address': driver['address']
+                              Get.toNamed(
+                                Routes.DRIVER_DETAILS,
+                                arguments: {
+                                  'isAddingManually': true,
+                                  'driverId': driver['id'],
+                                  'name': driver['name'],
+                                  'gender': driver['gender'],
+                                  'dob': driver['dob'],
+                                  'dl': driver['license_number'],
+                                  'address': driver['address']
+                                },
+                              )?.then((value) {
+                                if (value) {
+                                  controller.myFamilyAPI();
+                                }
                               });
                             },
                           ),
