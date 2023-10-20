@@ -177,7 +177,9 @@ class HomeController extends GetxController {
       'email': email.text,
       'mobile': phone.text,
     };
-    data['image'] = await dio.MultipartFile.fromFile(profileImagePath.value);
+    if (profileImagePath.value != "") {
+      data['image'] = await dio.MultipartFile.fromFile(profileImagePath.value);
+    }
     isLoading.value = true;
     final apiResult = await API().postData(
       endPoint: 'update-profile',
