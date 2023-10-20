@@ -188,7 +188,9 @@ class HomeController extends GetxController {
     if (apiResult is ApiSuccess) {
       final result = apiResult.data;
       if (result['status'] == 1) {
+        edit.value = false;
         getUserProfile();
+
       } else {
         isLoading.value = false;
         errorDialog(result['msg']);

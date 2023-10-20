@@ -20,29 +20,8 @@ class CarDetailsView extends GetView<CarDetailsController> {
               key: controller.formKey,
               child: Column(
                 children: [
-                  Row(
-                    children: [
-                      RRectIcon(
-                        image: ImagePaths.arrow,
-                        onTap: () {},
-                      ),
-                      Expanded(
-                        child: Text(
-                          "Vin",
-                          textAlign: TextAlign.center,
-                          style: Get.textTheme.titleLarge?.copyWith(
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
-                      Opacity(
-                        opacity: 0,
-                        child: RRectIcon(
-                          image: ImagePaths.menu,
-                          onTap: () {},
-                        ),
-                      ),
-                    ],
+                  const MyAppBar(
+                    title: 'Vin',
                   ),
                   Gap(40.h),
                   LoginTextField(

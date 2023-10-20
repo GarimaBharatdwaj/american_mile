@@ -16,29 +16,8 @@ class SearchByVinView extends GetView<SearchByVinController> {
           () => ListView(
             padding: EdgeInsets.all(15.w),
             children: [
-              Row(
-                children: [
-                  RRectIcon(
-                    image: ImagePaths.arrow,
-                    onTap: () {},
-                  ),
-                  Expanded(
-                    child: Text(
-                      "Details",
-                      textAlign: TextAlign.center,
-                      style: Get.textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
-                  Opacity(
-                    opacity: 0,
-                    child: RRectIcon(
-                      image: ImagePaths.menu,
-                      onTap: () {},
-                    ),
-                  ),
-                ],
+              const MyAppBar(
+                title: 'Details',
               ),
               Gap(40.h),
               Center(

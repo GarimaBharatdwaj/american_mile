@@ -88,6 +88,7 @@ class MyProfile extends StatelessWidget {
                               controller.fullName.text,
                               tag: 'Enter Full Name',
                               isMandatory: true),
+                          readOnly: controller.edit.value == false,
                           label: "Full Name",
                           value: controller.fullName,
                           keyboardType: TextInputType.name,
@@ -99,6 +100,7 @@ class MyProfile extends StatelessWidget {
                               FormValidation.emailValidatorRegistration(
                             controller.email.text,
                           ),
+                          readOnly: true,
                           label: "Email Address",
                           value: controller.email,
                           keyboardType: TextInputType.emailAddress,
@@ -106,10 +108,8 @@ class MyProfile extends StatelessWidget {
                         ),
                         _profileComponent(
                           context,
-                          validator: (value) => FormValidation.phoneValidator(
-                            controller.phone.text,
-                          ),
                           label: "Phone Number",
+                          readOnly: true,
                           value: controller.phone,
                           keyboardType: TextInputType.number,
                           icon: ImagePaths.phone,
@@ -143,6 +143,7 @@ class MyProfile extends StatelessWidget {
     required String icon,
     final String? Function(String?)? validator,
     List<TextInputFormatter>? inputFormatters,
+    bool readOnly = false,
     TextInputType? keyboardType,
   }) {
     return FormField<String>(
@@ -184,7 +185,7 @@ class MyProfile extends StatelessWidget {
                       keyboardType: keyboardType,
                       inputFormatters: inputFormatters,
                       decoration: const InputDecoration.collapsed(hintText: ""),
-                      readOnly: controller.edit.value == false,
+                      readOnly: readOnly,
                     ),
                   ),
                 ],

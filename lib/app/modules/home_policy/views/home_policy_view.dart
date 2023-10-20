@@ -21,30 +21,36 @@ class HomePolicyView extends GetView<HomePolicyController> {
                   padding: EdgeInsets.all(15.w),
                   child: Column(
                     children: [
-                      Row(
-                        children: [
-                          RRectIcon(
-                            image: ImagePaths.arrow,
-                            onTap: () {},
-                          ),
-                          Expanded(
-                            child: Text(
-                              'Home Policy',
-                              textAlign: TextAlign.center,
-                              style: Get.textTheme.titleLarge?.copyWith(
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ),
-                          Opacity(
-                            opacity: 0,
-                            child: RRectIcon(
-                              image: ImagePaths.menu,
-                              onTap: () {},
-                            ),
-                          ),
-                        ],
+
+                      const MyAppBar(
+                        title: 'Home Policy',
                       ),
+
+                      // Row(
+                      //   children: [
+                      //     RRectIcon(
+                      //       image: ImagePaths.arrow,
+                      //       onTap: () {},
+                      //     ),
+                      //     Expanded(
+                      //       child: Text(
+                      //         'Home Policy',
+                      //         textAlign: TextAlign.center,
+                      //         style: Get.textTheme.titleLarge?.copyWith(
+                      //           fontWeight: FontWeight.w700,
+                      //         ),
+                      //       ),
+                      //     ),
+                      //     Opacity(
+                      //       opacity: 0,
+                      //       child: RRectIcon(
+                      //         image: ImagePaths.menu,
+                      //         onTap: () {},
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
+                      //
                       Gap(40.h),
                       Padding(
                         padding: EdgeInsets.only(right: 80.w),

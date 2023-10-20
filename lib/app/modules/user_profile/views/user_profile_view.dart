@@ -110,29 +110,24 @@ class UserProfileView extends GetView<UserProfileController> {
                                           tag: 'Enter Full Name',
                                           isMandatory: true),
                                   label: "Full Name",
+                                  readOnly: controller.edit.value == false,
                                   value: controller.fullName,
                                   keyboardType: TextInputType.name,
                                   icon: ImagePaths.user,
                                 ),
                                 _profileComponent(
                                   context,
-                                  validator: (value) =>
-                                      FormValidation.emailValidatorRegistration(
-                                    controller.email.text,
-                                  ),
                                   label: "Email Address",
                                   value: controller.email,
+                                  readOnly: true,
                                   keyboardType: TextInputType.emailAddress,
                                   icon: ImagePaths.sms,
                                 ),
                                 _profileComponent(
                                   context,
-                                  validator: (value) =>
-                                      FormValidation.phoneValidator(
-                                    controller.phone.text,
-                                  ),
                                   label: "Phone Number",
                                   value: controller.phone,
+                                  readOnly: true,
                                   keyboardType: TextInputType.number,
                                   icon: ImagePaths.phone,
                                 ),
@@ -169,6 +164,7 @@ class UserProfileView extends GetView<UserProfileController> {
     required String icon,
     final String? Function(String?)? validator,
     List<TextInputFormatter>? inputFormatters,
+    bool readOnly = false,
     TextInputType? keyboardType,
   }) {
     return FormField<String>(
@@ -210,7 +206,7 @@ class UserProfileView extends GetView<UserProfileController> {
                       keyboardType: keyboardType,
                       inputFormatters: inputFormatters,
                       decoration: const InputDecoration.collapsed(hintText: ""),
-                      readOnly: controller.edit.value == false,
+                      readOnly: readOnly ,
                     ),
                   ),
                 ],

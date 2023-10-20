@@ -15,30 +15,35 @@ class StatementNoticeView extends GetView<StatementNoticeController> {
             padding: EdgeInsets.all(15.w),
             child: Column(
               children: [
-                Row(
-                  children: [
-                    RRectIcon(
-                      image: ImagePaths.arrow,
-                      onTap: () {},
-                    ),
-                    Expanded(
-                      child: Text(
-                        'Statement & Notices',
-                        textAlign: TextAlign.center,
-                        style: Get.textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                    Opacity(
-                      opacity: 0,
-                      child: RRectIcon(
-                        image: ImagePaths.menu,
-                        onTap: () {},
-                      ),
-                    ),
-                  ],
+
+                const MyAppBar(
+                  title: 'Statement & Notices',
                 ),
+
+                // Row(
+                //   children: [
+                //     RRectIcon(
+                //       image: ImagePaths.arrow,
+                //       onTap: () {},
+                //     ),
+                //     Expanded(
+                //       child: Text(
+                //         'Statement & Notices',
+                //         textAlign: TextAlign.center,
+                //         style: Get.textTheme.titleLarge?.copyWith(
+                //           fontWeight: FontWeight.w700,
+                //         ),
+                //       ),
+                //     ),
+                //     Opacity(
+                //       opacity: 0,
+                //       child: RRectIcon(
+                //         image: ImagePaths.menu,
+                //         onTap: () {},
+                //       ),
+                //     ),
+                //   ],
+                // ),
                 Gap(40.h),
                 _statementItem(
                   context,
