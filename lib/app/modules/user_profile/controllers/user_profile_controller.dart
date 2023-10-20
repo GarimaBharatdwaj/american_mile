@@ -118,7 +118,7 @@ class UserProfileController extends GetxController {
 
   updateUserDetails() async {
     final Map<String, dynamic> data = {
-      'user_id': "14",
+      'user_id': DeviceHelper.getUserId(),
       'fullname': fullName.text,
       'email': email.text,
       'mobile': phone.text,
@@ -147,16 +147,5 @@ class UserProfileController extends GetxController {
     }
   }
 
-  String? nameValidator(
-    String? value,
-  ) {
-    String patttern = r'^[a-zA-Z ]*$';
-    RegExp regExp = RegExp(patttern, unicode: true);
-    if (value!.isEmpty) {
-      return 'Please enter fullname';
-    } else if (!regExp.hasMatch(value)) {
-      return 'Only alphabets are allowed';
-    }
-    return null;
-  }
+ 
 }

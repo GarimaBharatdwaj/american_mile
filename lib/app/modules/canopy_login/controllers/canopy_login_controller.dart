@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:american_mile/app/ui/widgets/error_dialog.dart';
 
 import '../../../../common_lib.dart';
+import '../../../../core/helpers/device_helper.dart';
 import '../../../../core/network/api_service.dart';
 
 class CanopyLoginController extends GetxController {
@@ -66,10 +67,43 @@ class CanopyLoginController extends GetxController {
           debugPrint(
             mapData['msg']['account_email'],
           );
-          await Get.toNamed(
-            Routes.SET_MILE_PASSWORD,
-            arguments: mapData['msg']['account_email'],
-          );
+          if (mapData['mfa_options'] != null) {
+            isLoading.value = false;
+          } else {
+            canopyConnectApi(mapData['msg']['account_email']);
+          }
+        }
+      } else {
+        errorDialog("");
+        isLoading.value = false;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      isLoading.value = false;
+    }
+  }
+  // *********************************************************************** //
+  // ************************* Canopy Connect API ************************** //
+  // *********************************************************************** //
+
+  canopyConnectApi(String email) async {
+    try {
+      var response = await API().post('canopy-connect', data: {
+        'pull_id': login!['pull_id'],
+      });
+      Map<String, dynamic>? mapData = jsonDecode(response.data);
+      if (mapData != null) {
+        if (mapData['status'] == 1) {
+          if (DeviceHelper.getUserId() != null) {
+            Get.offAllNamed(Routes.HOME);
+          } else {
+            DeviceHelper.saveUserId(mapData['user_id']);
+            await Get.toNamed(
+              Routes.SET_MILE_PASSWORD,
+              arguments: email,
+            );
+          }
+
           isLoading.value = false;
         }
       } else {

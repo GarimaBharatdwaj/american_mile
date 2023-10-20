@@ -64,13 +64,18 @@ class SetMilePasswordView extends GetView<SetMilePasswordController> {
               controller: controller.confirmPassword,
             ),
             Gap(50.h),
-            Padding(
-              padding: EdgeInsets.all(30.w),
-              child: PrimaryButton(
-                buttonText: "Submit",
-                onTap: () {},
+            Obx(
+              () => Padding(
+                padding: EdgeInsets.all(30.w),
+                child: PrimaryButton(
+                  isLoading: controller.isLoading.value,
+                  buttonText: "Submit",
+                  onTap: () {
+                    controller.setPasswordApi();
+                  },
+                ),
               ),
-            ),
+            )
           ],
         ),
       ),

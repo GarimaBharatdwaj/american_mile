@@ -240,7 +240,6 @@ class FormValidation {
 
   static String? phoneValidator(String? value, {bool isMandatory = true}) {
     RegExp regExp = RegExp(r'^(\+91[\-\s]?)?[1234]\d{9}$');
-
     if (value!.isEmpty) {
       return isMandatory ? 'Phone number is required' : null;
     } else if (value.length < 10) {
