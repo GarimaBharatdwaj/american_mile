@@ -13,11 +13,11 @@ class LoginController extends GetxController {
   Rx<LoginViaEmailOrPhone> loginViaEmailOrPhone =
       LoginViaEmailOrPhone.email.obs;
   final TextEditingController emailController =
-      TextEditingController(text: 'adambrettrobbins@gmail.com');
+      TextEditingController(text: 'clark.kent@theplanet.com');
   final TextEditingController mobileController =
       TextEditingController(text: '4806787444');
   final TextEditingController passwordController =
-      TextEditingController(text: 'Farmers1!');
+      TextEditingController(text: 'A1234567');
 
   // *********************************************************************** //
   // ******************************* Login ********************************* //
