@@ -40,9 +40,12 @@ class CanopyLoginController extends GetxController {
           Future.delayed(600.milliseconds).then((value) {
             pullCanopy();
           });
+        } else {
+          errorDialog("Something went wrong!");
+          isLoading.value = false;
         }
       } else {
-        errorDialog("");
+        errorDialog("Something went wrong!");
         isLoading.value = false;
       }
     } catch (e) {
