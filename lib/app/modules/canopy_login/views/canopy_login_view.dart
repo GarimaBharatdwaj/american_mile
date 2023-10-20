@@ -2,7 +2,6 @@ import 'package:american_mile/app/modules/canopy_login/controllers/canopy_login_
 import 'package:american_mile/common_lib.dart';
 import 'package:american_mile/core/components/index.dart';
 import 'package:american_mile/core/components/primary_button.dart';
-import 'package:american_mile/core/utils/divider.dart';
 import '../../../../core/utils/index.dart';
 
 class CanopyLoginView extends GetView<CanopyLoginController> {
@@ -13,7 +12,27 @@ class CanopyLoginView extends GetView<CanopyLoginController> {
       child: Obx(
         () => Scaffold(
           body: controller.isLoading.value
-              ? showProgressIndicator()
+              ? Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox.square(
+                        dimension: 27,
+                        child: CircularProgressIndicator(
+                          color: AppColors.primaryDark,
+                          strokeWidth: 3.0,
+                        ),
+                      ),
+                      Gap(20.w),
+                      Text(
+                        "Please wait....\nWhile we fecthing your insurance details.",
+                        style: Get.textTheme.titleSmall?.copyWith(
+                          fontSize: 16.sp,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
               : ListView(
                   padding: EdgeInsets.all(15.w),
                   children: [
