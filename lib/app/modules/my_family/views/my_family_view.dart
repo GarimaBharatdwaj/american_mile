@@ -79,7 +79,15 @@ class MyFamilyView extends GetView<MyFamilyController> {
                 backgroundColor: AppColors.white,
                 foregroundColor: AppColors.black,
                 label: 'Add Driver',
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed(
+                    Routes.DRIVER_LICENCE,
+                  )?.then((value) {
+                    if (value) {
+                      controller.myFamilyAPI();
+                    }
+                  });
+                },
               ),
               SpeedDialChild(
                 shape: RoundedRectangleBorder(
@@ -267,7 +275,16 @@ class MyFamilyView extends GetView<MyFamilyController> {
                         children: [
                           SecondryButton(
                             buttonText: "Edit",
-                            onTap: () {},
+                            onTap: () {
+                              Get.toNamed(Routes.DRIVER_DETAILS, arguments: {
+                                'isAddingManually': true,
+                                'name': driver['name'],
+                                'gender': driver['gender'],
+                                'dob': driver['dob'],
+                                'dl': driver['license_number'],
+                                'address': driver['address']
+                              });
+                            },
                           ),
                           SecondryButton(
                             buttonText: "Remove",

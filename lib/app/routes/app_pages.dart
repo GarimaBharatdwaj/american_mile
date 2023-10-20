@@ -12,6 +12,8 @@ import '../modules/check_offer/bindings/check_offer_binding.dart';
 import '../modules/check_offer/views/check_offer_view.dart';
 import '../modules/connect_car/bindings/connect_car_binding.dart';
 import '../modules/connect_car/views/connect_car_view.dart';
+import '../modules/driver_details/bindings/driver_details_binding.dart';
+import '../modules/driver_details/views/driver_details_view.dart';
 import '../modules/driver_licence/bindings/driver_licence_binding.dart';
 import '../modules/driver_licence/views/driver_licence_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -162,6 +164,11 @@ class AppPages {
       name: _Paths.SET_MILE_PASSWORD,
       page: () => const SetMilePasswordView(),
       binding: SetMilePasswordBinding(),
+    ),
+    GetPage(
+      name: _Paths.DRIVER_DETAILS,
+      page: () => const DriverDetailsView(),
+      binding: DriverDetailsBinding(),
     ),
   ];
 }

@@ -25,6 +25,7 @@ abstract class Routes {
   static const CANOPY_LOGIN = _Paths.CANOPY_LOGIN;
   static const MY_FAMILY = _Paths.MY_FAMILY;
   static const SET_MILE_PASSWORD = _Paths.SET_MILE_PASSWORD;
+  static const DRIVER_DETAILS = _Paths.DRIVER_DETAILS;
 }
 
 abstract class _Paths {
@@ -51,4 +52,5 @@ abstract class _Paths {
   static const CANOPY_LOGIN = '/canopy-login';
   static const MY_FAMILY = '/my-family';
   static const SET_MILE_PASSWORD = '/set-mile-password';
+  static const DRIVER_DETAILS = '/driver-details';
 }

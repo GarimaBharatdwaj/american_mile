@@ -1,4 +1,3 @@
-import 'package:american_mile/app/modules/driver_licence/component/driver_details.dart';
 import 'package:american_mile/common_lib.dart';
 import '../../../../core/components/primary_button.dart';
 import '../../../../core/components/rect_icon.dart';
@@ -59,10 +58,8 @@ class DriverLicenceView extends GetView<DriverLicenceController> {
                 child: PrimaryButton(
                   buttonText: "Ready to Scan",
                   onTap: () {
-                    controller.isAddingManually.value = false;
-                    Get.to(
-                      () => DriverDetails(),
-                    );
+                    controller.sendArgumentsToDriverDetails(
+                        isAddingManually: false);
                   },
                 ),
               ),
@@ -71,15 +68,8 @@ class DriverLicenceView extends GetView<DriverLicenceController> {
                 child: PrimaryButton(
                   buttonText: "Add Manually",
                   onTap: () {
-                    controller.isAddingManually.value = true;
-                    controller.addressController.clear();
-                    controller.nameController.clear();
-                    controller.dlController.clear();
-                    controller.dobController.clear();
-                    controller.genderController.clear();
-                    Get.to(
-                      () => DriverDetails(),
-                    );
+                    controller.sendArgumentsToDriverDetails(
+                        isAddingManually: true);
                   },
                 ),
               ),
