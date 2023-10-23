@@ -23,9 +23,7 @@ class MyFamilyView extends GetView<MyFamilyController> {
                     headerSliverBuilder: (context, innerBoxIsScrolled) {
                       return [
                         _headerAppBarWidget(context),
-                        _tabBarWidget(
-                          context,
-                        ),
+                        _tabBarWidget(context),
                       ];
                     },
                     body: Column(
@@ -56,7 +54,6 @@ class MyFamilyView extends GetView<MyFamilyController> {
             spaceBetweenChildren: 8,
             closeManually: false,
             gradientBoxShape: BoxShape.rectangle,
-
             curve: Curves.bounceIn,
             overlayColor: AppColors.black,
             overlayOpacity: 0.5,
@@ -181,7 +178,6 @@ class MyFamilyView extends GetView<MyFamilyController> {
               ),
             ],
             indicatorSize: TabBarIndicatorSize.label,
-// isScrollable: true,
             controller: controller.tabCotroller,
             labelPadding: EdgeInsets.symmetric(
               horizontal: 25.w,
