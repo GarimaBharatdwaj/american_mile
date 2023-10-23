@@ -1,7 +1,5 @@
 import 'dart:convert';
-
 import 'package:american_mile/app/ui/widgets/error_dialog.dart';
-
 import '../../../../common_lib.dart';
 import '../../../../core/helpers/device_helper.dart';
 import '../../../../core/network/api_service.dart';
@@ -24,6 +22,7 @@ class CanopyLoginController extends GetxController {
   // *********************************************************************** //
   // ******************************* Login ********************************* //
   // *********************************************************************** //
+
   Map<String, dynamic>? login;
   canopyLogin() async {
     isLoading.value = true;

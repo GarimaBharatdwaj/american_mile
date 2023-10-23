@@ -14,30 +14,33 @@ class LoginView extends GetView<LoginController> {
         body: ListView(
           padding: EdgeInsets.all(15.w),
           children: [
-            Row(
-              children: [
-                RRectIcon(
-                  image: ImagePaths.arrow,
-                  onTap: () {},
-                ),
-                Expanded(
-                  child: Text(
-                    'Log In',
-                    textAlign: TextAlign.center,
-                    style: Get.textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-                Opacity(
-                  opacity: 0,
-                  child: RRectIcon(
-                    image: ImagePaths.menu,
-                    onTap: () {},
-                  ),
-                ),
-              ],
-            ),
+            const MyAppBar(title: 'Log In'),
+
+            // Row(
+            //   children: [
+            //     RRectIcon(
+            //       image: ImagePaths.arrow,
+            //       onTap: () {},
+            //     ),
+            //     Expanded(
+            //       child: Text(
+            //         'Log In',
+            //         textAlign: TextAlign.center,
+            //         style: Get.textTheme.titleLarge?.copyWith(
+            //           fontWeight: FontWeight.w700,
+            //         ),
+            //       ),
+            //     ),
+            //     Opacity(
+            //       opacity: 0,
+            //       child: RRectIcon(
+            //         image: ImagePaths.menu,
+            //         onTap: () {},
+            //       ),
+            //     ),
+            //   ],
+            // ),
+
             Gap(40.h),
             Obx(
               () => Row(
