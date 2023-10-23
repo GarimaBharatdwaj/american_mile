@@ -283,13 +283,6 @@ class AutoPolicyView extends GetView<AutoPolicyController> {
                                     ? _autoIdCards(context)
                                     : _autoDocuments(context),
                             Gap(40.h),
-                            Gap(40.h),
-                            PrimaryButton(
-                              buttonText: "Flow",
-                              onTap: () {
-                                Get.toNamed(Routes.CONNECT_CAR);
-                              },
-                            ),
                           ],
                         ),
                       ),

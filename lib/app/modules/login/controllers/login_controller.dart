@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:american_mile/app/ui/widgets/error_dialog.dart';
-import 'package:american_mile/app/ui/widgets/error_dialog.dart';
 import 'package:american_mile/core/helpers/device_helper.dart';
 import 'package:american_mile/core/network/api_service.dart';
 import '../../../../common_lib.dart';
@@ -16,8 +15,7 @@ class LoginController extends GetxController {
       LoginViaEmailOrPhone.email.obs;
   final TextEditingController emailController =
       TextEditingController(text: 'clark.kent@theplanet.com');
-  final TextEditingController mobileController =
-      TextEditingController(text: '4806787444');
+  final TextEditingController mobileController = TextEditingController();
   final TextEditingController passwordController =
       TextEditingController(text: 'A1234567');
 

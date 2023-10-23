@@ -1,7 +1,6 @@
 import 'package:american_mile/common_lib.dart';
 import 'package:american_mile/core/components/request_change.dart';
 import '../../../../core/components/index.dart';
-import '../../../../core/components/primary_button.dart';
 import '../../../../core/components/secondry_button.dart';
 import '../../../../core/utils/divider.dart';
 import '../../../../core/utils/index.dart';
@@ -21,36 +20,9 @@ class HomePolicyView extends GetView<HomePolicyController> {
                   padding: EdgeInsets.all(15.w),
                   child: Column(
                     children: [
-
                       const MyAppBar(
                         title: 'Home Policy',
                       ),
-
-                      // Row(
-                      //   children: [
-                      //     RRectIcon(
-                      //       image: ImagePaths.arrow,
-                      //       onTap: () {},
-                      //     ),
-                      //     Expanded(
-                      //       child: Text(
-                      //         'Home Policy',
-                      //         textAlign: TextAlign.center,
-                      //         style: Get.textTheme.titleLarge?.copyWith(
-                      //           fontWeight: FontWeight.w700,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     Opacity(
-                      //       opacity: 0,
-                      //       child: RRectIcon(
-                      //         image: ImagePaths.menu,
-                      //         onTap: () {},
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
-                      //
                       Gap(40.h),
                       Padding(
                         padding: EdgeInsets.only(right: 80.w),
@@ -408,12 +380,6 @@ class HomePolicyView extends GetView<HomePolicyController> {
                           ),
                       if (controller.type.value == 1) _policyDocuments(context),
                       Gap(22.h),
-                      PrimaryButton(
-                        buttonText: "Flow",
-                        onTap: () {
-                          Get.toNamed(Routes.STATEMENT_NOTICE);
-                        },
-                      ),
                     ],
                   ),
                 ),

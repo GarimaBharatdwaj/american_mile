@@ -38,12 +38,11 @@ class CarDetailsController extends GetxController {
       modelController = TextEditingController(text: args!['model']);
       bodyController = TextEditingController(text: args!['body']);
     } else {
-      vinController = TextEditingController(text: 'SALWR2REXKA826211');
-      yearController = TextEditingController(text: '2019');
-      makeController = TextEditingController(text: 'Land Rover');
-      modelController = TextEditingController(text: 'Range Rover Sports');
-      bodyController =
-          TextEditingController(text: 'Sport Utility Vehicle (SUV)');
+      vinController = TextEditingController();
+      yearController = TextEditingController();
+      makeController = TextEditingController();
+      modelController = TextEditingController();
+      bodyController = TextEditingController();
     }
   }
 

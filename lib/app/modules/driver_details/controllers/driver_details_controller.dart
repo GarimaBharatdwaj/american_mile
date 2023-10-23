@@ -37,12 +37,11 @@ class DriverDetailsController extends GetxController {
       dlController = TextEditingController(text: args!['dl']);
       addressController = TextEditingController(text: args!['address']);
     } else {
-      nameController = TextEditingController(text: 'SALWR2REXKA826211');
-      genderController = TextEditingController(text: '2019');
-      dobController = TextEditingController(text: 'Land Rover');
-      dlController = TextEditingController(text: 'Range Rover Sports');
-      addressController =
-          TextEditingController(text: 'Sport Utility Vehicle (SUV)');
+      nameController = TextEditingController();
+      genderController = TextEditingController();
+      dobController = TextEditingController();
+      dlController = TextEditingController();
+      addressController = TextEditingController();
     }
   }
 
