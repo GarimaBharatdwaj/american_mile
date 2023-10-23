@@ -16,8 +16,8 @@ class CanopyLoginController extends GetxController {
   @override
   void onInit() {
     carrierId = Get.arguments;
-    emailController = TextEditingController(text: "user_good");
-    passwordController = TextEditingController(text: "pass_good");
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
     super.onInit();
   }
 

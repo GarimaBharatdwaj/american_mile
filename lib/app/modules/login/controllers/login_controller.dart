@@ -13,11 +13,9 @@ class LoginController extends GetxController {
   RxBool isLoginTypeEmail = true.obs;
   Rx<LoginViaEmailOrPhone> loginViaEmailOrPhone =
       LoginViaEmailOrPhone.email.obs;
-  final TextEditingController emailController =
-      TextEditingController(text: 'clark.kent@theplanet.com');
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController mobileController = TextEditingController();
-  final TextEditingController passwordController =
-      TextEditingController(text: 'A1234567');
+  final TextEditingController passwordController = TextEditingController();
 
   // *********************************************************************** //
   // ******************************* Login ********************************* //
