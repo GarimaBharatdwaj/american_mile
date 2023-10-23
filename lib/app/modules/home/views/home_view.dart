@@ -352,7 +352,7 @@ class HomeView extends GetView<HomeController> {
                       Gap(20.w),
                       Expanded(
                         child: Text(
-                          "Good Morning. Have a nice\nday man",
+                          "Good ${controller.greeting()}. Have a nice\nday man",
                           style: Get.textTheme.titleSmall,
                         ),
                       )
@@ -372,7 +372,7 @@ class HomeView extends GetView<HomeController> {
         ),
         Gap(15.h),
         _optionWidget(
-          title: "Homeowners",
+          title: "Home Owners",
           image: ImagePaths.beg,
           onTap: () {
             Get.toNamed(Routes.INSURANCE_PROVIDER);

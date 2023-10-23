@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:american_mile/app/ui/widgets/error_dialog.dart';
+import 'package:american_mile/app/ui/widgets/error_dialog.dart';
 import 'package:american_mile/core/helpers/device_helper.dart';
 import 'package:american_mile/core/network/api_service.dart';
 import '../../../../common_lib.dart';
@@ -39,15 +40,16 @@ class LoginController extends GetxController {
           DeviceHelper.saveUserId(mapData['user_data']['user_id']);
           Get.offAllNamed(Routes.HOME);
         } else {
-          errorDialog('Something went wrong!');
+          errorDialog(mapData['msg']);
+          isLoading.value = false;
         }
       } else {
-        errorDialog('Something went wrong!');
+        errorDialog("Something went wrong");
+        isLoading.value = false;
       }
     } catch (e) {
       debugPrint(e.toString());
       isLoading.value = false;
     }
-    isLoading.value = false;
   }
 }

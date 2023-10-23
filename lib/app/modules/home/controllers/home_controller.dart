@@ -190,7 +190,6 @@ class HomeController extends GetxController {
       if (result['status'] == 1) {
         edit.value = false;
         getUserProfile();
-
       } else {
         isLoading.value = false;
         errorDialog(result['msg']);
@@ -220,5 +219,16 @@ class HomeController extends GetxController {
     if (index == 2) {
       policiesAPI();
     }
+  }
+
+  String greeting() {
+    var hour = DateTime.now().hour;
+    if (hour < 12) {
+      return 'Morning';
+    }
+    if (hour < 17) {
+      return 'Afternoon';
+    }
+    return 'Evening';
   }
 }
