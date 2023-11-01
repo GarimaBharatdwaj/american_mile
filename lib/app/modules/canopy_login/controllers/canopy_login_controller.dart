@@ -25,6 +25,8 @@ class CanopyLoginController extends GetxController {
 
   Map<String, dynamic>? login;
   canopyLogin() async {
+    print("\n\n\n\n$carrierId\n\n\n");
+
     isLoading.value = true;
     try {
       var response = await API().post('comsumer-login', data: {
@@ -36,7 +38,7 @@ class CanopyLoginController extends GetxController {
       if (mapData != null) {
         if (mapData['status'] == 1) {
           login = mapData['msg'];
-          Future.delayed(600.milliseconds).then((value) {
+          Future.delayed(1000.milliseconds).then((value) {
             pullCanopy();
           });
         } else {
@@ -58,6 +60,11 @@ class CanopyLoginController extends GetxController {
   // *********************************************************************** //
 
   pullCanopy() async {
+    var map = {
+      'pull_id': login!['pull_id'],
+      'pull_jwt': login!['pull_jwt'],
+    };
+
     try {
       var response = await API().post('pull', data: {
         'pull_id': login!['pull_id'],
@@ -69,8 +76,10 @@ class CanopyLoginController extends GetxController {
           debugPrint(
             mapData['msg']['account_email'],
           );
-          if (mapData['mfa_options'] != null) {
+          if (mapData['msg']['mfa_options'] != null) {
             isLoading.value = false;
+            map.addAll(mapData['msg']['mfa_options']);
+            Get.toNamed(Routes.MFA_VERIFY, arguments: map);
           } else {
             canopyConnectApi(mapData['msg']['account_email']);
           }

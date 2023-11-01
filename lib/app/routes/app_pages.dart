@@ -28,6 +28,8 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/manual_vehical_details/bindings/manual_vehical_details_binding.dart';
 import '../modules/manual_vehical_details/views/manual_vehical_details_view.dart';
+import '../modules/mfa_verify/bindings/mfa_verify_binding.dart';
+import '../modules/mfa_verify/views/mfa_verify_view.dart';
 import '../modules/my_family/bindings/my_family_binding.dart';
 import '../modules/my_family/views/my_family_view.dart';
 import '../modules/onboard/bindings/onboard_binding.dart';
@@ -169,6 +171,11 @@ class AppPages {
       name: _Paths.DRIVER_DETAILS,
       page: () => const DriverDetailsView(),
       binding: DriverDetailsBinding(),
+    ),
+    GetPage(
+      name: _Paths.MFA_VERIFY,
+      page: () => const MfaVerifyView(),
+      binding: MfaVerifyBinding(),
     ),
   ];
 }

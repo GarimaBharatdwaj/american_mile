@@ -25,7 +25,7 @@ class CanopyLoginView extends GetView<CanopyLoginController> {
                       ),
                       Gap(20.w),
                       Text(
-                        "Please wait....\nWhile we fecthing your insurance details.",
+                        "Please wait....\nWhile we fetching your insurance details.",
                         style: Get.textTheme.titleSmall?.copyWith(
                           fontSize: 16.sp,
                         ),
@@ -36,30 +36,7 @@ class CanopyLoginView extends GetView<CanopyLoginController> {
               : ListView(
                   padding: EdgeInsets.all(15.w),
                   children: [
-                    Row(
-                      children: [
-                        RRectIcon(
-                          image: ImagePaths.arrow,
-                          onTap: () {},
-                        ),
-                        Expanded(
-                          child: Text(
-                            'Log In',
-                            textAlign: TextAlign.center,
-                            style: Get.textTheme.titleLarge?.copyWith(
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ),
-                        Opacity(
-                          opacity: 0,
-                          child: RRectIcon(
-                            image: ImagePaths.menu,
-                            onTap: () {},
-                          ),
-                        ),
-                      ],
-                    ),
+                    const MyAppBar(title: 'Log In'),
                     Gap(40.h),
                     Text(
                       'Enter your progressive credentials to enable Canopy\nConnect to securely retrieve your insurance information.',

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../common_lib.dart';
@@ -11,8 +12,10 @@ import '../../../ui/widgets/error_dialog.dart';
 
 class HomeController extends GetxController {
   final GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
+
   @override
   void onInit() {
+
     if (DeviceHelper.getUserId() != null) {
       getUserProfile();
     }

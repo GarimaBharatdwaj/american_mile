@@ -53,6 +53,11 @@ class API {
   }
 
   Future<dio.Response<T>> post<T>(String path, {dynamic data}) async {
+
+    if (kDebugMode) {
+      print(data);
+    }
+
     try {
       final response = await _dio.post<T>(
         path,
