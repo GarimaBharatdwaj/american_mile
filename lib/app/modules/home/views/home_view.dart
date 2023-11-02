@@ -79,6 +79,16 @@ class HomeView extends GetView<HomeController> {
                           onTap: () {},
                         ),
                         _drawerItem(
+                          title: "Update Password",
+                          icon: Icons.password,
+                          onTap: () {
+                            Get.toNamed(
+                              Routes.SET_MILE_PASSWORD,
+                              arguments: controller.userData!['email'],
+                            );
+                          },
+                        ),
+                        _drawerItem(
                           title: "Logout",
                           icon: Icons.logout,
                           onTap: () {
