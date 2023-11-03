@@ -1,4 +1,5 @@
 import 'package:american_mile/common_lib.dart';
+import 'package:flutter/services.dart';
 import '../../../../core/components/index.dart';
 import '../../../../core/components/primary_button.dart';
 import '../../../../core/utils/form_validation.dart';
@@ -27,7 +28,9 @@ class DriverDetailsView extends GetView<DriverDetailsController> {
                     enabled: controller.isAddingManually.value,
                     hintText: "Enter Name",
                     labelText: "Name",
-                    inputFormatters: [UpperCaseTextFormatter()],
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp('[a-z A-Z ]'))
+                    ],
                     validator: (value) => FormValidation.nameValidator(
                         controller.nameController.text,
                         tag: 'Enter Name',
@@ -39,7 +42,6 @@ class DriverDetailsView extends GetView<DriverDetailsController> {
                     enabled: controller.isAddingManually.value,
                     hintText: "Enter Gender",
                     labelText: "Gender",
-                    inputFormatters: [UpperCaseTextFormatter()],
                     controller: controller.genderController,
                     validator: (value) => FormValidation.genderValidator(
                         controller.genderController.text,
@@ -68,6 +70,10 @@ class DriverDetailsView extends GetView<DriverDetailsController> {
                     enabled: controller.isAddingManually.value,
                     hintText: "Enter Driver's License Number",
                     labelText: "Driver's License Number",
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.allow(RegExp('[A-Z 0-9]'))
+                    ],
+                    textCapitalization: TextCapitalization.characters,
                     controller: controller.dlController,
                     validator: (value) => FormValidation.addressLineValidator(
                         controller.dlController.text,
@@ -88,13 +94,15 @@ class DriverDetailsView extends GetView<DriverDetailsController> {
                     padding: EdgeInsets.all(30.w),
                     child: PrimaryButton(
                       isLoading: controller.isLoading.value,
-                      buttonText: controller.isAddingManually.value
-                          ? "Submit"
-                          : "Yes, It's Correct",
+                      buttonText: controller.isAddingManually.value == false &&
+                              controller.isEdit.value == false
+                          ? "Yes, It's Correct"
+                          : "Submit",
                       onTap: controller.validateMethode,
                     ),
                   ),
-                  if (!controller.isAddingManually.value)
+                  if (controller.isAddingManually.value == false &&
+                      controller.isEdit.value == false)
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 30.w),
                       child: PrimaryButton(

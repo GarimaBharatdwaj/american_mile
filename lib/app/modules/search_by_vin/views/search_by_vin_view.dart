@@ -1,6 +1,7 @@
 import 'package:american_mile/common_lib.dart';
 import 'package:american_mile/core/components/index.dart';
 import 'package:american_mile/core/utils/index.dart';
+import 'package:flutter/services.dart';
 
 import '../../../../core/components/primary_button.dart';
 import '../../../../core/utils/form_validation.dart';
@@ -37,6 +38,10 @@ class SearchByVinView extends GetView<SearchByVinController> {
                 child: LoginTextField(
                   hintText: "Enter VIN",
                   labelText: "VIN",
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.allow(RegExp('[A-Z 0-9]'))
+                  ],
+                  textCapitalization: TextCapitalization.characters,
                   validator: (value) => FormValidation.vinValidator(
                       controller.vinController.text),
                   controller: controller.vinController,

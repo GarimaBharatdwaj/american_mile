@@ -17,7 +17,8 @@ class DriverDetailsController extends GetxController {
   late TextEditingController dlController;
   late TextEditingController addressController;
 
-  RxBool isAddingManually = false.obs;
+  RxBool isAddingManually = true.obs;
+  RxBool isEdit = false.obs;
 
   Map<String, dynamic>? args;
 
@@ -25,23 +26,30 @@ class DriverDetailsController extends GetxController {
   void onInit() {
     super.onInit();
     args = Get.arguments;
+    nameController = TextEditingController();
+    genderController = TextEditingController();
+    dobController = TextEditingController();
+    dlController = TextEditingController();
+    addressController = TextEditingController();
     setArgumentsValue();
   }
 
   setArgumentsValue() {
     if (args != null) {
       isAddingManually.value = args!['isAddingManually'];
-      nameController = TextEditingController(text: args!['name']);
-      genderController = TextEditingController(text: args!['gender']);
-      dobController = TextEditingController(text: args!['dob']);
-      dlController = TextEditingController(text: args!['dl']);
-      addressController = TextEditingController(text: args!['address']);
-    } else {
-      nameController = TextEditingController();
-      genderController = TextEditingController();
-      dobController = TextEditingController();
-      dlController = TextEditingController();
-      addressController = TextEditingController();
+      isEdit.value = args!['edit'];
+      if (isAddingManually.value == false) {
+        nameController.text = args!['name'];
+        if (args!['gender'] == "M") {
+          genderController.text = "Male";
+        } else {
+          genderController.text = "Female";
+        }
+
+        dobController.text = args!['dob'];
+        dlController.text = args!['dl'];
+        addressController.text = args!['address'];
+      }
     }
   }
 
@@ -72,7 +80,7 @@ class DriverDetailsController extends GetxController {
       var response = await API().post('add-edit-driver', data: {
         'user_id': DeviceHelper.getUserId() ?? "",
         'name': nameController.text.trim(),
-        'gender': genderController.text.trim(),
+        'gender': genderController.text == "Male" ? "M" : "F",
         'dob': dobController.text.trim(),
         'license_number': dlController.text.trim(),
         'address': addressController.text.trim(),
@@ -82,7 +90,7 @@ class DriverDetailsController extends GetxController {
       if (mapData != null) {
         if (mapData['status'] == 1) {
           debugPrint(mapData['msg']);
-          if (args!['driverId'] != null) {
+          if (args!['driverId'] != null && args!['driverId'] != '') {
             Get.back(result: true);
           } else {
             Get.back(result: true);

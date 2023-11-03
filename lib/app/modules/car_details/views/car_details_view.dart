@@ -1,4 +1,5 @@
 import 'package:american_mile/core/utils/form_validation.dart';
+import 'package:flutter/services.dart';
 
 import '../../../../common_lib.dart';
 import '../../../../core/components/index.dart';
@@ -29,6 +30,10 @@ class CarDetailsView extends GetView<CarDetailsController> {
                     hintText: "Enter VIN",
                     labelText: "VIN",
                     controller: controller.vinController,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.allow(RegExp('[A-Z 0-9]'))
+                    ],
+                    textCapitalization: TextCapitalization.characters,
                     validator: (value) => FormValidation.vinValidator(
                         controller.vinController.text),
                   ),
@@ -55,7 +60,6 @@ class CarDetailsView extends GetView<CarDetailsController> {
                       enabled: controller.isAddingManually.value,
                       hintText: "Enter Make",
                       labelText: "Make",
-                      inputFormatters: [UpperCaseTextFormatter()],
                       validator: (value) => FormValidation.addressLineValidator(
                           controller.makeController.text, "Please enter make"),
                       controller: controller.makeController),
@@ -64,7 +68,6 @@ class CarDetailsView extends GetView<CarDetailsController> {
                       enabled: controller.isAddingManually.value,
                       hintText: "Enter Model",
                       labelText: "Model",
-                      inputFormatters: [UpperCaseTextFormatter()],
                       validator: (value) => FormValidation.addressLineValidator(
                           controller.modelController.text,
                           "Please enter model"),

@@ -266,7 +266,9 @@ class HomePolicyView extends GetView<HomePolicyController> {
                                     ),
                                     Gap(20.h),
                                     SecondryButton(
-                                      onTap: () {},
+                                      onTap: () {
+                                        controller.type.value = 1;
+                                      },
                                       buttonText: 'Policy Documents',
                                     ),
                                     Gap(20.h),

@@ -34,7 +34,33 @@ class MyFamilyView extends GetView<MyFamilyController> {
                             children: [
                               _driversComponent(),
                               _vehicalComponent(),
-                              Container(),
+                              Column(
+                                children: [
+                                  Gap(20.h),
+                                  ShadowContainer(
+                                      child: Row(
+                                    children: [
+                                      Image.asset(
+                                        ImagePaths.houseIcon,
+                                        height: 40.w,
+                                        width: 40.w,
+                                      ),
+                                      Gap(12.w),
+                                      Expanded(
+                                        child: Text(
+                                          "9926 N 16TH PL E, PHOENIX, AZ, 85020, UNITED STATES",
+                                          style: Get.textTheme.titleMedium
+                                              ?.copyWith(
+                                            fontWeight: FontWeight.w700,
+                                            height: 1.3,
+                                          ),
+                                          textAlign: TextAlign.start,
+                                        ),
+                                      ),
+                                    ],
+                                  ))
+                                ],
+                              )
                             ],
                           ),
                         ),
@@ -243,6 +269,7 @@ class MyFamilyView extends GetView<MyFamilyController> {
                         style: Get.textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.w700,
                         ),
+                        textAlign: TextAlign.center,
                       ),
                       Gap(16.h),
                       _containerItem(
@@ -275,7 +302,8 @@ class MyFamilyView extends GetView<MyFamilyController> {
                               Get.toNamed(
                                 Routes.DRIVER_DETAILS,
                                 arguments: {
-                                  'isAddingManually': true,
+                                  'isAddingManually': false,
+                                  'edit': true,
                                   'driverId': driver['id'],
                                   'name': driver['name'],
                                   'gender': driver['gender'],
@@ -390,7 +418,104 @@ class MyFamilyView extends GetView<MyFamilyController> {
                           SecondryButton(
                             buttonText: "Remove",
                             onTap: () {
-                              controller.deleteDriverAPI(
+                              controller.deleteVehicalAPI(
+                                vehical['id'],
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Gap(20.h),
+              ],
+            );
+          }),
+        ],
+      ),
+    );
+  }
+
+  _homesComponent() {
+    return SingleChildScrollView(
+      padding: EdgeInsets.symmetric(horizontal: 12.w),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Gap(20.h),
+          ...List.generate(controller.familyDetails!['vehicles'].length,
+              (index) {
+            var vehical = controller.familyDetails!['vehicles'][index];
+            return Column(
+              children: [
+                ShadowContainer(
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        ImagePaths.carIcon,
+                        height: 80.w,
+                        width: 80.w,
+                      ),
+                      Gap(8.h),
+                      Text(
+                        "${vehical['year']} ${vehical['make']}\n${vehical['model']}",
+                        style: Get.textTheme.titleLarge?.copyWith(
+                          fontWeight: FontWeight.w700,
+                          height: 1.3,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      Gap(16.h),
+                      _containerItem(
+                        key: "VIN # :",
+                        value: vehical['vin_number'],
+                      ),
+                      _containerItem(
+                        key: "Year :",
+                        value: vehical['year'],
+                      ),
+                      _containerItem(
+                        key: "Make :",
+                        value: vehical['make'],
+                      ),
+                      _containerItem(
+                        key: "Model :",
+                        value: vehical['model'],
+                      ),
+                      _containerItem(
+                        key: "Body :",
+                        value: vehical['body'],
+                      ),
+                      Gap(20.h),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SecondryButton(
+                            buttonText: "Edit",
+                            onTap: () {
+                              Get.toNamed(Routes.CAR_DETAILS, arguments: {
+                                'isAddingManually': true,
+                                'vinNumber': vehical['vin_number'],
+                                'year': vehical['year'],
+                                'make': vehical['make'],
+                                'model': vehical['model'],
+                                'body': vehical['body'],
+                                'type': '1',
+                                'vehical_id': vehical['id'],
+                              })?.then(
+                                (value) {
+                                  if (value) {
+                                    controller.myFamilyAPI();
+                                  }
+                                },
+                              );
+                            },
+                          ),
+                          SecondryButton(
+                            buttonText: "Remove",
+                            onTap: () {
+                              controller.deleteVehicalAPI(
                                 vehical['id'],
                               );
                             },

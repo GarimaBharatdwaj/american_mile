@@ -9,13 +9,16 @@ class LoginTextField extends StatelessWidget {
   final bool? enabled;
   final String? Function(String?)? validator;
   final List<TextInputFormatter>? inputFormatters;
+  final TextCapitalization? textCapitalization;
   const LoginTextField({
     super.key,
     required this.hintText,
     required this.controller,
     required this.labelText,
     this.enabled = true,
-    this.validator, this.inputFormatters,
+    this.validator,
+    this.inputFormatters,
+    this.textCapitalization,
   });
 
   @override
@@ -42,6 +45,8 @@ class LoginTextField extends StatelessWidget {
                         color: AppColors.white),
                     child: TextFormField(
                       enabled: enabled,
+                      textCapitalization:
+                          textCapitalization ?? TextCapitalization.words,
                       inputFormatters: inputFormatters,
                       style: Get.textTheme.titleMedium
                           ?.copyWith(color: AppColors.textBlackColor),
