@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:american_mile/app/ui/widgets/error_dialog.dart';
 import 'package:get/get.dart';
 
 import '../../../../common_lib.dart';
@@ -41,13 +42,13 @@ class MyFamilyController extends GetxController
           if (res['status'].toString() == "1") {
             familyDetails = res['details'];
           } else {
-            // Constants.showErrorDialogRevise();
+            errorDialog(res['msg']);
           }
         } else {
-          // Constants.showErrorDialogRevise();
+          errorDialog("Some error occurred");
         }
       } catch (e) {
-        // Constants.showErrorDialogRevise();
+        errorDialog("Some error occurred");
       }
       isLoading.value = false;
     });

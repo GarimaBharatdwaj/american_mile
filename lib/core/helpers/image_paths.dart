@@ -63,4 +63,6 @@ class ImagePaths {
   static String houseIcon = "$iconPath/house-chimney.png";
   static String userIcon = "$iconPath/profile-icon-male.png";
   static String carIcon = "$iconPath/vehicle-icon.png";
+  static String evChargingIcon = "$iconPath/ev_charging.png";
+  static String oilStatus = "$iconPath/oil_status.png";
 }

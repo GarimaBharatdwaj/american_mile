@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:american_mile/app/ui/widgets/error_dialog.dart';
 import 'package:american_mile/common_lib.dart';
 import 'package:american_mile/core/network/api_service.dart';
 
@@ -37,6 +38,8 @@ class InsuranceProviderController extends GetxController {
         });
       }
     } catch (e) {
+
+      errorDialog("Some error occurred");
       debugPrint(e.toString());
     }
     isLoading = false;

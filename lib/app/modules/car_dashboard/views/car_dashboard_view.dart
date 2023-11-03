@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:american_mile/app/modules/car_dashboard/widgets/speed_meter.dart';
 import 'package:american_mile/common_lib.dart';
 import 'package:american_mile/core/utils/index.dart';
 import '../controllers/car_dashboard_controller.dart';
@@ -80,7 +81,9 @@ class CarDashboardView extends GetView<CarDashboardController> {
                         child: Column(
                           // mainAxisSize: MainAxisSize.min,
                           children: [
-                            Gap(180.h),
+                            _evWidget(context),
+
+                            ///Gap(180.h),
                             Text(
                               "Range Rover",
                               style: Get.textTheme.titleMedium?.copyWith(
@@ -88,8 +91,10 @@ class CarDashboardView extends GetView<CarDashboardController> {
                                 fontSize: 26.sp,
                               ),
                             ),
-                            Gap(12.h),
-                            Gap(400.h),
+                            Gap(30.h),
+
+                            /// Gap(12.h),
+                            Gap(700.h),
                           ],
                         ),
                       ),
@@ -141,6 +146,9 @@ class CarDashboardView extends GetView<CarDashboardController> {
                       ),
                     ],
                   ),
+
+                  /// bottom spacing
+                  Gap(20.h),
                 ],
               ),
               Column(
@@ -168,12 +176,153 @@ class CarDashboardView extends GetView<CarDashboardController> {
                     ),
                   ),
                   Gap(20.h),
+                  _blueGradientSpeedMeterBox(context),
+                  Gap(20.h),
                   _blueGradientTypePressureBox(context),
                 ],
               ),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  _evWidget(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(
+        20.w,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          evStatusWidget(
+              titleOne: "Lock Reminders",
+              titleTwo: "Fuel Status",
+              percent: '80'),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    "EV Charging ",
+                    style: Get.textTheme.labelSmall?.copyWith(
+                      color: AppColors.evGreenColor,
+                    ),
+                  ),
+                  Image.asset(
+                    ImagePaths.evChargingIcon,
+                    width: 22.w,
+                    height: 22.h,
+                  ),
+                ],
+              ),
+              Image.asset(
+                ImagePaths.car2,
+                width: 120.w,
+                height: 100.h,
+              ),
+            ],
+          ),
+          evStatusWidget(
+              titleOne: "Guardian Mode", titleTwo: "Oil Status", percent: '80'),
+        ],
+      ),
+    );
+  }
+
+  Column evStatusWidget(
+      {required String titleOne,
+      required String titleTwo,
+      required String percent}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              titleOne,
+              style: Get.textTheme.labelSmall?.copyWith(
+                color: AppColors.white,
+              ),
+            ),
+            Icon(
+              Icons.toggle_on_rounded,
+              size: 20.h,
+              color: AppColors.evGreenColor,
+            ),
+          ],
+        ),
+        Gap(12.h),
+        Text(
+          titleTwo,
+          style: Get.textTheme.labelSmall
+              ?.copyWith(color: AppColors.white, fontWeight: FontWeight.w500),
+        ),
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            Image.asset(
+              ImagePaths.oilStatus,
+              width: 85.w,
+              height: 85.h,
+            ),
+            Positioned(
+              top: 32.h,
+              child: Text(
+                "$percent%",
+                style: Get.textTheme.labelSmall?.copyWith(
+                    color: AppColors.primary,
+                    fontSize: 8.sp,
+                    fontWeight: FontWeight.w700),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  _blueGradientSpeedMeterBox(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20.w),
+      padding: EdgeInsets.all(
+        25.w,
+      ),
+      height: 200.w,
+      width: context.width,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20.r),
+        border: Border.all(
+          width: 2.w,
+          color: const Color(0xFF0886CA),
+        ),
+        gradient: LinearGradient(
+          colors: [
+            const Color(0xFF0886CA).withOpacity(.76),
+            const Color(0xFF0886CA).withOpacity(.05),
+          ],
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'Speed \n& Miles',
+            style: Get.textTheme.titleMedium?.copyWith(
+              color: AppColors.primary,
+              height: 1.4,
+              fontSize: 18.sp,
+            ),
+          ),
+          const SpeedMeter(speed: 35, kiloMeterDriven: 1234)
+        ],
       ),
     );
   }

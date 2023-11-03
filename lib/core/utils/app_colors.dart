@@ -26,5 +26,6 @@ class AppColors {
   static Color petPolicyLightColor = const Color(0xFF6992F2);
   static Color petPolicyDarkColor = const Color(0xFF3C008B);
   static Color borderColor = const Color(0xFFEBEBEB);
+  static Color evGreenColor = const Color(0xFF14DB71);
 }
 //#4E54C833#

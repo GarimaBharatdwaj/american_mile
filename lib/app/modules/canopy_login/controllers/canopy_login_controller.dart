@@ -114,14 +114,14 @@ class CanopyLoginController extends GetxController {
               arguments: email,
             );
           }
-
           isLoading.value = false;
         }
       } else {
-        errorDialog("");
+        errorDialog("msg");
         isLoading.value = false;
       }
     } catch (e) {
+      errorDialog("Some error occurred");
       debugPrint(e.toString());
       isLoading.value = false;
     }

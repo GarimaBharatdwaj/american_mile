@@ -1,13 +1,14 @@
 import 'dart:convert';
-
+import 'package:american_mile/app/ui/widgets/error_dialog.dart';
 import 'package:american_mile/core/helpers/device_helper.dart';
 import 'package:get/get.dart';
-
 import '../../../../core/network/api_service.dart';
 
 class HomePolicyController extends GetxController {
+  
   RxInt type = 0.obs;
   String policyId = "";
+
   @override
   void onInit() {
     policyId = Get.arguments;
@@ -37,13 +38,13 @@ class HomePolicyController extends GetxController {
           if (res['status'].toString() == "1") {
             homeDetails = res['data'];
           } else {
-            // Constants.showErrorDialogRevise();
+            errorDialog(res['msg']);
           }
         } else {
-          // Constants.showErrorDialogRevise();
+          errorDialog("Some error occurred");
         }
       } catch (e) {
-        // Constants.showErrorDialogRevise();
+        errorDialog("Some error occurred");
       }
       isLoading.value = false;
     });

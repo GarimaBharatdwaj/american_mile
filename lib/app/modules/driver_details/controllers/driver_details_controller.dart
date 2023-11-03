@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:american_mile/app/ui/widgets/error_dialog.dart';
 import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
 import 'package:intl/intl.dart';
 import '../../../../common_lib.dart';
@@ -96,11 +97,15 @@ class DriverDetailsController extends GetxController {
             Get.back(result: true);
             Get.back(result: true);
           }
+        } else {
+          errorDialog(mapData['msg']);
         }
       }
     } catch (e) {
       debugPrint(e.toString());
       isLoading.value = false;
+
+      errorDialog("Some error occurred");
     }
     isLoading.value = false;
   }

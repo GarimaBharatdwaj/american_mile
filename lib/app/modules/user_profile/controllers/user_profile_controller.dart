@@ -51,13 +51,13 @@ class UserProfileController extends GetxController {
             email.text = userData!['email'] ?? "";
             phone.text = userData!['mobile'] ?? "";
           } else {
-            // Constants.showErrorDialogRevise();
+            errorDialog(res['msg']);
           }
         } else {
-          // Constants.showErrorDialogRevise();
+          errorDialog("Some error occurred");
         }
       } catch (e) {
-        // Constants.showErrorDialogRevise();
+        errorDialog("Some error occurred");
       }
       isLoading.value = false;
     });
@@ -146,6 +146,4 @@ class UserProfileController extends GetxController {
       errorDialog("Some error occurred");
     }
   }
-
- 
 }

@@ -36,12 +36,13 @@ class SetMilePasswordController extends GetxController {
           Get.offAllNamed(Routes.HOME);
         }
       } else {
-        errorDialog("");
         isLoading.value = false;
+        errorDialog(mapData?['msg']);
       }
     } catch (e) {
       debugPrint(e.toString());
       isLoading.value = false;
+      errorDialog("Some error occurred");
     }
   }
 }

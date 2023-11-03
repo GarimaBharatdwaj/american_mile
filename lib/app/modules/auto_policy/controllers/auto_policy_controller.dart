@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:american_mile/app/ui/widgets/error_dialog.dart';
 import 'package:american_mile/core/helpers/device_helper.dart';
 import 'package:get/get.dart';
 
@@ -38,13 +39,13 @@ class AutoPolicyController extends GetxController {
           if (res['status'].toString() == "1") {
             autoDetails = res;
           } else {
-            // Constants.showErrorDialogRevise();
+            errorDialog(res['msg']);
           }
         } else {
-          // Constants.showErrorDialogRevise();
+          errorDialog("Some error occurred");
         }
       } catch (e) {
-        // Constants.showErrorDialogRevise();
+        errorDialog("Some error occurred");
       }
       isLoading.value = false;
     });

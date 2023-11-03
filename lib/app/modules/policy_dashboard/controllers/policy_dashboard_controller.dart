@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:american_mile/app/ui/widgets/error_dialog.dart';
+
 import '../../../../common_lib.dart';
 import '../../../../core/helpers/device_helper.dart';
 import '../../../../core/network/api_service.dart';
@@ -33,13 +35,13 @@ class PolicyDashboardController extends GetxController {
           if (res['status'].toString() == "1") {
             policies = res;
           } else {
-            // Constants.showErrorDialogRevise();
+            errorDialog(res['msg']);
           }
         } else {
-          // Constants.showErrorDialogRevise();
+          errorDialog("Some error occurred");
         }
       } catch (e) {
-        // Constants.showErrorDialogRevise();
+        errorDialog("Some error occurred");
       }
       isLoading.value = false;
     });
@@ -66,16 +68,16 @@ class PolicyDashboardController extends GetxController {
             userData = res['user_data'];
             isProfileLoading.value = false;
           } else {
-            // Constants.showErrorDialogRevise();
             isProfileLoading.value = false;
+            errorDialog(res['msg']);
           }
         } else {
-          // Constants.showErrorDialogRevise();
           isProfileLoading.value = false;
+          errorDialog("Some error occurred");
         }
       } catch (e) {
-        // Constants.showErrorDialogRevise();
         isProfileLoading.value = false;
+        errorDialog("Some error occurred");
       }
     });
   }
