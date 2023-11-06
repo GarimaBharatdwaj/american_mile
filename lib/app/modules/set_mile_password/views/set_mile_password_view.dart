@@ -1,7 +1,6 @@
 import 'package:american_mile/common_lib.dart';
 import '../../../../core/components/index.dart';
 import '../../../../core/components/primary_button.dart';
-import '../../../../core/utils/index.dart';
 import '../controllers/set_mile_password_controller.dart';
 
 class SetMilePasswordView extends GetView<SetMilePasswordController> {
@@ -13,36 +12,9 @@ class SetMilePasswordView extends GetView<SetMilePasswordController> {
         body: ListView(
           padding: EdgeInsets.all(15.w),
           children: [
-
             const MyAppBar(
               title: 'Set Password',
             ),
-
-            // Row(
-            //   children: [
-            //     RRectIcon(
-            //       image: ImagePaths.arrow,
-            //       onTap: () {},
-            //     ),
-            //     Expanded(
-            //       child: Text(
-            //         'Set Password',
-            //         textAlign: TextAlign.center,
-            //         style: Get.textTheme.titleLarge?.copyWith(
-            //           fontWeight: FontWeight.w700,
-            //         ),
-            //       ),
-            //     ),
-            //     Opacity(
-            //       opacity: 0,
-            //       child: RRectIcon(
-            //         image: ImagePaths.menu,
-            //         onTap: () {},
-            //       ),
-            //     ),
-            //   ],
-            // ),
-            //
             Gap(40.h),
             Text(
               controller.userEmail,
