@@ -48,7 +48,8 @@ class MyFamilyView extends GetView<MyFamilyController> {
                                       Gap(12.w),
                                       Expanded(
                                         child: Text(
-                                          "9926 N 16TH PL E, PHOENIX, AZ, 85020, UNITED STATES",
+                                          controller.familyDetails!['address']
+                                              .toString(),
                                           style: Get.textTheme.titleMedium
                                               ?.copyWith(
                                             fontWeight: FontWeight.w700,
