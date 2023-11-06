@@ -4,7 +4,6 @@ import '../../../../core/components/index.dart';
 import '../../../../core/components/primary_button.dart';
 import '../../../../core/utils/form_validation.dart';
 import '../../../../core/utils/index.dart';
-import '../../../../core/utils/text_capitalization_formatter.dart';
 import '../controllers/driver_details_controller.dart';
 
 class DriverDetailsView extends GetView<DriverDetailsController> {

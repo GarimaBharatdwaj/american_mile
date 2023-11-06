@@ -2,7 +2,6 @@ import 'package:american_mile/app/modules/car_details/components/otp_verificatio
 
 import '../../../../common_lib.dart';
 import '../../../../core/components/index.dart';
-import '../../../../core/components/primary_button.dart';
 import '../../../../core/utils/index.dart';
 
 class Details extends StatelessWidget {

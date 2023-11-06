@@ -1,6 +1,5 @@
 import 'package:american_mile/common_lib.dart';
 import 'package:american_mile/core/helpers/device_helper.dart';
-import 'package:american_mile/core/utils/storage_util.dart';
 
 class OnboardController extends GetxController {
   late PageController pageController;

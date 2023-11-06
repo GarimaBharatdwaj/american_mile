@@ -7,7 +7,6 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../common_lib.dart';
 import '../../../../core/components/app_bottomsheet.dart';
-import '../../../../core/helpers/device_helper.dart';
 
 class DriverLicenceController extends GetxController {
   RxBool isLoading = false.obs;

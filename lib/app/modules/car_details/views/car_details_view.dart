@@ -1,11 +1,9 @@
 import 'package:american_mile/core/utils/form_validation.dart';
 import 'package:flutter/services.dart';
-
 import '../../../../common_lib.dart';
 import '../../../../core/components/index.dart';
 import '../../../../core/components/primary_button.dart';
 import '../../../../core/utils/index.dart';
-import '../../../../core/utils/text_capitalization_formatter.dart';
 import '../controllers/car_details_controller.dart';
 
 class CarDetailsView extends GetView<CarDetailsController> {

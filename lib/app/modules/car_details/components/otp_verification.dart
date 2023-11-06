@@ -1,8 +1,5 @@
-import 'package:american_mile/app/modules/car_details/components/details.dart';
 import 'package:american_mile/app/modules/car_details/components/vehicle_details.dart';
-import 'package:flutter/material.dart';
 
-import 'package:get/get.dart';
 
 import '../../../../common_lib.dart';
 import '../../../../core/components/index.dart';
