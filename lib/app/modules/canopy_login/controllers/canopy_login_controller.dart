@@ -38,7 +38,7 @@ class CanopyLoginController extends GetxController {
       if (mapData != null) {
         if (mapData['status'] == 1) {
           login = mapData['msg'];
-          Future.delayed(1000.milliseconds).then((value) {
+          Future.delayed(1500.milliseconds).then((value) {
             pullCanopy();
           });
         } else {

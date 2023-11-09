@@ -49,12 +49,14 @@ class CanopyLoginView extends GetView<CanopyLoginController> {
                       hintText: "Enter Email Address",
                       labelText: "Email Address",
                       controller: controller.emailController,
+                      textCapitalization: TextCapitalization.none,
                     ),
                     Gap(24.h),
                     LoginTextField(
                       hintText: "Enter Password",
                       labelText: "Password",
                       controller: controller.passwordController,
+                      textCapitalization: TextCapitalization.none,
                     ),
                     Gap(50.h),
                     Padding(
