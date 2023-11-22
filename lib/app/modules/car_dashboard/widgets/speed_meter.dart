@@ -5,11 +5,11 @@ class SpeedMeter extends StatefulWidget {
   const SpeedMeter({
     Key? key,
     required this.speed,
-    required this.kiloMeterDriven,
+   /// required this.kiloMeterDriven,
   }) : super(key: key);
 
   final double speed;
-  final int kiloMeterDriven;
+  ///final int kiloMeterDriven;
 
   @override
   State<SpeedMeter> createState() => _SpeedMeterState();
@@ -24,21 +24,21 @@ class _SpeedMeterState extends State<SpeedMeter> {
 
   @override
   void initState() {
-    makeSevenItemsList();
+    ///makeSevenItemsList();
     scaleValue(widget.speed);
     checkRotationValue();
     super.initState();
   }
 
-  makeSevenItemsList() {
-    kiloMeters =
-        widget.kiloMeterDriven.toString().split('').map(int.parse).toList();
-    if (kiloMeters.length < 7) {
-      final numberOfZerosToAdd = 7 - kiloMeters.length;
-      final zeroList = List<int>.filled(numberOfZerosToAdd, 0);
-      kiloMeters = [...zeroList, ...kiloMeters];
-    }
-  }
+  /// makeSevenItemsList() {
+  //   kiloMeters =
+  //       widget.kiloMeterDriven.toString().split('').map(int.parse).toList();
+  //   if (kiloMeters.length < 7) {
+  //     final numberOfZerosToAdd = 7 - kiloMeters.length;
+  //     final zeroList = List<int>.filled(numberOfZerosToAdd, 0);
+  //     kiloMeters = [...zeroList, ...kiloMeters];
+  //   }
+  /// }
 
   scaleValue(double input) {
     if (input >= 0 && input <= 160) {
@@ -79,6 +79,7 @@ class _SpeedMeterState extends State<SpeedMeter> {
       rotationValue = -0.05;
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -125,46 +126,50 @@ class _SpeedMeterState extends State<SpeedMeter> {
       ),
     );
   }
+}
 
-  kiloMetersDriven() {
-    return SizedBox(
-      height: 55.h,
-      width: 102.w,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Image.asset(
-            ImagePaths.kiloMeterContainer,
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 2.h, left: 1.w),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ...List.generate(
-                  7,
-                      (index) => Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image.asset(
-                        ImagePaths.kiloMeterItem,
-                        height: 18.h,
-                      ),
-                      Text(
-                          kiloMeters.isEmpty
-                              ? '0'
-                              : kiloMeters[index].toString(),
-                          style: Get.textTheme.titleSmall?.copyWith(
-                              color: AppColors.textBlackColor,
-                              fontWeight: FontWeight.w600)),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+kiloMetersDriven({required int kiloMeterDriven}) {
+  var kiloMeters = kiloMeterDriven.toString().split('').map(int.parse).toList();
+  if (kiloMeters.length < 7) {
+    final numberOfZerosToAdd = 7 - kiloMeters.length;
+    final zeroList = List<int>.filled(numberOfZerosToAdd, 0);
+    kiloMeters = [...zeroList, ...kiloMeters];
   }
+
+  return SizedBox(
+    child: Stack(
+      alignment: Alignment.center,
+      children: [
+        Image.asset(
+          ImagePaths.kiloMeterContainer,
+          height: 88.h,
+        ),
+        Padding(
+          padding: EdgeInsets.only(bottom: 2.h),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ...List.generate(
+                7,
+                (index) => Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Image.asset(
+                      ImagePaths.kiloMeterItem,
+                      height: 18.h,
+                    ),
+                    Text(
+                        kiloMeters.isEmpty ? '0' : kiloMeters[index].toString(),
+                        style: Get.textTheme.titleSmall?.copyWith(
+                            color: AppColors.textBlackColor,
+                            fontWeight: FontWeight.w600)),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
 }

@@ -362,6 +362,14 @@ class MyFamilyView extends GetView<MyFamilyController> {
                         width: 80.w,
                       ),
                       Gap(8.h),
+                      SecondryButton(
+                        buttonText: "Connect car",
+                        onTap: () {
+                          Get.toNamed(Routes.CAR_DASHBOARD,
+                              arguments: vehical['id']);
+                        },
+                      ),
+                      Gap(8.h),
                       Text(
                         "${vehical['year']} ${vehical['make']}\n${vehical['model']}",
                         style: Get.textTheme.titleLarge?.copyWith(

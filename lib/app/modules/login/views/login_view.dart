@@ -1,6 +1,7 @@
 import 'package:american_mile/common_lib.dart';
 import 'package:american_mile/core/components/index.dart';
 import 'package:american_mile/core/components/primary_button.dart';
+import 'package:american_mile/core/utils/form_validation.dart';
 import '../../../../core/utils/index.dart';
 import '../controllers/login_controller.dart';
 
@@ -11,113 +12,124 @@ class LoginView extends GetView<LoginController> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: ListView(
-          padding: EdgeInsets.all(15.w),
-          children: [
-            const MyAppBar(title: 'Log In'),
+        body: Obx(
+          () => Form(
+            key: controller.formKey,
+            child: ListView(
+              padding: EdgeInsets.all(15.w),
+              children: [
+                const MyAppBar(title: 'Log In'),
 
-            // Row(
-            //   children: [
-            //     RRectIcon(
-            //       image: ImagePaths.arrow,
-            //       onTap: () {},
-            //     ),
-            //     Expanded(
-            //       child: Text(
-            //         'Log In',
-            //         textAlign: TextAlign.center,
-            //         style: Get.textTheme.titleLarge?.copyWith(
-            //           fontWeight: FontWeight.w700,
-            //         ),
-            //       ),
-            //     ),
-            //     Opacity(
-            //       opacity: 0,
-            //       child: RRectIcon(
-            //         image: ImagePaths.menu,
-            //         onTap: () {},
-            //       ),
-            //     ),
-            //   ],
-            // ),
+                // Row(
+                //   children: [
+                //     RRectIcon(
+                //       image: ImagePaths.arrow,
+                //       onTap: () {},
+                //     ),
+                //     Expanded(
+                //       child: Text(
+                //         'Log In',
+                //         textAlign: TextAlign.center,
+                //         style: Get.textTheme.titleLarge?.copyWith(
+                //           fontWeight: FontWeight.w700,
+                //         ),
+                //       ),
+                //     ),
+                //     Opacity(
+                //       opacity: 0,
+                //       child: RRectIcon(
+                //         image: ImagePaths.menu,
+                //         onTap: () {},
+                //       ),
+                //     ),
+                //   ],
+                // ),
 
-            Gap(40.h),
-            Obx(
-              () => Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ToggleEmailPhone(
-                    text: 'Email',
-                    value: true,
-                    groupValue: controller.isLoginTypeEmail.value,
-                    onChange: (val) {
-                      controller.isLoginTypeEmail.value = true;
-                    },
+                Gap(40.h),
+                Obx(
+                  () => Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ToggleEmailPhone(
+                        text: 'Email',
+                        value: true,
+                        groupValue: controller.isLoginTypeEmail.value,
+                        onChange: (val) {
+                          controller.isLoginTypeEmail.value = true;
+                        },
+                      ),
+                      Gap(8.w),
+                      ToggleEmailPhone(
+                        text: 'Phone',
+                        value: false,
+                        groupValue: controller.isLoginTypeEmail.value,
+                        onChange: (val) {
+                          controller.isLoginTypeEmail.value = false;
+                        },
+                      ),
+                    ],
                   ),
-                  Gap(8.w),
-                  ToggleEmailPhone(
-                    text: 'Phone',
-                    value: false,
-                    groupValue: controller.isLoginTypeEmail.value,
-                    onChange: (val) {
-                      controller.isLoginTypeEmail.value = false;
-                    },
+                ),
+                Gap(48.h),
+                Obx(
+                  () => Visibility(
+                    visible: controller.isLoginTypeEmail.value,
+                    child: LoginTextField(
+                      hintText: "Enter Email Address",
+                      labelText: "Email Address",
+                      validator: (value) => FormValidation.emailValidator(
+                        controller.emailController.text,
+                      ),
+                      controller: controller.emailController,
+                    ),
                   ),
-                ],
-              ),
-            ),
-            Gap(48.h),
-            Obx(
-              () => Visibility(
-                visible: controller.isLoginTypeEmail.value,
-                child: LoginTextField(
-                  hintText: "Enter Email Address",
-                  labelText: "Email Address",
-                  controller: controller.emailController,
                 ),
-              ),
-            ),
-            Obx(
-              () => Visibility(
-                visible: !controller.isLoginTypeEmail.value,
-                child: LoginTextField(
-                  hintText: "Enter Mobile Number",
-                  labelText: "Mobile Number",
-                  controller: controller.mobileController,
+                Obx(
+                  () => Visibility(
+                    visible: !controller.isLoginTypeEmail.value,
+                    child: LoginTextField(
+                      hintText: "Enter Mobile Number",
+                      labelText: "Mobile Number",
+                      validator: (value) => FormValidation.nameValidator(
+                          controller.mobileController.text,
+                          tag: "Please enter mobile number"),
+                      controller: controller.mobileController,
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            Gap(28.h),
-            LoginTextField(
-              hintText: "Enter Password",
-              labelText: "Password",
-              controller: controller.passwordController,
-            ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: TextButton(
-                onPressed: () {},
-                child: Text(
-                  'Forgot Password?',
-                  style: Get.textTheme.titleMedium,
+                Gap(28.h),
+                LoginTextField(
+                  hintText: "Enter Password",
+                  labelText: "Password",
+                  validator: (value) => FormValidation.passwordValidator(
+                      controller.passwordController.text),
+                  controller: controller.passwordController,
                 ),
-              ),
-            ),
-            Gap(30.h),
-            Padding(
-              padding: EdgeInsets.all(30.w),
-              child: Obx(
-                () => PrimaryButton(
-                  buttonText: "Log In",
-                  isLoading: controller.isLoading.value,
-                  onTap: () {
-                    controller.login();
-                  },
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      'Forgot Password?',
+                      style: Get.textTheme.titleMedium,
+                    ),
+                  ),
                 ),
-              ),
+                Gap(30.h),
+                Padding(
+                  padding: EdgeInsets.all(30.w),
+                  child: Obx(
+                    () => PrimaryButton(
+                      buttonText: "Log In",
+                      isLoading: controller.isLoading.value,
+                      onTap: controller.validateMethode,
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

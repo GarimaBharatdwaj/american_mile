@@ -5,10 +5,12 @@ import '../utils/index.dart';
 class RRectIcon extends StatelessWidget {
   final String image;
   final void Function() onTap;
+  final Color? backgroundColor;
   const RRectIcon({
     super.key,
     required this.image,
     required this.onTap,
+    this.backgroundColor,
   });
 
   @override
@@ -18,7 +20,7 @@ class RRectIcon extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: AppColors.white,
+          color: backgroundColor ?? AppColors.white,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Image.asset(

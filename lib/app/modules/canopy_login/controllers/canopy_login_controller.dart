@@ -5,6 +5,8 @@ import '../../../../core/helpers/device_helper.dart';
 import '../../../../core/network/api_service.dart';
 
 class CanopyLoginController extends GetxController {
+  var formKey = GlobalKey<FormState>();
+
   RxBool isLoading = false.obs;
   String? carrierId;
 
@@ -19,13 +21,23 @@ class CanopyLoginController extends GetxController {
     super.onInit();
   }
 
+  void validateMethode() {
+    final isValid = formKey.currentState!.validate();
+    if (!isValid) {
+      return;
+    } else {
+      canopyLogin();
+    }
+    formKey.currentState!.save();
+  }
+
   // *********************************************************************** //
   // ******************************* Login ********************************* //
   // *********************************************************************** //
 
   Map<String, dynamic>? login;
   canopyLogin() async {
-    print("\n\n\n\n$carrierId\n\n\n");
+    debugPrint("\n\n\n\n$carrierId\n\n\n");
 
     isLoading.value = true;
     try {

@@ -7,6 +7,8 @@ import '../../../../common_lib.dart';
 enum LoginViaEmailOrPhone { email, phone }
 
 class LoginController extends GetxController {
+  var formKey = GlobalKey<FormState>();
+
   final count = 0.obs;
   RxBool isLoading = false.obs;
 
@@ -16,6 +18,16 @@ class LoginController extends GetxController {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController mobileController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  void validateMethode() {
+    final isValid = formKey.currentState!.validate();
+    if (!isValid) {
+      return;
+    } else {
+      login();
+    }
+    formKey.currentState!.save();
+  }
 
   // *********************************************************************** //
   // ******************************* Login ********************************* //

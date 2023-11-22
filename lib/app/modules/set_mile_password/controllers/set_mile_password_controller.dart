@@ -7,6 +7,8 @@ import '../../../../core/network/api_service.dart';
 import '../../../ui/widgets/error_dialog.dart';
 
 class SetMilePasswordController extends GetxController {
+  var formKey = GlobalKey<FormState>();
+
   late TextEditingController password;
   late TextEditingController confirmPassword;
   String userEmail = "";
@@ -18,12 +20,23 @@ class SetMilePasswordController extends GetxController {
     super.onInit();
   }
 
+  void validateMethode() {
+    final isValid = formKey.currentState!.validate();
+    if (!isValid) {
+      return;
+    } else {
+      setPasswordApi();
+    }
+    formKey.currentState!.save();
+  }
+
   // *********************************************************************** //
   // ************************* Canopy Connect API ************************** //
   // *********************************************************************** //
 
   RxBool isLoading = false.obs;
   setPasswordApi() async {
+    isLoading.value = true;
     try {
       var response = await API().post('set-password', data: {
         'user_id': DeviceHelper.getUserId(),
