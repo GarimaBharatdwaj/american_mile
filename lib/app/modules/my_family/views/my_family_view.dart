@@ -1,3 +1,4 @@
+import 'package:american_mile/app/modules/car_dashboard/controllers/car_dashboard_controller.dart';
 import 'package:american_mile/core/components/index.dart';
 import 'package:american_mile/core/components/secondry_button.dart';
 import 'package:american_mile/core/utils/divider.dart';
@@ -34,34 +35,35 @@ class MyFamilyView extends GetView<MyFamilyController> {
                             children: [
                               _driversComponent(),
                               _vehicalComponent(),
-                              Column(
-                                children: [
-                                  Gap(20.h),
-                                  ShadowContainer(
-                                      child: Row(
-                                    children: [
-                                      Image.asset(
-                                        ImagePaths.houseIcon,
-                                        height: 40.w,
-                                        width: 40.w,
-                                      ),
-                                      Gap(12.w),
-                                      Expanded(
-                                        child: Text(
-                                          controller.familyDetails!['address']
-                                              .toString(),
-                                          style: Get.textTheme.titleMedium
-                                              ?.copyWith(
-                                            fontWeight: FontWeight.w700,
-                                            height: 1.3,
-                                          ),
-                                          textAlign: TextAlign.start,
-                                        ),
-                                      ),
-                                    ],
-                                  ))
-                                ],
-                              )
+                              _address(),
+                              // Column(
+                              //   children: [
+                              //     Gap(20.h),
+                              //     ShadowContainer(
+                              //         child: Row(
+                              //       children: [
+                              //         Image.asset(
+                              //           ImagePaths.houseIcon,
+                              //           height: 40.w,
+                              //           width: 40.w,
+                              //         ),
+                              //         Gap(12.w),
+                              //         Expanded(
+                              //           child: Text(
+                              //             controller.familyDetails!['address']
+                              //                 .toString(),
+                              //             style: Get.textTheme.titleMedium
+                              //                 ?.copyWith(
+                              //               fontWeight: FontWeight.w700,
+                              //               height: 1.3,
+                              //             ),
+                              //             textAlign: TextAlign.start,
+                              //           ),
+                              //         ),
+                              //       ],
+                              //     ))
+                              //   ],
+                              // )
                             ],
                           ),
                         ),
@@ -125,7 +127,7 @@ class MyFamilyView extends GetView<MyFamilyController> {
                 ),
                 backgroundColor: AppColors.white,
                 foregroundColor: AppColors.black,
-                label: 'Add Vehical',
+                label: 'Add Vehicle',
                 onTap: () {
                   Get.toNamed(
                     Routes.SEARCH_BY_VIN,
@@ -189,7 +191,7 @@ class MyFamilyView extends GetView<MyFamilyController> {
               ),
               Tab(
                 child: Text(
-                  "Vehicals",
+                  "Vehicles",
                   style: Get.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.w700,
                   ),
@@ -339,6 +341,44 @@ class MyFamilyView extends GetView<MyFamilyController> {
         ],
       ),
     );
+  }
+
+  _address() {
+    return SingleChildScrollView(
+        padding: EdgeInsets.symmetric(horizontal: 12.w),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Gap(20.h),
+          ...List.generate(controller.familyDetails!['address'].length,
+              (index) {
+            var address = controller.familyDetails!['address'][index];
+            return Column(
+              children: [
+                ShadowContainer(
+                    child: Row(
+                  children: [
+                    Image.asset(
+                      ImagePaths.houseIcon,
+                      height: 40.w,
+                      width: 40.w,
+                    ),
+                    Gap(14.w),
+                    Expanded(
+                      child: Text(
+                        address['full_address'].toString(),
+                        style: Get.textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w500,
+                          height: 1.3,
+                        ),
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
+                  ],
+                )),
+                Gap(20.h),
+              ],
+            );
+          }),
+        ]));
   }
 
   _vehicalComponent() {

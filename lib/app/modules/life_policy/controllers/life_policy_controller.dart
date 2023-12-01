@@ -14,6 +14,7 @@ class LifePolicyController extends GetxController {
     homePolicyAPI();
     super.onInit();
   }
+   RxInt type = 0.obs;
 
   //*********************************************************************//
   //************************* User Profile API **************************//

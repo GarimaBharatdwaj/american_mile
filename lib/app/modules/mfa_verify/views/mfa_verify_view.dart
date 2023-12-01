@@ -69,7 +69,7 @@ class MfaVerifyView extends GetView<MfaVerifyController> {
         /// TODO:
 
         Text(
-          'Please enter the MFA code sent to you via email',
+          'Please enter the code that was sent to you',
           style: Get.textTheme.titleMedium
               ?.copyWith(fontSize: 14.sp, fontWeight: FontWeight.w700),
         ),

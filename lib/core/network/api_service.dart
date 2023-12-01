@@ -24,9 +24,9 @@ class API {
     );
   }
 
-  /// static const String _baseUrl = "https://pyot.co.in/api/v3/";
+  static const String _baseUrl = "https://pyot.co.in/api/v3/";
 
-  static const String _baseUrl = "http://137.184.181.160/api/v3/";
+  /// static const String _baseUrl = "http://137.184.181.160/api/v3/";
 
   final dio.Dio _dio;
 

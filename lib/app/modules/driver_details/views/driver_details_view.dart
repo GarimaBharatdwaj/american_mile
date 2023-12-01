@@ -32,7 +32,7 @@ class DriverDetailsView extends GetView<DriverDetailsController> {
                     ],
                     validator: (value) => FormValidation.nameValidator(
                         controller.nameController.text,
-                        tag: 'Enter Name',
+                        tag: 'Please Enter Name',
                         isMandatory: true),
                     controller: controller.nameController,
                   ),

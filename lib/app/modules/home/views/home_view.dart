@@ -73,11 +73,11 @@ class HomeView extends GetView<HomeController> {
                             Get.toNamed(Routes.MY_FAMILY);
                           },
                         ),
-                        _drawerItem(
-                          title: "My Cars",
-                          icon: Icons.car_crash,
-                          onTap: () {},
-                        ),
+                        /// _drawerItem(
+                        //   title: "My Cars",
+                        //   icon: Icons.car_crash,
+                        //   onTap: () {},
+                        /// ),
                         _drawerItem(
                           title: "Update Password",
                           icon: Icons.password,
@@ -100,22 +100,22 @@ class HomeView extends GetView<HomeController> {
                     ),
                   ),
             backgroundColor: AppColors.background,
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerDocked,
-            floatingActionButton: DeviceHelper.getUserId() == null
-                ? null
-                : FloatingActionButton(
-                    onPressed: () => Get.toNamed(Routes.CAR_DASHBOARD),
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                    child: Image.asset(
-                      ImagePaths.carKey,
-                      height: 24,
-                      width: 24,
-                    ),
-                  ),
+            // floatingActionButtonLocation:
+            //     FloatingActionButtonLocation.centerDocked,
+            // floatingActionButton: DeviceHelper.getUserId() == null
+            //     ? null
+            //     : FloatingActionButton(
+            //         onPressed: () => Get.toNamed(Routes.CAR_DASHBOARD),
+            //         elevation: 0,
+            //         shape: RoundedRectangleBorder(
+            //           borderRadius: BorderRadius.circular(100),
+            //         ),
+            //         child: Image.asset(
+            //           ImagePaths.carKey,
+            //           height: 24,
+            //           width: 24,
+            //         ),
+            //       ),
             bottomNavigationBar: DeviceHelper.getUserId() == null
                 ? Padding(
                     padding: EdgeInsets.all(25.w),
@@ -393,15 +393,19 @@ class HomeView extends GetView<HomeController> {
           children: [
             Expanded(
                 child: _optionWidget(
-              title: "Auto",
-              image: ImagePaths.car,
-            )),
+                    title: "Auto",
+                    image: ImagePaths.car,
+                    onTap: () {
+                      Get.toNamed(Routes.INSURANCE_PROVIDER);
+                    })),
             Gap(20.w),
             Expanded(
                 child: _optionWidget(
-              title: "Pets",
-              image: ImagePaths.pets,
-            )),
+                    title: "Pets",
+                    image: ImagePaths.pets,
+                    onTap: () {
+                      Get.toNamed(Routes.INSURANCE_PROVIDER);
+                    })),
           ],
         ),
         Gap(15.h),
@@ -409,15 +413,19 @@ class HomeView extends GetView<HomeController> {
           children: [
             Expanded(
                 child: _optionWidget(
-              title: "Business",
-              image: ImagePaths.beg,
-            )),
+                    title: "Business",
+                    image: ImagePaths.beg,
+                    onTap: () {
+                      Get.toNamed(Routes.INSURANCE_PROVIDER);
+                    })),
             Gap(20.w),
             Expanded(
                 child: _optionWidget(
-              title: "Life",
-              image: ImagePaths.heart,
-            )),
+                    title: "Life",
+                    image: ImagePaths.heart,
+                    onTap: () {
+                      Get.toNamed(Routes.INSURANCE_PROVIDER);
+                    })),
           ],
         ),
       ],

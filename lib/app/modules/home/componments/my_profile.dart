@@ -86,7 +86,7 @@ class MyProfile extends StatelessWidget {
                           inputFormatters: [UpperCaseTextFormatter()],
                           validator: (value) => FormValidation.nameValidator(
                               controller.fullName.text,
-                              tag: 'Enter Full Name',
+                              tag: 'Please Enter Full Name',
                               isMandatory: true),
                           readOnly: controller.edit.value == false,
                           label: "Full Name",

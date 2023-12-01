@@ -107,7 +107,7 @@ class UserProfileView extends GetView<UserProfileController> {
                                   validator: (value) =>
                                       FormValidation.nameValidator(
                                           controller.fullName.text,
-                                          tag: 'Enter Full Name',
+                                          tag: 'Please Enter Full Name',
                                           isMandatory: true),
                                   label: "Full Name",
                                   readOnly: controller.edit.value == false,

@@ -6,15 +6,15 @@ import '../../../../core/components/app_bottomsheet.dart';
 import '../../../../core/helpers/device_helper.dart';
 import '../../../../core/network/api_service.dart';
 import 'package:dio/dio.dart' as dio;
-
 import '../../../ui/widgets/error_dialog.dart';
 
 class HomeController extends GetxController {
   final GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
+  RxInt type = 0.obs;
 
   @override
   void onInit() {
-
+    type.value = 0;
     if (DeviceHelper.getUserId() != null) {
       getUserProfile();
     }

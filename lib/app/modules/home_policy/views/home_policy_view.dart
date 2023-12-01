@@ -93,7 +93,13 @@ class HomePolicyView extends GetView<HomePolicyController> {
                                     fontSize: 18.sp,
                                   ),
                                 ),
-                                const RequestChange(),
+                                GestureDetector(
+                                    onTap: () {
+                                      Get.toNamed(Routes.MY_FAMILY);
+                                    },
+                                    child: const RequestChange(
+                                      title: 'Manage Homes',
+                                    )),
                               ],
                             ),
                             Text(
@@ -276,108 +282,306 @@ class HomePolicyView extends GetView<HomePolicyController> {
                                 ),
                               ),
                               Gap(40.h),
-                              ...List.generate(
-                                  controller.homeDetails!['coverages'].length,
-                                  (index) {
-                                var coverage =
-                                    controller.homeDetails!['coverages'][index];
-                                return ShadowContainer(
-                                    child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      coverage['full_address'],
-                                      style: Get.textTheme.titleMedium
-                                          ?.copyWith(
-                                              fontSize: 18.sp,
-                                              fontWeight: FontWeight.w600,
-                                              color: AppColors.primaryDark),
-                                    ),
-                                    Gap(8.h),
-                                    Image.asset(
-                                      ImagePaths.house,
-                                    ),
-                                    Gap(8.h),
+
+                              ShadowContainer(
+                                  child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    controller.homeDetails!['full_address'],
+                                    style: Get.textTheme.titleMedium?.copyWith(
+                                        fontSize: 18.sp,
+                                        fontWeight: FontWeight.w600,
+                                        color: AppColors.primaryDark),
+                                  ),
+                                  Gap(8.h),
+                                  Image.asset(
+                                    ImagePaths.house,
+                                  ),
+                                  Gap(8.h),
+                                  if (controller.homeDetails!['coverages']
+                                          ['medical_payments'] !=
+                                      null)
                                     _houseItem(
-                                      key: "PACKAGE-COVE-PERSONAL LIABILITY",
-                                      value: "\$1,000,000",
+                                      key: "MEDICAL PAYMENTS",
+                                      value:
+                                          controller.homeDetails!['coverages']
+                                              ['medical_payments'],
                                     ),
+                                  if (controller.homeDetails!['coverages']
+                                          ['persoal_liability'] !=
+                                      null)
                                     _houseItem(
-                                      key: "PACKAGE - COVF-GUEST MEDICAL",
-                                      value: "\$1,000",
+                                      key: "PERSONAL LIABILITY",
+                                      value:
+                                          controller.homeDetails!['coverages']
+                                              ['persoal_liability'],
                                     ),
+                                  if (controller.homeDetails!['coverages']
+                                          ['loss_of_use'] !=
+                                      null)
                                     _houseItem(
                                       key: "LOSS OF USE",
-                                      value: "10%",
+                                      value:
+                                          controller.homeDetails!['coverages']
+                                              ['loss_of_use'],
                                     ),
+                                  if (controller.homeDetails!['coverages']
+                                          ['persoal_prop_liability'] !=
+                                      null)
                                     _houseItem(
-                                      key: "ALE TERM",
-                                      value: "24 MONTHS",
+                                      key: "Persoal Prop Liability",
+                                      value:
+                                          controller.homeDetails!['coverages']
+                                              ['persoal_prop_liability'],
                                     ),
+                                  if (controller.homeDetails!['coverages']
+                                          ['security_liability'] !=
+                                      null)
                                     _houseItem(
-                                      key: "IDENTITY FRAUD EXPENSE",
-                                      value: "\$28,500",
+                                      key: "Security Liability",
+                                      value:
+                                          controller.homeDetails!['coverages']
+                                              ['security_liability'],
                                     ),
+                                  if (controller.homeDetails!['coverages']
+                                          ['dwelling_liability'] !=
+                                      null)
                                     _houseItem(
-                                      key: "SEWER & DRAIN DAMAGE-HIGHER LIMITS",
-                                      value: "\$25,000",
+                                      key: "Dwelling Liability",
+                                      value:
+                                          controller.homeDetails!['coverages']
+                                              ['dwelling_liability'],
                                     ),
-                                    _houseItem(
-                                      key: "FENCES",
-                                      value: "COVERED",
-                                    ),
-                                    _houseItem(
-                                      key: "PERSONAL PROP",
-                                      value: "40%",
-                                    ),
-                                    _houseItem(
-                                      key: "CONTENTS REPLACEMENT COST",
-                                      value: "YES",
-                                    ),
-                                    _houseItem(
-                                      key: "SEP STRUCTURES",
-                                      value: "59%",
-                                    ),
-                                    _houseItem(
-                                      key: "PACKAGE - CVGA-DWELLING",
-                                      value: "\$609,000",
-                                    ),
-                                    _houseItem(
-                                      key:
-                                          "SPECIAL LIMITS ON PERSONAL PROPERTY",
-                                      value: "COVERED",
-                                    ),
-                                    _houseItem(
-                                      key: "EXTENDED REPLACEMENT COST",
-                                      value: "150%",
-                                    ),
-                                    _houseItem(
-                                      key: "SERVICE LINE",
-                                      value: "\$10,000",
-                                    ),
-                                    _houseItem(
-                                      key: "LIMITED PLUMBING SYSTEM REPAIR",
-                                      value: "\$1,000",
-                                    ),
-                                    _houseItem(
-                                      key: "PERSONALS INJURY",
-                                      value: "COVERED",
-                                    ),
-                                    _houseItem(
-                                      key: "RESIDENCE GLASS",
-                                      value: "COVERED",
-                                    ),
-                                    _houseItem(
-                                      key: "EXTENDED ACCES",
-                                      value: "COVERED",
-                                    ),
-                                    Gap(12.h),
-                                    SecondryButton(
-                                        onTap: () {},
-                                        buttonText: "Request Change"),
-                                  ],
-                                ));
-                              }),
+
+                                  // _houseItem(
+                                  //   key: "FENCES",
+                                  //   value: "COVERED",
+                                  // ),
+                                  // _houseItem(
+                                  //   key: "PERSONAL PROP",
+                                  //   value: "40%",
+                                  // ),
+                                  // _houseItem(
+                                  //   key: "CONTENTS REPLACEMENT COST",
+                                  //   value: "YES",
+                                  // ),
+                                  // _houseItem(
+                                  //   key: "SEP STRUCTURES",
+                                  //   value: "59%",
+                                  // ),
+                                  // _houseItem(
+                                  //   key: "PACKAGE - CVGA-DWELLING",
+                                  //   value: "\$609,000",
+                                  // ),
+                                  // _houseItem(
+                                  //   key:
+                                  //   "SPECIAL LIMITS ON PERSONAL PROPERTY",
+                                  //   value: "COVERED",
+                                  // ),
+                                  // _houseItem(
+                                  //   key: "EXTENDED REPLACEMENT COST",
+                                  //   value: "150%",
+                                  // ),
+                                  // _houseItem(
+                                  //   key: "SERVICE LINE",
+                                  //   value: "\$10,000",
+                                  // ),
+                                  // _houseItem(
+                                  //   key: "LIMITED PLUMBING SYSTEM REPAIR",
+                                  //   value: "\$1,000",
+                                  // ),
+                                  // _houseItem(
+                                  //   key: "PERSONALS INJURY",
+                                  //   value: "COVERED",
+                                  // ),
+                                  // _houseItem(
+                                  //   key: "RESIDENCE GLASS",
+                                  //   value: "COVERED",
+                                  // ),
+                                  // _houseItem(
+                                  //   key: "EXTENDED ACCES",
+                                  //   value: "COVERED",
+                                  // ),
+                                  Gap(12.h),
+                                  SecondryButton(
+                                      onTap: () {
+                                        Get.toNamed(Routes.MY_FAMILY);
+                                      },
+                                      buttonText: "Manage Homes"),
+
+                                  Gap(30.h),
+
+                                  if (controller.homeDetails!['deductible']
+                                              ['All Perils'] !=
+                                          null ||
+                                      controller.homeDetails!['deductible']
+                                              ['windstorm_or_hail'] !=
+                                          null ||
+                                      controller.homeDetails!['deductible']
+                                              ['all_other_perils'] !=
+                                          null)
+                                    ShadowContainer(
+                                        child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Deductibles',
+                                          style: Get.textTheme.titleMedium
+                                              ?.copyWith(
+                                                  fontSize: 18.sp,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: AppColors.black),
+                                        ),
+                                        Gap(6.h),
+                                        Text(
+                                          "For home policies, there are three common types of deductibles; flat, percent, and split deductibles",
+                                          style: Get.textTheme.bodyMedium
+                                              ?.copyWith(
+                                            fontSize: 12.sp,
+                                          ),
+                                        ),
+                                        Gap(20.h),
+                                        if (controller
+                                                    .homeDetails!['deductible']
+                                                ['All Perils'] !=
+                                            null)
+                                          _houseItem(
+                                            key: "All Perils",
+                                            value: controller
+                                                    .homeDetails!['deductible']
+                                                ['All Perils'],
+                                          ),
+                                        if (controller
+                                                    .homeDetails!['deductible']
+                                                ['all_other_perils'] !=
+                                            null)
+                                          _houseItem(
+                                            key: "All Other Perils",
+                                            value: controller
+                                                    .homeDetails!['deductible']
+                                                ['all_other_perils'],
+                                          ),
+                                        if (controller
+                                                    .homeDetails!['deductible']
+                                                ['windstorm_or_hail'] !=
+                                            null)
+                                          _houseItem(
+                                            key: "Windstorm Or Hail",
+                                            value: controller
+                                                    .homeDetails!['deductible']
+                                                ['windstorm_or_hail'],
+                                          ),
+                                      ],
+                                    )),
+                                ],
+                              ))
+
+                              // ...List.generate(
+                              //     controller.homeDetails!['coverages'].length,
+                              //     (index) {
+                              //   var coverage =
+                              //       controller.homeDetails!['coverages'][index];
+                              //   return ShadowContainer(
+                              //       child: Column(
+                              //     crossAxisAlignment: CrossAxisAlignment.start,
+                              //     children: [
+                              //       Text(
+                              //         coverage['full_address'],
+                              //         style: Get.textTheme.titleMedium
+                              //             ?.copyWith(
+                              //                 fontSize: 18.sp,
+                              //                 fontWeight: FontWeight.w600,
+                              //                 color: AppColors.primaryDark),
+                              //       ),
+                              //       Gap(8.h),
+                              //       Image.asset(
+                              //         ImagePaths.house,
+                              //       ),
+                              //       Gap(8.h),
+                              //       _houseItem(
+                              //         key: "PACKAGE-COVE-PERSONAL LIABILITY",
+                              //         value: "\$1,000,000",
+                              //       ),
+                              //       _houseItem(
+                              //         key: "PACKAGE - COVF-GUEST MEDICAL",
+                              //         value: "\$1,000",
+                              //       ),
+                              //       _houseItem(
+                              //         key: "LOSS OF USE",
+                              //         value: "10%",
+                              //       ),
+                              //       _houseItem(
+                              //         key: "ALE TERM",
+                              //         value: "24 MONTHS",
+                              //       ),
+                              //       _houseItem(
+                              //         key: "IDENTITY FRAUD EXPENSE",
+                              //         value: "\$28,500",
+                              //       ),
+                              //       _houseItem(
+                              //         key: "SEWER & DRAIN DAMAGE-HIGHER LIMITS",
+                              //         value: "\$25,000",
+                              //       ),
+                              //       _houseItem(
+                              //         key: "FENCES",
+                              //         value: "COVERED",
+                              //       ),
+                              //       _houseItem(
+                              //         key: "PERSONAL PROP",
+                              //         value: "40%",
+                              //       ),
+                              //       _houseItem(
+                              //         key: "CONTENTS REPLACEMENT COST",
+                              //         value: "YES",
+                              //       ),
+                              //       _houseItem(
+                              //         key: "SEP STRUCTURES",
+                              //         value: "59%",
+                              //       ),
+                              //       _houseItem(
+                              //         key: "PACKAGE - CVGA-DWELLING",
+                              //         value: "\$609,000",
+                              //       ),
+                              //       _houseItem(
+                              //         key:
+                              //             "SPECIAL LIMITS ON PERSONAL PROPERTY",
+                              //         value: "COVERED",
+                              //       ),
+                              //       _houseItem(
+                              //         key: "EXTENDED REPLACEMENT COST",
+                              //         value: "150%",
+                              //       ),
+                              //       _houseItem(
+                              //         key: "SERVICE LINE",
+                              //         value: "\$10,000",
+                              //       ),
+                              //       _houseItem(
+                              //         key: "LIMITED PLUMBING SYSTEM REPAIR",
+                              //         value: "\$1,000",
+                              //       ),
+                              //       _houseItem(
+                              //         key: "PERSONALS INJURY",
+                              //         value: "COVERED",
+                              //       ),
+                              //       _houseItem(
+                              //         key: "RESIDENCE GLASS",
+                              //         value: "COVERED",
+                              //       ),
+                              //       _houseItem(
+                              //         key: "EXTENDED ACCES",
+                              //         value: "COVERED",
+                              //       ),
+                              //       Gap(12.h),
+                              //       SecondryButton(
+                              //           onTap: () {
+                              //             Get.toNamed(Routes.MY_FAMILY);
+                              //           },
+                              //           buttonText: "Manage Homes"),
+                              //     ],
+                              //   ));
+                              // }),
                             ],
                           ),
                       if (controller.type.value == 1) _policyDocuments(context),
@@ -430,33 +634,38 @@ class HomePolicyView extends GetView<HomePolicyController> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 8.h,
-                        horizontal: 12.w,
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(
-                          15.r,
+                    GestureDetector(
+                      onTap: (){
+                        controller.viewDocumentAPI(doc['docId']);
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 8.h,
+                          horizontal: 12.w,
                         ),
-                        color: AppColors.textLight,
-                      ),
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            ImagePaths.pdf,
-                            height: 18.w,
-                            width: 14.w,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                            15.r,
                           ),
-                          Gap(4.h),
-                          Text(
-                            "Document",
-                            style: Get.textTheme.bodySmall?.copyWith(
-                              color: AppColors.white,
-                              fontSize: 8.sp,
+                          color: AppColors.textLight,
+                        ),
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              ImagePaths.pdf,
+                              height: 18.w,
+                              width: 14.w,
                             ),
-                          )
-                        ],
+                            Gap(4.h),
+                            Text(
+                              "Document",
+                              style: Get.textTheme.bodySmall?.copyWith(
+                                color: AppColors.white,
+                                fontSize: 8.sp,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                     Column(

@@ -1,4 +1,5 @@
 import 'package:american_mile/app/modules/home/controllers/home_controller.dart';
+import 'package:american_mile/core/components/primary_button.dart';
 import '../../../../common_lib.dart';
 import '../../../../core/components/index.dart';
 import '../../../../core/utils/index.dart';
@@ -8,83 +9,305 @@ class PolicyHomeDashboard extends StatelessWidget {
   final controller = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Gap(30.h),
-        ...List.generate(controller.policies!['data']['auto_policies'].length,
-            (index) {
-          var policy = controller.policies!['data']['auto_policies'][index];
-          return Column(
-            children: [
-              _policyItem(
-                onTap: () {
-                  Get.toNamed(
-                    Routes.AUTO_POLICY,
-                    arguments: policy['id'].toString(),
-                  );
-                },
-                policyName: "AUTO ON POLICY",
-                colors: [
-                  AppColors.autoPolicyLightColor,
-                  AppColors.autoPolicyDarkColor
+    return Obx(
+      () => Column(
+        children: [
+          Gap(30.h),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    controller.type.value = 0;
+                  },
+                  child: Text(
+                    "Car Policy",
+                    style: Get.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      height: 1.4,
+                      color: controller.type.value == 0
+                          ? AppColors.primaryDark
+                          : AppColors.textLight,
+                      fontSize: 18.sp,
+                    ),
+                  ),
+                ),
+                Gap(30.h),
+                GestureDetector(
+                  onTap: () {
+                    controller.type.value = 1;
+                  },
+                  child: Text(
+                    "Home Policy",
+                    style: Get.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      height: 1.4,
+                      color: controller.type.value == 1
+                          ? AppColors.primaryDark
+                          : AppColors.textLight,
+                      fontSize: 18.sp,
+                    ),
+                  ),
+                ),
+                Gap(30.h),
+                GestureDetector(
+                  onTap: () {
+                    controller.type.value = 2;
+                  },
+                  child: Text(
+                    "Life Policy",
+                    style: Get.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      height: 1.4,
+                      color: controller.type.value == 2
+                          ? AppColors.primaryDark
+                          : AppColors.textLight,
+                      fontSize: 18.sp,
+                    ),
+                  ),
+                ),
+                Gap(30.h),
+                GestureDetector(
+                  onTap: () {
+                    controller.type.value = 3;
+                  },
+                  child: Text(
+                    "Other Policy",
+                    style: Get.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      height: 1.4,
+                      color: controller.type.value == 3
+                          ? AppColors.primaryDark
+                          : AppColors.textLight,
+                      fontSize: 18.sp,
+                    ),
+                  ),
+                ),
+                Gap(30.h),
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed(Routes.INSURANCE_PROVIDER);
+                  },
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.add_circle_rounded,
+                        color: AppColors.primaryDark,
+                      ),
+                      Gap(4.w),
+                      Text(
+                        "Add Business Policy",
+                        style: Get.textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                          height: 1.4,
+                          color: AppColors.primaryDark,
+                          fontSize: 18.sp,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          if (controller.type.value == 0) ...[
+            Gap(30.h),
+            ...List.generate(
+                controller.policies!['data']['auto_policies'].length, (index) {
+              var policy = controller.policies!['data']['auto_policies'][index];
+              return Column(
+                children: [
+                  _policyItem(
+                    onTap: () {
+                      Get.toNamed(
+                        Routes.AUTO_POLICY,
+                        arguments: policy['id'].toString(),
+                      );
+                    },
+                    policyName: "AUTO ON POLICY",
+                    colors: [
+                      AppColors.autoPolicyLightColor,
+                      AppColors.autoPolicyDarkColor
+                    ],
+                    policy: policy,
+                  ),
+                  Gap(30.h),
                 ],
-                policy: policy,
-              ),
-              Gap(30.h),
-            ],
-          );
-        }),
-        ...List.generate(controller.policies!['data']['home_policies'].length,
-            (index) {
-          var policy = controller.policies!['data']['home_policies'][index];
-          return Column(
-            children: [
-              _policyItem(
+              );
+            }),
+            Align(
+              alignment: Alignment.centerRight,
+              child: PrimaryButton(
+                alignment: Alignment.center,
+                buttonText: 'Import Another Policy',
                 onTap: () {
-                  Get.toNamed(
-                    Routes.HOME_POLICY,
-                    arguments: policy['id'].toString(),
-                  );
+                  Get.toNamed(Routes.INSURANCE_PROVIDER);
                 },
-                policyName: "HOME POLICY",
-                colors: [
-                  AppColors.homePolicyLightColor,
-                  AppColors.homePolicyDarkColor
-                ],
-                policy: policy,
+                buttonWidth: context.width / 2,
               ),
-              Gap(30.h),
-            ],
-          );
-        }),
-        ...List.generate(controller.policies!['data']['life_policies'].length,
-            (index) {
-          var policy = controller.policies!['data']['life_policies'][index];
-          return Column(
-            children: [
-              _policyItem(
+            ),
+          ],
+          if (controller.type.value == 1) ...[
+            Gap(30.h),
+            ...List.generate(
+                controller.policies!['data']['home_policies'].length, (index) {
+              var policy = controller.policies!['data']['home_policies'][index];
+              return Column(
+                children: [
+                  _policyItem(
+                    onTap: () {
+                      Get.toNamed(
+                        Routes.HOME_POLICY,
+                        arguments: policy['id'].toString(),
+                      );
+                    },
+                    policyName: "HOME POLICY",
+                    colors: [
+                      AppColors.homePolicyLightColor,
+                      AppColors.homePolicyDarkColor
+                    ],
+                    policy: policy,
+                  ),
+                  Gap(30.h),
+                ],
+              );
+            }),
+            Align(
+              alignment: Alignment.centerRight,
+              child: PrimaryButton(
+                alignment: Alignment.center,
+                buttonText: 'Import Another Policy',
                 onTap: () {
-                  Get.toNamed(
-                    Routes.LIFE_POLICY,
-                    arguments: policy['id'].toString(),
-                  );
+                  Get.toNamed(Routes.INSURANCE_PROVIDER);
                 },
-                policyName: "LIFE POLICY",
-                colors: [
-                  AppColors.lifePolicyLightColor,
-                  AppColors.lifePolicyDarkColor
-                ],
-                policy: policy,
-                isAuto: false,
+                buttonWidth: context.width / 2,
               ),
-              Gap(30.h),
-            ],
-          );
-        }),
-        Gap(20.h),
-      ],
+            ),
+          ],
+
+          if (controller.type.value == 2) ...[
+            Gap(30.h),
+            ...List.generate(
+                controller.policies!['data']['life_policies'].length, (index) {
+              var policy = controller.policies!['data']['life_policies'][index];
+              return Column(
+                children: [
+                  _policyItem(
+                    onTap: () {
+                      Get.toNamed(
+                        Routes.LIFE_POLICY,
+                        arguments: policy['id'].toString(),
+                      );
+                    },
+                    policyName: "LIFE POLICY",
+                    colors: [
+                      AppColors.lifePolicyLightColor,
+                      AppColors.lifePolicyDarkColor
+                    ],
+                    policy: policy,
+                    isAuto: false,
+                  ),
+                  Gap(30.h),
+                ],
+              );
+            }),
+            Align(
+              alignment: Alignment.centerRight,
+              child: PrimaryButton(
+                alignment: Alignment.center,
+                buttonText: 'Import Another Policy',
+                onTap: () {
+                  Get.toNamed(Routes.INSURANCE_PROVIDER);
+                },
+                buttonWidth: context.width / 2,
+              ),
+            ),
+          ],
+
+
+
+          // ...List.generate(
+          //     controller.policies!['data']['auto_policies'].length, (index) {
+          //   var policy = controller.policies!['data']['auto_policies'][index];
+          //   return Column(
+          //     children: [
+          //       _policyItem(
+          //         onTap: () {
+          //           Get.toNamed(
+          //             Routes.AUTO_POLICY,
+          //             arguments: policy['id'].toString(),
+          //           );
+          //         },
+          //         policyName: "AUTO ON POLICY",
+          //         colors: [
+          //           AppColors.autoPolicyLightColor,
+          //           AppColors.autoPolicyDarkColor
+          //         ],
+          //         policy: policy,
+          //       ),
+          //       Gap(30.h),
+          //     ],
+          //   );
+          /// }),
+          // if (controller.type.value == 1) Gap(30.h),
+          // if (controller.type.value == 1)
+          //   ...List.generate(
+          //       controller.policies!['data']['home_policies'].length, (index) {
+          //     var policy = controller.policies!['data']['home_policies'][index];
+          //     return Column(
+          //       children: [
+          //         _policyItem(
+          //           onTap: () {
+          //             Get.toNamed(
+          //               Routes.HOME_POLICY,
+          //               arguments: policy['id'].toString(),
+          //             );
+          //           },
+          //           policyName: "HOME POLICY",
+          //           colors: [
+          //             AppColors.homePolicyLightColor,
+          //             AppColors.homePolicyDarkColor
+          //           ],
+          //           policy: policy,
+          //         ),
+          //         Gap(30.h),
+          //       ],
+          //     );
+          ///   }),
+          // if (controller.type.value == 2) Gap(30.h),
+          // if (controller.type.value == 2)
+          //   ...List.generate(
+          //       controller.policies!['data']['life_policies'].length, (index) {
+          //     var policy = controller.policies!['data']['life_policies'][index];
+          //     return Column(
+          //       children: [
+          //         _policyItem(
+          //           onTap: () {
+          //             Get.toNamed(
+          //               Routes.LIFE_POLICY,
+          //               arguments: policy['id'].toString(),
+          //             );
+          //           },
+          //           policyName: "LIFE POLICY",
+          //           colors: [
+          //             AppColors.lifePolicyLightColor,
+          //             AppColors.lifePolicyDarkColor
+          //           ],
+          //           policy: policy,
+          //           isAuto: false,
+          //         ),
+          //         Gap(30.h),
+          //       ],
+          //     );
+          //   }),
+          Gap(20.h),
+        ],
+      ),
     );
   }
+
+
 
   _policyItem({
     required String policyName,

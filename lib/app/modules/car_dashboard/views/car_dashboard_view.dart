@@ -126,7 +126,7 @@ class CarDashboardView extends GetView<CarDashboardController> {
                                       Gap(30.h),
 
                                       /// Gap(12.h),
-                                      controller.carDashBoardData![
+                                      controller.carDashBoardData?[
                                                   'tires.passenger_front'] !=
                                               null
                                           ? Gap(700.h)
@@ -216,7 +216,7 @@ class CarDashboardView extends GetView<CarDashboardController> {
                               ),
                             ),
                             Gap(20.h),
-                            if (controller.carDashBoardData!['odometer'] !=
+                            if (controller.carDashBoardData?['odometer'] !=
                                 null)
                               _blueGradientSpeedMeterBox(context),
                             Gap(20.h),
@@ -245,7 +245,7 @@ class CarDashboardView extends GetView<CarDashboardController> {
           evStatusWidget(
               titleOne: "Lock Reminders",
               titleTwo: "Fuel Status",
-              percent: controller.carDashBoardData!['fuel.percentRemaining'] ??
+              percent: controller.carDashBoardData?['fuel.percentRemaining'] ??
                   "0%"),
           Column(
             mainAxisSize: MainAxisSize.min,
@@ -276,7 +276,7 @@ class CarDashboardView extends GetView<CarDashboardController> {
           evStatusWidget(
               titleOne: "Guardian Mode",
               titleTwo: "Oil Status",
-              percent: controller.carDashBoardData![''] ?? "0%"),
+              percent: controller.carDashBoardData?[''] ?? "0%"),
         ],
       ),
     );

@@ -125,9 +125,9 @@ class FormValidation {
     RegExp regExp = RegExp(patttern, unicode: true);
 
     if (value.length == 0) {
-      return isMandatory ? 'Please enter $tag name' : null;
+      return isMandatory ? '$tag' : null;
     } else if (!regExp.hasMatch(value)) {
-      return 'Please enter valid $tag name';
+      return '$tag';
     } else if (quotesRegx.hasMatch(value)) {
       return quotesError;
     }

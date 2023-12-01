@@ -7,13 +7,14 @@ class PrimaryButton extends StatelessWidget {
   final Color? backgroundColor;
   final void Function() onTap;
   final bool isLoading;
+  final AlignmentGeometry? alignment;
   const PrimaryButton({
     super.key,
     required this.buttonText,
     this.buttonWidth,
     this.backgroundColor,
     this.isLoading = false,
-    required this.onTap,
+    required this.onTap, this.alignment,
   });
 
   @override
@@ -21,7 +22,7 @@ class PrimaryButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        alignment: Alignment.center,
+        alignment: alignment ?? Alignment.center,
         padding: EdgeInsets.symmetric(
           vertical: 18.h,
         ),

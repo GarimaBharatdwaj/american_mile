@@ -85,13 +85,13 @@ class DriverDetailsController extends GetxController {
         'dob': dobController.text.trim(),
         'license_number': dlController.text.trim(),
         'address': addressController.text.trim(),
-        'driver_id': args!['driverId'] ?? '',
+        'driver_id': args?['driverId'] ?? '',
       });
       Map<String, dynamic>? mapData = jsonDecode(response.data);
       if (mapData != null) {
         if (mapData['status'] == 1) {
           debugPrint(mapData['msg']);
-          if (args!['driverId'] != null && args!['driverId'] != '') {
+          if (args?['driverId'] != null && args?['driverId'] != '') {
             Get.back(result: true);
           } else {
             Get.back(result: true);
@@ -126,7 +126,7 @@ class DriverDetailsController extends GetxController {
       initialDate: DateTime.now(),
       firstDate: DateTime(1960),
       lastDate: DateTime.now(),
-      dateFormat: "yyyy",
+      dateFormat: "MM/dd/yyyy",
       locale: DateTimePickerLocale.en_us,
       looping: true,
       itemTextStyle: Get.textTheme.bodyLarge?.copyWith(
@@ -137,7 +137,7 @@ class DriverDetailsController extends GetxController {
     );
     if (picked != null && picked != pickedBirthDate) {
       pickedBirthDate = picked;
-      String formattedDate = DateFormat('yyyy').format(pickedBirthDate!);
+      String formattedDate = DateFormat('MM/dd/yyyy').format(pickedBirthDate!);
       controller.text = formattedDate;
       Get.log("ALpha Date : $formattedDate");
       update();

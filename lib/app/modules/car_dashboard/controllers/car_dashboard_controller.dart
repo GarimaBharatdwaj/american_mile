@@ -10,6 +10,9 @@ class CarDashboardController extends GetxController {
   Map<String, dynamic>? carDashBoardData;
   String? webUrl;
 
+  final thankYouUrl = 'https://pyot.co.in/thankyou';
+  final thankYouUrlTwo = 'https://pyot.co.in/Smartcar_api/browser_callback';
+
   String? vehicleId;
 
   final count = 0.obs;

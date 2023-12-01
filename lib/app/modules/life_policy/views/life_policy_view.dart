@@ -174,296 +174,332 @@ class LifePolicyView extends GetView<LifePolicyController> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            "DETAILS",
-                            style: Get.textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.w600,
-                              height: 1.4,
-                              color: AppColors.primaryDark,
-                              fontSize: 18.sp,
-                            ),
-                          ),
-                          Text(
-                            "DOCUMENTS",
-                            style: Get.textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.w600,
-                              height: 1.4,
-                              color: AppColors.textLight,
-                              fontSize: 18.sp,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    ShadowContainer(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "CURRENT POLICY",
-                            style: Get.textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 18.sp,
-                            ),
-                          ),
-                          Gap(8.h),
-                          Text(
-                            controller.lifeDetails!['life_policy_data'][0]
-                                ['name'],
-                            style: Get.textTheme.bodyMedium?.copyWith(
-                              fontSize: 14.sp,
-                            ),
-                          ),
-                          Gap(8.h),
-                          Text(
-                            "THE INFORMATION CONTAINED HEREIN IS\nPROVIDED AS A GUIDE ONLY AND IS SUBJECT\nTO THE ACTUAL PROVISIONS CONTAINED IN\nYOUR POLICY OR CONTRACT.",
-                            style: Get.textTheme.bodyMedium?.copyWith(
-                              fontSize: 14.sp,
-                              height: 1.3,
-                            ),
-                          ),
-                          Gap(12.h),
-                          _policyItem(
-                              key: 'PLAN DESCRIPTION',
-                              value: controller.lifeDetails!['life_policy_data']
-                                  [0]['plan_desc']),
-                          _policyItem(
-                              key: 'POLICY ISSUE DATE',
-                              value: controller.lifeDetails!['life_policy_data']
-                                  [0]['policy_issue_date']),
-                          _policyItem(
-                              key: 'POLICY STATUS',
-                              value: controller.lifeDetails!['life_policy_data']
-                                  [0]['policy_status']),
-                          _policyItem(
-                              key: 'MATURITY DATE',
-                              value: controller.lifeDetails!['life_policy_data']
-                                  [0]['maturity_date']),
-                          Text(
-                            "THE DATE ON WHICH A POLICY REACHES THE END\nOF ITS TERM WHILE THE INSURED IS STILL LIVING.",
-                            style: Get.textTheme.bodyMedium?.copyWith(
-                              fontSize: 10.sp,
-                              height: 1.3,
-                            ),
-                          ),
-                          Gap(12.h),
-                          _policyItem(
-                              key: 'INSURED STATUS',
-                              value: controller.lifeDetails!['life_policy_data']
-                                  [0]['insured_status']),
-                          _policyItem(
-                              key: 'FACE AMOUNT',
-                              value:
-                                  '\$${controller.lifeDetails!['life_policy_data'][0]['face_amt']}'),
-                          _policyItem(
-                              key: 'INSURED ISSUE AGE',
-                              value: controller.lifeDetails!['life_policy_data']
-                                  [0]['insured_issue_age']),
-                          _policyItem(
-                              key: 'POLICY TYPE',
-                              value: controller.lifeDetails!['life_policy_data']
-                                  [0]['policy_type']),
-                          _policyItem(
-                              key: 'PAID UP DATE',
-                              value: controller.lifeDetails!['life_policy_data']
-                                  [0]['paidup_date']),
-                          _policyItem(
-                              key: 'EXCESS CREDIT OPTION',
-                              value: controller.lifeDetails!['life_policy_data']
-                                  [0]['excess_credit_option']),
-                          Text(
-                            "EXCESS CREDITS ARE NAN GUARANTEED AMOUNTS OF MONEY\nTHAT MAY BE PAID AT THE DISCRETION OF FAMERS LIFE.",
-                            style: Get.textTheme.bodyMedium?.copyWith(
-                              fontSize: 10.sp,
-                              height: 1.3,
-                            ),
-                          ),
-                          Gap(12.h),
-                        ],
-                      ),
-                    ),
-                    Gap(40.h),
-                    ShadowContainer(
-                        child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "COVERAGE",
-                          style: Get.textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18.sp,
-                          ),
-                        ),
-                        Gap(8.h),
-                        Text(
-                          controller.lifeDetails!['coverage']
-                                  ['coverage_paragraph']
-                              .toString()
-                              .toUpperCase(),
-                          style: Get.textTheme.bodyMedium?.copyWith(
-                            fontSize: 14.sp,
-                          ),
-                        ),
-                        Gap(12.h),
-                        Row(
-                          children: [
-                            profileImage(
-                              imageUrl: controller.lifeDetails!['coverage']
-                                  ['image_url'],
-                              circleRadius: 100.w,
-                              imageSize: 80.w,
-                            ),
-                            Gap(20.w),
-                            Text(
-                              controller.lifeDetails!['coverage']['name'],
+                          GestureDetector(
+                            onTap: () {
+                              controller.type.value = 0;
+                            },
+                            child: Text(
+                              "DETAILS",
                               style: Get.textTheme.titleMedium?.copyWith(
                                 fontWeight: FontWeight.w600,
+                                height: 1.4,
+                                color: controller.type.value == 0
+                                    ? AppColors.primaryDark
+                                    : AppColors.textLight,
                                 fontSize: 18.sp,
                               ),
                             ),
-                          ],
-                        ),
-                        Gap(12.h),
-                        _policyItem(
-                            key: 'WAIVER OF PREMIUM',
-                            value:
-                                '\$${controller.lifeDetails!['coverage']['waiver_premimum']}'),
-                        _policyItem(
-                            key: 'ACCIDENTAL DEATH BENEFIT',
-                            value:
-                                '\$${controller.lifeDetails!['coverage']['accidental_benefit']}'),
-                      ],
-                    )),
-                    Gap(40.h),
-                    ShadowContainer(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "BILLING INFORMATION",
-                            style: Get.textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 21.sp,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              controller.type.value = 1;
+                            },
+                            child: Text(
+                              "DOCUMENTS",
+                              style: Get.textTheme.titleMedium?.copyWith(
+                                fontWeight: FontWeight.w600,
+                                height: 1.4,
+                                color: controller.type.value == 1
+                                    ? AppColors.primaryDark
+                                    : AppColors.textLight,
+                                fontSize: 18.sp,
+                              ),
                             ),
                           ),
-                          Gap(12.h),
-                          Text(
-                            "BANK",
-                            style: Get.textTheme.bodyMedium?.copyWith(
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          Gap(12.h),
-                          Text(
-                            controller.lifeDetails!['billing_info']
-                                ['bank_name'],
-                            style: Get.textTheme.bodyMedium?.copyWith(
-                              fontSize: 16.sp,
-                            ),
-                          ),
-                          Gap(12.h),
-                          Text(
-                            "PREMIUM",
-                            style: Get.textTheme.bodyMedium?.copyWith(
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          Gap(12.h),
-                          Text(
-                            "${controller.lifeDetails!['billing_info']['premium']}",
-                            style: Get.textTheme.bodyMedium?.copyWith(
-                              fontSize: 16.sp,
-                            ),
-                          ),
-                          Gap(12.h),
-                          Text(
-                            "PAYMENT METHOD",
-                            style: Get.textTheme.bodyMedium?.copyWith(
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          Gap(12.h),
-                          Text(
-                            controller.lifeDetails!['billing_info']
-                                ['payment_method'],
-                            style: Get.textTheme.bodyMedium?.copyWith(
-                              fontSize: 16.sp,
-                            ),
-                          ),
-                          Gap(12.h),
-                          Text(
-                            "PAYMENT FREQUENCY",
-                            style: Get.textTheme.bodyMedium?.copyWith(
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          Gap(12.h),
-                          Text(
-                            controller.lifeDetails!['billing_info']
-                                ['payment_frequency'],
-                            style: Get.textTheme.bodyMedium?.copyWith(
-                              fontSize: 16.sp,
-                            ),
-                          ),
-                          Gap(8.h),
-                          Text(
-                            controller.lifeDetails!['billing_info']
-                                    ['payment_paragraph']
-                                .toString()
-                                .toUpperCase(),
-                            style: Get.textTheme.bodyMedium?.copyWith(
-                              fontSize: 12.sp,
-                              color: AppColors.textBlackColor,
-                            ),
-                          ),
-                          Gap(8.h),
-                          Text(
-                            "PREMIUM DRAFT DAY",
-                            style: Get.textTheme.bodyMedium?.copyWith(
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          Gap(12.h),
-                          Text(
-                            controller.lifeDetails!['billing_info']
-                                    ['premium_draft_day']
-                                .toString()
-                                .toUpperCase(),
-                            style: Get.textTheme.bodyMedium?.copyWith(
-                              fontSize: 16.sp,
-                            ),
-                          ),
-                          Gap(8.h),
-                          Text(
-                            controller.lifeDetails!['billing_info']
-                                    ['draft_paragraph']
-                                .toString()
-                                .toUpperCase(),
-                            style: Get.textTheme.bodyMedium?.copyWith(
-                              fontSize: 12.sp,
-                              color: AppColors.textBlackColor,
-                            ),
-                          ),
-                          Gap(8.h),
                         ],
                       ),
                     ),
+                    controller.type.value == 0 ? details() : documents(),
                     Gap(20.h),
-                    PrimaryButton(
-                      buttonText: "Flow",
-                      onTap: () {
-                        Get.toNamed(Routes.MY_FAMILY);
-                      },
-                    ),
+
+                    /// PrimaryButton(
+                    //   buttonText: "Flow",
+                    //   onTap: () {
+                    //     Get.toNamed(Routes.MY_FAMILY);
+                    //   },
+                    /// ),
                   ]),
                 ),
         ),
       ),
+    );
+  }
+
+  ShadowContainer documents() => ShadowContainer(
+          child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            controller.lifeDetails!['policy_doc']['head'],
+            style: Get.textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.w600,
+              fontSize: 18.sp,
+            ),
+          ),
+          Gap(8.h),
+          Text(
+            controller.lifeDetails!['policy_doc']['text'],
+            style: Get.textTheme.bodyMedium?.copyWith(
+              fontSize: 14.sp,
+              height: 1.3,
+            ),
+          ),
+        ],
+      ));
+
+  Column details() {
+    return Column(
+      children: [
+        ShadowContainer(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "CURRENT POLICY",
+                style: Get.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 18.sp,
+                ),
+              ),
+              Gap(8.h),
+              Text(
+                controller.lifeDetails!['life_policy_data'][0]['name'],
+                style: Get.textTheme.bodyMedium?.copyWith(
+                  fontSize: 14.sp,
+                ),
+              ),
+              Gap(8.h),
+              Text(
+                "THE INFORMATION CONTAINED HEREIN IS\nPROVIDED AS A GUIDE ONLY AND IS SUBJECT\nTO THE ACTUAL PROVISIONS CONTAINED IN\nYOUR POLICY OR CONTRACT.",
+                style: Get.textTheme.bodyMedium?.copyWith(
+                  fontSize: 14.sp,
+                  height: 1.3,
+                ),
+              ),
+              Gap(12.h),
+              _policyItem(
+                  key: 'PLAN DESCRIPTION',
+                  value: controller.lifeDetails!['life_policy_data'][0]
+                      ['plan_desc']),
+              _policyItem(
+                  key: 'POLICY ISSUE DATE',
+                  value: controller.lifeDetails!['life_policy_data'][0]
+                      ['policy_issue_date']),
+              _policyItem(
+                  key: 'POLICY STATUS',
+                  value: controller.lifeDetails!['life_policy_data'][0]
+                      ['policy_status']),
+              _policyItem(
+                  key: 'MATURITY DATE',
+                  value: controller.lifeDetails!['life_policy_data'][0]
+                      ['maturity_date']),
+              Text(
+                "THE DATE ON WHICH A POLICY REACHES THE END\nOF ITS TERM WHILE THE INSURED IS STILL LIVING.",
+                style: Get.textTheme.bodyMedium?.copyWith(
+                  fontSize: 10.sp,
+                  height: 1.3,
+                ),
+              ),
+              Gap(12.h),
+              _policyItem(
+                  key: 'INSURED STATUS',
+                  value: controller.lifeDetails!['life_policy_data'][0]
+                      ['insured_status']),
+              _policyItem(
+                  key: 'FACE AMOUNT',
+                  value:
+                      '\$${controller.lifeDetails!['life_policy_data'][0]['face_amt']}'),
+              _policyItem(
+                  key: 'INSURED ISSUE AGE',
+                  value: controller.lifeDetails!['life_policy_data'][0]
+                      ['insured_issue_age']),
+              _policyItem(
+                  key: 'POLICY TYPE',
+                  value: controller.lifeDetails!['life_policy_data'][0]
+                      ['policy_type']),
+              _policyItem(
+                  key: 'PAID UP DATE',
+                  value: controller.lifeDetails!['life_policy_data'][0]
+                      ['paidup_date']),
+              _policyItem(
+                  key: 'EXCESS CREDIT OPTION',
+                  value: controller.lifeDetails!['life_policy_data'][0]
+                      ['excess_credit_option']),
+              Text(
+                "EXCESS CREDITS ARE NAN GUARANTEED AMOUNTS OF MONEY\nTHAT MAY BE PAID AT THE DISCRETION OF FAMERS LIFE.",
+                style: Get.textTheme.bodyMedium?.copyWith(
+                  fontSize: 10.sp,
+                  height: 1.3,
+                ),
+              ),
+              Gap(12.h),
+            ],
+          ),
+        ),
+        Gap(40.h),
+        ShadowContainer(
+            child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "COVERAGE",
+              style: Get.textTheme.titleMedium?.copyWith(
+                fontWeight: FontWeight.w600,
+                fontSize: 18.sp,
+              ),
+            ),
+            Gap(8.h),
+            Text(
+              controller.lifeDetails!['coverage']['coverage_paragraph']
+                  .toString()
+                  .toUpperCase(),
+              style: Get.textTheme.bodyMedium?.copyWith(
+                fontSize: 14.sp,
+              ),
+            ),
+            Gap(12.h),
+            Row(
+              children: [
+                profileImage(
+                  imageUrl: controller.lifeDetails!['coverage']['image_url'],
+                  circleRadius: 100.w,
+                  imageSize: 80.w,
+                ),
+                Gap(20.w),
+                Text(
+                  controller.lifeDetails!['coverage']['name'],
+                  style: Get.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18.sp,
+                  ),
+                ),
+              ],
+            ),
+            Gap(12.h),
+            _policyItem(
+                key: 'WAIVER OF PREMIUM',
+                value:
+                    '\$${controller.lifeDetails!['coverage']['waiver_premimum']}'),
+            _policyItem(
+                key: 'ACCIDENTAL DEATH BENEFIT',
+                value:
+                    '\$${controller.lifeDetails!['coverage']['accidental_benefit']}'),
+          ],
+        )),
+        Gap(40.h),
+        ShadowContainer(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "BILLING INFORMATION",
+                style: Get.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 21.sp,
+                ),
+              ),
+              Gap(12.h),
+              Text(
+                "BANK",
+                style: Get.textTheme.bodyMedium?.copyWith(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              Gap(12.h),
+              Text(
+                controller.lifeDetails!['billing_info']['bank_name'],
+                style: Get.textTheme.bodyMedium?.copyWith(
+                  fontSize: 16.sp,
+                ),
+              ),
+              Gap(12.h),
+              Text(
+                "PREMIUM",
+                style: Get.textTheme.bodyMedium?.copyWith(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              Gap(12.h),
+              Text(
+                "${controller.lifeDetails!['billing_info']['premium']}",
+                style: Get.textTheme.bodyMedium?.copyWith(
+                  fontSize: 16.sp,
+                ),
+              ),
+              Gap(12.h),
+              Text(
+                "PAYMENT METHOD",
+                style: Get.textTheme.bodyMedium?.copyWith(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              Gap(12.h),
+              Text(
+                controller.lifeDetails!['billing_info']['payment_method'],
+                style: Get.textTheme.bodyMedium?.copyWith(
+                  fontSize: 16.sp,
+                ),
+              ),
+              Gap(12.h),
+              Text(
+                "PAYMENT FREQUENCY",
+                style: Get.textTheme.bodyMedium?.copyWith(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              Gap(12.h),
+              Text(
+                controller.lifeDetails!['billing_info']['payment_frequency'],
+                style: Get.textTheme.bodyMedium?.copyWith(
+                  fontSize: 16.sp,
+                ),
+              ),
+              Gap(8.h),
+              Text(
+                controller.lifeDetails!['billing_info']['payment_paragraph']
+                    .toString()
+                    .toUpperCase(),
+                style: Get.textTheme.bodyMedium?.copyWith(
+                  fontSize: 12.sp,
+                  color: AppColors.textBlackColor,
+                ),
+              ),
+              Gap(8.h),
+              Text(
+                "PREMIUM DRAFT DAY",
+                style: Get.textTheme.bodyMedium?.copyWith(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              Gap(12.h),
+              Text(
+                controller.lifeDetails!['billing_info']['premium_draft_day']
+                    .toString()
+                    .toUpperCase(),
+                style: Get.textTheme.bodyMedium?.copyWith(
+                  fontSize: 16.sp,
+                ),
+              ),
+              Gap(8.h),
+              Text(
+                controller.lifeDetails!['billing_info']['draft_paragraph']
+                    .toString()
+                    .toUpperCase(),
+                style: Get.textTheme.bodyMedium?.copyWith(
+                  fontSize: 12.sp,
+                  color: AppColors.textBlackColor,
+                ),
+              ),
+              Gap(8.h),
+            ],
+          ),
+        ),
+      ],
     );
   }
 

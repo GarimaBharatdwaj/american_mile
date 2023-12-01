@@ -1,3 +1,4 @@
+import 'package:american_mile/app/modules/my_family/controllers/my_family_controller.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import '../../../../common_lib.dart';
 import '../controllers/car_dashboard_controller.dart';
@@ -17,6 +18,17 @@ class _CarDashBoardWebViewState extends State<CarDashBoardWebView> {
   final CarDashboardController carDashboardController =
       Get.find<CarDashboardController>();
 
+  whenCarConnected(url) {
+    if (url.contains(carDashboardController.thankYouUrl) ||
+        url.contains(carDashboardController.thankYouUrlTwo)) {
+      final MyFamilyController myFamilyController =
+          Get.find<MyFamilyController>();
+      myFamilyController.myFamilyAPI();
+      Get.back();
+      Get.toNamed(Routes.MY_FAMILY);
+    }
+  }
+
   initializeWebView() async {
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
@@ -25,9 +37,7 @@ class _CarDashBoardWebViewState extends State<CarDashBoardWebView> {
         NavigationDelegate(
           onProgress: (int progress) {},
           onPageStarted: (String url) {
-            if (url.contains("https://pyot.co.in/thankyou")) {
-              Get.toNamed(Routes.MY_FAMILY);
-            }
+            whenCarConnected(url);
           },
           onPageFinished: (String url) {},
           onWebResourceError: (WebResourceError error) {},

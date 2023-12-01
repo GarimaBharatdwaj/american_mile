@@ -177,5 +177,6 @@ class AppPages {
       page: () => const MfaVerifyView(),
       binding: MfaVerifyBinding(),
     ),
+
   ];
 }

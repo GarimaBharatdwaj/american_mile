@@ -51,8 +51,9 @@ class CanopyLoginView extends GetView<CanopyLoginController> {
                       LoginTextField(
                         hintText: "Enter Email Address",
                         labelText: "Email Address",
-                        validator: (value) => FormValidation.emailValidator(
-                            controller.emailController.text),
+                        validator: (value) => FormValidation.nameValidator(
+                            controller.emailController.text,
+                            tag: "Email can't be empty"),
                         textCapitalization: TextCapitalization.none,
                         controller: controller.emailController,
                       ),
@@ -60,8 +61,9 @@ class CanopyLoginView extends GetView<CanopyLoginController> {
                       LoginTextField(
                         hintText: "Enter Password",
                         labelText: "Password",
-                        validator: (value) => FormValidation.passwordValidator(
-                            controller.passwordController.text),
+                        validator: (value) => FormValidation.nameValidator(
+                            controller.passwordController.text,
+                            tag: "Password can't be empty"),
                         textCapitalization: TextCapitalization.none,
                         controller: controller.passwordController,
                       ),
