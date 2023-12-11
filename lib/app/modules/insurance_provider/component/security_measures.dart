@@ -12,64 +12,61 @@ class InsuranceSecurityMeasures extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: AppColors.background,
-        body: SingleChildScrollView(
-          padding: EdgeInsets.all(15.w),
-          child: Column(
-            children: [
-              const MyAppBar(
-                title: 'Security measures',
-              ),
-              Gap(30.h),
-              Text(
-                "American Mile Insurance uses state of the art security\nmeasures to protect your information",
-                style: Get.textTheme.titleSmall,
-              ),
-              Gap(30.h),
-              _widget(
-                icon: ImagePaths.shield,
-                title: "Secure",
-                subTitle:
-                    "Transfer of your information is encrypted\nend-to-end",
-              ),
-              Gap(30.h),
-              _widget(
-                icon: ImagePaths.eye,
-                title: "Private",
-                subTitle:
-                    "Your credentials will never be made available\nto American Mile Insurance",
-              ),
-            ],
-          ),
+    return Scaffold(
+      backgroundColor: AppColors.background,
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(15.w),
+        child: Column(
+          children: [
+            const MyAppBar(
+              title: 'Security measures',
+            ),
+            Gap(30.h),
+            Text(
+              "American Mile Insurance uses state of the art security\nmeasures to protect your information",
+              style: Get.textTheme.titleSmall,
+            ),
+            Gap(30.h),
+            _widget(
+              icon: ImagePaths.shield,
+              title: "Secure",
+              subTitle: "Transfer of your information is encrypted\nend-to-end",
+            ),
+            Gap(30.h),
+            _widget(
+              icon: ImagePaths.eye,
+              title: "Private",
+              subTitle:
+                  "Your credentials will never be made available\nto American Mile Insurance",
+            ),
+          ],
         ),
-        bottomNavigationBar: Padding(
-          padding: EdgeInsets.all(15.w),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 15.h),
-                child: PrimaryButton(
-                  buttonText: "Continue",
-                  onTap: () {
-                    Get.offNamed(Routes.CANOPY_LOGIN,
-                        arguments: controller.carrierId);
-                  },
-                ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.all(15.w),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 15.h),
+              child: PrimaryButton(
+                buttonText: "Continue",
+                onTap: () {
+                  Get.offNamed(Routes.CANOPY_LOGIN,
+                      arguments: controller.carrierId);
+                },
               ),
-              Text(
-                "By selecting '"
-                'Continue'
-                "' you agree to the Canopy End\nUser Privacy Policy",
-                textAlign: TextAlign.center,
-                style: Get.textTheme.titleSmall?.copyWith(
-                  fontWeight: FontWeight.w700,
-                ),
+            ),
+            Text(
+              "By selecting '"
+              'Continue'
+              "' you agree to the Canopy End\nUser Privacy Policy",
+              textAlign: TextAlign.center,
+              style: Get.textTheme.titleSmall?.copyWith(
+                fontWeight: FontWeight.w700,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

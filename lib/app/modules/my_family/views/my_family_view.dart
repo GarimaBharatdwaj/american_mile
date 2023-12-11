@@ -12,107 +12,105 @@ class MyFamilyView extends GetView<MyFamilyController> {
   const MyFamilyView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Obx(
-        () => Scaffold(
-          backgroundColor: AppColors.background,
-          body: controller.isLoading.value
-              ? showProgressIndicator()
-              : Padding(
-                  padding: EdgeInsets.all(12.w),
-                  child: NestedScrollView(
-                    floatHeaderSlivers: true,
-                    headerSliverBuilder: (context, innerBoxIsScrolled) {
-                      return [
-                        _headerAppBarWidget(context),
-                        _tabBarWidget(context),
-                      ];
-                    },
-                    body: Column(
-                      children: [
-                        Expanded(
-                          child: TabBarView(
-                            controller: controller.tabController,
-                            children: [
-                              _driversComponent(),
-                              _vehicalComponent(context),
-                              _address(),
-                            ],
-                          ),
+    return Obx(
+      () => Scaffold(
+        backgroundColor: AppColors.background,
+        body: controller.isLoading.value
+            ? showProgressIndicator()
+            : Padding(
+                padding: EdgeInsets.all(12.w),
+                child: NestedScrollView(
+                  floatHeaderSlivers: true,
+                  headerSliverBuilder: (context, innerBoxIsScrolled) {
+                    return [
+                      _headerAppBarWidget(context),
+                      _tabBarWidget(context),
+                    ];
+                  },
+                  body: Column(
+                    children: [
+                      Expanded(
+                        child: TabBarView(
+                          controller: controller.tabController,
+                          children: [
+                            _driversComponent(),
+                            _vehicalComponent(context),
+                            _address(),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-          floatingActionButton: SpeedDial(
-            icon: Icons.add_rounded,
-            activeIcon: Icons.close_rounded,
-            backgroundColor: AppColors.primary,
-            foregroundColor: AppColors.white,
-            activeBackgroundColor: AppColors.primary,
-            activeForegroundColor: AppColors.white,
-            visible: true,
-            spacing: 8,
-            spaceBetweenChildren: 8,
-            closeManually: false,
-            gradientBoxShape: BoxShape.rectangle,
-            curve: Curves.bounceIn,
-            overlayColor: AppColors.black,
-            overlayOpacity: 0.5,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(
-                12.w,
               ),
-            ), //shape of button
-            children: [
-              SpeedDialChild(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(
-                    12.w,
-                  ),
+        floatingActionButton: SpeedDial(
+          icon: Icons.add_rounded,
+          activeIcon: Icons.close_rounded,
+          backgroundColor: AppColors.primary,
+          foregroundColor: AppColors.white,
+          activeBackgroundColor: AppColors.primary,
+          activeForegroundColor: AppColors.white,
+          visible: true,
+          spacing: 8,
+          spaceBetweenChildren: 8,
+          closeManually: false,
+          gradientBoxShape: BoxShape.rectangle,
+          curve: Curves.bounceIn,
+          overlayColor: AppColors.black,
+          overlayOpacity: 0.5,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(
+              12.w,
+            ),
+          ), //shape of button
+          children: [
+            SpeedDialChild(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(
+                  12.w,
                 ),
-                child: Icon(
-                  Icons.add,
-                  size: 25.w,
-                ),
-                backgroundColor: AppColors.white,
-                foregroundColor: AppColors.black,
-                label: 'Add Driver',
-                onTap: () {
-                  Get.toNamed(
-                    Routes.DRIVER_LICENCE,
-                  )?.then((value) {
-                    if (value) {
-                      controller.myFamilyAPI();
-                    }
-                  });
-                },
               ),
-              SpeedDialChild(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(
-                    12.w,
-                  ),
-                ),
-                child: Icon(
-                  Icons.add,
-                  size: 25.w,
-                ),
-                backgroundColor: AppColors.white,
-                foregroundColor: AppColors.black,
-                label: 'Add Vehicle',
-                onTap: () {
-                  Get.toNamed(
-                    Routes.SEARCH_BY_VIN,
-                  )?.then((value) {
-                    if (value) {
-                      controller.myFamilyAPI();
-                    }
-                  });
-                },
+              child: Icon(
+                Icons.add,
+                size: 25.w,
               ),
-            ],
-          ),
+              backgroundColor: AppColors.white,
+              foregroundColor: AppColors.black,
+              label: 'Add Driver',
+              onTap: () {
+                Get.toNamed(
+                  Routes.DRIVER_LICENCE,
+                )?.then((value) {
+                  if (value) {
+                    controller.myFamilyAPI();
+                  }
+                });
+              },
+            ),
+            SpeedDialChild(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(
+                  12.w,
+                ),
+              ),
+              child: Icon(
+                Icons.add,
+                size: 25.w,
+              ),
+              backgroundColor: AppColors.white,
+              foregroundColor: AppColors.black,
+              label: 'Add Vehicle',
+              onTap: () {
+                Get.toNamed(
+                  Routes.SEARCH_BY_VIN,
+                )?.then((value) {
+                  if (value) {
+                    controller.myFamilyAPI();
+                  }
+                });
+              },
+            ),
+          ],
         ),
       ),
     );

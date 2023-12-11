@@ -8,8 +8,7 @@ class SetMilePasswordView extends GetView<SetMilePasswordController> {
   const SetMilePasswordView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
+    return  Scaffold(
         body: Form(
           key: controller.formKey,
           child: ListView(
@@ -64,7 +63,6 @@ class SetMilePasswordView extends GetView<SetMilePasswordController> {
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 }

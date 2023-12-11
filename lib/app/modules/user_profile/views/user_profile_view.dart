@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:american_mile/app/ui/widgets/view_picture.dart';
@@ -57,25 +58,37 @@ class UserProfileView extends GetView<UserProfileController> {
                                         ),
                                       if (controller
                                           .profileImagePath.value.isEmpty)
-                                        profileImage(
-                                          onTap: () {
-                                            Get.to(() => ViewPicture(
-                                                  imageUrl: controller
-                                                      .userData!['image'],
-                                                ));
-                                          },
-                                          imageUrl: controller.userData !=
-                                                      null &&
-                                                  controller
-                                                          .userData!['image'] !=
-                                                      null &&
-                                                  controller
-                                                          .userData!['image'] !=
-                                                      ""
-                                              ? controller.userData!['image']
-                                              : "https://image.shutterstock.com/image-photo/young-handsome-man-beard-wearing-260nw-1768126784.jpg",
-                                          circleRadius: 110.w,
-                                        ),
+                                        controller.userData != null &&
+                                                controller.userData!['image'] !=
+                                                    null &&
+                                                controller.userData!['image'] !=
+                                                    ""
+                                            ? profileImage(
+                                                onTap: () {
+                                                  Get.to(() => ViewPicture(
+                                                        imageUrl: controller
+                                                            .userData!['image'],
+                                                      ));
+                                                },
+                                                imageUrl: controller
+                                                                .userData !=
+                                                            null &&
+                                                        controller.userData![
+                                                                'image'] !=
+                                                            null &&
+                                                        controller.userData![
+                                                                'image'] !=
+                                                            ""
+                                                    ? controller
+                                                        .userData!['image']
+                                                    : "https://image.shutterstock.com/image-photo/young-handsome-man-beard-wearing-260nw-1768126784.jpg",
+                                                circleRadius: 110.w,
+                                              )
+                                            : Container(
+                                                decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    color: Colors.red),
+                                              ),
                                       if (controller.edit.isTrue)
                                         Container(
                                           padding: EdgeInsets.all(12.w),
@@ -137,6 +150,8 @@ class UserProfileView extends GetView<UserProfileController> {
                                       ? "Edit Profile"
                                       : 'Update Profile',
                                   onTap: () {
+                                    log("Garima ");
+                                    log(controller.profileImagePath.toString());
                                     if (controller.edit.isTrue) {
                                       controller.validateMethode();
                                     } else {
@@ -206,7 +221,7 @@ class UserProfileView extends GetView<UserProfileController> {
                       keyboardType: keyboardType,
                       inputFormatters: inputFormatters,
                       decoration: const InputDecoration.collapsed(hintText: ""),
-                      readOnly: readOnly ,
+                      readOnly: readOnly,
                     ),
                   ),
                 ],

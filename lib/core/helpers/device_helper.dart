@@ -4,6 +4,7 @@ import '../utils/storage_util.dart';
 class DeviceHelper {
   // ****************** Device Id Setup *********************** //
   static const String _onBoard = "on_board";
+  static const String _noImage = "https://americanmile.com/assets/images/no-image-icon.png";
 
   static String? getOnBoard() {
     String? onBoard = StorageUtil.read<String>(_onBoard);

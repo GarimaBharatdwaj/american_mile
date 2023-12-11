@@ -42,21 +42,42 @@ class MyProfile extends StatelessWidget {
                                   ),
                                 ),
                               if (controller.profileImagePath.value.isEmpty)
-                                profileImage(
-                                  onTap: () {
-                                    Get.to(() => ViewPicture(
-                                          imageUrl:
-                                              controller.userData!['image'],
-                                        ));
-                                  },
-                                  imageUrl: controller.userData != null &&
-                                          controller.userData!['image'] !=
-                                              null &&
-                                          controller.userData!['image'] != ""
-                                      ? controller.userData!['image']
-                                      : "https://image.shutterstock.com/image-photo/young-handsome-man-beard-wearing-260nw-1768126784.jpg",
-                                  circleRadius: 110.w,
-                                ),
+                                controller.userData != null &&
+                                        controller.userData!['image'] != null &&
+                                        controller.userData!['image'] != ""
+                                    ? profileImage(
+                                        onTap: () {
+                                          Get.to(() => ViewPicture(
+                                                imageUrl: controller
+                                                    .userData!['image'],
+                                              ));
+                                        },
+                                        imageUrl: controller.userData != null &&
+                                                controller.userData!['image'] !=
+                                                    null &&
+                                                controller.userData!['image'] !=
+                                                    ""
+                                            ? controller.userData!['image']
+                                            : "https://image.shutterstock.com/image-photo/young-handsome-man-beard-wearing-260nw-1768126784.jpg",
+                                        circleRadius: 110.w,
+                                      )
+                                    : Container(
+                                        alignment: Alignment.center,
+                                        height: 110.w,
+                                        width: 110.w,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: AppColors.background,
+                                        ),
+                                        child: Text(
+                                          controller.fullName.text
+                                              .substring(0, 1),
+                                          style: Get.textTheme.displayMedium
+                                              ?.copyWith(
+                                            color: AppColors.primary,
+                                          ),
+                                        ),
+                                      ),
                               if (controller.edit.isTrue)
                                 Container(
                                   padding: EdgeInsets.all(12.w),
