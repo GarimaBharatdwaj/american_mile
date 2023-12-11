@@ -22,6 +22,7 @@ class CarDashboardView extends GetView<CarDashboardController> {
             : controller.webUrl != null
                 ? CarDashBoardWebView(
                     webUrl: controller.webUrl!,
+                    type: controller.argumentsMap['type'],
                   )
                 : SingleChildScrollView(
                     child: Stack(
@@ -118,12 +119,18 @@ class CarDashboardView extends GetView<CarDashboardController> {
                                       _evWidget(context),
 
                                       ///Gap(180.h),
-                                      Text(
-                                        "Range Rover",
-                                        style:
-                                            Get.textTheme.titleMedium?.copyWith(
-                                          color: AppColors.white,
-                                          fontSize: 26.sp,
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 50.w),
+                                        child: Text(
+                                          controller
+                                              .carDashBoardData?['vehiclename'],
+                                          textAlign: TextAlign.center,
+                                          style: Get.textTheme.titleMedium
+                                              ?.copyWith(
+                                            color: AppColors.white,
+                                            fontSize: 26.sp,
+                                          ),
                                         ),
                                       ),
                                       Gap(30.h),
@@ -132,8 +139,8 @@ class CarDashboardView extends GetView<CarDashboardController> {
                                       controller.carDashBoardData?[
                                                   'tires.passenger_front'] !=
                                               null
-                                          ? Gap(700.h)
-                                          : Gap(450.h),
+                                          ? Gap(730.h)
+                                          : Gap(480.h),
                                     ],
                                   ),
                                 ),
@@ -196,7 +203,7 @@ class CarDashboardView extends GetView<CarDashboardController> {
                         ),
                         Column(
                           children: [
-                            Gap(310.h),
+                            Gap(350.h),
                             SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: Row(
@@ -212,8 +219,8 @@ class CarDashboardView extends GetView<CarDashboardController> {
                                       ),
                                       child: GestureDetector(
                                         onTap: () {
-
-                                          controller.isLockList[index] = !controller.isLockList[index];
+                                          controller.isLockList[index] =
+                                              !controller.isLockList[index];
 
                                           controller.lockUnlockVehicleAPI(
                                               controller.isLockList[index],

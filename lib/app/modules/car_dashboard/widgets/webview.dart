@@ -1,12 +1,19 @@
+import 'package:american_mile/app/modules/auto_policy/controllers/auto_policy_controller.dart';
+import 'package:american_mile/app/modules/home/controllers/home_controller.dart';
 import 'package:american_mile/app/modules/my_family/controllers/my_family_controller.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import '../../../../common_lib.dart';
 import '../controllers/car_dashboard_controller.dart';
 
 class CarDashBoardWebView extends StatefulWidget {
-  const CarDashBoardWebView({super.key, required this.webUrl});
+  const CarDashBoardWebView({
+    super.key,
+    required this.webUrl,
+    required this.type,
+  });
 
   final String webUrl;
+  final String type;
 
   @override
   State<CarDashBoardWebView> createState() => _CarDashBoardWebViewState();
@@ -21,11 +28,22 @@ class _CarDashBoardWebViewState extends State<CarDashBoardWebView> {
   whenCarConnected(url) {
     if (url.contains(carDashboardController.thankYouUrl) ||
         url.contains(carDashboardController.thankYouUrlTwo)) {
-      final MyFamilyController myFamilyController =
-          Get.find<MyFamilyController>();
-      myFamilyController.myFamilyAPI();
-      Get.back();
-      Get.toNamed(Routes.MY_FAMILY);
+      if (widget.type == "1") {
+        final AutoPolicyController myFamilyController =
+            Get.find<AutoPolicyController>();
+        myFamilyController.autoPolicyAPI();
+        Get.back();
+      } else if (widget.type == "2") {
+        final HomeController myFamilyController = Get.find<HomeController>();
+        myFamilyController.myFamilyAPI();
+        Get.back();
+      } else {
+        final MyFamilyController myFamilyController =
+            Get.find<MyFamilyController>();
+        myFamilyController.myFamilyAPI();
+        Get.back();
+      }
+      
     }
   }
 

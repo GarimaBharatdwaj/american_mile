@@ -14,14 +14,15 @@ class CarDashboardController extends GetxController {
   final thankYouUrl = 'https://pyot.co.in/thankyou';
   final thankYouUrlTwo = 'https://pyot.co.in/Smartcar_api/browser_callback';
 
-  String? vehicleId;
+  // String? vehicleId;
 
   final count = 0.obs;
+  late Map<String, dynamic> argumentsMap;
   @override
   void onInit() {
     super.onInit();
 
-    vehicleId = Get.arguments;
+    argumentsMap = Get.arguments;
     getCarDashBoardData();
   }
 
@@ -82,7 +83,7 @@ class CarDashboardController extends GetxController {
         "send-access-control-instruction",
         data: {
           'user_id': DeviceHelper.getUserId(),
-          'vehicle_id': vehicleId,
+          'vehicle_id': argumentsMap['id'],
           'do_lock': lockUnlock
         },
       );
@@ -109,8 +110,10 @@ class CarDashboardController extends GetxController {
     isLoading.value = true;
 
     try {
-      var response = await API().post('get-vehicle-info-batch',
-          data: {'user_id': DeviceHelper.getUserId(), 'vehicle_id': vehicleId});
+      var response = await API().post('get-vehicle-info-batch', data: {
+        'user_id': DeviceHelper.getUserId(),
+        'vehicle_id': argumentsMap['id'],
+      });
       Map<String, dynamic>? mapData = jsonDecode(response.data);
       if (mapData != null) {
         if (mapData['status'] == 1) {

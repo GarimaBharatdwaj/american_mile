@@ -441,8 +441,13 @@ class MyFamilyView extends GetView<MyFamilyController> {
                       SecondryButton(
                         buttonText: "Connect car",
                         onTap: () {
-                          Get.toNamed(Routes.CAR_DASHBOARD,
-                              arguments: vehical['id']);
+                          Get.toNamed(
+                            Routes.CAR_DASHBOARD,
+                            arguments: {
+                              "id": vehical['id'],
+                              "type": "3",
+                            },
+                          );
                         },
                       ),
                       Gap(8.h),

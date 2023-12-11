@@ -320,7 +320,7 @@ class AutoPolicyView extends GetView<AutoPolicyController> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         controller.viewDocumentAPI(doc['doc_id']);
                       },
                       child: Container(
@@ -533,8 +533,9 @@ class AutoPolicyView extends GetView<AutoPolicyController> {
                                 children: [
                                   _pdfComponent(context, 'Wallet Size',
                                       onTap: () {
-                                        controller.viewDocumentAPI(idCard['walletsize']);
-                                      }),
+                                    controller
+                                        .viewDocumentAPI(idCard['walletsize']);
+                                  }),
                                   Gap(14.h),
                                   AppIconButton(
                                     buttonText: "Fax",
@@ -550,15 +551,14 @@ class AutoPolicyView extends GetView<AutoPolicyController> {
                                 children: [
                                   _pdfComponent(context, 'Paper Size',
                                       onTap: () {
-                                        controller.viewDocumentAPI(idCard['papersize']);
-                                      }),
+                                    controller
+                                        .viewDocumentAPI(idCard['papersize']);
+                                  }),
                                   Gap(14.h),
                                   AppIconButton(
                                     buttonText: "Mail",
                                     icon: ImagePaths.mail,
-                                    onTap: () {
-
-                                    },
+                                    onTap: () {},
                                   ),
                                 ],
                               ),
@@ -996,7 +996,13 @@ class AutoPolicyView extends GetView<AutoPolicyController> {
               ),
               InkWell(
                 onTap: () {
-                  Get.toNamed(Routes.CAR_DASHBOARD, arguments: car['vehicleid']);
+                  Get.toNamed(
+                    Routes.CAR_DASHBOARD,
+                    arguments: {
+                      "id": car['vehicleid'],
+                      "type": "1",
+                    },
+                  );
                 },
                 child: Container(
                   padding: EdgeInsets.symmetric(
