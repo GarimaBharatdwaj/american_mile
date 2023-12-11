@@ -996,7 +996,7 @@ class AutoPolicyView extends GetView<AutoPolicyController> {
               ),
               InkWell(
                 onTap: () {
-                  Get.toNamed(Routes.CAR_DASHBOARD, arguments: car['id']);
+                  Get.toNamed(Routes.CAR_DASHBOARD, arguments: car['vehicleid']);
                 },
                 child: Container(
                   padding: EdgeInsets.symmetric(

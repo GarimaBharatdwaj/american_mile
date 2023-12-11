@@ -35,7 +35,12 @@ class MfaVerifyController extends GetxController {
       Map<String, dynamic>? mapData = jsonDecode(response.data);
       if (mapData != null) {
         if (mapData['status'] == 1) {
-          canopyConnectApi(mfaOptions!.elementAt(verificationMethod.value));
+          debugPrint(".\n\n\n\n\n\n\n.MFA SUBMITTED.\n\n\n\n\n\n\n\n\n\n.");
+
+          canopyConnectSecondaryFistApi(
+              mfaOptions!.elementAt(verificationMethod.value));
+
+          /// canopyConnectApi(mfaOptions!.elementAt(verificationMethod.value));
         } else {
           errorDialog(mapData['msg']);
           isLoading.value = false;
@@ -48,7 +53,60 @@ class MfaVerifyController extends GetxController {
       debugPrint(e.toString());
       isLoading.value = false;
     }
-    isLoading.value = false;
+  }
+
+
+  /// Calling it twice
+  canopyConnectSecondaryFistApi(String email) async {
+    debugPrint(".\n\n\n\n\n\n\n.Canopy Connect Secondary First Api Called.\n\n\n\n\n\n\n\n\n\n.");
+    isLoading.value = true;
+    var userId = DeviceHelper.getUserId();
+    try {
+      var response = await API().post('canopy-connect-secondary', data: {
+        'user_id' : userId,
+        'pull_id': mfaOptions!.elementAt(0),
+      });
+      /// Map<String, dynamic>? mapData = jsonDecode(response.data);
+      canopyConnectSecondaryApi(email);
+    } catch (e) {
+      debugPrint(e.toString());
+      canopyConnectSecondaryApi(email);
+    }
+  }
+
+  canopyConnectSecondaryApi(String email) async {
+    debugPrint(".\n\n\n\n\n\n\n.Canopy Connect Secondary Twice Api Called.\n\n\n\n\n\n\n\n\n\n.");
+    isLoading.value = true;
+    var userId = DeviceHelper.getUserId();
+    try {
+      var response = await API().post('canopy-connect-secondary', data: {
+        'user_id' : userId,
+        'pull_id': mfaOptions!.elementAt(0),
+      });
+      Map<String, dynamic>? mapData = jsonDecode(response.data);
+      if (mapData != null) {
+        if (mapData['status'] == true) {
+          if (userId != null) {
+            Get.offAllNamed(Routes.HOME);
+          } else {
+            DeviceHelper.saveUserId(mapData['user_id']);
+            await Get.toNamed(
+              Routes.SET_MILE_PASSWORD,
+              arguments: email,
+            );
+          }
+          isLoading.value = false;
+        }else{
+          errorDialog("Some Error Occurred");
+        }
+      } else {
+        errorDialog("Some Error Occurred");
+        isLoading.value = false;
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      isLoading.value = false;
+    }
   }
 
   canopyConnectApi(String email) async {

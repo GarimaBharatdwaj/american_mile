@@ -1,11 +1,8 @@
 import 'dart:convert';
-
-import 'package:american_mile/app/routes/app_pages.dart';
 import 'package:american_mile/app/ui/widgets/error_dialog.dart';
 import 'package:american_mile/app/ui/widgets/view_document.dart';
 import 'package:american_mile/core/helpers/device_helper.dart';
-import 'package:get/get.dart';
-
+import '../../../../common_lib.dart';
 import '../../../../core/network/api_service.dart';
 
 class AutoPolicyController extends GetxController {
@@ -68,6 +65,7 @@ class AutoPolicyController extends GetxController {
         if (res != null) {
           if (res['status'].toString() == "1") {
             isLoading.value = false;
+            debugPrint(res['docfile']);
             Get.to(() => ViewDocument(url: res['docfile']));
           } else {
             isLoading.value = false;

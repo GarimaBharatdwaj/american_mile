@@ -3,9 +3,12 @@ import 'package:american_mile/app/modules/car_dashboard/widgets/speed_meter.dart
 import 'package:american_mile/app/modules/car_dashboard/widgets/webview.dart';
 import 'package:american_mile/common_lib.dart';
 import 'package:american_mile/core/components/index.dart';
+import 'package:american_mile/core/components/primary_button.dart';
 import 'package:american_mile/core/utils/divider.dart';
 import 'package:american_mile/core/utils/index.dart';
+import 'package:get_storage/get_storage.dart';
 import '../controllers/car_dashboard_controller.dart';
+import 'package:map_launcher/map_launcher.dart';
 
 class CarDashboardView extends GetView<CarDashboardController> {
   const CarDashboardView({Key? key}) : super(key: key);
@@ -201,14 +204,26 @@ class CarDashboardView extends GetView<CarDashboardController> {
                                   controller.dataList.length,
                                   (index) {
                                     var item = controller.dataList[index];
+
                                     return Container(
                                       padding: EdgeInsets.only(
                                         right: 25.w,
                                         left: index == 0 ? 25.w : 0,
                                       ),
-                                      child: _borderBox(
-                                        image: item['image'],
-                                        text: item['text'],
+                                      child: GestureDetector(
+                                        onTap: () {
+
+                                          controller.isLockList[index] = !controller.isLockList[index];
+
+                                          controller.lockUnlockVehicleAPI(
+                                              controller.isLockList[index],
+                                              index);
+                                        },
+                                        child: Obx(() => _borderBox(
+                                            image: item['image'].toString(),
+                                            text: item['text'].toString(),
+                                            isLocked:
+                                                controller.isLockList[index])),
                                       ),
                                     );
                                   },
@@ -220,10 +235,30 @@ class CarDashboardView extends GetView<CarDashboardController> {
                                 null)
                               _blueGradientSpeedMeterBox(context),
                             Gap(20.h),
-                            if (controller.carDashBoardData![
+                            if (controller.carDashBoardData?[
                                     'tires.passenger_front'] !=
                                 null)
                               _blueGradientTypePressureBox(context),
+                            Padding(
+                              padding: const EdgeInsets.all(18.0),
+                              child: PrimaryButton(
+                                  borderRadius: BorderRadius.circular(15.w),
+                                  buttonText: "Open Map",
+                                  onTap: () async {
+                                    final availableMaps =
+                                        await MapLauncher.installedMaps;
+                                    debugPrint(availableMaps
+                                        .toString()); // [AvailableMap { mapName: Google Maps, mapType: google }, ...]
+                                    await availableMaps.first.showMarker(
+                                      coords: Coords(
+                                          controller.carDashBoardData?[
+                                              'location.latitude'],
+                                          controller.carDashBoardData?[
+                                              'location.longitude']),
+                                      title: "Smart car",
+                                    );
+                                  }),
+                            )
                           ],
                         ),
                       ],
@@ -504,10 +539,8 @@ class CarDashboardView extends GetView<CarDashboardController> {
     );
   }
 
-  _borderBox({
-    required String image,
-    required String text,
-  }) {
+  _borderBox(
+      {required String image, required String text, required var isLocked}) {
     return Container(
       padding: EdgeInsets.all(
         20.w,
@@ -520,22 +553,43 @@ class CarDashboardView extends GetView<CarDashboardController> {
           width: 2.w,
           color: AppColors.white,
         ),
-        gradient: LinearGradient(
-          colors: [
-            AppColors.white.withOpacity(.76),
-            AppColors.white.withOpacity(.05),
-          ],
-          begin: Alignment.topRight,
-          end: Alignment.bottomLeft,
-        ),
+        gradient: isLocked
+            ? LinearGradient(
+                colors: [
+                  const Color(0xFF0886CA).withOpacity(.76),
+                  const Color(0xFF0886CA).withOpacity(.05),
+                ],
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+              )
+            : LinearGradient(
+                colors: [
+                  AppColors.white.withOpacity(.76),
+                  AppColors.white.withOpacity(.05),
+                ],
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+              ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.asset(
-            image,
-            height: 45.w,
-            width: 35.w,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Image.asset(
+                image,
+                height: 45.w,
+                width: 35.w,
+                color: AppColors.white,
+              ),
+              if (isLocked)
+                Icon(
+                  Icons.check_circle,
+                  color: AppColors.white,
+                  size: 44.h,
+                ),
+            ],
           ),
           Gap(6.h),
           Text(

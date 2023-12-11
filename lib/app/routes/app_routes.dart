@@ -27,6 +27,7 @@ abstract class Routes {
   static const SET_MILE_PASSWORD = _Paths.SET_MILE_PASSWORD;
   static const DRIVER_DETAILS = _Paths.DRIVER_DETAILS;
   static const MFA_VERIFY = _Paths.MFA_VERIFY;
+  static const FORGET_PASSWORD = _Paths.FORGET_PASSWORD;
 }
 
 abstract class _Paths {
@@ -55,4 +56,5 @@ abstract class _Paths {
   static const SET_MILE_PASSWORD = '/set-mile-password';
   static const DRIVER_DETAILS = '/driver-details';
   static const MFA_VERIFY = '/mfa-verify';
+  static const FORGET_PASSWORD = '/forget-password';
 }

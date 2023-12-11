@@ -95,11 +95,12 @@ class MfaVerifyView extends GetView<MfaVerifyController> {
 
         Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: 24.w,
+            horizontal: 28.w,
           ),
           child: Obx(
             () => PrimaryButton(
               buttonText: "Verify",
+              borderRadius: BorderRadius.circular(15.r),
               isLoading: controller.isLoading.value,
               onTap: () {
                 controller.submitMfa();

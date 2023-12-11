@@ -7,6 +7,7 @@ class PrimaryButton extends StatelessWidget {
   final Color? backgroundColor;
   final void Function() onTap;
   final bool isLoading;
+  final BorderRadiusGeometry? borderRadius;
   final AlignmentGeometry? alignment;
   const PrimaryButton({
     super.key,
@@ -14,7 +15,7 @@ class PrimaryButton extends StatelessWidget {
     this.buttonWidth,
     this.backgroundColor,
     this.isLoading = false,
-    required this.onTap, this.alignment,
+    required this.onTap, this.alignment, this.borderRadius,
   });
 
   @override
@@ -28,7 +29,7 @@ class PrimaryButton extends StatelessWidget {
         ),
         width: buttonWidth ?? context.width,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(100.w),
+          borderRadius: borderRadius ?? BorderRadius.circular(100.w),
           color: backgroundColor ?? AppColors.primaryDark,
         ),
         child: isLoading

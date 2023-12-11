@@ -39,6 +39,68 @@ class HomeController extends GetxController {
     return name;
   }
 
+  var otherPolicyList = [
+    {"name": "Boat Insurance", "details": "Details here..."},
+    {"name": "Specialty Vehicle Insurance", "details": "Details here..."},
+    {"name": "Motorcycle Insurance", "details": "Details here..."}
+  ];
+
+  //*********************************************************************//
+  //************************* Delete Policies API ***********************//
+  //*********************************************************************//
+
+  Future<void> deleteAPI({required String apiName, id}) async {
+    isPoliciesLoading.value = true;
+    try {
+      var response = await API().post(
+        apiName,
+        data: {'user_id': DeviceHelper.getUserId(), 'id': id},
+      );
+
+      Get.log("Value  :  ${response.data}");
+
+      Map<String, dynamic>? res = json.decode(response.data);
+
+      if (res != null) {
+        if (res['status'] == 1) {
+          await policiesAPI();
+        } else {
+          errorDialog(res['msg']);
+        }
+      } else {
+        errorDialog('Some error occurred');
+      }
+    } catch (e) {
+      errorDialog('Some error occurred');
+    }
+  }
+
+  // deleteAPI({required String apiName, id}) {
+  //   isPoliciesLoading.value = true;
+  //   API().post(
+  //     apiName,
+  //     data: {'user_id': DeviceHelper.getUserId(), 'id': id},
+  //   ).then((value) async {
+  //     Get.log("Value  :  $value");
+  //     try {
+  //       Map<String, dynamic>? res = json.decode(value.data);
+  //       policiesAPI();
+  //       if (res != null) {
+  //         if (res['status'] == 1) {
+  //
+  //         } else {
+  //           errorDialog(res['msg']);
+  //         }
+  //       } else {
+  //         errorDialog('Some error occurred');
+  //       }
+  //     } catch (e) {
+  //       errorDialog('Some error occurred');
+  //     }
+  //     isPoliciesLoading.value = false;
+  //   });
+  // }
+
   //*********************************************************************//
   //************************* User Policies API *************************//
   //*********************************************************************//
@@ -59,14 +121,15 @@ class HomeController extends GetxController {
         if (res != null) {
           if (res['status'].toString() == "1") {
             policies = res;
+            isPoliciesLoading.value = false;
           } else {
-            // Constants.showErrorDialogRevise();
+            errorDialog(res['msg']);
           }
         } else {
-          // Constants.showErrorDialogRevise();
+          errorDialog('Some error occurred');
         }
       } catch (e) {
-        // Constants.showErrorDialogRevise();
+        errorDialog('Some error occurred');
       }
       isPoliciesLoading.value = false;
     });
@@ -221,6 +284,10 @@ class HomeController extends GetxController {
     if (index == 2) {
       policiesAPI();
     }
+
+    if (index == 1) {
+      getData();
+    }
   }
 
   String greeting() {
@@ -232,5 +299,121 @@ class HomeController extends GetxController {
       return 'Afternoon';
     }
     return 'Evening';
+  }
+
+  /// --------------------------------------------------------------------------
+
+  Future<void> restoreVehicleAPI(String id) async {
+    isLoading.value = true;
+    try {
+      var response = await API().post(
+        "add-unlisted-vehicle",
+        data: {'user_id': DeviceHelper.getUserId(), 'id': id},
+      );
+
+      Get.log("Value  :  ${response.data}");
+
+      Map<String, dynamic>? res = json.decode(response.data);
+
+      if (res != null) {
+        if (res['status'] == 1) {
+          await getData();
+        } else {
+          errorDialog(res['msg']);
+        }
+      }
+    } catch (e) {
+      errorDialog("Some error occurred");
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> getData() async {
+    isLoading.value = true;
+    await myFamilyAPI();
+    await getRestoreVehicleListAPI();
+
+    debugPrint("DATA NOT FOUND");
+  }
+
+  Map<String, dynamic>? familyDetails;
+
+  var restoreVehicleList = [].obs;
+  Future<void> getRestoreVehicleListAPI() async {
+    isLoading.value = true;
+    restoreVehicleList.clear();
+    try {
+      var response = await API().post(
+        "get-driver-package",
+        data: {'user_id': DeviceHelper.getUserId()},
+      );
+
+      Get.log("Value  :  ${response.data}");
+
+      Map<String, dynamic>? res = json.decode(response.data);
+
+      if (res != null) {
+        restoreVehicleList.value = res['unlisted_vehicles'];
+        isLoading.value = false;
+      }
+      isLoading.value = false;
+    } catch (e) {
+      errorDialog("Some error occurred");
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> deleteVehicleAPI(String vehicleId) async {
+    isLoading.value = true;
+    try {
+      var response = await API().post(
+        "delete-vehicle",
+        data: {
+          'user_id': DeviceHelper.getUserId(),
+          'vehicle_id': vehicleId,
+        },
+      );
+
+      Get.log("Value  :  ${response.data}");
+
+      Map<String, dynamic>? res = json.decode(response.data);
+
+      if (res != null) {
+        if (res['status'].toString() == "1") {
+          await getData();
+        }
+      }
+    } catch (e) {
+      debugPrint("Error in deleteVehicleAPI: $e");
+    }
+  }
+
+  Future<void> myFamilyAPI() async {
+    isLoading.value = true;
+    try {
+      var response = await API().post(
+        "my-family",
+        data: {'user_id': DeviceHelper.getUserId()},
+      );
+
+      Get.log("Value  :  ${response.data}");
+
+      Map<String, dynamic>? res = json.decode(response.data);
+
+      if (res != null) {
+        if (res['status'].toString() == "1") {
+          familyDetails = res['details'];
+        } else {
+          errorDialog(res['msg']);
+        }
+      } else {
+        errorDialog("Some error occurred");
+      }
+    } catch (e) {
+      errorDialog("Some error occurred");
+    } finally {
+      isLoading.value = false;
+    }
   }
 }

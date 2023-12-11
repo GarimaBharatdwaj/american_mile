@@ -38,7 +38,6 @@ class InsuranceProviderController extends GetxController {
         });
       }
     } catch (e) {
-
       errorDialog("Some error occurred");
       debugPrint(e.toString());
     }

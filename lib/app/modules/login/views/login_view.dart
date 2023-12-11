@@ -10,15 +10,15 @@ class LoginView extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Form(
+    return Scaffold(
+      body: SafeArea(
+        child: Form(
           key: controller.formKey,
           child: ListView(
             padding: EdgeInsets.all(15.w),
             children: [
               const MyAppBar(title: 'Log In'),
-
+            
               // Row(
               //   children: [
               //     RRectIcon(
@@ -43,7 +43,7 @@ class LoginView extends GetView<LoginController> {
               //     ),
               //   ],
               // ),
-
+            
               Gap(40.h),
               Obx(
                 () => Row(
@@ -108,16 +108,16 @@ class LoginView extends GetView<LoginController> {
                     tag: "Please enter password."),
                 controller: controller.passwordController,
               ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    'Forgot Password?',
-                    style: Get.textTheme.titleMedium,
-                  ),
-                ),
-              ),
+              /// Align(
+              //   alignment: Alignment.centerRight,
+              //   child: TextButton(
+              //     onPressed: () {},
+              //     child: Text(
+              //       'Forgot Password?',
+              //       style: Get.textTheme.titleMedium,
+              //     ),
+              //   ),
+              /// ),
               Gap(30.h),
               Padding(
                 padding: EdgeInsets.all(30.w),

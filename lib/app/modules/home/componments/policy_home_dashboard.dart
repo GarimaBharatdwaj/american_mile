@@ -185,7 +185,6 @@ class PolicyHomeDashboard extends StatelessWidget {
               ),
             ),
           ],
-
           if (controller.type.value == 2) ...[
             Gap(30.h),
             ...List.generate(
@@ -224,8 +223,59 @@ class PolicyHomeDashboard extends StatelessWidget {
               ),
             ),
           ],
-
-
+          if (controller.type.value == 3) ...[
+            Gap(30.h),
+            ...List.generate(3, (index) {
+              var policy = controller.otherPolicyList[index];
+              return Column(
+                children: [
+                  ShadowContainer(
+                      borderRadius: BorderRadius.circular(
+                        15.r,
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 15.w,
+                        vertical: 10.h,
+                      ),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              policy['name']!,
+                              style: Get.textTheme.titleMedium?.copyWith(
+                                fontSize: 16.sp,
+                              ),
+                            ),
+                            Gap(10.h),
+                            Container(
+                              height: 0.4,
+                              color: Colors.grey.withOpacity(0.3),
+                            ),
+                            Gap(10.h),
+                            Text(
+                              policy['details']!,
+                              style: Get.textTheme.titleMedium?.copyWith(
+                                fontSize: 14.sp,
+                              ),
+                            ),
+                            Gap(10.h),
+                          ])),
+                  Gap(30.h),
+                ],
+              );
+            }),
+            Align(
+              alignment: Alignment.centerRight,
+              child: PrimaryButton(
+                alignment: Alignment.center,
+                buttonText: 'Import Another Policy',
+                onTap: () {
+                  Get.toNamed(Routes.INSURANCE_PROVIDER);
+                },
+                buttonWidth: context.width / 2,
+              ),
+            ),
+          ],
 
           // ...List.generate(
           //     controller.policies!['data']['auto_policies'].length, (index) {
@@ -306,8 +356,6 @@ class PolicyHomeDashboard extends StatelessWidget {
       ),
     );
   }
-
-
 
   _policyItem({
     required String policyName,
@@ -420,6 +468,27 @@ class PolicyHomeDashboard extends StatelessWidget {
               ),
             ),
             Gap(15.h),
+            if (policyName != "LIFE POLICY")
+              GestureDetector(
+                onTap: () {
+                  controller.deleteAPI(
+                      apiName: policyName == "AUTO ON POLICY"
+                          ? 'delete-auto-policy'
+                          : 'delete-home-policy',
+                      id: policy['id']);
+                },
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Icon(
+                      Icons.clear,
+                      color: Colors.red,
+                    ),
+                    Text(" Delete Policy")
+                  ],
+                ),
+              ),
+            Gap(8.h),
           ],
         ),
       ),

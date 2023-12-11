@@ -16,6 +16,8 @@ import '../modules/driver_details/bindings/driver_details_binding.dart';
 import '../modules/driver_details/views/driver_details_view.dart';
 import '../modules/driver_licence/bindings/driver_licence_binding.dart';
 import '../modules/driver_licence/views/driver_licence_view.dart';
+import '../modules/forget_password/bindings/forget_password_binding.dart';
+import '../modules/forget_password/views/forget_password_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/home_policy/bindings/home_policy_binding.dart';
@@ -177,6 +179,10 @@ class AppPages {
       page: () => const MfaVerifyView(),
       binding: MfaVerifyBinding(),
     ),
-
+    GetPage(
+      name: _Paths.FORGET_PASSWORD,
+      page: () => const ForgetPasswordView(),
+      binding: ForgetPasswordBinding(),
+    ),
   ];
 }

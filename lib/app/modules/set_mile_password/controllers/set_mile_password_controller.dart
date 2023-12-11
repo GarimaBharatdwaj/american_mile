@@ -39,7 +39,7 @@ class SetMilePasswordController extends GetxController {
     isLoading.value = true;
     try {
       var response = await API().post('set-password', data: {
-        'user_id': DeviceHelper.getUserId(),
+        'user_id': userEmail != "" ? userEmail : DeviceHelper.getUserId(),
         'password': password.text.trim(),
         'confirmpassword': confirmPassword.text.trim(),
       });

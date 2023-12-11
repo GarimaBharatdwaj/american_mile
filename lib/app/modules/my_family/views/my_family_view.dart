@@ -1,5 +1,6 @@
 import 'package:american_mile/app/modules/car_dashboard/controllers/car_dashboard_controller.dart';
 import 'package:american_mile/core/components/index.dart';
+import 'package:american_mile/core/components/primary_button.dart';
 import 'package:american_mile/core/components/secondry_button.dart';
 import 'package:american_mile/core/utils/divider.dart';
 import 'package:american_mile/core/utils/index.dart';
@@ -15,7 +16,7 @@ class MyFamilyView extends GetView<MyFamilyController> {
       child: Obx(
         () => Scaffold(
           backgroundColor: AppColors.background,
-          body: controller.isLoading.isTrue
+          body: controller.isLoading.value
               ? showProgressIndicator()
               : Padding(
                   padding: EdgeInsets.all(12.w),
@@ -31,39 +32,11 @@ class MyFamilyView extends GetView<MyFamilyController> {
                       children: [
                         Expanded(
                           child: TabBarView(
-                            controller: controller.tabCotroller,
+                            controller: controller.tabController,
                             children: [
                               _driversComponent(),
-                              _vehicalComponent(),
+                              _vehicalComponent(context),
                               _address(),
-                              // Column(
-                              //   children: [
-                              //     Gap(20.h),
-                              //     ShadowContainer(
-                              //         child: Row(
-                              //       children: [
-                              //         Image.asset(
-                              //           ImagePaths.houseIcon,
-                              //           height: 40.w,
-                              //           width: 40.w,
-                              //         ),
-                              //         Gap(12.w),
-                              //         Expanded(
-                              //           child: Text(
-                              //             controller.familyDetails!['address']
-                              //                 .toString(),
-                              //             style: Get.textTheme.titleMedium
-                              //                 ?.copyWith(
-                              //               fontWeight: FontWeight.w700,
-                              //               height: 1.3,
-                              //             ),
-                              //             textAlign: TextAlign.start,
-                              //           ),
-                              //         ),
-                              //       ],
-                              //     ))
-                              //   ],
-                              // )
                             ],
                           ),
                         ),
@@ -207,7 +180,7 @@ class MyFamilyView extends GetView<MyFamilyController> {
               ),
             ],
             indicatorSize: TabBarIndicatorSize.label,
-            controller: controller.tabCotroller,
+            controller: controller.tabController,
             labelPadding: EdgeInsets.symmetric(
               horizontal: 25.w,
             ),
@@ -253,9 +226,9 @@ class MyFamilyView extends GetView<MyFamilyController> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Gap(20.h),
-          ...List.generate(controller.familyDetails!['drivers'].length,
+          ...List.generate(controller.familyDetails?['drivers'].length,
               (index) {
-            var driver = controller.familyDetails!['drivers'][index];
+            var driver = controller.familyDetails?['drivers'][index];
             return Column(
               children: [
                 ShadowContainer(
@@ -348,9 +321,9 @@ class MyFamilyView extends GetView<MyFamilyController> {
         padding: EdgeInsets.symmetric(horizontal: 12.w),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Gap(20.h),
-          ...List.generate(controller.familyDetails!['address'].length,
+          ...List.generate(controller.familyDetails?['address'].length,
               (index) {
-            var address = controller.familyDetails!['address'][index];
+            var address = controller.familyDetails?['address'][index];
             return Column(
               children: [
                 ShadowContainer(
@@ -381,16 +354,81 @@ class MyFamilyView extends GetView<MyFamilyController> {
         ]));
   }
 
-  _vehicalComponent() {
+  _restoreVehicleComponent(BuildContext context, List list) {
+    return Container(
+      alignment: Alignment.centerLeft,
+      padding: EdgeInsets.symmetric(
+        vertical: 18.h,
+      ),
+      width: context.width,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10.w),
+        color: AppColors.primaryDark,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              " ${controller.restoreVehicleList.length} Click Add from Policy Vehicles",
+              style: Get.textTheme.titleLarge?.copyWith(
+                  color: AppColors.white,
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w600),
+            ),
+            Gap(8.h),
+            ...List.generate(
+                list.length,
+                (index) => GestureDetector(
+                      onTap: () {
+                        controller.restoreVehicleAPI(list[index]['id']);
+                      },
+                      child: Column(
+                        children: [
+                          Gap(8.h),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.add,
+                                color: AppColors.white,
+                                size: 30.h,
+                              ),
+                              Text(
+                                list[index]['make'] +
+                                    " " +
+                                    list[index]['model'],
+                                style: Get.textTheme.titleMedium?.copyWith(
+                                  color: AppColors.white,
+                                  fontSize: 14.sp,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Gap(8.h),
+                        ],
+                      ),
+                    )),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _vehicalComponent(BuildContext context) {
     return SingleChildScrollView(
       padding: EdgeInsets.symmetric(horizontal: 12.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Gap(20.h),
-          ...List.generate(controller.familyDetails!['vehicles'].length,
+          Obx(() => controller.restoreVehicleList.isNotEmpty
+              ? _restoreVehicleComponent(context, controller.restoreVehicleList)
+              : const SizedBox()),
+          Gap(20.h),
+          ...List.generate(controller.familyDetails?['vehicles'].length,
               (index) {
-            var vehical = controller.familyDetails!['vehicles'][index];
+            var vehical = controller.familyDetails?['vehicles'][index];
             return Column(
               children: [
                 ShadowContainer(
@@ -467,7 +505,7 @@ class MyFamilyView extends GetView<MyFamilyController> {
                           SecondryButton(
                             buttonText: "Remove",
                             onTap: () {
-                              controller.deleteVehicalAPI(
+                              controller.deleteVehicleAPI(
                                 vehical['id'],
                               );
                             },
@@ -564,7 +602,7 @@ class MyFamilyView extends GetView<MyFamilyController> {
                           SecondryButton(
                             buttonText: "Remove",
                             onTap: () {
-                              controller.deleteVehicalAPI(
+                              controller.deleteVehicleAPI(
                                 vehical['id'],
                               );
                             },

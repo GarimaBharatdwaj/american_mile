@@ -16,136 +16,137 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Obx(() => Scaffold(
-            key: controller.scaffoldkey,
-            drawer: controller.isLoading.value == true ||
-                    DeviceHelper.getUserId() == null
-                ? null
-                : Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 15.w,
-                      vertical: 24.h,
+    return Obx(() => Scaffold(
+          key: controller.scaffoldkey,
+          drawer: controller.isLoading.value == true ||
+                  DeviceHelper.getUserId() == null
+              ? null
+              : Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 15.w,
+                    vertical: 24.h,
+                  ),
+                  width: context.width * .8,
+                  decoration: BoxDecoration(
+                    color: AppColors.background,
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(12.r),
+                      bottomRight: Radius.circular(12.r),
                     ),
-                    width: context.width * .8,
-                    decoration: BoxDecoration(
-                      color: AppColors.background,
-                      borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(12.r),
-                        bottomRight: Radius.circular(12.r),
+                  ),
+                  child: Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          controller.bottomNavIndex.value = 3;
+                          Get.close(1);
+                        },
+                        child: profileImage(
+                          imageUrl: controller.userData!['image'],
+                          circleRadius: 120.r,
+                          imageSize: 120.w,
+                        ),
                       ),
-                    ),
-                    child: Column(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            controller.bottomNavIndex.value = 3;
-                            Get.close(1);
-                          },
-                          child: profileImage(
-                            imageUrl: controller.userData!['image'],
-                            circleRadius: 120.r,
-                            imageSize: 120.w,
-                          ),
+                      Gap(6.h),
+                      Text(
+                        controller.userData!['fullname'] ?? "Hi User!",
+                        style: Get.textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 18.sp,
                         ),
-                        Gap(6.h),
-                        Text(
-                          controller.userData!['fullname'] ?? "Hi User!",
-                          style: Get.textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18.sp,
-                          ),
+                      ),
+                      Gap(3.h),
+                      Text(
+                        controller.userData!['email'],
+                        style: Get.textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14.sp,
                         ),
-                        Gap(3.h),
-                        Text(
-                          controller.userData!['email'],
-                          style: Get.textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 14.sp,
-                          ),
-                        ),
-                        Gap(40.h),
-                        _drawerItem(
-                          title: "My Family",
-                          icon: Icons.people_alt_rounded,
-                          onTap: () {
-                            Get.close(1);
-                            Get.toNamed(Routes.MY_FAMILY);
-                          },
-                        ),
-                        /// _drawerItem(
-                        //   title: "My Cars",
-                        //   icon: Icons.car_crash,
-                        //   onTap: () {},
-                        /// ),
-                        _drawerItem(
-                          title: "Update Password",
-                          icon: Icons.password,
-                          onTap: () {
-                            Get.toNamed(
-                              Routes.SET_MILE_PASSWORD,
-                              arguments: controller.userData!['email'],
-                            );
-                          },
-                        ),
-                        _drawerItem(
-                          title: "Logout",
-                          icon: Icons.logout,
-                          onTap: () {
-                            DeviceHelper.removeUserId();
-                            Get.offAllNamed(Routes.LOGIN);
-                          },
-                        ),
-                      ],
-                    ),
+                      ),
+                      Gap(40.h),
+                      _drawerItem(
+                        title: "My Family",
+                        icon: Icons.people_alt_rounded,
+                        onTap: () {
+                          Get.close(1);
+                          Get.toNamed(Routes.MY_FAMILY);
+                        },
+                      ),
+    
+                      /// _drawerItem(
+                      //   title: "My Cars",
+                      //   icon: Icons.car_crash,
+                      //   onTap: () {},
+                      /// ),
+                      _drawerItem(
+                        title: "Update Password",
+                        icon: Icons.password,
+                        onTap: () {
+                          Get.toNamed(
+                            Routes.SET_MILE_PASSWORD,
+                            arguments: controller.userData!['email'],
+                          );
+                        },
+                      ),
+                      _drawerItem(
+                        title: "Logout",
+                        icon: Icons.logout,
+                        onTap: () {
+                          DeviceHelper.removeUserId();
+                          Get.offAllNamed(Routes.LOGIN);
+                        },
+                      ),
+                    ],
                   ),
-            backgroundColor: AppColors.background,
-            // floatingActionButtonLocation:
-            //     FloatingActionButtonLocation.centerDocked,
-            // floatingActionButton: DeviceHelper.getUserId() == null
-            //     ? null
-            //     : FloatingActionButton(
-            //         onPressed: () => Get.toNamed(Routes.CAR_DASHBOARD),
-            //         elevation: 0,
-            //         shape: RoundedRectangleBorder(
-            //           borderRadius: BorderRadius.circular(100),
-            //         ),
-            //         child: Image.asset(
-            //           ImagePaths.carKey,
-            //           height: 24,
-            //           width: 24,
-            //         ),
-            //       ),
-            bottomNavigationBar: DeviceHelper.getUserId() == null
-                ? Padding(
-                    padding: EdgeInsets.all(25.w),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        SecondryButton(
-                          width: context.width,
-                          buttonText: "Sign In",
-                          onTap: () {
-                            Get.toNamed(Routes.LOGIN);
-                          },
-                        ),
-                      ],
-                    ),
-                  )
-                : AnimatedBottomNavigationBar(
-                    icons: controller.iconList,
-                    activeIndex: controller.bottomNavIndex.value,
-                    gapLocation: GapLocation.center,
-                    height: 70,
-                    notchSmoothness: NotchSmoothness.defaultEdge,
-                    leftCornerRadius: 24,
-                    rightCornerRadius: 24,
-                    onTap: controller.onBottomTap,
+                ),
+          backgroundColor: AppColors.background,
+          // floatingActionButtonLocation:
+          //     FloatingActionButtonLocation.centerDocked,
+          // floatingActionButton: DeviceHelper.getUserId() == null
+          //     ? null
+          //     : FloatingActionButton(
+          //         onPressed: () => Get.toNamed(Routes.CAR_DASHBOARD),
+          //         elevation: 0,
+          //         shape: RoundedRectangleBorder(
+          //           borderRadius: BorderRadius.circular(100),
+          //         ),
+          //         child: Image.asset(
+          //           ImagePaths.carKey,
+          //           height: 24,
+          //           width: 24,
+          //         ),
+          //       ),
+          bottomNavigationBar: DeviceHelper.getUserId() == null
+              ? Padding(
+                  padding: EdgeInsets.all(25.w),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SecondryButton(
+                        width: context.width,
+                        buttonText: "Sign In",
+                        onTap: () {
+                          Get.toNamed(Routes.LOGIN);
+                        },
+                      ),
+                    ],
                   ),
-            body: controller.isLoading.value ||
-                    controller.isPoliciesLoading.value
-                ? showProgressIndicator()
-                : SingleChildScrollView(
+                )
+              : AnimatedBottomNavigationBar(
+                  icons: controller.iconList,
+                  activeIndex: controller.bottomNavIndex.value,
+                  gapLocation: GapLocation.center,
+                  height: 70,
+                  notchSmoothness: NotchSmoothness.defaultEdge,
+                  leftCornerRadius: 24,
+                  rightCornerRadius: 24,
+                  onTap: controller.onBottomTap,
+                ),
+          body: controller.isLoading.value ||
+                  controller.isPoliciesLoading.value
+              ? showProgressIndicator()
+              : SafeArea(
+                child: SingleChildScrollView(
                     padding: EdgeInsets.all(15.w),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -181,7 +182,7 @@ class HomeView extends GetView<HomeController> {
                           ],
                         ),
                         controller.bottomNavIndex.value == 1
-                            ? const LocationMap()
+                            ? LocationMap()
                             : controller.bottomNavIndex.value == 2
                                 ? PolicyHomeDashboard()
                                 : controller.bottomNavIndex.value == 3
@@ -190,8 +191,8 @@ class HomeView extends GetView<HomeController> {
                       ],
                     ),
                   ),
-          )),
-    );
+              ),
+        ));
   }
 
   _optionWidget({
@@ -329,7 +330,11 @@ class HomeView extends GetView<HomeController> {
                     ),
                   ),
                   child: Text(
-                    controller.userData!['fullname'] ?? "Hi User!",
+                    controller.userData?['name']
+                            .toString()
+                            .split(' ')
+                            .first ??
+                        "Hi User!",
                     textAlign: TextAlign.center,
                     style: Get.textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.w700,

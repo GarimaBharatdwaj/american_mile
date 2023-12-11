@@ -6,12 +6,13 @@ class ShadowContainer extends StatelessWidget {
   final double? width;
   final Color? backgroundColor;
   final EdgeInsetsGeometry? padding;
+  final BorderRadiusGeometry? borderRadius;
   const ShadowContainer({
     super.key,
     required this.child,
     this.width,
     this.backgroundColor,
-    this.padding,
+    this.padding, this.borderRadius,
   });
 
   @override
@@ -20,7 +21,7 @@ class ShadowContainer extends StatelessWidget {
       width: width ?? context.width,
       padding: padding ?? EdgeInsets.all(20.w),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(
+        borderRadius: borderRadius ?? BorderRadius.circular(
           20.r,
         ),
         color: backgroundColor ?? AppColors.white,
