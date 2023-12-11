@@ -9,8 +9,7 @@ class DriverLicenceView extends GetView<DriverLicenceController> {
   const DriverLicenceView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Obx(
+    return  Obx(
       () => Scaffold(
         body: controller.isLoading.value
             ? showProgressIndicator()
@@ -82,6 +81,7 @@ class DriverLicenceView extends GetView<DriverLicenceController> {
                 ),
               ),
       ),
-    ));
+    )
+    ;
   }
 }

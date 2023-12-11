@@ -9,8 +9,7 @@ class ConnectCarView extends GetView<ConnectCarController> {
   const ConnectCarView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
+    return Scaffold(
         backgroundColor: AppColors.background,
         body: SingleChildScrollView(
           padding: EdgeInsets.all(15.w),
@@ -144,8 +143,7 @@ class ConnectCarView extends GetView<ConnectCarController> {
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 
   _component({

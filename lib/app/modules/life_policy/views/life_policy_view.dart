@@ -9,218 +9,215 @@ class LifePolicyView extends GetView<LifePolicyController> {
   const LifePolicyView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Obx(
-        () => Scaffold(
-          backgroundColor: AppColors.background,
-          body: controller.isLoading.isTrue
-              ? showProgressIndicator()
-              : SingleChildScrollView(
-                  padding: EdgeInsets.all(15.w),
-                  child: Column(children: [
-                    const MyAppBar(
-                      title: 'Life Policy',
+    return Obx(
+      () => Scaffold(
+        backgroundColor: AppColors.background,
+        body: controller.isLoading.isTrue
+            ? showProgressIndicator()
+            : SingleChildScrollView(
+                padding: EdgeInsets.all(15.w),
+                child: Column(children: [
+                  const MyAppBar(
+                    title: 'Life Policy',
+                  ),
+                  Gap(40.h),
+                  ShadowContainer(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Named Insured",
+                          style: Get.textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 21.sp,
+                          ),
+                        ),
+                        Gap(6.h),
+                        Text(
+                          "NAMED INSURED",
+                          style: Get.textTheme.bodyMedium?.copyWith(
+                            fontSize: 14.sp,
+                          ),
+                        ),
+                        Gap(16.h),
+                        Text(
+                          controller.lifeDetails!['named_insureds']['name'],
+                          style: Get.textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 21.sp,
+                          ),
+                        ),
+                        Text(
+                          controller.lifeDetails!['named_insureds']['address'],
+                          style: Get.textTheme.bodyMedium?.copyWith(
+                            fontSize: 14.sp,
+                            height: 1.4,
+                          ),
+                        ),
+                        Gap(16.h),
+                        Text(
+                          "DATE OF BIRTH",
+                          style: Get.textTheme.bodyMedium?.copyWith(
+                            fontSize: 12.sp,
+                          ),
+                        ),
+                        Gap(4.h),
+                        Text(
+                          controller.lifeDetails!['named_insureds']['dob'],
+                          style: Get.textTheme.bodyMedium?.copyWith(
+                            fontSize: 12.sp,
+                          ),
+                        ),
+                      ],
                     ),
-                    Gap(40.h),
-                    ShadowContainer(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Named Insured",
+                  ),
+                  Gap(40.h),
+                  ShadowContainer(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Beneficiary Information",
+                          style: Get.textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 21.sp,
+                          ),
+                        ),
+                        Gap(6.h),
+                        Text(
+                          "NAMED INSURED",
+                          style: Get.textTheme.bodyMedium?.copyWith(
+                            fontSize: 14.sp,
+                          ),
+                        ),
+                        Gap(6.h),
+                        Text(
+                          controller.lifeDetails!['beneficiary_Info']
+                                  ['beneficiary_paragraph']
+                              .toString()
+                              .toUpperCase(),
+                          style: Get.textTheme.bodyMedium?.copyWith(
+                            fontSize: 12.sp,
+                            height: 1.4,
+                          ),
+                        ),
+                        Gap(40.h),
+                        Text(
+                          "BENEFICIARY",
+                          style: Get.textTheme.bodyMedium?.copyWith(
+                            fontSize: 12.sp,
+                          ),
+                        ),
+                        Gap(3.h),
+                        Text(
+                          controller.lifeDetails!['beneficiary_Info']
+                              ['beneficiary'],
+                          style: Get.textTheme.bodyMedium?.copyWith(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Gap(40.h),
+                  ShadowContainer(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Payor information",
+                          style: Get.textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 21.sp,
+                          ),
+                        ),
+                        Gap(10.h),
+                        Text(
+                          "AN INDIVIDUAL AUTHORIZED TO MAKE PAYMENTS\nND MAKE CERTAIN LIMITED CHANGES TO BILLING.",
+                          style: Get.textTheme.bodyMedium?.copyWith(
+                            fontSize: 12.sp,
+                            height: 1.4,
+                          ),
+                        ),
+                        Gap(30.h),
+                        Text(
+                          "PAYOR",
+                          style: Get.textTheme.bodyMedium?.copyWith(
+                            fontSize: 12.sp,
+                          ),
+                        ),
+                        Gap(6.h),
+                        Text(
+                          controller.lifeDetails!['payor_info']['payor_name'],
+                          style: Get.textTheme.bodyMedium?.copyWith(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        Text(
+                          controller.lifeDetails!['payor_info']
+                              ['payor_address'],
+                          style: Get.textTheme.bodyMedium?.copyWith(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w600,
+                            height: 1.3,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(40.w),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            controller.type.value = 0;
+                          },
+                          child: Text(
+                            "DETAILS",
                             style: Get.textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.w600,
-                              fontSize: 21.sp,
-                            ),
-                          ),
-                          Gap(6.h),
-                          Text(
-                            "NAMED INSURED",
-                            style: Get.textTheme.bodyMedium?.copyWith(
-                              fontSize: 14.sp,
-                            ),
-                          ),
-                          Gap(16.h),
-                          Text(
-                            controller.lifeDetails!['named_insureds']['name'],
-                            style: Get.textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 21.sp,
-                            ),
-                          ),
-                          Text(
-                            controller.lifeDetails!['named_insureds']
-                                ['address'],
-                            style: Get.textTheme.bodyMedium?.copyWith(
-                              fontSize: 14.sp,
                               height: 1.4,
+                              color: controller.type.value == 0
+                                  ? AppColors.primaryDark
+                                  : AppColors.textLight,
+                              fontSize: 18.sp,
                             ),
                           ),
-                          Gap(16.h),
-                          Text(
-                            "DATE OF BIRTH",
-                            style: Get.textTheme.bodyMedium?.copyWith(
-                              fontSize: 12.sp,
-                            ),
-                          ),
-                          Gap(4.h),
-                          Text(
-                            controller.lifeDetails!['named_insureds']['dob'],
-                            style: Get.textTheme.bodyMedium?.copyWith(
-                              fontSize: 12.sp,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Gap(40.h),
-                    ShadowContainer(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Beneficiary Information",
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            controller.type.value = 1;
+                          },
+                          child: Text(
+                            "DOCUMENTS",
                             style: Get.textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.w600,
-                              fontSize: 21.sp,
-                            ),
-                          ),
-                          Gap(6.h),
-                          Text(
-                            "NAMED INSURED",
-                            style: Get.textTheme.bodyMedium?.copyWith(
-                              fontSize: 14.sp,
-                            ),
-                          ),
-                          Gap(6.h),
-                          Text(
-                            controller.lifeDetails!['beneficiary_Info']
-                                    ['beneficiary_paragraph']
-                                .toString()
-                                .toUpperCase(),
-                            style: Get.textTheme.bodyMedium?.copyWith(
-                              fontSize: 12.sp,
                               height: 1.4,
+                              color: controller.type.value == 1
+                                  ? AppColors.primaryDark
+                                  : AppColors.textLight,
+                              fontSize: 18.sp,
                             ),
                           ),
-                          Gap(40.h),
-                          Text(
-                            "BENEFICIARY",
-                            style: Get.textTheme.bodyMedium?.copyWith(
-                              fontSize: 12.sp,
-                            ),
-                          ),
-                          Gap(3.h),
-                          Text(
-                            controller.lifeDetails!['beneficiary_Info']
-                                ['beneficiary'],
-                            style: Get.textTheme.bodyMedium?.copyWith(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    Gap(40.h),
-                    ShadowContainer(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Payor information",
-                            style: Get.textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 21.sp,
-                            ),
-                          ),
-                          Gap(10.h),
-                          Text(
-                            "AN INDIVIDUAL AUTHORIZED TO MAKE PAYMENTS\nND MAKE CERTAIN LIMITED CHANGES TO BILLING.",
-                            style: Get.textTheme.bodyMedium?.copyWith(
-                              fontSize: 12.sp,
-                              height: 1.4,
-                            ),
-                          ),
-                          Gap(30.h),
-                          Text(
-                            "PAYOR",
-                            style: Get.textTheme.bodyMedium?.copyWith(
-                              fontSize: 12.sp,
-                            ),
-                          ),
-                          Gap(6.h),
-                          Text(
-                            controller.lifeDetails!['payor_info']['payor_name'],
-                            style: Get.textTheme.bodyMedium?.copyWith(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          Text(
-                            controller.lifeDetails!['payor_info']
-                                ['payor_address'],
-                            style: Get.textTheme.bodyMedium?.copyWith(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w600,
-                              height: 1.3,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(40.w),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              controller.type.value = 0;
-                            },
-                            child: Text(
-                              "DETAILS",
-                              style: Get.textTheme.titleMedium?.copyWith(
-                                fontWeight: FontWeight.w600,
-                                height: 1.4,
-                                color: controller.type.value == 0
-                                    ? AppColors.primaryDark
-                                    : AppColors.textLight,
-                                fontSize: 18.sp,
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              controller.type.value = 1;
-                            },
-                            child: Text(
-                              "DOCUMENTS",
-                              style: Get.textTheme.titleMedium?.copyWith(
-                                fontWeight: FontWeight.w600,
-                                height: 1.4,
-                                color: controller.type.value == 1
-                                    ? AppColors.primaryDark
-                                    : AppColors.textLight,
-                                fontSize: 18.sp,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    controller.type.value == 0 ? details() : documents(),
-                    Gap(20.h),
+                  ),
+                  controller.type.value == 0 ? details() : documents(),
+                  Gap(20.h),
 
-                    /// PrimaryButton(
-                    //   buttonText: "Flow",
-                    //   onTap: () {
-                    //     Get.toNamed(Routes.MY_FAMILY);
-                    //   },
-                    /// ),
-                  ]),
-                ),
-        ),
+                  /// PrimaryButton(
+                  //   buttonText: "Flow",
+                  //   onTap: () {
+                  //     Get.toNamed(Routes.MY_FAMILY);
+                  //   },
+                  /// ),
+                ]),
+              ),
       ),
     );
   }

@@ -72,7 +72,7 @@ class HomeView extends GetView<HomeController> {
                           Get.toNamed(Routes.MY_FAMILY);
                         },
                       ),
-    
+
                       /// _drawerItem(
                       //   title: "My Cars",
                       //   icon: Icons.car_crash,
@@ -135,18 +135,17 @@ class HomeView extends GetView<HomeController> {
               : AnimatedBottomNavigationBar(
                   icons: controller.iconList,
                   activeIndex: controller.bottomNavIndex.value,
-                  gapLocation: GapLocation.center,
+                  gapLocation: GapLocation.none,
                   height: 70,
                   notchSmoothness: NotchSmoothness.defaultEdge,
                   leftCornerRadius: 24,
                   rightCornerRadius: 24,
                   onTap: controller.onBottomTap,
                 ),
-          body: controller.isLoading.value ||
-                  controller.isPoliciesLoading.value
+          body: controller.isLoading.value || controller.isPoliciesLoading.value
               ? showProgressIndicator()
               : SafeArea(
-                child: SingleChildScrollView(
+                  child: SingleChildScrollView(
                     padding: EdgeInsets.all(15.w),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -191,7 +190,7 @@ class HomeView extends GetView<HomeController> {
                       ],
                     ),
                   ),
-              ),
+                ),
         ));
   }
 
@@ -330,10 +329,7 @@ class HomeView extends GetView<HomeController> {
                     ),
                   ),
                   child: Text(
-                    controller.userData?['name']
-                            .toString()
-                            .split(' ')
-                            .first ??
+                    controller.userData?['name'].toString().split(' ').first ??
                         "Hi User!",
                     textAlign: TextAlign.center,
                     style: Get.textTheme.titleLarge?.copyWith(

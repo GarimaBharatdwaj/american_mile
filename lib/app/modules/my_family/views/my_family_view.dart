@@ -437,20 +437,6 @@ class MyFamilyView extends GetView<MyFamilyController> {
                         height: 80.w,
                         width: 80.w,
                       ),
-                      Gap(8.h),
-                      SecondryButton(
-                        buttonText: "Connect car",
-                        onTap: () {
-                          Get.toNamed(
-                            Routes.CAR_DASHBOARD,
-                            arguments: {
-                              "id": vehical['id'],
-                              "type": "3",
-                            },
-                          );
-                        },
-                      ),
-                      Gap(8.h),
                       Text(
                         "${vehical['year']} ${vehical['make']}\n${vehical['model']}",
                         style: Get.textTheme.titleLarge?.copyWith(
@@ -476,10 +462,12 @@ class MyFamilyView extends GetView<MyFamilyController> {
                         key: "Model :",
                         value: vehical['model'],
                       ),
-                      _containerItem(
-                        key: "Body :",
-                        value: vehical['body'],
-                      ),
+                      vehical['body'] == null || vehical['body'] == ""
+                          ? Container()
+                          : _containerItem(
+                              key: "Body :",
+                              value: vehical['body'],
+                            ),
                       Gap(20.h),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -515,6 +503,21 @@ class MyFamilyView extends GetView<MyFamilyController> {
                           ),
                         ],
                       ),
+                      Gap(8.h),
+                      SecondryButton(
+                        width: context.width,
+                        buttonText: "Connect car",
+                        onTap: () {
+                          Get.toNamed(
+                            Routes.CAR_DASHBOARD,
+                            arguments: {
+                              "id": vehical['id'],
+                              "type": "3",
+                            },
+                          );
+                        },
+                      ),
+                      Gap(8.h),
                     ],
                   ),
                 ),

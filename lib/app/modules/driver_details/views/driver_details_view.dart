@@ -10,8 +10,7 @@ class DriverDetailsView extends GetView<DriverDetailsController> {
   const DriverDetailsView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
+    return  Scaffold(
         body: SingleChildScrollView(
           padding: EdgeInsets.all(15.w),
           child: Obx(
@@ -117,7 +116,6 @@ class DriverDetailsView extends GetView<DriverDetailsController> {
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }

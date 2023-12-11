@@ -11,296 +11,291 @@ class AutoPolicyView extends GetView<AutoPolicyController> {
   const AutoPolicyView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Obx(
-        () => Scaffold(
-          backgroundColor: AppColors.background,
-          body: controller.isLoading.value == true
-              ? showProgressIndicator()
-              : SingleChildScrollView(
-                  padding: EdgeInsets.symmetric(vertical: 15.w),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 15.w),
-                        child: const MyAppBar(title: 'Auto Policy Details'),
-                      ),
-                      Gap(40.h),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: [
-                            Gap(15.w),
-                            ShadowContainer(
-                              width: context.width * .75,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    "Named Insured",
-                                    style: Get.textTheme.titleMedium?.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 18.sp,
-                                    ),
-                                  ),
-                                  ...List.generate(
-                                      controller
-                                          .autoDetails!['data']
-                                              ['named_insureds']
-                                          .length, (index) {
-                                    return Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Gap(6.h),
-                                        Text(
-                                          "NAMED INSURED",
-                                          style: Get.textTheme.bodyMedium
-                                              ?.copyWith(
-                                            fontSize: 12.sp,
-                                          ),
-                                        ),
-                                        Gap(6.h),
-                                        Text(
-                                          controller.autoDetails!['data']
-                                              ['named_insureds'][index],
-                                          style: Get.textTheme.titleMedium
-                                              ?.copyWith(
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 16.sp,
-                                          ),
-                                        ),
-                                      ],
-                                    );
-                                  }),
-                                ],
-                              ),
-                            ),
-                            Gap(15.w),
-                            Container(
-                              width: context.width * .75,
-                              padding: EdgeInsets.only(
-                                top: 20.h,
-                                bottom: 20.h,
-                                left: 20.h,
-                              ),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(
-                                  20.r,
-                                ),
-                                color: AppColors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: AppColors.shadowColor,
-                                    blurRadius: 10.w,
-                                    offset: Offset(
-                                      0,
-                                      3.h,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Drivers",
-                                        style:
-                                            Get.textTheme.titleMedium?.copyWith(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 18.sp,
-                                        ),
-                                      ),
-                                      GestureDetector(
-                                          onTap: () {
-                                            Get.toNamed(Routes.MY_FAMILY);
-                                          },
-                                          child: const RequestChange(
-                                            title: 'Manage Driver',
-                                          )),
-                                    ],
-                                  ),
-                                  ...List.generate(
-                                      controller
-                                          .autoDetails!['data']['driver_data']
-                                          .length, (index) {
-                                    var driver = controller.autoDetails!['data']
-                                        ['driver_data'][index];
-                                    return Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "DRIVERS",
-                                          style: Get.textTheme.bodyMedium
-                                              ?.copyWith(
-                                            fontSize: 12.sp,
-                                          ),
-                                        ),
-                                        Gap(6.h),
-                                        Text(
-                                          driver['name'],
-                                          style: Get.textTheme.titleMedium
-                                              ?.copyWith(
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 16.sp,
-                                          ),
-                                        ),
-                                      ],
-                                    );
-                                  }),
-                                ],
-                              ),
-                            ),
-                            Gap(15.w),
-                            Container(
-                              width: context.width * .75,
-                              padding: EdgeInsets.only(
-                                top: 20.h,
-                                bottom: 20.h,
-                                left: 20.h,
-                              ),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(
-                                  20.r,
-                                ),
-                                color: AppColors.white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: AppColors.shadowColor,
-                                    blurRadius: 10.w,
-                                    offset: Offset(
-                                      0,
-                                      3.h,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Addresses",
-                                        style:
-                                            Get.textTheme.titleMedium?.copyWith(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 18.sp,
-                                        ),
-                                      ),
-                                      GestureDetector(
-                                          onTap: () {
-                                            Get.toNamed(Routes.MY_FAMILY);
-                                          },
-                                          child: const RequestChange(
-                                            title: 'Manage Homes',
-                                          )),
-                                    ],
-                                  ),
-                                  Text(
-                                    "ADDRESS",
-                                    style: Get.textTheme.bodyMedium?.copyWith(
-                                      fontSize: 12.sp,
-                                    ),
-                                  ),
-                                  Gap(6.h),
-                                  Text(
-                                    controller.autoDetails!['data']['address'],
-                                    style: Get.textTheme.titleMedium?.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 16.sp,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Gap(15.w),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 15.w),
-                        child: Column(
-                          children: [
-                            Gap(40.h),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Obx(
+      () => Scaffold(
+        backgroundColor: AppColors.background,
+        body: controller.isLoading.value == true
+            ? showProgressIndicator()
+            : SingleChildScrollView(
+                padding: EdgeInsets.symmetric(vertical: 15.w),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15.w),
+                      child: const MyAppBar(title: 'Auto Policy Details'),
+                    ),
+                    Gap(40.h),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: [
+                          Gap(15.w),
+                          ShadowContainer(
+                            width: context.width * .75,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    controller.type.value = 0;
-                                  },
-                                  child: Text(
-                                    "DETAILS",
-                                    style: Get.textTheme.titleMedium?.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                      height: 1.4,
-                                      color: controller.type.value == 0
-                                          ? AppColors.primaryDark
-                                          : AppColors.textLight,
-                                      fontSize: 18.sp,
-                                    ),
+                                Text(
+                                  "Named Insured",
+                                  style: Get.textTheme.titleMedium?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 18.sp,
                                   ),
                                 ),
-                                GestureDetector(
-                                  onTap: () {
-                                    controller.type.value = 1;
-                                  },
-                                  child: Text(
-                                    "ID CARDS",
-                                    style: Get.textTheme.titleMedium?.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                      height: 1.4,
-                                      color: controller.type.value == 1
-                                          ? AppColors.primaryDark
-                                          : AppColors.textLight,
-                                      fontSize: 18.sp,
-                                    ),
-                                  ),
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    controller.type.value = 2;
-                                  },
-                                  child: Text(
-                                    "DOCUMENTS",
-                                    style: Get.textTheme.titleMedium?.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                      height: 1.4,
-                                      color: controller.type.value == 2
-                                          ? AppColors.primaryDark
-                                          : AppColors.textLight,
-                                      fontSize: 18.sp,
-                                    ),
+                                ...List.generate(
+                                    controller
+                                        .autoDetails!['data']['named_insureds']
+                                        .length, (index) {
+                                  return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Gap(6.h),
+                                      Text(
+                                        "NAMED INSURED",
+                                        style:
+                                            Get.textTheme.bodyMedium?.copyWith(
+                                          fontSize: 12.sp,
+                                        ),
+                                      ),
+                                      Gap(6.h),
+                                      Text(
+                                        controller.autoDetails!['data']
+                                            ['named_insureds'][index],
+                                        style:
+                                            Get.textTheme.titleMedium?.copyWith(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 16.sp,
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                }),
+                              ],
+                            ),
+                          ),
+                          Gap(15.w),
+                          Container(
+                            width: context.width * .75,
+                            padding: EdgeInsets.only(
+                              top: 20.h,
+                              bottom: 20.h,
+                              left: 20.h,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(
+                                20.r,
+                              ),
+                              color: AppColors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: AppColors.shadowColor,
+                                  blurRadius: 10.w,
+                                  offset: Offset(
+                                    0,
+                                    3.h,
                                   ),
                                 ),
                               ],
                             ),
-                            Gap(40.h),
-                            controller.type.value == 0
-                                ? _autoDetails(context)
-                                : controller.type.value == 1
-                                    ? _autoIdCards(context)
-                                    : _autoDocuments(context),
-                            Gap(40.h),
-                          ],
-                        ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Drivers",
+                                      style:
+                                          Get.textTheme.titleMedium?.copyWith(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 18.sp,
+                                      ),
+                                    ),
+                                    GestureDetector(
+                                        onTap: () {
+                                          Get.toNamed(Routes.MY_FAMILY);
+                                        },
+                                        child: const RequestChange(
+                                          title: 'Manage Driver',
+                                        )),
+                                  ],
+                                ),
+                                ...List.generate(
+                                    controller
+                                        .autoDetails!['data']['driver_data']
+                                        .length, (index) {
+                                  var driver = controller.autoDetails!['data']
+                                      ['driver_data'][index];
+                                  return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "DRIVERS",
+                                        style:
+                                            Get.textTheme.bodyMedium?.copyWith(
+                                          fontSize: 12.sp,
+                                        ),
+                                      ),
+                                      Gap(6.h),
+                                      Text(
+                                        driver['name'],
+                                        style:
+                                            Get.textTheme.titleMedium?.copyWith(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 16.sp,
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                }),
+                              ],
+                            ),
+                          ),
+                          Gap(15.w),
+                          Container(
+                            width: context.width * .75,
+                            padding: EdgeInsets.only(
+                              top: 20.h,
+                              bottom: 20.h,
+                              left: 20.h,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(
+                                20.r,
+                              ),
+                              color: AppColors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: AppColors.shadowColor,
+                                  blurRadius: 10.w,
+                                  offset: Offset(
+                                    0,
+                                    3.h,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Addresses",
+                                      style:
+                                          Get.textTheme.titleMedium?.copyWith(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 18.sp,
+                                      ),
+                                    ),
+                                    GestureDetector(
+                                        onTap: () {
+                                          Get.toNamed(Routes.MY_FAMILY);
+                                        },
+                                        child: const RequestChange(
+                                          title: 'Manage Homes',
+                                        )),
+                                  ],
+                                ),
+                                Text(
+                                  "ADDRESS",
+                                  style: Get.textTheme.bodyMedium?.copyWith(
+                                    fontSize: 12.sp,
+                                  ),
+                                ),
+                                Gap(6.h),
+                                Text(
+                                  controller.autoDetails!['data']['address'],
+                                  style: Get.textTheme.titleMedium?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16.sp,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Gap(15.w),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15.w),
+                      child: Column(
+                        children: [
+                          Gap(40.h),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  controller.type.value = 0;
+                                },
+                                child: Text(
+                                  "DETAILS",
+                                  style: Get.textTheme.titleMedium?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    height: 1.4,
+                                    color: controller.type.value == 0
+                                        ? AppColors.primaryDark
+                                        : AppColors.textLight,
+                                    fontSize: 18.sp,
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  controller.type.value = 1;
+                                },
+                                child: Text(
+                                  "ID CARDS",
+                                  style: Get.textTheme.titleMedium?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    height: 1.4,
+                                    color: controller.type.value == 1
+                                        ? AppColors.primaryDark
+                                        : AppColors.textLight,
+                                    fontSize: 18.sp,
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  controller.type.value = 2;
+                                },
+                                child: Text(
+                                  "DOCUMENTS",
+                                  style: Get.textTheme.titleMedium?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    height: 1.4,
+                                    color: controller.type.value == 2
+                                        ? AppColors.primaryDark
+                                        : AppColors.textLight,
+                                    fontSize: 18.sp,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Gap(40.h),
+                          controller.type.value == 0
+                              ? _autoDetails(context)
+                              : controller.type.value == 1
+                                  ? _autoIdCards(context)
+                                  : _autoDocuments(context),
+                          Gap(40.h),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-        ),
+              ),
       ),
     );
   }
