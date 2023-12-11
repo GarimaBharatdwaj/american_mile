@@ -22,7 +22,7 @@ class CanopyLoginView extends GetView<CanopyLoginController> {
                         child: CircularProgressIndicator(
                           color: AppColors.primaryDark,
                           strokeWidth: 3.0,
-                        ),
+                        ), 
                       ),
                       Gap(20.w),
                       Text(
@@ -33,7 +33,7 @@ class CanopyLoginView extends GetView<CanopyLoginController> {
                       ),
                     ],
                   ),
-                )
+                ) 
               : Form(
                   key: controller.formKey,
                   child: ListView(
