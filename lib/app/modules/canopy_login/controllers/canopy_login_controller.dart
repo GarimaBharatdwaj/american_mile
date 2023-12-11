@@ -50,7 +50,7 @@ class CanopyLoginController extends GetxController {
       if (mapData != null) {
         if (mapData['status'] == 1) {
           login = mapData['msg'];
-          Future.delayed(1500.milliseconds).then((value) {
+          Future.delayed(3000.milliseconds).then((value) {
             pullCanopy();
           });
         } else {
@@ -93,7 +93,13 @@ class CanopyLoginController extends GetxController {
             map.addAll(mapData['msg']['mfa_options']);
             Get.toNamed(Routes.MFA_VERIFY, arguments: map);
           } else {
-            canopyConnectApi(mapData['msg']['account_email']);
+            if (mapData['msg']['account_email'] != null &&
+                mapData['msg']['account_email'] != "") {
+              canopyConnectApi(mapData['msg']['account_email']);
+            } else {
+              isLoading.value = false;
+              errorDialog('Something went wrong, please try again later');
+            }
           }
         }
       } else {

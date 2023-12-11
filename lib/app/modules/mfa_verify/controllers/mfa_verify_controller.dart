@@ -139,14 +139,14 @@ class MfaVerifyController extends GetxController {
     }
   }
 
-  sendVerificationCode() async {
+  sendVerificationCode(String key) async {
     isLoading.value = true;
 
     try {
       var response = await API().post('select-id-verification', data: {
         'pull_id': mfaOptions!.elementAt(0),
         'pull_jwt': mfaOptions!.elementAt(1),
-        'optionKey': 'email',
+        'optionKey': key,
       });
       Map<String, dynamic>? mapData = jsonDecode(response.data);
       if (mapData != null) {

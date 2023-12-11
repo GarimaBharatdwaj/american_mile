@@ -33,15 +33,15 @@ class MfaVerifyView extends GetView<MfaVerifyController> {
               ?.copyWith(fontSize: 14.sp, fontWeight: FontWeight.w700),
         ),
         Gap(30.h),
-        ...List.generate(
-            controller.mfaOptions!.length - 2,
-            (index) => ToggleMFAVerification(
-                text: controller.mfaOptions!.elementAt(index + 2),
-                value: index,
-                groupValue: controller.verificationMethod.value,
-                onChange: (val) {
-                  controller.verificationMethod.value = val;
-                })),
+        ...List.generate(controller.mfaOptions!.length - 2, (index) {
+          return ToggleMFAVerification(
+              text: controller.mfaOptions!.elementAt(index + 2),
+              value: index,
+              groupValue: controller.verificationMethod.value,
+              onChange: (val) {
+                controller.verificationMethod.value = val;
+              });
+        }),
         Gap(30.h),
         Padding(
           padding: EdgeInsets.symmetric(
@@ -52,7 +52,10 @@ class MfaVerifyView extends GetView<MfaVerifyController> {
               buttonText: "Continue",
               isLoading: controller.isLoading.value,
               onTap: () {
-                controller.sendVerificationCode();
+                controller.sendVerificationCode(
+                  controller.mfaOptions!.keys
+                      .elementAt(controller.verificationMethod.value + 2),
+                );
               },
             ),
           ),
