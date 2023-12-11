@@ -1,6 +1,7 @@
 // Package imports:
 
 import 'package:american_mile/common_lib.dart';
+import 'package:american_mile/core/helpers/device_helper.dart';
 import 'package:american_mile/core/utils/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -27,7 +28,7 @@ Widget profileImage({
           CachedNetworkImage(
             imageUrl: imageUrl != null && imageUrl != "" && imageUrl.isNotEmpty
                 ? imageUrl
-                : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_G6xzg50_0xQxkpPALn3UWChYalFzTPFCJA&usqp=CAU",
+                : "https://americanmile.com/assets/images/no-image-icon.png",
             imageBuilder: (context, imageProvider) {
               return Container(
                 decoration: BoxDecoration(
@@ -53,7 +54,7 @@ Widget profileImage({
                 decoration: BoxDecoration(
                   image: const DecorationImage(
                     image: NetworkImage(
-                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_G6xzg50_0xQxkpPALn3UWChYalFzTPFCJA&usqp=CAU",
+                      "https://americanmile.com/assets/images/no-image-icon.png",
                     ),
                     fit: BoxFit.cover,
                   ),
