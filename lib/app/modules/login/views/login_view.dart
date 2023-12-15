@@ -44,32 +44,32 @@ class LoginView extends GetView<LoginController> {
               //   ],
               // ),
             
-              Gap(40.h),
-              Obx(
-                () => Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ToggleEmailPhone(
-                      text: 'Email',
-                      value: true,
-                      groupValue: controller.isLoginTypeEmail.value,
-                      onChange: (val) {
-                        controller.isLoginTypeEmail.value = true;
-                      },
-                    ),
-                    Gap(8.w),
-                    ToggleEmailPhone(
-                      text: 'Phone',
-                      value: false,
-                      groupValue: controller.isLoginTypeEmail.value,
-                      onChange: (val) {
-                        controller.isLoginTypeEmail.value = false;
-                      },
-                    ),
-                  ],
-                ),
-              ),
+              ///Gap(40.h),
+              // Obx(
+              //   () => Row(
+              //     mainAxisSize: MainAxisSize.max,
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       ToggleEmailPhone(
+              //         text: 'Email',
+              //         value: true,
+              //         groupValue: controller.isLoginTypeEmail.value,
+              //         onChange: (val) {
+              //           controller.isLoginTypeEmail.value = true;
+              //         },
+              //       ),
+              //       Gap(8.w),
+              //       ToggleEmailPhone(
+              //         text: 'Phone',
+              //         value: false,
+              //         groupValue: controller.isLoginTypeEmail.value,
+              //         onChange: (val) {
+              //           controller.isLoginTypeEmail.value = false;
+              //         },
+              //       ),
+              //     ],
+              //   ),
+              /// ),
               Gap(48.h),
               Obx(
                 () => Visibility(

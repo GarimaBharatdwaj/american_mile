@@ -2,7 +2,7 @@
 import '../../../common_lib.dart';
 
 errorDialog(String message,
-    {String? title, VoidCallback? onTap, String? buttonTitle}) {
+    {String? title, VoidCallback? onTap, String? buttonTitle,}) {
   showDialog(
     context: Get.context!,
     builder: (ctx) => AlertDialog(

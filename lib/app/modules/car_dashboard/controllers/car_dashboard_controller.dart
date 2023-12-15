@@ -34,7 +34,11 @@ class CarDashboardController extends GetxController {
     update();
   }
 
-  var isLockList = [false, false, false, false, false, false, false].obs;
+  var isLockList = [
+    false,
+
+    /// false, false, false, false, false, false
+  ].obs;
 
   var dataList = [
     {
@@ -42,36 +46,37 @@ class CarDashboardController extends GetxController {
       "text": "lock\nVehicle",
       "isLock": false,
     },
-    {
-      "image": ImagePaths.carWhite,
-      "text": "Door\nLocking",
-      "isLock": false,
-    },
-    {
-      "image": ImagePaths.carWhite,
-      "text": "Vehicle\nHood",
-      "isLock": false,
-    },
-    {
-      "image": ImagePaths.sunroof,
-      "text": "Vehicle\nSunroof",
-      "isLock": false,
-    },
-    {
-      "image": ImagePaths.trunck,
-      "text": "Vehicle\nTrunk",
-      "isLock": false,
-    },
-    {
-      "image": ImagePaths.carDoor,
-      "text": "Vehicle\nWindows",
-      "isLock": false,
-    },
-    {
-      "image": ImagePaths.battery,
-      "text": "EV\nBattery",
-      "isLock": false,
-    },
+
+    /// {
+    //   "image": ImagePaths.carWhite,
+    //   "text": "Door\nLocking",
+    //   "isLock": false,
+    // },
+    // {
+    //   "image": ImagePaths.carWhite,
+    //   "text": "Vehicle\nHood",
+    //   "isLock": false,
+    // },
+    // {
+    //   "image": ImagePaths.sunroof,
+    //   "text": "Vehicle\nSunroof",
+    //   "isLock": false,
+    // },
+    // {
+    //   "image": ImagePaths.trunck,
+    //   "text": "Vehicle\nTrunk",
+    //   "isLock": false,
+    // },
+    // {
+    //   "image": ImagePaths.carDoor,
+    //   "text": "Vehicle\nWindows",
+    //   "isLock": false,
+    // },
+    // {
+    //   "image": ImagePaths.battery,
+    //   "text": "EV\nBattery",
+    //   "isLock": false,
+    /// },
   ].obs;
 
   var isLocked = false.obs;
@@ -94,13 +99,19 @@ class CarDashboardController extends GetxController {
 
       if (res != null) {
         if (res['status'] == 1) {
+          isLoading.value = false;
         } else {
+          Get.back();
           errorDialog('Some error occurred');
         }
         isLoading.value = false;
+      } else {
+        Get.back();
+        errorDialog('Some error occurred');
+        isLoading.value = false;
       }
-      isLoading.value = false;
     } catch (e) {
+      Get.back();
       errorDialog("Some error occurred");
       isLoading.value = false;
     }
@@ -117,21 +128,26 @@ class CarDashboardController extends GetxController {
       Map<String, dynamic>? mapData = jsonDecode(response.data);
       if (mapData != null) {
         if (mapData['status'] == 1) {
-          webUrl = mapData['url'];
-
           if (mapData['url'] != null) {
+            webUrl = mapData['url'];
             debugPrint(mapData['url']);
+          } else {
+            carDashBoardData = mapData['msg'];
           }
-
-          carDashBoardData = mapData['msg'];
           isLoading.value = false;
         } else {
-          errorDialog(mapData['msg']);
           isLoading.value = false;
+          errorDialog(mapData['msg'], onTap: () {
+            Get.back();
+            Get.back();
+          });
         }
       } else {
-        errorDialog("Something went wrong!");
         isLoading.value = false;
+        errorDialog("Something went wrong!", onTap: () {
+          Get.back();
+          Get.back();
+        });
       }
     } catch (e) {
       debugPrint(e.toString());

@@ -42,7 +42,7 @@ class HomeView extends GetView<HomeController> {
                           Get.close(1);
                         },
                         child: profileImage(
-                          imageUrl: controller.userData!['image'],
+                          imageUrl: controller.userData?['image'],
                           circleRadius: 120.r,
                           imageSize: 120.w,
                         ),
@@ -100,7 +100,8 @@ class HomeView extends GetView<HomeController> {
                   ),
                 ),
           backgroundColor: AppColors.background,
-          // floatingActionButtonLocation:
+
+          /// floatingActionButtonLocation:
           //     FloatingActionButtonLocation.centerDocked,
           // floatingActionButton: DeviceHelper.getUserId() == null
           //     ? null
@@ -115,7 +116,7 @@ class HomeView extends GetView<HomeController> {
           //           height: 24,
           //           width: 24,
           //         ),
-          //       ),
+          ///       ),
           bottomNavigationBar: DeviceHelper.getUserId() == null
               ? Padding(
                   padding: EdgeInsets.all(25.w),
@@ -135,6 +136,7 @@ class HomeView extends GetView<HomeController> {
               : AnimatedBottomNavigationBar(
                   icons: controller.iconList,
                   activeIndex: controller.bottomNavIndex.value,
+                  activeColor: AppColors.primary,
                   gapLocation: GapLocation.none,
                   height: 70,
                   notchSmoothness: NotchSmoothness.defaultEdge,

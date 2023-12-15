@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:american_mile/app/ui/widgets/error_dialog.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -25,8 +26,7 @@ class API {
   }
 
   static const String _baseUrl = "https://americanmile.com/api/v3/";
-  //static const String _baseUrl = "https://pyot.co.in/api/v3/";
-
+  ///static const String _baseUrl = "https://pyot.co.in/api/v3/";
   /// static const String _baseUrl = "http://137.184.181.160/api/v3/";
 
   final dio.Dio _dio;
@@ -43,6 +43,8 @@ class API {
       );
       return response;
     } on dio.DioException catch (e) {
+      errorDialog("Something went wrong!");
+
       if (e.response != null) {
         throw Exception(
           'Request failed with status code ${e.response!.statusCode}',
@@ -68,6 +70,10 @@ class API {
       );
       return response;
     } on dio.DioException catch (e) {
+
+      errorDialog("Something went wrong!");
+
+
       if (e.response != null) {
         throw Exception(
           'Request failed with status code ${e.response!.statusCode}',

@@ -25,256 +25,268 @@ class CarDashboardView extends GetView<CarDashboardController> {
                 )
               : controller.carDashBoardData == null
                   ? Container()
-                  : SingleChildScrollView(
-                      child: Stack(
-                        children: [
-                          Container(
-                            height: context.height,
-                            width: context.width,
-                            color: const Color(0xFF3E3E3E),
-                          ),
-                          Positioned(
-                            left: 166.w,
-                            top: -90.h,
-                            child: ImageFiltered(
-                              imageFilter: ImageFilter.blur(
-                                sigmaX: 30.0,
-                                sigmaY: 30.0,
-                              ),
-                              child: Container(
-                                height: 200.w,
-                                width: 200.w,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  gradient: RadialGradient(
-                                    colors: [
-                                      const Color(0xFFED0808).withOpacity(.10),
-                                      const Color(0xFFED0808).withOpacity(.10),
-                                    ],
-                                  ),
-                                ),
-                              ),
+                  : SafeArea(
+                      child: SingleChildScrollView(
+                        child: Stack(
+                          children: [
+                            Container(
+                              height: context.height,
+                              width: context.width,
+                              color: const Color(0xFF3E3E3E),
                             ),
-                          ),
-                          Positioned(
-                            left: 35.w,
-                            top: -140.h,
-                            child: ImageFiltered(
-                              imageFilter: ImageFilter.blur(
-                                sigmaX: 30.0,
-                                sigmaY: 30.0,
-                              ),
-                              child: Container(
-                                height: 200.w,
-                                width: 200.w,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  gradient: RadialGradient(
-                                    colors: [
-                                      const Color(0xFFED08A1).withOpacity(.10),
-                                      const Color(0xFFED08A1).withOpacity(.10),
-                                    ],
-                                  ),
+                            Positioned(
+                              left: 166.w,
+                              top: -90.h,
+                              child: ImageFiltered(
+                                imageFilter: ImageFilter.blur(
+                                  sigmaX: 30.0,
+                                  sigmaY: 30.0,
                                 ),
-                              ),
-                            ),
-                          ),
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Container(
-                                margin: EdgeInsets.symmetric(
-                                    horizontal: 12.w, vertical: 10.h),
-                                alignment: Alignment.centerLeft,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    RRectIcon(
-                                      backgroundColor: Colors.black,
-                                      image: ImagePaths.menu,
-                                      onTap: () {},
-                                    ),
-                                    RRectIcon(
-                                      backgroundColor: Colors.black,
-                                      image: ImagePaths.menu,
-                                      onTap: () {},
-                                    ),
-                                  ],
-                                ),
-                              ),
-
-                              Stack(
-                                children: [
-                                  Container(
-                                    margin:
-                                        EdgeInsets.symmetric(horizontal: 10.w),
-                                    width: context.width,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20.r),
-                                      color: AppColors.black,
-                                    ),
-                                    child: Column(
-                                      // mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        _evWidget(context),
-
-                                        ///Gap(180.h),
-                                        Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 50.w),
-                                          child: Text(
-                                            controller.carDashBoardData?[
-                                                'vehiclename'],
-                                            textAlign: TextAlign.center,
-                                            style: Get.textTheme.titleMedium
-                                                ?.copyWith(
-                                              color: AppColors.white,
-                                              fontSize: 26.sp,
-                                            ),
-                                          ),
-                                        ),
-                                        Gap(30.h),
-
-                                        /// Gap(12.h),
-                                        controller.carDashBoardData?[
-                                                    'tires.passenger_front'] !=
-                                                null
-                                            ? Gap(730.h)
-                                            : Gap(480.h),
+                                child: Container(
+                                  height: 200.w,
+                                  width: 200.w,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    gradient: RadialGradient(
+                                      colors: [
+                                        const Color(0xFFED0808)
+                                            .withOpacity(.10),
+                                        const Color(0xFFED0808)
+                                            .withOpacity(.10),
                                       ],
                                     ),
                                   ),
-                                  Positioned(
-                                    left: 120.w,
-                                    top: 120.h,
-                                    child: ImageFiltered(
-                                      imageFilter: ImageFilter.blur(
-                                        sigmaX: 30.0,
-                                        sigmaY: 30.0,
-                                      ),
-                                      child: Container(
-                                        height: 450.w,
-                                        width: 450.w,
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          gradient: RadialGradient(
-                                            colors: [
-                                              const Color(0xFFC908ED)
-                                                  .withOpacity(.10),
-                                              const Color(0xFFC908ED)
-                                                  .withOpacity(.10),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Positioned(
-                                    right: 120.w,
-                                    top: 20.h,
-                                    child: ImageFiltered(
-                                      imageFilter: ImageFilter.blur(
-                                        sigmaX: 30.0,
-                                        sigmaY: 30.0,
-                                      ),
-                                      child: Container(
-                                        height: 450.w,
-                                        width: 450.w,
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          gradient: RadialGradient(
-                                            colors: [
-                                              const Color(0xFF089DED)
-                                                  .withOpacity(.10),
-                                              const Color(0xFF089DED)
-                                                  .withOpacity(.10),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
-
-                              /// bottom spacing
-                              Gap(20.h),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              Gap(350.h),
-                              SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  children: List.generate(
-                                    controller.dataList.length,
-                                    (index) {
-                                      var item = controller.dataList[index];
-
-                                      return Container(
-                                        padding: EdgeInsets.only(
-                                          right: 25.w,
-                                          left: index == 0 ? 25.w : 0,
-                                        ),
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            controller.isLockList[index] =
-                                                !controller.isLockList[index];
-
-                                            controller.lockUnlockVehicleAPI(
-                                                controller.isLockList[index],
-                                                index);
-                                          },
-                                          child: Obx(() => _borderBox(
-                                              image: item['image'].toString(),
-                                              text: item['text'].toString(),
-                                              isLocked: controller
-                                                  .isLockList[index])),
-                                        ),
-                                      );
-                                    },
+                            ),
+                            Positioned(
+                              left: 35.w,
+                              top: -140.h,
+                              child: ImageFiltered(
+                                imageFilter: ImageFilter.blur(
+                                  sigmaX: 30.0,
+                                  sigmaY: 30.0,
+                                ),
+                                child: Container(
+                                  height: 200.w,
+                                  width: 200.w,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    gradient: RadialGradient(
+                                      colors: [
+                                        const Color(0xFFED08A1)
+                                            .withOpacity(.10),
+                                        const Color(0xFFED08A1)
+                                            .withOpacity(.10),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                              Gap(20.h),
-                              if (controller.carDashBoardData?['odometer'] !=
-                                  null)
-                                _blueGradientSpeedMeterBox(context),
-                              Gap(20.h),
-                              if (controller.carDashBoardData?[
-                                      'tires.passenger_front'] !=
-                                  null)
-                                _blueGradientTypePressureBox(context),
-                              Padding(
-                                padding: const EdgeInsets.all(18.0),
-                                child: PrimaryButton(
-                                    borderRadius: BorderRadius.circular(15.w),
-                                    buttonText: "Open Map",
-                                    onTap: () async {
-                                      final availableMaps =
-                                          await MapLauncher.installedMaps;
-                                      debugPrint(availableMaps
-                                          .toString()); // [AvailableMap { mapName: Google Maps, mapType: google }, ...]
-                                      await availableMaps.first.showMarker(
-                                        coords: Coords(
-                                            controller.carDashBoardData?[
-                                                'location.latitude'],
-                                            controller.carDashBoardData?[
-                                                'location.longitude']),
-                                        title: "Smart car",
-                                      );
-                                    }),
-                              )
-                            ],
-                          ),
-                        ],
+                            ),
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.symmetric(
+                                      horizontal: 12.w, vertical: 10.h),
+                                  alignment: Alignment.centerLeft,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      RRectIcon(
+                                        backgroundColor: Colors.black,
+                                        image: ImagePaths.arrow,
+                                        onTap: () {
+                                          Get.back();
+                                        },
+                                      ),
+
+                                      /// RRectIcon(
+                                      //   backgroundColor: Colors.black,
+                                      //   image: ImagePaths.menu,
+                                      //   onTap: () {},
+                                      /// ),
+                                    ],
+                                  ),
+                                ),
+
+                                Stack(
+                                  children: [
+                                    Container(
+                                      margin: EdgeInsets.symmetric(
+                                          horizontal: 10.w),
+                                      width: context.width,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(20.r),
+                                        color: AppColors.black,
+                                      ),
+                                      child: Column(
+                                        // mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          _evWidget(context),
+
+                                          ///Gap(180.h),
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 50.w),
+                                            child: Text(
+                                              controller.carDashBoardData?[
+                                                  'vehiclename'],
+                                              textAlign: TextAlign.center,
+                                              style: Get.textTheme.titleMedium
+                                                  ?.copyWith(
+                                                color: AppColors.white,
+                                                fontSize: 26.sp,
+                                              ),
+                                            ),
+                                          ),
+                                          Gap(30.h),
+
+                                          /// Gap(12.h),
+                                          controller.carDashBoardData?[
+                                                      'tires.passenger_front'] !=
+                                                  null
+                                              ? Gap(730.h)
+                                              : Gap(480.h),
+                                        ],
+                                      ),
+                                    ),
+                                    Positioned(
+                                      left: 120.w,
+                                      top: 120.h,
+                                      child: ImageFiltered(
+                                        imageFilter: ImageFilter.blur(
+                                          sigmaX: 30.0,
+                                          sigmaY: 30.0,
+                                        ),
+                                        child: Container(
+                                          height: 450.w,
+                                          width: 450.w,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            gradient: RadialGradient(
+                                              colors: [
+                                                const Color(0xFFC908ED)
+                                                    .withOpacity(.10),
+                                                const Color(0xFFC908ED)
+                                                    .withOpacity(.10),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      right: 120.w,
+                                      top: 20.h,
+                                      child: ImageFiltered(
+                                        imageFilter: ImageFilter.blur(
+                                          sigmaX: 30.0,
+                                          sigmaY: 30.0,
+                                        ),
+                                        child: Container(
+                                          height: 450.w,
+                                          width: 450.w,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            gradient: RadialGradient(
+                                              colors: [
+                                                const Color(0xFF089DED)
+                                                    .withOpacity(.10),
+                                                const Color(0xFF089DED)
+                                                    .withOpacity(.10),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
+                                /// bottom spacing
+                                Gap(20.h),
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Gap(350.h),
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children: List.generate(
+                                      controller.dataList.length,
+                                      (index) {
+                                        var item = controller.dataList[index];
+
+                                        return Container(
+                                          padding: EdgeInsets.only(
+                                            right: 25.w,
+                                            left: index == 0 ? 25.w : 0,
+                                          ),
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              controller.isLockList[index] =
+                                                  !controller.isLockList[index];
+
+                                              controller.lockUnlockVehicleAPI(
+                                                  controller.isLockList[index],
+                                                  index);
+                                            },
+                                            child: Obx(() => _borderBox(
+                                                image: item['image'].toString(),
+                                                text: item['text'].toString(),
+                                                isLocked: controller
+                                                    .isLockList[index])),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
+                                Gap(20.h),
+                                if (controller.carDashBoardData?['odometer'] !=
+                                    null)
+                                  _blueGradientSpeedMeterBox(context),
+                                Gap(20.h),
+                                if (controller.carDashBoardData?[
+                                        'tires.passenger_front'] !=
+                                    null)
+                                  _blueGradientTypePressureBox(context),
+                                Padding(
+                                  padding: const EdgeInsets.all(18.0),
+                                  child: PrimaryButton(
+                                      borderRadius: BorderRadius.circular(15.w),
+                                      buttonText: "Open Map",
+                                      onTap: () async {
+                                        final availableMaps =
+                                            await MapLauncher.installedMaps;
+                                        debugPrint(availableMaps
+                                            .toString()); // [AvailableMap { mapName: Google Maps, mapType: google }, ...]
+                                        await availableMaps.first.showMarker(
+                                          coords: Coords(
+                                              controller.carDashBoardData?[
+                                                  'location.latitude'],
+                                              controller.carDashBoardData?[
+                                                  'location.longitude']),
+                                          title: "Smart car",
+                                        );
+                                      }),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     )),
     );
   }
 
+  /// Ev Widget
   _evWidget(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(
@@ -282,7 +294,7 @@ class CarDashboardView extends GetView<CarDashboardController> {
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           evStatusWidget(
               titleOne: "Lock Reminders",
@@ -293,32 +305,33 @@ class CarDashboardView extends GetView<CarDashboardController> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Row(
-                children: [
-                  Text(
-                    "EV Charging ",
-                    style: Get.textTheme.labelSmall?.copyWith(
-                      color: AppColors.evGreenColor,
+              if (controller.carDashBoardData?['charge.status'] != null)
+                Row(
+                  children: [
+                    Text(
+                      controller.carDashBoardData?['charge.status'] ?? "",
+                      style: Get.textTheme.labelSmall?.copyWith(
+                        color: AppColors.evGreenColor,
+                      ),
                     ),
-                  ),
-                  Image.asset(
-                    ImagePaths.evChargingIcon,
-                    width: 22.w,
-                    height: 22.h,
-                  ),
-                ],
-              ),
+                    Image.asset(
+                      ImagePaths.evChargingIcon,
+                      width: 22.w,
+                      height: 22.h,
+                    ),
+                  ],
+                ),
               Image.asset(
                 ImagePaths.car2,
-                width: 120.w,
+                width: 115.w,
                 height: 100.h,
               ),
             ],
           ),
           evStatusWidget(
               titleOne: "Guardian Mode",
-              titleTwo: "Oil Status",
-              percent: controller.carDashBoardData?[''] ?? "0%"),
+              titleTwo: "Oil Life",
+              percent: controller.carDashBoardData?['engine_oil'] ?? "0%")
         ],
       ),
     );
@@ -479,8 +492,9 @@ class CarDashboardView extends GetView<CarDashboardController> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               _widgetTyre(
-                                  tyrePressure: controller.carDashBoardData![
-                                      'tires.passenger_front']),
+                                  tyrePressure: controller.carDashBoardData?[
+                                          'tires.passenger_front'] ??
+                                      "0"),
                               Padding(
                                 padding: EdgeInsets.only(left: 12.w),
                                 child: Image.asset(
@@ -490,16 +504,18 @@ class CarDashboardView extends GetView<CarDashboardController> {
                                 ),
                               ),
                               _widgetTyre(
-                                  tyrePressure: controller
-                                      .carDashBoardData!['tires.driver_front']),
+                                  tyrePressure: controller.carDashBoardData?[
+                                          'tires.driver_front'] ??
+                                      "0"),
                             ],
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               _widgetTyre(
-                                  tyrePressure: controller.carDashBoardData![
-                                      'tires.passenger_rear']),
+                                  tyrePressure: controller.carDashBoardData?[
+                                          'tires.passenger_rear'] ??
+                                      ""),
                               Padding(
                                 padding: EdgeInsets.only(right: 12.w),
                                 child: Image.asset(
@@ -509,8 +525,9 @@ class CarDashboardView extends GetView<CarDashboardController> {
                                 ),
                               ),
                               _widgetTyre(
-                                  tyrePressure: controller
-                                      .carDashBoardData!['tires.driver_rear']),
+                                  tyrePressure: controller.carDashBoardData?[
+                                          'tires.driver_rear'] ??
+                                      "0"),
                             ],
                           ),
                         ],
