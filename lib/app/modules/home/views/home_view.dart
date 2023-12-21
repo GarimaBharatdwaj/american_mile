@@ -100,7 +100,6 @@ class HomeView extends GetView<HomeController> {
                   ),
                 ),
           backgroundColor: AppColors.background,
-
           /// floatingActionButtonLocation:
           //     FloatingActionButtonLocation.centerDocked,
           // floatingActionButton: DeviceHelper.getUserId() == null
