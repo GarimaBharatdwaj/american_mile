@@ -1,9 +1,9 @@
 import 'package:american_mile/core/utils/app_colors.dart';
 import '../../common_lib.dart';
 
-Divider showDivider({double? height}) => Divider(
+Divider showDivider({double? height,Color? color}) => Divider(
       height: height,
-      color: AppColors.primary.withOpacity(0.2),
+      color: color ?? AppColors.primary.withOpacity(0.2),
     );
 
 VerticalDivider showVerticalDivider(

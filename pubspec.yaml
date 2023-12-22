@@ -39,6 +39,29 @@ flutter:
   assets:
     - assets/icons/
     - assets/img/
+    - assets/fonts/
+
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/poppins/Poppins-Black.ttf
+        - asset: assets/fonts/poppins/Poppins-Bold.ttf
+        - asset: assets/fonts/poppins/Poppins-ExtraBold.ttf
+        - asset: assets/fonts/poppins/Poppins-Regular.ttf
+        - asset: assets/fonts/poppins/Poppins-Medium.ttf
+        - asset: assets/fonts/poppins/Poppins-SemiBold.ttf
+          style: italic
+    - family: Helvetica
+      fonts:
+        - asset: assets/fonts/helvetica/Roboto-Black.ttf
+        - asset: assets/fonts/helvetica/Roboto-Bold.ttf
+        - asset: assets/fonts/helvetica/Roboto-Medium.ttf
+        - asset: assets/fonts/helvetica/Roboto-Regular.ttf
+          style: italic
+    - family: Monoton
+      fonts:
+        - asset: assets/fonts/monoton/Monoton-Regular.ttf
+          style: italic
     
   uses-material-design: true
 

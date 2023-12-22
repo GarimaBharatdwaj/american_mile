@@ -16,7 +16,8 @@ class HomeController extends GetxController {
   void onInit() {
     type.value = 0;
     if (DeviceHelper.getUserId() != null) {
-      getUserProfile();
+      policiesAPI();
+      ///getUserProfile();
     }
     super.onInit();
   }
@@ -24,7 +25,7 @@ class HomeController extends GetxController {
   String getAppBarName() {
     String name = "";
     if (bottomNavIndex.value == 0) {
-      name = "Insurance Dashboard";
+      name = "Dashboard";
     }
     if (bottomNavIndex.value == 1) {
       name = "Navigation";
@@ -108,6 +109,7 @@ class HomeController extends GetxController {
   RxBool isPoliciesLoading = false.obs;
   Map<String, dynamic>? policies;
   policiesAPI() {
+
     isPoliciesLoading.value = true;
     API().post(
       "policy-dashboard",
@@ -270,16 +272,17 @@ class HomeController extends GetxController {
 
   RxInt bottomNavIndex = 0.obs;
   final iconList = <IconData>[
-    Icons.home,
-    Icons.location_searching,
     Icons.dashboard,
+    Icons.manage_accounts_outlined,
+    Icons.drive_eta_outlined,
     Icons.account_circle,
   ];
 
   onBottomTap(int index) {
     bottomNavIndex.value = index;
     if (index == 0 || index == 3) {
-      getUserProfile();
+      policiesAPI();
+      ///getUserProfile();
     }
     if (index == 2) {
       policiesAPI();

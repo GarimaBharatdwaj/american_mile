@@ -1,3 +1,5 @@
+import 'package:american_mile/app/modules/car_dashboard/controllers/car_dashboard_controller.dart';
+import 'package:american_mile/app/modules/car_dashboard/new_car_dashboard_deisgn.dart';
 import 'package:american_mile/app/modules/home/componments/my_profile.dart';
 import 'package:american_mile/common_lib.dart';
 import 'package:american_mile/core/components/profile_image_circle.dart';
@@ -8,6 +10,7 @@ import 'package:american_mile/core/utils/index.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import '../../../../core/helpers/device_helper.dart';
 import '../componments/map.dart';
+import '../componments/new_designs/all_policy_dashboard.dart';
 import '../componments/policy_home_dashboard.dart';
 import '../controllers/home_controller.dart';
 
@@ -18,104 +21,109 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Obx(() => Scaffold(
           key: controller.scaffoldkey,
-          drawer: controller.isLoading.value == true ||
-                  DeviceHelper.getUserId() == null
-              ? null
-              : Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 15.w,
-                    vertical: 24.h,
-                  ),
-                  width: context.width * .8,
-                  decoration: BoxDecoration(
-                    color: AppColors.background,
-                    borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(12.r),
-                      bottomRight: Radius.circular(12.r),
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          controller.bottomNavIndex.value = 3;
-                          Get.close(1);
-                        },
-                        child: profileImage(
-                          imageUrl: controller.userData?['image'],
-                          circleRadius: 120.r,
-                          imageSize: 120.w,
-                        ),
-                      ),
-                      Gap(6.h),
-                      Text(
-                        controller.userData!['fullname'] ?? "Hi User!",
-                        style: Get.textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 18.sp,
-                        ),
-                      ),
-                      Gap(3.h),
-                      Text(
-                        controller.userData!['email'],
-                        style: Get.textTheme.titleMedium?.copyWith(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14.sp,
-                        ),
-                      ),
-                      Gap(40.h),
-                      _drawerItem(
-                        title: "My Family",
-                        icon: Icons.people_alt_rounded,
-                        onTap: () {
-                          Get.close(1);
-                          Get.toNamed(Routes.MY_FAMILY);
-                        },
-                      ),
 
-                      /// _drawerItem(
-                      //   title: "My Cars",
-                      //   icon: Icons.car_crash,
-                      //   onTap: () {},
-                      /// ),
-                      _drawerItem(
-                        title: "Update Password",
-                        icon: Icons.password,
-                        onTap: () {
-                          Get.toNamed(
-                            Routes.SET_MILE_PASSWORD,
-                            arguments: controller.userData!['email'],
-                          );
-                        },
-                      ),
-                      _drawerItem(
-                        title: "Logout",
-                        icon: Icons.logout,
-                        onTap: () {
-                          DeviceHelper.removeUserId();
-                          Get.offAllNamed(Routes.LOGIN);
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-          backgroundColor: AppColors.background,
-          /// floatingActionButtonLocation:
-          //     FloatingActionButtonLocation.centerDocked,
-          // floatingActionButton: DeviceHelper.getUserId() == null
+          /// drawer: controller.isLoading.value == true ||
+          //         DeviceHelper.getUserId() == null
           //     ? null
-          //     : FloatingActionButton(
-          //         onPressed: () => Get.toNamed(Routes.CAR_DASHBOARD),
-          //         elevation: 0,
-          //         shape: RoundedRectangleBorder(
-          //           borderRadius: BorderRadius.circular(100),
+          //     : Container(
+          //         padding: EdgeInsets.symmetric(
+          //           horizontal: 15.w,
+          //           vertical: 24.h,
           //         ),
-          //         child: Image.asset(
-          //           ImagePaths.carKey,
-          //           height: 24,
-          //           width: 24,
+          //         width: context.width * .8,
+          //         decoration: BoxDecoration(
+          //           color: AppColors.background,
+          //           borderRadius: BorderRadius.only(
+          //             topRight: Radius.circular(12.r),
+          //             bottomRight: Radius.circular(12.r),
+          //           ),
+          //         ),
+          //         child: Column(
+          //           children: [
+          //             GestureDetector(
+          //               onTap: () {
+          //                 controller.bottomNavIndex.value = 3;
+          //                 Get.close(1);
+          //               },
+          //               child: profileImage(
+          //                 imageUrl: controller.userData?['image'],
+          //                 circleRadius: 120.r,
+          //                 imageSize: 120.w,
+          //               ),
+          //             ),
+          //             Gap(6.h),
+          //             Text(
+          //               controller.userData!['fullname'] ?? "Hi User!",
+          //               style: Get.textTheme.titleMedium?.copyWith(
+          //                 fontWeight: FontWeight.w600,
+          //                 fontSize: 18.sp,
+          //               ),
+          //             ),
+          //             Gap(3.h),
+          //             Text(
+          //               controller.userData!['email'],
+          //               style: Get.textTheme.titleMedium?.copyWith(
+          //                 fontWeight: FontWeight.w500,
+          //                 fontSize: 14.sp,
+          //               ),
+          //             ),
+          //             Gap(40.h),
+          //             _drawerItem(
+          //               title: "My Family",
+          //               icon: Icons.people_alt_rounded,
+          //               onTap: () {
+          //                 Get.close(1);
+          //                 Get.toNamed(Routes.MY_FAMILY);
+          //               },
+          //             ),
+          //
+          //             /// _drawerItem(
+          //             //   title: "My Cars",
+          //             //   icon: Icons.car_crash,
+          //             //   onTap: () {},
+          //             /// ),
+          //             _drawerItem(
+          //               title: "Update Password",
+          //               icon: Icons.password,
+          //               onTap: () {
+          //                 Get.toNamed(
+          //                   Routes.SET_MILE_PASSWORD,
+          //                   arguments: controller.userData!['email'],
+          //                 );
+          //               },
+          //             ),
+          //             _drawerItem(
+          //               title: "Logout",
+          //               icon: Icons.logout,
+          //               onTap: () {
+          //                 DeviceHelper.removeUserId();
+          //                 Get.offAllNamed(Routes.LOGIN);
+          //               },
+          //             ),
+          //           ],
           //         ),
           ///       ),
+          backgroundColor: AppColors.white,
+
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked,
+          floatingActionButton: DeviceHelper.getUserId() == null
+              ? null
+              : FloatingActionButton(
+                  onPressed: () {
+                    Get.to(()=> const CarDashboardDesign());
+                  },
+                  elevation: 2,
+                  backgroundColor: AppColors.primary,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(100.r),
+                  ),
+                  child: Image.asset(
+                    ImagePaths.carKey,
+                    height: 24,
+                    width: 24,
+                  ),
+                ),
           bottomNavigationBar: DeviceHelper.getUserId() == null
               ? Padding(
                   padding: EdgeInsets.all(25.w),
@@ -135,50 +143,58 @@ class HomeView extends GetView<HomeController> {
               : AnimatedBottomNavigationBar(
                   icons: controller.iconList,
                   activeIndex: controller.bottomNavIndex.value,
-                  activeColor: AppColors.primary,
-                  gapLocation: GapLocation.none,
-                  height: 70,
-                  notchSmoothness: NotchSmoothness.defaultEdge,
+                  activeColor: AppColors.white,
+                  iconSize: 26.h,
+                  gapLocation: GapLocation.center,
+                  height: 70.h,
+                  notchSmoothness: NotchSmoothness.sharpEdge,
                   leftCornerRadius: 24,
                   rightCornerRadius: 24,
+                  backgroundColor: AppColors.primary.withOpacity(0.7),
                   onTap: controller.onBottomTap,
                 ),
-          body: controller.isLoading.value || controller.isPoliciesLoading.value
+          body:
+          controller.isPoliciesLoading.value
+          ///controller.isLoading.value || controller.isPoliciesLoading.value
               ? showProgressIndicator()
               : SafeArea(
                   child: SingleChildScrollView(
-                    padding: EdgeInsets.all(15.w),
+                    padding: EdgeInsets.all(10.w),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Gap(8.h),
                         Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Opacity(
-                              opacity: DeviceHelper.getUserId() == null ? 0 : 1,
-                              child: RRectIcon(
-                                image: ImagePaths.menu,
-                                onTap: () {
-                                  controller.scaffoldkey.currentState!
-                                      .openDrawer();
-                                },
-                              ),
-                            ),
+                            /// Opacity(
+                            //   opacity: DeviceHelper.getUserId() == null ? 0 : 1,
+                            //   child: RRectIcon(
+                            //     image: ImagePaths.menu,
+                            //     onTap: () {
+                            //       controller.scaffoldkey.currentState!
+                            //           .openDrawer();
+                            //     },
+                            //   ),
+                            /// ),
                             Expanded(
                               child: Text(
                                 controller.getAppBarName(),
                                 textAlign: TextAlign.center,
                                 style: Get.textTheme.titleLarge?.copyWith(
-                                  fontWeight: FontWeight.w700,
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: 'Poppins'
                                 ),
                               ),
                             ),
-                            Opacity(
-                              opacity: 0,
-                              child: RRectIcon(
-                                image: ImagePaths.menu,
-                                onTap: () {},
-                              ),
-                            ),
+
+                            /// Opacity(
+                            //   opacity: 0,
+                            //   child: RRectIcon(
+                            //     image: ImagePaths.menu,
+                            //     onTap: () {},
+                            //   ),
+                            /// ),
                           ],
                         ),
                         controller.bottomNavIndex.value == 1
@@ -187,7 +203,9 @@ class HomeView extends GetView<HomeController> {
                                 ? PolicyHomeDashboard()
                                 : controller.bottomNavIndex.value == 3
                                     ? MyProfile()
-                                    : _homeWidget(context)
+                                    : AllPolicyDashboard()
+
+                        ///_homeWidget(context)
                       ],
                     ),
                   ),
