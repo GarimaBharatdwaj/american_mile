@@ -21,9 +21,9 @@ class CarDashboardController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-
-    argumentsMap = Get.arguments;
-    getCarDashBoardData();
+    /// need to change
+    /// argumentsMap = Get.arguments;
+    /// getCarDashBoardData();
   }
 
   toggleCar(index) {

@@ -111,6 +111,7 @@ class HomeView extends GetView<HomeController> {
               ? null
               : FloatingActionButton(
                   onPressed: () {
+                    Get.put(CarDashboardController());
                     Get.to(()=> const CarDashboardDesign());
                   },
                   elevation: 2,

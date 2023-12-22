@@ -10,6 +10,7 @@ class ImagePaths {
   static String onboardTwo = "$imagePath/onboard2.png";
   static String onboardThree = "$imagePath/onboard3.png";
   static String carCircle = "$imagePath/car-circle.png";
+  static String blueBackground = "$imagePath/blue_backgroud.png";
 
 //**************************************************************//
 //************************ Icons ******************************//

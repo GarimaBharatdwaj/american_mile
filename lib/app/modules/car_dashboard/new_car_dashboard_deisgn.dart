@@ -12,7 +12,10 @@ class CarDashboardDesign extends GetView<CarDashboardController> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
-            children: [_evWidget(context)],
+            children: [
+              Image.asset(ImagePaths.blueBackground,width: MediaQuery.of(context).size.width,),
+
+              _evWidget(context)],
           ),
         ),
       ),
@@ -21,52 +24,49 @@ class CarDashboardDesign extends GetView<CarDashboardController> {
 
   /// Ev Widget
   _evWidget(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(
-        20.w,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          evStatusWidget(
-              titleOne: "Lock Reminders",
-              titleTwo: "Fuel Status",
-              percent: controller.carDashBoardData?['fuel.percentRemaining'] ??
-                  "0%"),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              if (controller.carDashBoardData?['charge.status'] != null)
-                Row(
-                  children: [
-                    Text(
-                      controller.carDashBoardData?['charge.status'] ?? "",
-                      style: Get.textTheme.labelSmall?.copyWith(
-                        color: AppColors.evGreenColor,
-                      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+
+
+        evStatusWidget(
+            titleOne: "Lock Reminders",
+            titleTwo: "Fuel Status",
+            percent: controller.carDashBoardData?['fuel.percentRemaining'] ??
+                "0%"),
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            if (controller.carDashBoardData?['charge.status'] != null)
+              Row(
+                children: [
+                  Text(
+                    controller.carDashBoardData?['charge.status'] ?? "",
+                    style: Get.textTheme.labelSmall?.copyWith(
+                      color: AppColors.evGreenColor,
                     ),
-                    Image.asset(
-                      ImagePaths.evChargingIcon,
-                      width: 22.w,
-                      height: 22.h,
-                    ),
-                  ],
-                ),
-              Image.asset(
-                ImagePaths.car2,
-                width: 115.w,
-                height: 100.h,
+                  ),
+                  Image.asset(
+                    ImagePaths.evChargingIcon,
+                    width: 22.w,
+                    height: 22.h,
+                  ),
+                ],
               ),
-            ],
-          ),
-          evStatusWidget(
-              titleOne: "Guardian Mode",
-              titleTwo: "Oil Life",
-              percent: controller.carDashBoardData?['engine_oil'] ?? "0%")
-        ],
-      ),
+            Image.asset(
+              ImagePaths.car2,
+              width: 115.w,
+              height: 100.h,
+            ),
+          ],
+        ),
+        evStatusWidget(
+            titleOne: "Guardian Mode",
+            titleTwo: "Oil Life",
+            percent: controller.carDashBoardData?['engine_oil'] ?? "0%")
+      ],
     );
   }
 
