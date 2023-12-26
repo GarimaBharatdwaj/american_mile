@@ -1,7 +1,6 @@
 import 'package:american_mile/app/modules/home/controllers/home_controller.dart';
 import 'package:american_mile/common_lib.dart';
 import 'package:american_mile/core/utils/divider.dart';
-
 import '../../../../../core/components/shadow_container.dart';
 import '../../../../../core/utils/app_colors.dart';
 
@@ -15,9 +14,9 @@ class AllPolicyDashboard extends StatelessWidget {
       child: Column(
         children: [
           Gap(10.h),
-          ...List.generate(controller.policies!['data']['auto_policies'].length,
+          ...List.generate(controller.policies?['data']['auto_policies'].length,
               (index) {
-            var policy = controller.policies!['data']['auto_policies'][index];
+            var policy = controller.policies?['data']['auto_policies'][index];
             return Column(
               children: [
                 _policyItem(

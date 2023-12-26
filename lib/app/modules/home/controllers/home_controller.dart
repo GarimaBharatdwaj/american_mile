@@ -17,6 +17,7 @@ class HomeController extends GetxController {
     type.value = 0;
     if (DeviceHelper.getUserId() != null) {
       policiesAPI();
+
       ///getUserProfile();
     }
     super.onInit();
@@ -109,7 +110,6 @@ class HomeController extends GetxController {
   RxBool isPoliciesLoading = false.obs;
   Map<String, dynamic>? policies;
   policiesAPI() {
-
     isPoliciesLoading.value = true;
     API().post(
       "policy-dashboard",
@@ -237,6 +237,7 @@ class HomeController extends GetxController {
   final TextEditingController fullName = TextEditingController();
   final TextEditingController email = TextEditingController();
   final TextEditingController phone = TextEditingController();
+
   updateUserDetails() async {
     final Map<String, dynamic> data = {
       'user_id': DeviceHelper.getUserId(),
@@ -273,7 +274,7 @@ class HomeController extends GetxController {
   RxInt bottomNavIndex = 0.obs;
   final iconList = <IconData>[
     Icons.dashboard,
-    Icons.manage_accounts_outlined,
+    Icons.location_searching_rounded,
     Icons.drive_eta_outlined,
     Icons.account_circle,
   ];
@@ -282,6 +283,7 @@ class HomeController extends GetxController {
     bottomNavIndex.value = index;
     if (index == 0 || index == 3) {
       policiesAPI();
+
       ///getUserProfile();
     }
     if (index == 2) {
