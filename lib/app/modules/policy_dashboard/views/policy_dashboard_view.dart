@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:american_mile/core/utils/divider.dart';
 import '../../../../common_lib.dart';
 import '../../../../core/components/index.dart';
@@ -8,6 +10,7 @@ class PolicyDashboardView extends GetView<PolicyDashboardController> {
   const PolicyDashboardView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+
     return SafeArea(
       child: Obx(
         () => Scaffold(

@@ -1,3 +1,4 @@
+import 'package:american_mile/app/modules/auto_policy/views/view_auto_policy.dart';
 import 'package:american_mile/common_lib.dart';
 import 'package:american_mile/core/components/icon_button.dart';
 import '../../../../core/components/index.dart';
@@ -9,6 +10,210 @@ import '../controllers/auto_policy_controller.dart';
 
 class AutoPolicyView extends GetView<AutoPolicyController> {
   const AutoPolicyView({Key? key}) : super(key: key);
+
+  /// =========================
+  autoPolicyDetails(context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 14.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            controller.autoDetails!['data']['car_policy_data'][0]['name'],
+            textAlign: TextAlign.center,
+            style: Get.textTheme.titleMedium?.copyWith(
+              fontSize: 18.sp,
+              fontFamily: "Poppins",
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          Gap(10.h),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "EFFECTIVE DATE",
+                      style: Get.textTheme.titleMedium?.copyWith(
+                        fontSize: 10.sp,
+                      ),
+                    ),
+                    Text(
+                      controller.autoDetails!['data']['car_policy_data'][0]
+                              ['description']
+                          .toString()
+                          .toLowerCase()
+                          .replaceAll("effective", "#"),
+                      style: Get.textTheme.titleMedium?.copyWith(
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Gap(20.w),
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "EFFECTIVE DATE",
+                      style: Get.textTheme.titleMedium?.copyWith(
+                        fontSize: 10.sp,
+                      ),
+                    ),
+                    Text(
+                      controller.autoDetails!['data']['car_policy_data'][0]
+                          ['expiry_date'],
+                      style: Get.textTheme.titleMedium?.copyWith(
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          Gap(10.h),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "NEXT RENEWAL DATE",
+                      style: Get.textTheme.titleMedium?.copyWith(
+                        fontSize: 10.sp,
+                      ),
+                    ),
+                    Text(
+                      controller.autoDetails!['data']['car_policy_data'][0]
+                          ['renewal_date'],
+                      style: Get.textTheme.titleMedium?.copyWith(
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Gap(20.w),
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "CURRENT PREMIUM",
+                      style: Get.textTheme.titleMedium?.copyWith(
+                        fontSize: 10.sp,
+                      ),
+                    ),
+                    Text(
+                      "\$${controller.autoDetails!['data']['car_policy_data'][0]['total_premium_usd']}",
+                      style: Get.textTheme.titleMedium?.copyWith(
+                        fontSize: 12.sp,
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          Gap(10.h),
+          Text(
+            'Additional fees may apply please review your policy documents for details',
+            textAlign: TextAlign.start,
+            style: Get.textTheme.bodySmall?.copyWith(
+              color: AppColors.textLight,
+            ),
+          ),
+          Gap(10.h),
+          Row(
+            children: [
+              SecondryButton(
+                  onTap: () {
+                    controller.type.value = !controller.type.value;
+                    controller.typeOne.value = false;
+                  },
+                  height: 40.h,
+                  padding: EdgeInsets.symmetric(
+                    vertical: 2.h,
+                  ),
+                  buttonText: 'Current ID Cards'),
+              Gap(15.h),
+              SecondryButton(
+                  onTap: () {
+                    controller.typeOne.value = !controller.typeOne.value;
+                    controller.type.value = false;
+                  },
+                  height: 40.h,
+                  padding: EdgeInsets.symmetric(
+                    vertical: 2.h,
+                  ),
+                  buttonText: 'Policy Documents'),
+            ],
+          ),
+
+
+          Gap(20.h),
+          if(controller.type.value == true)
+            _autoIdCards(context),
+          if(controller.typeOne.value == true)
+            _autoDocuments(context),
+          Gap(10.h),
+          Container(
+            height: 0.5,
+            margin: EdgeInsets.symmetric(horizontal: 2.w),
+            color: Colors.grey.withOpacity(0.6),
+          ),
+          Gap(30.h),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Coverage",
+                style: Get.textTheme.titleMedium?.copyWith(
+                  fontSize: 24.sp,
+                  fontFamily: "Poppins",
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              SecondryButton(
+                  onTap: () {
+                    Get.offAllNamed(Routes.HOME, arguments: "auto");
+                  },
+                  height: 40.h,
+                  padding: EdgeInsets.symmetric(
+                    vertical: 2.h,
+                  ),
+                  buttonText: 'Manage Vehicles'),
+            ],
+          ),
+          Gap(30.h),
+
+
+
+
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -16,290 +221,403 @@ class AutoPolicyView extends GetView<AutoPolicyController> {
         backgroundColor: AppColors.background,
         body: controller.isLoading.value == true
             ? showProgressIndicator()
-            : SingleChildScrollView(
-                padding: EdgeInsets.symmetric(vertical: 15.w),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15.w),
-                      child: const MyAppBar(title: 'Auto Policy Details'),
-                    ),
-                    Gap(40.h),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          Gap(15.w),
-                          ShadowContainer(
-                            width: context.width * .75,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Named Insured",
-                                  style: Get.textTheme.titleMedium?.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 18.sp,
-                                  ),
-                                ),
-                                ...List.generate(
-                                    controller
-                                        .autoDetails!['data']['named_insureds']
-                                        .length, (index) {
-                                  return Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Gap(6.h),
-                                      Text(
-                                        "NAMED INSURED",
-                                        style:
-                                            Get.textTheme.bodyMedium?.copyWith(
-                                          fontSize: 12.sp,
-                                        ),
-                                      ),
-                                      Gap(6.h),
-                                      Text(
-                                        controller.autoDetails!['data']
-                                            ['named_insureds'][index],
-                                        style:
-                                            Get.textTheme.titleMedium?.copyWith(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 16.sp,
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                }),
-                              ],
-                            ),
-                          ),
-                          Gap(15.w),
-                          Container(
-                            width: context.width * .75,
-                            padding: EdgeInsets.only(
-                              top: 20.h,
-                              bottom: 20.h,
-                              left: 20.h,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                20.r,
-                              ),
-                              color: AppColors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: AppColors.shadowColor,
-                                  blurRadius: 10.w,
-                                  offset: Offset(
-                                    0,
-                                    3.h,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Drivers",
-                                      style:
-                                          Get.textTheme.titleMedium?.copyWith(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 18.sp,
-                                      ),
-                                    ),
-                                    GestureDetector(
-                                        onTap: () {
-                                          Get.toNamed(Routes.MY_FAMILY);
-                                        },
-                                        child: const RequestChange(
-                                          title: 'Manage Driver',
-                                        )),
-                                  ],
-                                ),
-                                ...List.generate(
-                                    controller
-                                        .autoDetails!['data']['driver_data']
-                                        .length, (index) {
-                                  var driver = controller.autoDetails!['data']
-                                      ['driver_data'][index];
-                                  return Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "DRIVERS",
-                                        style:
-                                            Get.textTheme.bodyMedium?.copyWith(
-                                          fontSize: 12.sp,
-                                        ),
-                                      ),
-                                      Gap(6.h),
-                                      Text(
-                                        driver['name'],
-                                        style:
-                                            Get.textTheme.titleMedium?.copyWith(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 16.sp,
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                }),
-                              ],
-                            ),
-                          ),
-                          Gap(15.w),
-                          Container(
-                            width: context.width * .75,
-                            padding: EdgeInsets.only(
-                              top: 20.h,
-                              bottom: 20.h,
-                              left: 20.h,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                20.r,
-                              ),
-                              color: AppColors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: AppColors.shadowColor,
-                                  blurRadius: 10.w,
-                                  offset: Offset(
-                                    0,
-                                    3.h,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Addresses",
-                                      style:
-                                          Get.textTheme.titleMedium?.copyWith(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 18.sp,
-                                      ),
-                                    ),
-                                    GestureDetector(
-                                        onTap: () {
-                                          Get.toNamed(Routes.MY_FAMILY);
-                                        },
-                                        child: const RequestChange(
-                                          title: 'Manage Homes',
-                                        )),
-                                  ],
-                                ),
-                                Text(
-                                  "ADDRESS",
-                                  style: Get.textTheme.bodyMedium?.copyWith(
-                                    fontSize: 12.sp,
-                                  ),
-                                ),
-                                Gap(6.h),
-                                Text(
-                                  controller.autoDetails!['data']['address'],
-                                  style: Get.textTheme.titleMedium?.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16.sp,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Gap(15.w),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15.w),
-                      child: Column(
-                        children: [
-                          Gap(40.h),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            : SafeArea(
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 15.w),
+                          child: const MyAppBar(title: 'Auto Policy Details'),
+                        ),
+                        Gap(15.h),
+                        autoPolicyDetails(context),
+                        Gap(45.h),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Column(
                             children: [
-                              GestureDetector(
-                                onTap: () {
-                                  controller.type.value = 0;
-                                },
-                                child: Text(
-                                  "DETAILS",
-                                  style: Get.textTheme.titleMedium?.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    height: 1.4,
-                                    color: controller.type.value == 0
-                                        ? AppColors.primaryDark
-                                        : AppColors.textLight,
-                                    fontSize: 18.sp,
+                              ...List.generate(
+                                  controller.autoDetails!['data']['vehicles']
+                                      .length, (index) {
+                                var car = controller.autoDetails!['data']
+                                    ['vehicles'][index];
+
+                                return GestureDetector(
+                                  onTap: () {
+                                    Get.to(ViewAutoPolicy(
+                                      details: controller.autoDetails!['data']
+                                          ['vehicles'][index],
+                                    ));
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              "${car['year']} ${car['make']} ${car['model']}",
+                                              style: Get.textTheme.titleMedium
+                                                  ?.copyWith(
+                                                fontSize: 16.sp,
+                                                fontFamily: "Poppins",
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                          ),
+                                          Gap(30.w),
+                                          Icon(
+                                            Icons.arrow_forward_ios_rounded,
+                                            size: 35.h,
+                                            color: AppColors.primary,
+                                          ),
+                                        ],
+                                      ),
+                                      Gap(10.h),
+                                      Container(
+                                        height: 1,
+                                        color: Colors.grey.withOpacity(0.5),
+                                      ),
+                                      Gap(15.h),
+                                    ],
                                   ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  controller.type.value = 1;
-                                },
-                                child: Text(
-                                  "ID CARDS",
-                                  style: Get.textTheme.titleMedium?.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    height: 1.4,
-                                    color: controller.type.value == 1
-                                        ? AppColors.primaryDark
-                                        : AppColors.textLight,
-                                    fontSize: 18.sp,
-                                  ),
-                                ),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  controller.type.value = 2;
-                                },
-                                child: Text(
-                                  "DOCUMENTS",
-                                  style: Get.textTheme.titleMedium?.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    height: 1.4,
-                                    color: controller.type.value == 2
-                                        ? AppColors.primaryDark
-                                        : AppColors.textLight,
-                                    fontSize: 18.sp,
-                                  ),
-                                ),
-                              ),
+                                );
+                              }),
                             ],
                           ),
-                          Gap(40.h),
-                          controller.type.value == 0
-                              ? _autoDetails(context)
-                              : controller.type.value == 1
-                                  ? _autoIdCards(context)
-                                  : _autoDocuments(context),
-                          Gap(40.h),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
       ),
     );
   }
 
+  _containerItem({required String key, required String value}) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 2.h),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            flex: 3,
+            child: Text(
+              key,
+              style: Get.textTheme.titleSmall?.copyWith(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 10.sp,
+                  fontFamily: "Poppins"),
+            ),
+          ),
+          Expanded(
+            flex: 5,
+            child: Text(
+              value,
+              style: Get.textTheme.labelLarge?.copyWith(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 10.sp,
+                  fontFamily: "Poppins"),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Obx(
+  //     () => Scaffold(
+  //       backgroundColor: AppColors.background,
+  //       body: controller.isLoading.value == true
+  //           ? showProgressIndicator()
+  //           : SingleChildScrollView(
+  //               padding: EdgeInsets.symmetric(vertical: 15.w),
+  //               child: Column(
+  //                 children: [
+  //                   Padding(
+  //                     padding: EdgeInsets.symmetric(horizontal: 15.w),
+  //                     child: const MyAppBar(title: 'Auto Policy Details'),
+  //                   ),
+  //                   Gap(40.h),
+  //                   SingleChildScrollView(
+  //                     scrollDirection: Axis.horizontal,
+  //                     child: Row(
+  //                       children: [
+  //                         Gap(15.w),
+  //                         ShadowContainer(
+  //                           width: context.width * .75,
+  //                           child: Column(
+  //                             crossAxisAlignment: CrossAxisAlignment.start,
+  //                             children: [
+  //                               Text(
+  //                                 "Named Insured",
+  //                                 style: Get.textTheme.titleMedium?.copyWith(
+  //                                   fontWeight: FontWeight.w600,
+  //                                   fontSize: 18.sp,
+  //                                 ),
+  //                               ),
+  //                               ...List.generate(
+  //                                   controller
+  //                                       .autoDetails!['data']['named_insureds']
+  //                                       .length, (index) {
+  //                                 return Column(
+  //                                   crossAxisAlignment:
+  //                                       CrossAxisAlignment.start,
+  //                                   children: [
+  //                                     Gap(6.h),
+  //                                     Text(
+  //                                       "NAMED INSURED",
+  //                                       style:
+  //                                           Get.textTheme.bodyMedium?.copyWith(
+  //                                         fontSize: 12.sp,
+  //                                       ),
+  //                                     ),
+  //                                     Gap(6.h),
+  //                                     Text(
+  //                                       controller.autoDetails!['data']
+  //                                           ['named_insureds'][index],
+  //                                       style:
+  //                                           Get.textTheme.titleMedium?.copyWith(
+  //                                         fontWeight: FontWeight.w600,
+  //                                         fontSize: 16.sp,
+  //                                       ),
+  //                                     ),
+  //                                   ],
+  //                                 );
+  //                               }),
+  //                             ],
+  //                           ),
+  //                         ),
+  //                         Gap(15.w),
+  //                         Container(
+  //                           width: context.width * .75,
+  //                           padding: EdgeInsets.only(
+  //                             top: 20.h,
+  //                             bottom: 20.h,
+  //                             left: 20.h,
+  //                           ),
+  //                           decoration: BoxDecoration(
+  //                             borderRadius: BorderRadius.circular(
+  //                               20.r,
+  //                             ),
+  //                             color: AppColors.white,
+  //                             boxShadow: [
+  //                               BoxShadow(
+  //                                 color: AppColors.shadowColor,
+  //                                 blurRadius: 10.w,
+  //                                 offset: Offset(
+  //                                   0,
+  //                                   3.h,
+  //                                 ),
+  //                               ),
+  //                             ],
+  //                           ),
+  //                           child: Column(
+  //                             crossAxisAlignment: CrossAxisAlignment.start,
+  //                             children: [
+  //                               Row(
+  //                                 mainAxisAlignment:
+  //                                     MainAxisAlignment.spaceBetween,
+  //                                 crossAxisAlignment: CrossAxisAlignment.start,
+  //                                 children: [
+  //                                   Text(
+  //                                     "Drivers",
+  //                                     style:
+  //                                         Get.textTheme.titleMedium?.copyWith(
+  //                                       fontWeight: FontWeight.w600,
+  //                                       fontSize: 18.sp,
+  //                                     ),
+  //                                   ),
+  //                                   GestureDetector(
+  //                                       onTap: () {
+  //                                         Get.toNamed(Routes.MY_FAMILY);
+  //                                       },
+  //                                       child: const RequestChange(
+  //                                         title: 'Manage Driver',
+  //                                       )),
+  //                                 ],
+  //                               ),
+  //                               ...List.generate(
+  //                                   controller
+  //                                       .autoDetails!['data']['driver_data']
+  //                                       .length, (index) {
+  //                                 var driver = controller.autoDetails!['data']
+  //                                     ['driver_data'][index];
+  //                                 return Column(
+  //                                   crossAxisAlignment:
+  //                                       CrossAxisAlignment.start,
+  //                                   children: [
+  //                                     Text(
+  //                                       "DRIVERS",
+  //                                       style:
+  //                                           Get.textTheme.bodyMedium?.copyWith(
+  //                                         fontSize: 12.sp,
+  //                                       ),
+  //                                     ),
+  //                                     Gap(6.h),
+  //                                     Text(
+  //                                       driver['name'],
+  //                                       style:
+  //                                           Get.textTheme.titleMedium?.copyWith(
+  //                                         fontWeight: FontWeight.w600,
+  //                                         fontSize: 16.sp,
+  //                                       ),
+  //                                     ),
+  //                                   ],
+  //                                 );
+  //                               }),
+  //                             ],
+  //                           ),
+  //                         ),
+  //                         Gap(15.w),
+  //                         Container(
+  //                           width: context.width * .75,
+  //                           padding: EdgeInsets.only(
+  //                             top: 20.h,
+  //                             bottom: 20.h,
+  //                             left: 20.h,
+  //                           ),
+  //                           decoration: BoxDecoration(
+  //                             borderRadius: BorderRadius.circular(
+  //                               20.r,
+  //                             ),
+  //                             color: AppColors.white,
+  //                             boxShadow: [
+  //                               BoxShadow(
+  //                                 color: AppColors.shadowColor,
+  //                                 blurRadius: 10.w,
+  //                                 offset: Offset(
+  //                                   0,
+  //                                   3.h,
+  //                                 ),
+  //                               ),
+  //                             ],
+  //                           ),
+  //                           child: Column(
+  //                             crossAxisAlignment: CrossAxisAlignment.start,
+  //                             children: [
+  //                               Row(
+  //                                 mainAxisAlignment:
+  //                                     MainAxisAlignment.spaceBetween,
+  //                                 crossAxisAlignment: CrossAxisAlignment.start,
+  //                                 children: [
+  //                                   Text(
+  //                                     "Addresses",
+  //                                     style:
+  //                                         Get.textTheme.titleMedium?.copyWith(
+  //                                       fontWeight: FontWeight.w600,
+  //                                       fontSize: 18.sp,
+  //                                     ),
+  //                                   ),
+  //                                   GestureDetector(
+  //                                       onTap: () {
+  //                                         Get.toNamed(Routes.MY_FAMILY);
+  //                                       },
+  //                                       child: const RequestChange(
+  //                                         title: 'Manage Homes',
+  //                                       )),
+  //                                 ],
+  //                               ),
+  //                               Text(
+  //                                 "ADDRESS",
+  //                                 style: Get.textTheme.bodyMedium?.copyWith(
+  //                                   fontSize: 12.sp,
+  //                                 ),
+  //                               ),
+  //                               Gap(6.h),
+  //                               Text(
+  //                                 controller.autoDetails!['data']['address'],
+  //                                 style: Get.textTheme.titleMedium?.copyWith(
+  //                                   fontWeight: FontWeight.w600,
+  //                                   fontSize: 16.sp,
+  //                                 ),
+  //                               ),
+  //                             ],
+  //                           ),
+  //                         ),
+  //                         Gap(15.w),
+  //                       ],
+  //                     ),
+  //                   ),
+  //                   Padding(
+  //                     padding: EdgeInsets.symmetric(horizontal: 15.w),
+  //                     child: Column(
+  //                       children: [
+  //                         Gap(40.h),
+  //                         Row(
+  //                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                           children: [
+  //                             GestureDetector(
+  //                               onTap: () {
+  //                                 controller.type.value = 0;
+  //                               },
+  //                               child: Text(
+  //                                 "DETAILS",
+  //                                 style: Get.textTheme.titleMedium?.copyWith(
+  //                                   fontWeight: FontWeight.w600,
+  //                                   height: 1.4,
+  //                                   color: controller.type.value == 0
+  //                                       ? AppColors.primaryDark
+  //                                       : AppColors.textLight,
+  //                                   fontSize: 18.sp,
+  //                                 ),
+  //                               ),
+  //                             ),
+  //                             GestureDetector(
+  //                               onTap: () {
+  //                                 controller.type.value = 1;
+  //                               },
+  //                               child: Text(
+  //                                 "ID CARDS",
+  //                                 style: Get.textTheme.titleMedium?.copyWith(
+  //                                   fontWeight: FontWeight.w600,
+  //                                   height: 1.4,
+  //                                   color: controller.type.value == 1
+  //                                       ? AppColors.primaryDark
+  //                                       : AppColors.textLight,
+  //                                   fontSize: 18.sp,
+  //                                 ),
+  //                               ),
+  //                             ),
+  //                             GestureDetector(
+  //                               onTap: () {
+  //                                 controller.type.value = 2;
+  //                               },
+  //                               child: Text(
+  //                                 "DOCUMENTS",
+  //                                 style: Get.textTheme.titleMedium?.copyWith(
+  //                                   fontWeight: FontWeight.w600,
+  //                                   height: 1.4,
+  //                                   color: controller.type.value == 2
+  //                                       ? AppColors.primaryDark
+  //                                       : AppColors.textLight,
+  //                                   fontSize: 18.sp,
+  //                                 ),
+  //                               ),
+  //                             ),
+  //                           ],
+  //                         ),
+  //                         Gap(40.h),
+  //                         controller.type.value == 0
+  //                             ? _autoDetails(context)
+  //                             : controller.type.value == 1
+  //                                 ? _autoIdCards(context)
+  //                                 : _autoDocuments(context),
+  //                         Gap(40.h),
+  //                       ],
+  //                     ),
+  //                   ),
+  //                 ],
+  //               ),
+  //             ),
+  //     ),
+  //   );
+  // }
+  //
   _autoDocuments(BuildContext context) {
     return Column(
       children: List.generate(
@@ -935,13 +1253,15 @@ class AutoPolicyView extends GetView<AutoPolicyController> {
                   children: [
                     SecondryButton(
                         onTap: () {
-                          controller.type.value = 1;
+                          controller.type.value = !controller.type.value;
+
                         },
                         buttonText: 'Current ID Cards'),
                     Gap(15.h),
                     SecondryButton(
                         onTap: () {
-                          controller.type.value = 2;
+                          controller.typeOne.value = !controller.typeOne.value;
+
                         },
                         buttonText: 'Policy Documents'),
                   ],

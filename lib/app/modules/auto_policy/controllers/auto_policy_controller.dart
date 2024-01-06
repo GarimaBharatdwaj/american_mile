@@ -15,7 +15,9 @@ class AutoPolicyController extends GetxController {
     super.onInit();
   }
 
-  RxInt type = 0.obs;
+  var type = false.obs;
+  var typeOne = false.obs;
+
   //*********************************************************************//
   //************************** Auto Policy API **************************//
   //*********************************************************************//

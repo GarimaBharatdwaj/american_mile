@@ -12,15 +12,56 @@ class HomeController extends GetxController {
   final GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
   RxInt type = 0.obs;
 
+  String? arguments;
   @override
   void onInit() {
     type.value = 0;
     if (DeviceHelper.getUserId() != null) {
       policiesAPI();
 
+      arguments = Get.arguments;
+
       ///getUserProfile();
     }
     super.onInit();
+  }
+
+  setNavThroughArg() {
+    Future.delayed(const Duration(seconds: 1), () {
+      if (arguments == "auto") {
+        toggleFamily(2);
+      }
+      if (arguments == "home") {
+        toggleFamily(3);
+      }
+    });
+  }
+
+  deleteDriverAPI(String driverId) {
+    isLoading.value = true;
+    API().post(
+      "delete-driver",
+      data: {
+        'user_id': DeviceHelper.getUserId(),
+        "driver_id": driverId,
+      },
+    ).then((value) async {
+      Get.log("Value  :  $value");
+      try {
+        Map<String, dynamic>? res = json.decode(value.data);
+        if (res != null) {
+          if (res['status'].toString() == "1") {
+            myFamilyAPI();
+          } else {
+            isLoading.value = false;
+          }
+        } else {
+          isLoading.value = false;
+        }
+      } catch (e) {
+        isLoading.value = false;
+      }
+    });
   }
 
   String getAppBarName() {
@@ -32,7 +73,7 @@ class HomeController extends GetxController {
       name = "Navigation";
     }
     if (bottomNavIndex.value == 2) {
-      name = "Policy Dashboard";
+      name = "";
     }
     if (bottomNavIndex.value == 3) {
       name = "Profile";
@@ -281,7 +322,7 @@ class HomeController extends GetxController {
 
   onBottomTap(int index) {
     bottomNavIndex.value = index;
-    if (index == 0 || index == 3) {
+    if (index == 0) {
       policiesAPI();
 
       ///getUserProfile();
@@ -292,6 +333,10 @@ class HomeController extends GetxController {
 
     if (index == 1) {
       getData();
+    }
+    if (index == 3) {
+      getData();
+      getUserProfile();
     }
   }
 
@@ -334,11 +379,13 @@ class HomeController extends GetxController {
     }
   }
 
-  Future<void> getData() async {
-    isLoading.value = true;
-    await myFamilyAPI();
-    await getRestoreVehicleListAPI();
+  RxBool isMyFamily = false.obs;
 
+  Future<void> getData() async {
+    isMyFamily.value = true;
+    await myFamilyAPI();
+
+    ///await getRestoreVehicleListAPI();
     debugPrint("DATA NOT FOUND");
   }
 
@@ -394,8 +441,34 @@ class HomeController extends GetxController {
     }
   }
 
+  var active = [
+    false,
+    false,
+    false,
+  ].obs;
+
+  toggleFamily(ind) {
+    if (ind == 1) {
+      active[0] = !active[0];
+      active[1] = false;
+      active[2] = false;
+      return active[0];
+    } else if (ind == 2) {
+      active[1] = !active[1];
+      active[0] = false;
+      active[2] = false;
+      return active[1];
+    } else {
+      active[2] = !active[2];
+      active[0] = false;
+      active[1] = false;
+      return active[2];
+    }
+  }
+
   Future<void> myFamilyAPI() async {
     isLoading.value = true;
+
     try {
       var response = await API().post(
         "my-family",
@@ -409,6 +482,9 @@ class HomeController extends GetxController {
       if (res != null) {
         if (res['status'].toString() == "1") {
           familyDetails = res['details'];
+          isMyFamily.value = false;
+
+          setNavThroughArg();
         } else {
           errorDialog(res['msg']);
         }
@@ -419,6 +495,7 @@ class HomeController extends GetxController {
       errorDialog("Some error occurred");
     } finally {
       isLoading.value = false;
+      isMyFamily.value = false;
     }
   }
 }

@@ -1,7 +1,8 @@
 import '../../common_lib.dart';
 
 class AppColors {
-  static Color primary = const Color(0xFF089DED);
+  static Color primary = const Color(0xFF108AEC);
+  /// static Color primary = const Color(0xFF089DED);
   static Color primaryDark = const Color(0xFF0880C1);
   static Color secondry = const Color(0xFF8F94FB);
   static Color primaryLight = const Color(0xFF62AFB2);

@@ -9,11 +9,12 @@ class CarDashBoardWebView extends StatefulWidget {
   const CarDashBoardWebView({
     super.key,
     required this.webUrl,
-    required this.type,
+
+    ///required this.type,
   });
 
   final String webUrl;
-  final String type;
+  ///final String type;
 
   @override
   State<CarDashBoardWebView> createState() => _CarDashBoardWebViewState();
@@ -28,22 +29,26 @@ class _CarDashBoardWebViewState extends State<CarDashBoardWebView> {
   whenCarConnected(url) {
     if (url.contains(carDashboardController.thankYouUrl) ||
         url.contains(carDashboardController.thankYouUrlTwo)) {
-      if (widget.type == "1") {
-        final AutoPolicyController myFamilyController =
-            Get.find<AutoPolicyController>();
-        myFamilyController.autoPolicyAPI();
-        Get.back();
-      } else if (widget.type == "2") {
-        final HomeController myFamilyController = Get.find<HomeController>();
-        myFamilyController.myFamilyAPI();
-        Get.back();
-      } else {
-        final MyFamilyController myFamilyController =
-            Get.find<MyFamilyController>();
-        myFamilyController.myFamilyAPI();
-        Get.back();
-      }
-      
+      // if (widget.type == "1") {
+      //   final AutoPolicyController myFamilyController =
+      //        Get.find<AutoPolicyController>();
+      //    myFamilyController.autoPolicyAPI();
+      //    Get.back();
+      //  }
+       //else if (widget.type == "2") {
+      //   final HomeController myFamilyController = Get.find<HomeController>();
+      //   myFamilyController.myFamilyAPI();
+      //   Get.back();
+      // } else {
+      //   final MyFamilyController myFamilyController =
+      //       Get.find<MyFamilyController>();
+      //   myFamilyController.myFamilyAPI();
+       //else{
+      final CarDashboardController carDashboardController =
+          Get.find<CarDashboardController>();
+      carDashboardController.getData();
+      Get.back();
+      //}
     }
   }
 
@@ -72,6 +77,6 @@ class _CarDashBoardWebViewState extends State<CarDashBoardWebView> {
 
   @override
   Widget build(BuildContext context) {
-    return WebViewWidget(controller: _controller);
+    return SafeArea(child: WebViewWidget(controller: _controller));
   }
 }

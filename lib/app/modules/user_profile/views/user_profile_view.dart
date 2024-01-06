@@ -15,6 +15,7 @@ import '../controllers/user_profile_controller.dart';
 class UserProfileView extends GetView<UserProfileController> {
   const UserProfileView({Key? key}) : super(key: key);
   @override
+
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(

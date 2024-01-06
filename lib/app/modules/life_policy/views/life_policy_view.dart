@@ -18,7 +18,7 @@ class LifePolicyView extends GetView<LifePolicyController> {
                 padding: EdgeInsets.all(15.w),
                 child: Column(children: [
                   const MyAppBar(
-                    title: 'Life Policy',
+                    title: 'Life Policy Details',
                   ),
                   Gap(40.h),
                   ShadowContainer(
@@ -30,13 +30,16 @@ class LifePolicyView extends GetView<LifePolicyController> {
                           style: Get.textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.w600,
                             fontSize: 21.sp,
+                            fontFamily: "Poppins",
+
                           ),
                         ),
                         Gap(6.h),
                         Text(
                           "NAMED INSURED",
                           style: Get.textTheme.bodyMedium?.copyWith(
-                            fontSize: 14.sp,
+                            fontSize: 14.sp,                  fontFamily: "Poppins",
+
                           ),
                         ),
                         Gap(16.h),
@@ -44,14 +47,16 @@ class LifePolicyView extends GetView<LifePolicyController> {
                           controller.lifeDetails!['named_insureds']['name'],
                           style: Get.textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.w600,
-                            fontSize: 21.sp,
+                            fontSize: 21.sp,                  fontFamily: "Poppins",
+
                           ),
                         ),
                         Text(
                           controller.lifeDetails!['named_insureds']['address'],
                           style: Get.textTheme.bodyMedium?.copyWith(
-                            fontSize: 14.sp,
-                            height: 1.4,
+                            fontSize: 12.sp,
+                            height: 1.4,                  fontFamily: "Poppins",
+
                           ),
                         ),
                         Gap(16.h),
@@ -59,6 +64,8 @@ class LifePolicyView extends GetView<LifePolicyController> {
                           "DATE OF BIRTH",
                           style: Get.textTheme.bodyMedium?.copyWith(
                             fontSize: 12.sp,
+                            fontFamily: "Poppins",
+
                           ),
                         ),
                         Gap(4.h),
@@ -66,6 +73,8 @@ class LifePolicyView extends GetView<LifePolicyController> {
                           controller.lifeDetails!['named_insureds']['dob'],
                           style: Get.textTheme.bodyMedium?.copyWith(
                             fontSize: 12.sp,
+                            fontFamily: "Poppins",
+
                           ),
                         ),
                       ],
@@ -81,6 +90,8 @@ class LifePolicyView extends GetView<LifePolicyController> {
                           style: Get.textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.w600,
                             fontSize: 21.sp,
+                            fontFamily: "Poppins",
+
                           ),
                         ),
                         Gap(6.h),
@@ -88,6 +99,8 @@ class LifePolicyView extends GetView<LifePolicyController> {
                           "NAMED INSURED",
                           style: Get.textTheme.bodyMedium?.copyWith(
                             fontSize: 14.sp,
+                            fontFamily: "Poppins",
+
                           ),
                         ),
                         Gap(6.h),
@@ -99,6 +112,8 @@ class LifePolicyView extends GetView<LifePolicyController> {
                           style: Get.textTheme.bodyMedium?.copyWith(
                             fontSize: 12.sp,
                             height: 1.4,
+                            fontFamily: "Poppins",
+
                           ),
                         ),
                         Gap(40.h),
@@ -106,15 +121,19 @@ class LifePolicyView extends GetView<LifePolicyController> {
                           "BENEFICIARY",
                           style: Get.textTheme.bodyMedium?.copyWith(
                             fontSize: 12.sp,
+                            fontFamily: "Poppins",
+
                           ),
                         ),
                         Gap(3.h),
                         Text(
                           controller.lifeDetails!['beneficiary_Info']
-                              ['beneficiary'],
+                              ['beneficiary'].toString().toUpperCase(),
                           style: Get.textTheme.bodyMedium?.copyWith(
                             fontSize: 12.sp,
-                            fontWeight: FontWeight.w600,
+                            fontFamily: "Poppins",
+
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
                       ],
@@ -130,6 +149,8 @@ class LifePolicyView extends GetView<LifePolicyController> {
                           style: Get.textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.w600,
                             fontSize: 21.sp,
+                            fontFamily: "Poppins",
+
                           ),
                         ),
                         Gap(10.h),
@@ -137,6 +158,8 @@ class LifePolicyView extends GetView<LifePolicyController> {
                           "AN INDIVIDUAL AUTHORIZED TO MAKE PAYMENTS\nND MAKE CERTAIN LIMITED CHANGES TO BILLING.",
                           style: Get.textTheme.bodyMedium?.copyWith(
                             fontSize: 12.sp,
+                            fontFamily: "Poppins",
+
                             height: 1.4,
                           ),
                         ),
@@ -145,6 +168,8 @@ class LifePolicyView extends GetView<LifePolicyController> {
                           "PAYOR",
                           style: Get.textTheme.bodyMedium?.copyWith(
                             fontSize: 12.sp,
+                            fontFamily: "Poppins",
+
                           ),
                         ),
                         Gap(6.h),
@@ -152,6 +177,8 @@ class LifePolicyView extends GetView<LifePolicyController> {
                           controller.lifeDetails!['payor_info']['payor_name'],
                           style: Get.textTheme.bodyMedium?.copyWith(
                             fontSize: 12.sp,
+                            fontFamily: "Poppins",
+
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -161,6 +188,8 @@ class LifePolicyView extends GetView<LifePolicyController> {
                           style: Get.textTheme.bodyMedium?.copyWith(
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w600,
+                            fontFamily: "Poppins",
+
                             height: 1.3,
                           ),
                         ),
@@ -231,6 +260,8 @@ class LifePolicyView extends GetView<LifePolicyController> {
             style: Get.textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.w600,
               fontSize: 18.sp,
+              fontFamily: "Poppins",
+
             ),
           ),
           Gap(8.h),
@@ -239,6 +270,8 @@ class LifePolicyView extends GetView<LifePolicyController> {
             style: Get.textTheme.bodyMedium?.copyWith(
               fontSize: 14.sp,
               height: 1.3,
+              fontFamily: "Poppins",
+
             ),
           ),
         ],
@@ -251,25 +284,39 @@ class LifePolicyView extends GetView<LifePolicyController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "CURRENT POLICY",
-                style: Get.textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 18.sp,
+              Align(
+                alignment: Alignment.center,
+                child: Text(
+                  "CURRENT POLICY",
+                  textAlign: TextAlign.center,
+                  style: Get.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    fontFamily: "Poppins",
+                    fontSize: 18.sp,
+                  ),
+                ),
+              ),
+              Gap(8.h),
+              Align(
+                alignment: Alignment.center,
+                child: Text(
+
+                  controller.lifeDetails!['life_policy_data'][0]['name'],
+                  textAlign: TextAlign.center,
+                  style: Get.textTheme.bodyMedium?.copyWith(
+                    fontSize: 12.sp,
+                    color: Colors.grey,
+                    fontFamily: "Poppins"
+                  ),
                 ),
               ),
               Gap(8.h),
               Text(
-                controller.lifeDetails!['life_policy_data'][0]['name'],
+                "THE INFORMATION CONTAINED HEREIN IS PROVIDED AS A GUIDE ONLY AND IS SUBJECT TO THE ACTUAL PROVISIONS CONTAINED IN YOUR POLICY OR CONTRACT.",
                 style: Get.textTheme.bodyMedium?.copyWith(
-                  fontSize: 14.sp,
-                ),
-              ),
-              Gap(8.h),
-              Text(
-                "THE INFORMATION CONTAINED HEREIN IS\nPROVIDED AS A GUIDE ONLY AND IS SUBJECT\nTO THE ACTUAL PROVISIONS CONTAINED IN\nYOUR POLICY OR CONTRACT.",
-                style: Get.textTheme.bodyMedium?.copyWith(
-                  fontSize: 14.sp,
+                  fontSize: 10.sp,
+                  fontFamily: "Poppins",
+                  fontWeight: FontWeight.w500,
                   height: 1.3,
                 ),
               ),
@@ -393,6 +440,8 @@ class LifePolicyView extends GetView<LifePolicyController> {
                 style: Get.textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.w600,
                   fontSize: 21.sp,
+                  fontFamily: "Poppins",
+
                 ),
               ),
               Gap(12.h),
@@ -400,6 +449,8 @@ class LifePolicyView extends GetView<LifePolicyController> {
                 "BANK",
                 style: Get.textTheme.bodyMedium?.copyWith(
                   fontSize: 16.sp,
+                  fontFamily: "Poppins",
+
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -408,6 +459,8 @@ class LifePolicyView extends GetView<LifePolicyController> {
                 controller.lifeDetails!['billing_info']['bank_name'],
                 style: Get.textTheme.bodyMedium?.copyWith(
                   fontSize: 16.sp,
+                  fontFamily: "Poppins",
+
                 ),
               ),
               Gap(12.h),
@@ -415,6 +468,8 @@ class LifePolicyView extends GetView<LifePolicyController> {
                 "PREMIUM",
                 style: Get.textTheme.bodyMedium?.copyWith(
                   fontSize: 16.sp,
+                  fontFamily: "Poppins",
+
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -423,6 +478,8 @@ class LifePolicyView extends GetView<LifePolicyController> {
                 "${controller.lifeDetails!['billing_info']['premium']}",
                 style: Get.textTheme.bodyMedium?.copyWith(
                   fontSize: 16.sp,
+                  fontFamily: "Poppins",
+
                 ),
               ),
               Gap(12.h),
@@ -430,6 +487,8 @@ class LifePolicyView extends GetView<LifePolicyController> {
                 "PAYMENT METHOD",
                 style: Get.textTheme.bodyMedium?.copyWith(
                   fontSize: 16.sp,
+                  fontFamily: "Poppins",
+
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -438,6 +497,8 @@ class LifePolicyView extends GetView<LifePolicyController> {
                 controller.lifeDetails!['billing_info']['payment_method'],
                 style: Get.textTheme.bodyMedium?.copyWith(
                   fontSize: 16.sp,
+                  fontFamily: "Poppins",
+
                 ),
               ),
               Gap(12.h),
@@ -445,6 +506,8 @@ class LifePolicyView extends GetView<LifePolicyController> {
                 "PAYMENT FREQUENCY",
                 style: Get.textTheme.bodyMedium?.copyWith(
                   fontSize: 16.sp,
+                  fontFamily: "Poppins",
+
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -453,6 +516,8 @@ class LifePolicyView extends GetView<LifePolicyController> {
                 controller.lifeDetails!['billing_info']['payment_frequency'],
                 style: Get.textTheme.bodyMedium?.copyWith(
                   fontSize: 16.sp,
+                  fontFamily: "Poppins",
+
                 ),
               ),
               Gap(8.h),
@@ -462,6 +527,8 @@ class LifePolicyView extends GetView<LifePolicyController> {
                     .toUpperCase(),
                 style: Get.textTheme.bodyMedium?.copyWith(
                   fontSize: 12.sp,
+                  fontFamily: "Poppins",
+
                   color: AppColors.textBlackColor,
                 ),
               ),
@@ -470,6 +537,8 @@ class LifePolicyView extends GetView<LifePolicyController> {
                 "PREMIUM DRAFT DAY",
                 style: Get.textTheme.bodyMedium?.copyWith(
                   fontSize: 16.sp,
+                  fontFamily: "Poppins",
+
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -480,6 +549,8 @@ class LifePolicyView extends GetView<LifePolicyController> {
                     .toUpperCase(),
                 style: Get.textTheme.bodyMedium?.copyWith(
                   fontSize: 16.sp,
+                  fontFamily: "Poppins",
+
                 ),
               ),
               Gap(8.h),
@@ -489,6 +560,8 @@ class LifePolicyView extends GetView<LifePolicyController> {
                     .toUpperCase(),
                 style: Get.textTheme.bodyMedium?.copyWith(
                   fontSize: 12.sp,
+                  fontFamily: "Poppins",
+
                   color: AppColors.textBlackColor,
                 ),
               ),
@@ -511,6 +584,8 @@ class LifePolicyView extends GetView<LifePolicyController> {
           key,
           style: Get.textTheme.titleMedium?.copyWith(
             fontSize: 14.sp,
+            fontFamily: "Poppins",
+
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -519,6 +594,9 @@ class LifePolicyView extends GetView<LifePolicyController> {
           value,
           style: Get.textTheme.titleMedium?.copyWith(
             fontSize: 14.sp,
+            fontFamily: "Poppins",
+            color: AppColors.primary
+
           ),
         ),
         Gap(12.h),

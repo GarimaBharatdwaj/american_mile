@@ -5,10 +5,12 @@ class SpeedMeter extends StatefulWidget {
   const SpeedMeter({
     Key? key,
     required this.speed,
-   /// required this.kiloMeterDriven,
+
+    /// required this.kiloMeterDriven,
   }) : super(key: key);
 
   final double speed;
+
   ///final int kiloMeterDriven;
 
   @override
@@ -145,7 +147,7 @@ kiloMetersDriven({required int kiloMeterDriven}) {
           height: 88.h,
         ),
         Padding(
-          padding: EdgeInsets.only(bottom: 2.h),
+          padding: EdgeInsets.only(bottom: 1.h),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -161,7 +163,8 @@ kiloMetersDriven({required int kiloMeterDriven}) {
                     Text(
                         kiloMeters.isEmpty ? '0' : kiloMeters[index].toString(),
                         style: Get.textTheme.titleSmall?.copyWith(
-                            color: AppColors.textBlackColor,
+                            color: AppColors.white,
+                            fontSize: 11.sp,
                             fontWeight: FontWeight.w600)),
                   ],
                 ),

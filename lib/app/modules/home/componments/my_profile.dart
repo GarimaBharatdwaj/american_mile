@@ -15,6 +15,8 @@ class MyProfile extends StatelessWidget {
   final controller = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
+    
+
     return Obx(
       () => controller.isLoading.value
           ? showProgressIndicator()

@@ -6,7 +6,6 @@ import 'package:american_mile/core/components/app_bottomsheet.dart';
 import 'package:american_mile/core/network/api_service.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../../../../core/helpers/device_helper.dart';
 
 class UserProfileController extends GetxController {
@@ -25,6 +24,7 @@ class UserProfileController extends GetxController {
     userId = DeviceHelper.getUserId();
     getUserProfile();
   }
+
 
   //*********************************************************************//
   //************************* User Profile API **************************//
@@ -62,7 +62,6 @@ class UserProfileController extends GetxController {
       isLoading.value = false;
     });
   }
-
   RxString profileImagePath = "".obs;
   void onProfileImageTap(BuildContext context) {
     AppBottomSheet.kImagePickerBottomSheet(
@@ -77,7 +76,6 @@ class UserProfileController extends GetxController {
       },
     );
   }
-
   final ImagePicker _picker = ImagePicker();
   _pickImage(ImageSource source) async {
     XFile? image = await _picker.pickImage(source: source);
@@ -85,7 +83,6 @@ class UserProfileController extends GetxController {
       _cropImage(image.path);
     }
   }
-
   _cropImage(String imagePath) async {
     final cropped = await ImageCropper().cropImage(
       sourcePath: imagePath,
@@ -105,8 +102,7 @@ class UserProfileController extends GetxController {
       profileImagePath.value = path;
     }
   }
-
-  void validateMethode() {
+   void validateMethode() {
     final isValid = formKey.currentState!.validate();
     if (!isValid) {
       return;
@@ -115,7 +111,6 @@ class UserProfileController extends GetxController {
     }
     formKey.currentState!.save();
   }
-
   updateUserDetails() async {
     final Map<String, dynamic> data = {
       'user_id': DeviceHelper.getUserId(),

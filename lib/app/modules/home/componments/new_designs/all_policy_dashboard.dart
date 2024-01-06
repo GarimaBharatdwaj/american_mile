@@ -1,8 +1,12 @@
 import 'package:american_mile/app/modules/home/controllers/home_controller.dart';
 import 'package:american_mile/common_lib.dart';
-import 'package:american_mile/core/utils/divider.dart';
-import '../../../../../core/components/shadow_container.dart';
 import '../../../../../core/utils/app_colors.dart';
+
+///
+///
+/// Changes in auto policy design
+///
+///
 
 class AllPolicyDashboard extends StatelessWidget {
   AllPolicyDashboard({super.key});
@@ -10,85 +14,103 @@ class AllPolicyDashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Gap(10.h),
-          ...List.generate(controller.policies?['data']['auto_policies'].length,
-              (index) {
-            var policy = controller.policies?['data']['auto_policies'][index];
-            return Column(
+    return controller.policies == null
+        ? Center(
+            child: Text(
+              "No Data Available",
+              textAlign: TextAlign.center,
+              style: Get.textTheme.titleMedium?.copyWith(
+                  fontSize: 18.sp,
+                  fontFamily: "Poppins",
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.primaryDark),
+            ),
+          )
+        : SingleChildScrollView(
+            child: Column(
               children: [
-                _policyItem(
-                  onTap: () {
-                    Get.toNamed(
-                      Routes.AUTO_POLICY,
-                      arguments: policy['id'].toString(),
-                    );
-                  },
-                  policyName: "AUTO POLICY",
-                  colors: [
-                    AppColors.autoPolicyLightColor,
-                    AppColors.autoPolicyDarkColor
-                  ],
-                  policy: policy,
-                ),
                 Gap(10.h),
-              ],
-            );
-          }),
-          ...List.generate(controller.policies!['data']['home_policies'].length,
-              (index) {
-            var policy = controller.policies!['data']['home_policies'][index];
-
-            return Column(
-              children: [
-                _policyItem(
-                    onTap: () {
-                      Get.toNamed(
-                        Routes.HOME_POLICY,
-                        arguments: policy['id'].toString(),
-                      );
-                    },
-                    policyName: "HOME POLICY",
-                    colors: [
-                      AppColors.homePolicyLightColor,
-                      AppColors.homePolicyDarkColor
+                ...List.generate(
+                    controller.policies?['data']['auto_policies'].length,
+                    (index) {
+                  var policy =
+                      controller.policies?['data']['auto_policies'][index];
+                  return Column(
+                    children: [
+                      _policyItem(
+                        onTap: () {
+                          Get.toNamed(
+                            Routes.AUTO_POLICY,
+                            arguments: policy['id'].toString(),
+                          );
+                        },
+                        policyName: "AUTO POLICY",
+                        colors: [
+                          AppColors.autoPolicyLightColor,
+                          AppColors.autoPolicyDarkColor
+                        ],
+                        policy: policy,
+                      ),
+                      Gap(10.h),
                     ],
-                    policy: policy,
-                    shadowColor: AppColors.homePolicyDarkColor),
-                Gap(10.h),
-              ],
-            );
-          }),
-          ...List.generate(controller.policies!['data']['life_policies'].length,
-              (index) {
-            var policy = controller.policies!['data']['life_policies'][index];
+                  );
+                }),
+                ...List.generate(
+                    controller.policies!['data']['home_policies'].length,
+                    (index) {
+                  var policy =
+                      controller.policies!['data']['home_policies'][index];
 
-            return Column(
-              children: [
-                _policyItem(
-                  onTap: () {
-                    Get.toNamed(
-                      Routes.HOME_POLICY,
-                      arguments: policy['id'].toString(),
-                    );
-                  },
-                  policyName: "LIFE POLICY",
-                  colors: [
-                    AppColors.lifePolicyLightColor,
-                    AppColors.lifePolicyDarkColor
-                  ],
-                  shadowColor: AppColors.lifePolicyDarkColor,
-                  policy: policy,
-                ),
-                Gap(10.h),
+                  return Column(
+                    children: [
+                      _policyItem(
+                          onTap: () {
+                            Get.toNamed(
+                              Routes.HOME_POLICY,
+                              arguments: policy['id'].toString(),
+                            );
+                          },
+                          policyName: "HOME POLICY",
+                          colors: [
+                            AppColors.homePolicyLightColor,
+                            AppColors.homePolicyDarkColor
+                          ],
+                          policy: policy,
+                          shadowColor: AppColors.homePolicyDarkColor),
+                      Gap(10.h),
+                    ],
+                  );
+                }),
+                ...List.generate(
+                    controller.policies!['data']['life_policies'].length,
+                    (index) {
+                  var policy =
+                      controller.policies!['data']['life_policies'][index];
+
+                  return Column(
+                    children: [
+                      _policyItem(
+                        onTap: () {
+                          Get.toNamed(
+                            Routes.LIFE_POLICY,
+                            arguments: policy['id'].toString(),
+                          );
+                        },
+                        policyName: "LIFE POLICY",
+                        colors: [
+                          AppColors.lifePolicyLightColor,
+                          AppColors.lifePolicyDarkColor
+                        ],
+                        shadowColor: AppColors.lifePolicyDarkColor,
+                        policy: policy,
+                      ),
+                      Gap(10.h),
+                    ],
+                  );
+                }),
               ],
-            );
-          }),
-        ],
-      ),
-    );
+            ),
+          );
   }
 
   _policyItem({
@@ -120,8 +142,12 @@ class AllPolicyDashboard extends StatelessWidget {
                         colors: colors,
                       ),
                     ),
-                    child: const Icon(
-                      Icons.drive_eta,
+                    child: Icon(
+                      policyName == "AUTO POLICY"
+                          ? Icons.drive_eta
+                          : policyName == "HOME POLICY"
+                              ? Icons.home_rounded
+                              : Icons.person,
                       color: Colors.white,
                     ),
                   ),

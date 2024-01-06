@@ -45,6 +45,8 @@ class LoginController extends GetxController {
       Map<String, dynamic>? mapData = jsonDecode(response.data);
       if (mapData != null) {
         if (mapData['status'] == 1) {
+
+          print(mapData);
           DeviceHelper.saveUserId(mapData['user_data']['user_id']);
           Get.offAllNamed(Routes.HOME);
         } else {
