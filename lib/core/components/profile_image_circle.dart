@@ -41,14 +41,15 @@ Widget profileImage({
                 ),
               );
             },
-            placeholder: (context, url) => Container(
-              height: size,
-              width: size,
-              decoration: BoxDecoration(
-                color: AppColors.background,
-                borderRadius: BorderRadius.circular(circleRadius ?? 40.r),
-              ),
-            ),
+            // placeholder: (context, url) => Container(
+            //   height: size,
+            //   width: size,
+            //   decoration: BoxDecoration(
+            //     color: AppColors.background,
+            //     borderRadius: BorderRadius.circular(circleRadius ?? 40.r),
+            //   ),
+            // ),
+            placeholder: (context, url) => CircularProgressIndicator(),
             errorWidget: (context, value, error) {
               return Container(
                 decoration: BoxDecoration(

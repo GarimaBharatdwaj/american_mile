@@ -2,11 +2,13 @@ import 'dart:convert';
 import 'package:american_mile/app/ui/widgets/error_dialog.dart';
 import 'package:american_mile/core/helpers/device_helper.dart';
 import 'package:american_mile/core/network/api_service.dart';
+import 'package:flutter/foundation.dart';
 import '../../../../common_lib.dart';
 
 enum LoginViaEmailOrPhone { email, phone }
 
 class LoginController extends GetxController {
+
   var formKey = GlobalKey<FormState>();
 
   final count = 0.obs;
@@ -15,6 +17,7 @@ class LoginController extends GetxController {
   RxBool isLoginTypeEmail = true.obs;
   Rx<LoginViaEmailOrPhone> loginViaEmailOrPhone =
       LoginViaEmailOrPhone.email.obs;
+
   final TextEditingController emailController = TextEditingController();
   final TextEditingController mobileController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -45,10 +48,14 @@ class LoginController extends GetxController {
       Map<String, dynamic>? mapData = jsonDecode(response.data);
       if (mapData != null) {
         if (mapData['status'] == 1) {
-
-          print(mapData);
           DeviceHelper.saveUserId(mapData['user_data']['user_id']);
-          Get.offAllNamed(Routes.HOME);
+          if (kDebugMode) {
+            print(mapData);
+          }
+
+          Future.delayed(const Duration(milliseconds: 500), () {
+            Get.offAllNamed(Routes.HOME);
+          });
         } else {
           errorDialog(mapData['msg']);
           isLoading.value = false;

@@ -638,6 +638,7 @@ import 'package:american_mile/common_lib.dart';
 import 'package:american_mile/core/components/index.dart';
 import 'package:american_mile/core/helpers/image_paths.dart';
 import 'package:american_mile/core/utils/app_colors.dart';
+import 'package:flutter/services.dart';
 import '../../../../core/utils/divider.dart';
 
 class CarDashboardView extends GetView<CarDashboardController> {
@@ -645,201 +646,217 @@ class CarDashboardView extends GetView<CarDashboardController> {
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(const Duration(seconds: 1), () {
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: AppColors.primary,
+      ));
+    });
+
     return Scaffold(
       backgroundColor: AppColors.background,
       body: Obx(
-        () => controller.isLoading.value
-            ? showProgressIndicator()
-            : controller.webUrl != null
-                ? CarDashBoardWebView(
-                    webUrl: controller.webUrl!,
+        () => controller.webUrl != null
+            ? CarDashBoardWebView(
+                webUrl: controller.webUrl!,
 
-                    ///type: controller.argumentsMap?['type'],
-                  )
-                : controller.carDashBoardData == null
-                    ? Container()
-                    : SafeArea(
-                        child: SingleChildScrollView(
-                          child: Padding(
-                            padding: EdgeInsets.all(8.w),
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(
-                                      left: 4.w, right: 4.w, bottom: 5.h),
-                                  child: Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: RRectIcon(
-                                      backgroundColor:
-                                          AppColors.primary.withOpacity(0.2),
-                                      image: ImagePaths.arrow,
-                                      onTap: () {
-                                        Get.back();
-                                      },
-                                    ),
-                                  ),
-                                ),
-                                SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Obx(
-                                      () => Row(
-                                        children: [
-                                          ...List.generate(
-                                              controller
-                                                  .familyDetails?['vehicles']
-                                                  .length, (index) {
-                                            var vehicle = controller
-                                                    .familyDetails?['vehicles']
-                                                [index];
-
-                                            return Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 5.w),
-                                              child: GestureDetector(
-                                                onTap: () {
-                                                  controller.selectedIndex
-                                                      .value = index;
-
-                                                  controller
-                                                      .getCarDashBoardData(
-                                                          id: vehicle['id']);
-                                                },
-                                                child: Chip(
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  5.r))),
-                                                  side: BorderSide.none,
-                                                  elevation: 1,
-                                                  avatar: Icon(
-                                                    Icons.drive_eta,
-                                                    size: 18.h,
-                                                    color: controller
-                                                                .selectedIndex
-                                                                .value ==
-                                                            index
-                                                        ? AppColors.white
-                                                        : AppColors.primary,
-                                                  ),
-                                                  labelStyle: Get
-                                                      .textTheme.labelMedium
-                                                      ?.copyWith(
-                                                    color: controller
-                                                                .selectedIndex
-                                                                .value ==
-                                                            index
-                                                        ? AppColors.white
-                                                        : AppColors.primary,
-                                                    fontSize: 10,
-                                                  ),
-                                                  label: Text(
-                                                    "${vehicle['year']} ${vehicle['make']} ${vehicle['model']}"
-                                                        .toUpperCase(),
-                                                  ),
-                                                  backgroundColor: controller
-                                                              .selectedIndex
-                                                              .value ==
-                                                          index
-                                                      ? AppColors.primary
-                                                      : AppColors.white,
-                                                ),
-                                              ),
-                                            );
-                                          }),
-                                        ],
-                                      ),
-                                    )),
-                                Card(
-                                  color: AppColors.white,
-                                  elevation: 1,
-                                  child: Column(
-                                    children: [
-                                      Gap(25.h),
-                                      _evWidget(context),
-                                      Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 50.w),
-                                        child: Text(
-                                          controller.carDashBoardData?[
-                                                  'vehiclename'] ??
-                                              "Range Rover",
-                                          textAlign: TextAlign.center,
-                                          style: Get.textTheme.titleMedium
-                                              ?.copyWith(
-                                            color: AppColors.primary,
-                                            fontFamily: 'Poppins',
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 26.sp,
-                                          ),
-                                        ),
-                                      ),
-                                      Gap(25.h),
-                                      SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: Row(
-                                          children: List.generate(
-                                            controller.dataList.length,
-                                            (index) {
-                                              var item =
-                                                  controller.dataList[index];
-
-                                              return Container(
-                                                padding: EdgeInsets.only(
-                                                  right: 20.w,
-                                                  left: index == 0 ? 20.w : 0,
-                                                ),
-                                                child: GestureDetector(
-                                                  onTap: () {
-                                                    if (index == 0) {
-                                                      controller.isLockList[
-                                                              index] =
-                                                          !controller
-                                                                  .isLockList[
-                                                              index];
-
-                                                      controller
-                                                          .lockUnlockVehicleAPI(
-                                                              controller
-                                                                      .isLockList[
-                                                                  index],
-                                                              index,
-                                                              controller
-                                                                  .tempId);
-                                                    }
-                                                  },
-                                                  child: Obx(() => _borderBox(
-                                                      image: item['image']
-                                                          .toString(),
-                                                      text: item['text']
-                                                          .toString(),
-                                                      isLocked: controller
-                                                          .isLockList[index])),
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                      ),
-                                      Gap(25.h),
-
-                                      ///if (controller.carDashBoardData?['odometer'] != null)
-                                      _blueGradientSpeedMeterBox(context),
-
-                                      Gap(20.h),
-
-                                      /// if (controller.carDashBoardData?['tires.passenger_front'] !=
-                                      ///     null)
-                                      _blueGradientTypePressureBox(context),
-                                      Gap(25.h),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                ///type: controller.argumentsMap?['type'],
+              )
+            : SafeArea(
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.all(8.w),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: 4.w, right: 4.w, bottom: 5.h),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: RRectIcon(
+                              backgroundColor:
+                                  AppColors.primary.withOpacity(0.2),
+                              image: ImagePaths.arrow,
+                              onTap: () {
+                                Get.back();
+                              },
                             ),
                           ),
                         ),
-                      ),
+                        if (controller.familyDetails != null)
+                          SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Obx(
+                                () => Row(
+                                  children: [
+                                    ...List.generate(
+                                        controller.familyDetails?['vehicles']
+                                            .length, (index) {
+                                      var vehicle = controller
+                                          .familyDetails?['vehicles'][index];
+
+                                      return Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 5.w),
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            controller.selectedIndex.value =
+                                                index;
+
+                                            controller.getCarDashBoardData(
+                                                id: vehicle['id']);
+                                          },
+                                          child: Chip(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(5.r))),
+                                            side: BorderSide.none,
+                                            elevation: 1,
+                                            avatar: Icon(
+                                              Icons.drive_eta,
+                                              size: 18.h,
+                                              color: controller.selectedIndex
+                                                          .value ==
+                                                      index
+                                                  ? AppColors.white
+                                                  : AppColors.primary,
+                                            ),
+                                            labelStyle: Get
+                                                .textTheme.labelMedium
+                                                ?.copyWith(
+                                              color: controller.selectedIndex
+                                                          .value ==
+                                                      index
+                                                  ? AppColors.white
+                                                  : AppColors.primary,
+                                              fontSize: 10,
+                                            ),
+                                            label: Text(
+                                              "${vehicle['year']} ${vehicle['make']} ${vehicle['model']}"
+                                                  .toUpperCase(),
+                                            ),
+                                            backgroundColor: controller
+                                                        .selectedIndex.value ==
+                                                    index
+                                                ? AppColors.primary
+                                                : AppColors.white,
+                                          ),
+                                        ),
+                                      );
+                                    }),
+                                  ],
+                                ),
+                              )),
+                        controller.isLoading.value
+                            ? Container(
+                                alignment: Alignment.center,
+                                height:
+                                    MediaQuery.of(context).size.height - 130.h,
+                                child: showProgressIndicator())
+                            : controller.carDashBoardData == null
+                                ? Container()
+                                : Card(
+                                    color: AppColors.white,
+                                    elevation: 1,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Gap(25.h),
+                                        _evWidget(context),
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 50.w),
+                                          child: Text(
+                                            controller.carDashBoardData?[
+                                                    'vehiclename'] ??
+                                                "Range Rover",
+                                            textAlign: TextAlign.center,
+                                            style: Get.textTheme.titleMedium
+                                                ?.copyWith(
+                                              color: AppColors.primary,
+                                              fontFamily: 'Poppins',
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 26.sp,
+                                            ),
+                                          ),
+                                        ),
+                                        Gap(25.h),
+                                        SingleChildScrollView(
+                                          scrollDirection: Axis.horizontal,
+                                          child: Row(
+                                            children: List.generate(
+                                              controller.dataList.length,
+                                              (index) {
+                                                var item =
+                                                    controller.dataList[index];
+
+                                                if (index == 1 &&
+                                                    controller.carDashBoardData?[
+                                                            'charge.status'] ==
+                                                        null) {
+                                                  return const SizedBox();
+                                                }
+
+                                                return Container(
+                                                  padding: EdgeInsets.only(
+                                                    right: 20.w,
+                                                    left: index == 0 ? 20.w : 0,
+                                                  ),
+                                                  child: GestureDetector(
+                                                    onTap: () {
+                                                      if (index == 0) {
+                                                        controller.isLockList[
+                                                                index] =
+                                                            !controller
+                                                                    .isLockList[
+                                                                index];
+
+                                                        controller
+                                                            .lockUnlockVehicleAPI(
+                                                                controller
+                                                                        .isLockList[
+                                                                    index],
+                                                                index,
+                                                                controller
+                                                                    .tempId);
+                                                      }
+                                                    },
+                                                    child: Obx(() => _borderBox(
+                                                        image: item['image']
+                                                            .toString(),
+                                                        text: item['text']
+                                                            .toString(),
+                                                        index: index,
+                                                        isLocked: controller
+                                                                .isLockList[
+                                                            index])),
+                                                  ),
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        ),
+                                        Gap(25.h),
+
+                                        ///if (controller.carDashBoardData?['odometer'] != null)
+                                        _blueGradientSpeedMeterBox(context),
+
+                                        Gap(20.h),
+
+                                        /// if (controller.carDashBoardData?['tires.passenger_front'] !=
+                                        ///     null)
+                                        _blueGradientTypePressureBox(context),
+                                        Gap(25.h),
+                                      ],
+                                    ),
+                                  ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
       ),
     );
   }
@@ -1019,7 +1036,10 @@ class CarDashboardView extends GetView<CarDashboardController> {
   }
 
   _borderBox(
-      {required String image, required String text, required var isLocked}) {
+      {required String image,
+      required String text,
+      required var isLocked,
+      int? index}) {
     return Container(
       padding: EdgeInsets.all(
         15.w,
@@ -1068,6 +1088,20 @@ class CarDashboardView extends GetView<CarDashboardController> {
                   color: AppColors.white,
                   size: 40.h,
                 ),
+              if (index == 1 &&
+                  controller.carDashBoardData?['charge.status'] != null)
+                Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text(
+                    controller.carDashBoardData?['battery.level'],
+                    style: Get.textTheme.titleMedium?.copyWith(
+                        color:
+                            isLocked ? AppColors.white : AppColors.evGreenColor,
+                        fontSize: 22.sp,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w700),
+                  ),
+                )
             ],
           ),
           Gap(4.h),
@@ -1090,11 +1124,12 @@ class CarDashboardView extends GetView<CarDashboardController> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        evStatusWidget(
-            titleOne: "Lock Reminders",
-            titleTwo: "Fuel Status",
-            percent:
-                controller.carDashBoardData?['fuel.percentRemaining'] ?? "0%"),
+        if (controller.carDashBoardData?['fuel.percentRemaining'] != null)
+          evStatusWidget(
+              titleOne: "Lock Reminders",
+              titleTwo: "Fuel Status",
+              percent: controller.carDashBoardData?['fuel.percentRemaining'] ??
+                  "0%"),
         Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -1122,10 +1157,11 @@ class CarDashboardView extends GetView<CarDashboardController> {
             ),
           ],
         ),
-        evStatusWidget(
-            titleOne: "Guardian Mode",
-            titleTwo: "Oil Life",
-            percent: controller.carDashBoardData?['engine_oil'] ?? "0%")
+        if (controller.carDashBoardData?['engine_oil'] != null)
+          evStatusWidget(
+              titleOne: "Guardian Mode",
+              titleTwo: "Oil Life",
+              percent: controller.carDashBoardData?['engine_oil'] ?? "0%")
       ],
     );
   }

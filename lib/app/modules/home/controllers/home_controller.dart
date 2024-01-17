@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../common_lib.dart';
@@ -9,6 +10,8 @@ import 'package:dio/dio.dart' as dio;
 import '../../../ui/widgets/error_dialog.dart';
 
 class HomeController extends GetxController {
+  var isErrorOccured = false.obs;
+
   final GlobalKey<ScaffoldState> scaffoldkey = GlobalKey<ScaffoldState>();
   RxInt type = 0.obs;
 
@@ -16,7 +19,7 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     type.value = 0;
-    if (DeviceHelper.getUserId() != null) {
+    if (DeviceHelper.getUserId() != null && arguments == null) {
       policiesAPI();
 
       arguments = Get.arguments;
@@ -26,12 +29,20 @@ class HomeController extends GetxController {
     super.onInit();
   }
 
+  getMyCarsData() async {
+    isMyFamily.value = true;
+    await myFamilyAPI();
+    await getRestoreVehicleListAPI();
+  }
+
   setNavThroughArg() {
-    Future.delayed(const Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 0), () {
       if (arguments == "auto") {
         toggleFamily(2);
       }
-      if (arguments == "home") {
+      else if (arguments == "home") {
+        toggleFamily(3);
+      } else {
         toggleFamily(3);
       }
     });
@@ -73,7 +84,7 @@ class HomeController extends GetxController {
       name = "Navigation";
     }
     if (bottomNavIndex.value == 2) {
-      name = "";
+      name = "My Cars";
     }
     if (bottomNavIndex.value == 3) {
       name = "Profile";
@@ -152,14 +163,15 @@ class HomeController extends GetxController {
   Map<String, dynamic>? policies;
   policiesAPI() {
     isPoliciesLoading.value = true;
+
     API().post(
       "policy-dashboard",
       data: {
         'user_id': DeviceHelper.getUserId(),
       },
     ).then((value) async {
-      Get.log("Value  :  $value");
       try {
+        Get.log("Value  :  $value");
         Map<String, dynamic>? res = json.decode(value.data);
         if (res != null) {
           if (res['status'].toString() == "1") {
@@ -175,7 +187,37 @@ class HomeController extends GetxController {
         errorDialog('Some error occurred');
       }
       isPoliciesLoading.value = false;
+    }).catchError((error) {
+      isPoliciesLoading.value = false;
+      if (kDebugMode) {
+        print(error);
+      }
     });
+
+    // API().post(
+    //   "policy-dashboard",
+    //   data: {
+    //     'user_id': DeviceHelper.getUserId(),
+    //   },
+    // ).then((value) async {
+    //   Get.log("Value  :  $value");
+    //   try {
+    //     Map<String, dynamic>? res = json.decode(value.data);
+    //     if (res != null) {
+    //       if (res['status'].toString() == "1") {
+    //         policies = res;
+    //         isPoliciesLoading.value = false;
+    //       } else {
+    //         errorDialog(res['msg']);
+    //       }
+    //     } else {
+    //       errorDialog('Some error occurred');
+    //     }
+    //   } catch (e) {
+    //     errorDialog('Some error occurred');
+    //   }
+    //   isPoliciesLoading.value = false;
+    // });
   }
 
   //*********************************************************************//
@@ -190,36 +232,72 @@ class HomeController extends GetxController {
 
   RxBool isLoading = false.obs;
   Map<String, dynamic>? userData;
-  getUserProfile() {
+
+  Future<void> getUserProfile() async {
     isLoading.value = true;
-    API().post(
-      "get-profile",
-      data: {
-        'user_id': DeviceHelper.getUserId(), //DeviceHelper.getId()
-      },
-    ).then((value) async {
-      Get.log("Value  :  $value");
-      try {
-        Map<String, dynamic>? res = json.decode(value.data);
-        if (res != null) {
-          if (res['status'].toString() == "1") {
-            profileImagePath.value = "";
-            userData = res['user_data'];
-            fullName.text = userData!['fullname'] ?? "";
-            email.text = userData!['email'] ?? "";
-            phone.text = userData!['mobile'] ?? "";
-          } else {
-            // Constants.showErrorDialogRevise();
-          }
+    try {
+      var response = await API().post(
+        "get-profile",
+        data: {
+          'user_id': DeviceHelper.getUserId(),
+        },
+      );
+
+      Get.log("Value  :  ${response.data}");
+
+      Map<String, dynamic>? res = json.decode(response.data);
+
+      if (res != null) {
+        if (res['status'].toString() == "1") {
+          profileImagePath.value = "";
+          userData = res['user_data'];
+          fullName.text = userData!['fullname'] ?? "";
+          email.text = userData!['email'] ?? "";
+          phone.text = userData!['mobile'] ?? "";
         } else {
           // Constants.showErrorDialogRevise();
         }
-      } catch (e) {
+      } else {
         // Constants.showErrorDialogRevise();
       }
+    } catch (e) {
+      // Constants.showErrorDialogRevise();
+    } finally {
       isLoading.value = false;
-    });
+    }
   }
+
+  /// old get user profile
+  // getUserProfile() {
+  //   isLoading.value = true;
+  //   API().post(
+  //     "get-profile",
+  //     data: {
+  //       'user_id': DeviceHelper.getUserId(), //DeviceHelper.getId()
+  //     },
+  //   ).then((value) async {
+  //     Get.log("Value  :  $value");
+  //     try {
+  //       Map<String, dynamic>? res = json.decode(value.data);
+  //       if (res != null) {
+  //         if (res['status'].toString() == "1") {
+  //           profileImagePath.value = "";
+  //           userData = res['user_data'];
+  //           fullName.text = userData!['fullname'] ?? "";
+  //           email.text = userData!['email'] ?? "";
+  //           phone.text = userData!['mobile'] ?? "";
+  //         } else {
+  //           // Constants.showErrorDialogRevise();
+  //         }
+  //       } else {
+  //         // Constants.showErrorDialogRevise();
+  //       }
+  //     } catch (e) {
+  //       // Constants.showErrorDialogRevise();
+  //     }
+  //     isLoading.value = false;
+  //   });
+  // }
 
   RxBool edit = false.obs;
   RxString profileImagePath = "".obs;
@@ -328,7 +406,9 @@ class HomeController extends GetxController {
       ///getUserProfile();
     }
     if (index == 2) {
-      policiesAPI();
+      getMyCarsData();
+
+      ///policiesAPI();
     }
 
     if (index == 1) {
@@ -367,7 +447,7 @@ class HomeController extends GetxController {
 
       if (res != null) {
         if (res['status'] == 1) {
-          await getData();
+          await getMyCarsData();
         } else {
           errorDialog(res['msg']);
         }
@@ -467,6 +547,7 @@ class HomeController extends GetxController {
   }
 
   Future<void> myFamilyAPI() async {
+    familyDetails = null;
     isLoading.value = true;
 
     try {
@@ -483,7 +564,6 @@ class HomeController extends GetxController {
         if (res['status'].toString() == "1") {
           familyDetails = res['details'];
           isMyFamily.value = false;
-
           setNavThroughArg();
         } else {
           errorDialog(res['msg']);

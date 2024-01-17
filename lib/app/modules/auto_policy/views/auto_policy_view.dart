@@ -1,6 +1,7 @@
 import 'package:american_mile/app/modules/auto_policy/views/view_auto_policy.dart';
 import 'package:american_mile/common_lib.dart';
 import 'package:american_mile/core/components/icon_button.dart';
+import 'package:flutter/services.dart';
 import '../../../../core/components/index.dart';
 import '../../../../core/components/request_change.dart';
 import '../../../../core/components/secondry_button.dart';
@@ -12,6 +13,163 @@ class AutoPolicyView extends GetView<AutoPolicyController> {
   const AutoPolicyView({Key? key}) : super(key: key);
 
   /// =========================
+
+  @override
+  Widget build(BuildContext context) {
+    Future.delayed(const Duration(seconds: 1), () {
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: AppColors.primary,
+      ));
+    });
+
+    return Obx(
+      () => Scaffold(
+        backgroundColor: AppColors.background,
+        floatingActionButton: GestureDetector(
+          onTap: () {
+            Get.toNamed(Routes.INSURANCE_PROVIDER);
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(25.r),
+              gradient: LinearGradient(
+                colors: [
+                  AppColors.primary,
+                  AppColors.primary.withOpacity(0.9),
+                  AppColors.primary.withOpacity(0.8),
+                  AppColors.primary.withOpacity(0.7),
+                ],
+              ),
+            ),
+            child: IntrinsicWidth(
+              child: Padding(
+                padding: const EdgeInsets.all(6.0),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.add_circle_rounded,
+                      size: 30.h,
+                      color: AppColors.white,
+                    ),
+                    Text(
+                      " Add Auto Policy ",
+                      style: Get.textTheme.labelLarge?.copyWith(
+                          color: AppColors.white, fontFamily: "Poppins"),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+        body: controller.isLoading.value == true
+            ? showProgressIndicator()
+            : SafeArea(
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 15.w),
+                          child: const MyAppBar(title: 'Auto Policy Details'),
+                        ),
+                        Gap(15.h),
+                        autoPolicyDetails(context),
+                        Gap(45.h),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Column(
+                            children: [
+                              ...List.generate(
+                                  controller.autoDetails!['data']['vehicles']
+                                      .length, (index) {
+                                var car = controller.autoDetails!['data']
+                                    ['vehicles'][index];
+
+                                return GestureDetector(
+                                  onTap: () {
+                                    Get.to(ViewAutoPolicy(
+                                      details: controller.autoDetails!['data']
+                                          ['vehicles'][index],
+                                    ));
+                                  },
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              "${car['year']} ${car['make']} ${car['model']}",
+                                              style: Get.textTheme.titleMedium
+                                                  ?.copyWith(
+                                                fontSize: 16.sp,
+                                                fontFamily: "Poppins",
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                          ),
+                                          Gap(30.w),
+                                          Icon(
+                                            Icons.arrow_forward_ios_rounded,
+                                            size: 35.h,
+                                            color: AppColors.primary,
+                                          ),
+                                        ],
+                                      ),
+                                      Gap(10.h),
+                                      Container(
+                                        height: 1,
+                                        color: Colors.grey.withOpacity(0.5),
+                                      ),
+                                      Gap(15.h),
+                                    ],
+                                  ),
+                                );
+                              }),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+      ),
+    );
+  }
+
+  _containerItem({required String key, required String value}) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 2.h),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            flex: 3,
+            child: Text(
+              key,
+              style: Get.textTheme.titleSmall?.copyWith(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 10.sp,
+                  fontFamily: "Poppins"),
+            ),
+          ),
+          Expanded(
+            flex: 5,
+            child: Text(
+              value,
+              style: Get.textTheme.labelLarge?.copyWith(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 10.sp,
+                  fontFamily: "Poppins"),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   autoPolicyDetails(context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 14.0),
@@ -168,13 +326,9 @@ class AutoPolicyView extends GetView<AutoPolicyController> {
                   buttonText: 'Policy Documents'),
             ],
           ),
-
-
           Gap(20.h),
-          if(controller.type.value == true)
-            _autoIdCards(context),
-          if(controller.typeOne.value == true)
-            _autoDocuments(context),
+          if (controller.type.value == true) _autoIdCards(context),
+          if (controller.typeOne.value == true) _autoDocuments(context),
           Gap(10.h),
           Container(
             height: 0.5,
@@ -205,123 +359,6 @@ class AutoPolicyView extends GetView<AutoPolicyController> {
             ],
           ),
           Gap(30.h),
-
-
-
-
-        ],
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Obx(
-      () => Scaffold(
-        backgroundColor: AppColors.background,
-        body: controller.isLoading.value == true
-            ? showProgressIndicator()
-            : SafeArea(
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 15.w),
-                          child: const MyAppBar(title: 'Auto Policy Details'),
-                        ),
-                        Gap(15.h),
-                        autoPolicyDetails(context),
-                        Gap(45.h),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          child: Column(
-                            children: [
-                              ...List.generate(
-                                  controller.autoDetails!['data']['vehicles']
-                                      .length, (index) {
-                                var car = controller.autoDetails!['data']
-                                    ['vehicles'][index];
-
-                                return GestureDetector(
-                                  onTap: () {
-                                    Get.to(ViewAutoPolicy(
-                                      details: controller.autoDetails!['data']
-                                          ['vehicles'][index],
-                                    ));
-                                  },
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                            child: Text(
-                                              "${car['year']} ${car['make']} ${car['model']}",
-                                              style: Get.textTheme.titleMedium
-                                                  ?.copyWith(
-                                                fontSize: 16.sp,
-                                                fontFamily: "Poppins",
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                          ),
-                                          Gap(30.w),
-                                          Icon(
-                                            Icons.arrow_forward_ios_rounded,
-                                            size: 35.h,
-                                            color: AppColors.primary,
-                                          ),
-                                        ],
-                                      ),
-                                      Gap(10.h),
-                                      Container(
-                                        height: 1,
-                                        color: Colors.grey.withOpacity(0.5),
-                                      ),
-                                      Gap(15.h),
-                                    ],
-                                  ),
-                                );
-                              }),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-      ),
-    );
-  }
-
-  _containerItem({required String key, required String value}) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 2.h),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            flex: 3,
-            child: Text(
-              key,
-              style: Get.textTheme.titleSmall?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 10.sp,
-                  fontFamily: "Poppins"),
-            ),
-          ),
-          Expanded(
-            flex: 5,
-            child: Text(
-              value,
-              style: Get.textTheme.labelLarge?.copyWith(
-                  fontWeight: FontWeight.normal,
-                  fontSize: 10.sp,
-                  fontFamily: "Poppins"),
-            ),
-          ),
         ],
       ),
     );
@@ -1254,14 +1291,12 @@ class AutoPolicyView extends GetView<AutoPolicyController> {
                     SecondryButton(
                         onTap: () {
                           controller.type.value = !controller.type.value;
-
                         },
                         buttonText: 'Current ID Cards'),
                     Gap(15.h),
                     SecondryButton(
                         onTap: () {
                           controller.typeOne.value = !controller.typeOne.value;
-
                         },
                         buttonText: 'Policy Documents'),
                   ],

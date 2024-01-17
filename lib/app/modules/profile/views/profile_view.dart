@@ -1,4 +1,5 @@
 import 'package:american_mile/core/components/small_button.dart';
+import 'package:flutter/services.dart';
 import '../../../../common_lib.dart';
 import '../../../../core/components/index.dart';
 import '../../../../core/utils/index.dart';
@@ -8,6 +9,11 @@ class ProfileView extends GetView<ProfileController> {
   const ProfileView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Future.delayed(const Duration(seconds: 1), () {
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: AppColors.primary,
+      ));
+    });
     return SafeArea(
       child: Scaffold(
           backgroundColor: AppColors.background,

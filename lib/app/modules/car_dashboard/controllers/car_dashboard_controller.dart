@@ -24,6 +24,7 @@ class CarDashboardController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
+
     argumentsMap = Get.arguments;
     await getData();
 
@@ -41,7 +42,6 @@ class CarDashboardController extends GetxController {
 
   Map<String, dynamic>? familyDetails;
   Future<void> myFamilyAPI() async {
-    isLoading.value = true;
     try {
       var response = await API().post(
         "my-family",
@@ -63,7 +63,6 @@ class CarDashboardController extends GetxController {
       }
     } catch (e) {
       errorDialog("Some error occurred");
-      isLoading.value = false;
     }
   }
 
@@ -79,7 +78,9 @@ class CarDashboardController extends GetxController {
   var isLockList = [
     false,
 
-     false, false, false, false, false, false
+    false,
+
+    ///false, false, false, false, false
   ].obs;
 
   var dataList = [
@@ -88,31 +89,31 @@ class CarDashboardController extends GetxController {
       "text": "lock\nVehicle",
       "isLock": false,
     },
-    {
-      "image": ImagePaths.carWhite,
-      "text": "Door\nLocking",
-      "isLock": false,
-    },
-    {
-      "image": ImagePaths.carWhite,
-      "text": "Vehicle\nHood",
-      "isLock": false,
-    },
-    {
-      "image": ImagePaths.sunroof,
-      "text": "Vehicle\nSunroof",
-      "isLock": false,
-    },
-    {
-      "image": ImagePaths.trunck,
-      "text": "Vehicle\nTrunk",
-      "isLock": false,
-    },
-    {
-      "image": ImagePaths.carDoor,
-      "text": "Vehicle\nWindows",
-      "isLock": false,
-    },
+    // {
+    //   "image": ImagePaths.carWhite,
+    //   "text": "Door\nLocking",
+    //   "isLock": false,
+    // },
+    // {
+    //   "image": ImagePaths.carWhite,
+    //   "text": "Vehicle\nHood",
+    //   "isLock": false,
+    // },
+    // {
+    //   "image": ImagePaths.sunroof,
+    //   "text": "Vehicle\nSunroof",
+    //   "isLock": false,
+    // },
+    // {
+    //   "image": ImagePaths.trunck,
+    //   "text": "Vehicle\nTrunk",
+    //   "isLock": false,
+    // },
+    // {
+    //   "image": ImagePaths.carDoor,
+    //   "text": "Vehicle\nWindows",
+    //   "isLock": false,
+    // },
     {
       "image": ImagePaths.battery,
       "text": "EV\nBattery",
@@ -120,10 +121,9 @@ class CarDashboardController extends GetxController {
     },
   ].obs;
 
-
   var tempId;
   var isLocked = false.obs;
-  Future<void> lockUnlockVehicleAPI(bool lockUnlock, index,id) async {
+  Future<void> lockUnlockVehicleAPI(bool lockUnlock, index, id) async {
     debugPrint(lockUnlock.toString());
 
     try {
@@ -171,6 +171,7 @@ class CarDashboardController extends GetxController {
             id ?? argumentsMap?['id'] ?? familyDetails!['vehicles'][0]['id'],
       });
       Map<String, dynamic>? mapData = jsonDecode(response.data);
+
       if (mapData != null) {
         if (mapData['status'] == 1) {
           if (mapData['url'] != null) {
@@ -184,6 +185,7 @@ class CarDashboardController extends GetxController {
           isLoading.value = false;
           errorDialog(mapData['msg'], onTap: () {
             Get.back();
+
             ///Get.back();
           });
         }
@@ -191,7 +193,8 @@ class CarDashboardController extends GetxController {
         isLoading.value = false;
         errorDialog("Something went wrong!", onTap: () {
           Get.back();
-         /// Get.back();
+
+          /// Get.back();
         });
       }
     } catch (e) {

@@ -1,6 +1,7 @@
 import 'package:american_mile/app/modules/home_policy/views/view_home_policy.dart';
 import 'package:american_mile/common_lib.dart';
 import 'package:american_mile/core/components/request_change.dart';
+import 'package:flutter/services.dart';
 import '../../../../core/components/index.dart';
 import '../../../../core/components/secondry_button.dart';
 import '../../../../core/utils/divider.dart';
@@ -618,9 +619,55 @@ class HomePolicyView extends GetView<HomePolicyController> {
 
   @override
   Widget build(BuildContext context) {
+
+    Future.delayed(const Duration(seconds: 1), () {
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: AppColors.primary,
+      ));
+    });
+
+
     return Obx(
       () => Scaffold(
         backgroundColor: AppColors.background,
+        floatingActionButton: GestureDetector(
+          onTap: () {
+            Get.toNamed(Routes.INSURANCE_PROVIDER);
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(25.r),
+              gradient: LinearGradient(
+                colors: [
+                  AppColors.primary,
+                  AppColors.primary.withOpacity(0.9),
+                  AppColors.primary.withOpacity(0.8),
+                  AppColors.primary.withOpacity(0.7),
+                ],
+              ),
+            ),
+            child: IntrinsicWidth(
+              child: Padding(
+                padding: const EdgeInsets.all(6.0),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.add_circle_rounded,
+                      size: 30.h,
+                      color: AppColors.white,
+                    ),
+                    Text(
+                      " Add Home Policy ",
+                      style: Get.textTheme.labelLarge?.copyWith(
+                          color: AppColors.white, fontFamily: "Poppins"),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+
         body: controller.isLoading.value == true
             ? showProgressIndicator()
             : SafeArea(

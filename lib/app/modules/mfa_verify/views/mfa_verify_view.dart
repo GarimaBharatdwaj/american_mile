@@ -1,4 +1,5 @@
 import 'package:american_mile/core/utils/app_colors.dart';
+import 'package:flutter/services.dart';
 import 'package:pinput/pinput.dart';
 import '../../../../common_lib.dart';
 import '../../../../core/components/my_app_bar.dart';
@@ -9,6 +10,13 @@ class MfaVerifyView extends GetView<MfaVerifyController> {
   const MfaVerifyView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+
+    Future.delayed(const Duration(seconds: 1), () {
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: AppColors.primary,
+      ));
+    });
+
     return Scaffold(
         body: SafeArea(
             child: Obx(

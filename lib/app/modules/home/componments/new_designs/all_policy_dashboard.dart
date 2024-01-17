@@ -1,10 +1,13 @@
 import 'package:american_mile/app/modules/home/controllers/home_controller.dart';
+import 'package:american_mile/app/ui/widgets/error_dialog.dart';
 import 'package:american_mile/common_lib.dart';
 import '../../../../../core/utils/app_colors.dart';
 
 ///
 ///
+///
 /// Changes in auto policy design
+///
 ///
 ///
 
@@ -15,15 +18,63 @@ class AllPolicyDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return controller.policies == null
-        ? Center(
-            child: Text(
-              "No Data Available",
-              textAlign: TextAlign.center,
-              style: Get.textTheme.titleMedium?.copyWith(
-                  fontSize: 18.sp,
-                  fontFamily: "Poppins",
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.primaryDark),
+        ? SizedBox(
+            height: MediaQuery.of(context).size.height - 150.h,
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "No policy is currently available; please proceed by importing one.",
+                  textAlign: TextAlign.center,
+                  style: Get.textTheme.titleMedium?.copyWith(
+                      fontSize: 13.sp,
+                      fontFamily: "Poppins",
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.primaryDark),
+                ),
+                Gap(20.h),
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed(Routes.INSURANCE_PROVIDER);
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25.r),
+                      gradient: LinearGradient(
+                        colors: [
+                          AppColors.primary,
+                          AppColors.primary.withOpacity(0.9),
+                          AppColors.primary.withOpacity(0.8),
+                          AppColors.primary.withOpacity(0.7),
+                        ],
+                      ),
+                    ),
+                    child: IntrinsicWidth(
+                      child: Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.add_circle_rounded,
+                              size: 32.h,
+                              color: AppColors.white,
+                            ),
+                            Text(
+                              "  Import Policy  ",
+                              style: Get.textTheme.labelLarge?.copyWith(
+                                  fontSize: 20.sp,
+                                  color: AppColors.white,
+                                  fontFamily: "Poppins"),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           )
         : SingleChildScrollView(
@@ -38,6 +89,7 @@ class AllPolicyDashboard extends StatelessWidget {
                   return Column(
                     children: [
                       _policyItem(
+                        context,
                         onTap: () {
                           Get.toNamed(
                             Routes.AUTO_POLICY,
@@ -63,13 +115,12 @@ class AllPolicyDashboard extends StatelessWidget {
 
                   return Column(
                     children: [
-                      _policyItem(
-                          onTap: () {
-                            Get.toNamed(
-                              Routes.HOME_POLICY,
-                              arguments: policy['id'].toString(),
-                            );
-                          },
+                      _policyItem(context, onTap: () {
+                        Get.toNamed(
+                          Routes.HOME_POLICY,
+                          arguments: policy['id'].toString(),
+                        );
+                      },
                           policyName: "HOME POLICY",
                           colors: [
                             AppColors.homePolicyLightColor,
@@ -90,6 +141,7 @@ class AllPolicyDashboard extends StatelessWidget {
                   return Column(
                     children: [
                       _policyItem(
+                        context,
                         onTap: () {
                           Get.toNamed(
                             Routes.LIFE_POLICY,
@@ -108,12 +160,58 @@ class AllPolicyDashboard extends StatelessWidget {
                     ],
                   );
                 }),
+                Gap(10.h),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.toNamed(Routes.INSURANCE_PROVIDER);
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25.r),
+                          gradient: LinearGradient(
+                            colors: [
+                              AppColors.primary,
+                              AppColors.primary.withOpacity(0.9),
+                              AppColors.primary.withOpacity(0.8),
+                              AppColors.primary.withOpacity(0.7),
+                            ],
+                          ),
+                        ),
+                        child: IntrinsicWidth(
+                          child: Padding(
+                            padding: const EdgeInsets.all(6.0),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.add_circle_rounded,
+                                  size: 30.h,
+                                  color: AppColors.white,
+                                ),
+                                Text(
+                                  " Import Another Policy ",
+                                  style: Get.textTheme.labelLarge?.copyWith(
+                                      color: AppColors.white,
+                                      fontFamily: "Poppins"),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           );
   }
 
-  _policyItem({
+  _policyItem(
+    BuildContext context, {
     required String policyName,
     required List<Color> colors,
     required Map<String, dynamic> policy,
@@ -274,11 +372,15 @@ class AllPolicyDashboard extends StatelessWidget {
             if (policyName != "LIFE POLICY")
               GestureDetector(
                 onTap: () {
-                  controller.deleteAPI(
-                      apiName: policyName == "AUTO POLICY"
-                          ? 'delete-auto-policy'
-                          : 'delete-home-policy',
-                      id: policy['id']);
+                  deleteItemDialog(
+                      context: context,
+                      onTap: () {
+                        controller.deleteAPI(
+                            apiName: policyName == "AUTO POLICY"
+                                ? 'delete-auto-policy'
+                                : 'delete-home-policy',
+                            id: policy['id']);
+                      });
                 },
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 15.w),
@@ -300,5 +402,9 @@ class AllPolicyDashboard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  myPrint() {
+    print("\n\n\n\n\n\n\n\n\n hhhhhhhhhhh \n\n\n\n\n\n\n\n");
   }
 }

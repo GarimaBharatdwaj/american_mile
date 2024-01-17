@@ -12,7 +12,17 @@ class ViewPicture extends StatelessWidget {
       height: context.height,
       child: Image.network(
         imageUrl,
+       errorBuilder:
+            (context, error, stackTrace) {
+          return Container(
+            height: 500,color: Colors.white,
+            // child: Image.asset(
+            //     'assets/images/error.jpg',
+            //     fit: BoxFit.fitWidth),
+          );
+        },
         fit: BoxFit.contain,
+
       ),
     );
   }

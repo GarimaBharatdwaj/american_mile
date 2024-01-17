@@ -10,6 +10,13 @@ class DriverDetailsView extends GetView<DriverDetailsController> {
   const DriverDetailsView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+
+    Future.delayed(const Duration(seconds: 1), () {
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: AppColors.primary,
+      ));
+    });
+
     return  Scaffold(
         body: SingleChildScrollView(
           padding: EdgeInsets.all(15.w),

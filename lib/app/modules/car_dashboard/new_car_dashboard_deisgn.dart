@@ -5,6 +5,7 @@ import 'package:american_mile/common_lib.dart';
 import 'package:american_mile/core/components/index.dart';
 import 'package:american_mile/core/helpers/image_paths.dart';
 import 'package:american_mile/core/utils/app_colors.dart';
+import 'package:flutter/services.dart';
 import '../../../core/utils/divider.dart';
 
 class CarDashboardDesign extends GetView<CarDashboardController> {
@@ -12,6 +13,13 @@ class CarDashboardDesign extends GetView<CarDashboardController> {
 
   @override
   Widget build(BuildContext context) {
+
+    Future.delayed(const Duration(seconds: 1), () {
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: AppColors.primary,
+      ));
+    });
+
     return Scaffold(
       backgroundColor: AppColors.background,
       body: Obx(

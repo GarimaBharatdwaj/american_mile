@@ -1,5 +1,6 @@
 import 'package:american_mile/common_lib.dart';
 import 'package:american_mile/core/utils/divider.dart';
+import 'package:flutter/services.dart';
 import '../../../../core/components/index.dart';
 import '../../../../core/components/primary_button.dart';
 import '../../../../core/utils/index.dart';
@@ -9,6 +10,13 @@ class DriverLicenceView extends GetView<DriverLicenceController> {
   const DriverLicenceView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+
+
+    Future.delayed(const Duration(seconds: 1), () {
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: AppColors.primary,
+      ));
+    });
     return  Obx(
       () => Scaffold(
         body: controller.isLoading.value

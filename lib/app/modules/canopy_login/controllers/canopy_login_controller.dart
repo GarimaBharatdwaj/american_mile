@@ -103,7 +103,7 @@ class CanopyLoginController extends GetxController {
           }
         }
       } else {
-        errorDialog("");
+        errorDialog("Something went wrong");
         isLoading.value = false;
       }
     } catch (e) {

@@ -1,4 +1,5 @@
 import 'package:american_mile/common_lib.dart';
+import 'package:flutter/services.dart';
 import '../core/utils/index.dart';
 
 class AMileApp extends StatelessWidget {
@@ -6,6 +7,8 @@ class AMileApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
     return ScreenUtilInit(
         designSize: const Size(414, 896),
         minTextAdapt: true,

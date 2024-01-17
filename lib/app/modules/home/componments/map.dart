@@ -15,7 +15,10 @@ class LocationMap extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() => Column(children: [
           controller.isLoading.value
-              ? showProgressIndicator()
+              ? Container(
+                  height: context.height-150.h,
+                  alignment: Alignment.center,
+                  child: showProgressIndicator())
               : _vehicalComponent(context),
         ]));
   }
@@ -111,11 +114,11 @@ class LocationMap extends StatelessWidget {
 
   _vehicalComponent(BuildContext context) {
     return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(horizontal: 12.w),
+      padding: EdgeInsets.symmetric(horizontal: 5.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Gap(20.h),
+          Gap(10.h),
           Obx(() => controller.restoreVehicleList.isNotEmpty
               ? _restoreVehicleComponent(context, controller.restoreVehicleList)
               : const SizedBox()),
@@ -125,100 +128,116 @@ class LocationMap extends StatelessWidget {
             var vehical = controller.familyDetails?['vehicles'][index];
             return Column(
               children: [
-                ShadowContainer(
-                  child: Column(
-                    children: [
-                      Image.asset(
-                        ImagePaths.carIcon,
-                        height: 80.w,
-                        width: 80.w,
-                      ),
-                      Gap(8.h),
-                      Text(
-                        "${vehical['year']} ${vehical['make']}\n${vehical['model']}",
-                        style: Get.textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.w700,
-                          height: 1.3,
+                Card(
+                  color: AppColors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    child: Column(
+                      children: [
+                        Gap(16.h),
+
+                        CircleAvatar(
+                            radius: 55.h,
+
+                            ///backgroundColor: AppColors.primary,
+                            child: CircleAvatar(
+                                radius: 55.h,
+                                foregroundImage: AssetImage(
+                                  ImagePaths.carIcon,
+                                ))),
+
+                        Gap(16.h),
+                        Text(
+                          "${vehical['year']} ${vehical['make']} ${vehical['model']}",
+                          style: Get.textTheme.titleLarge?.copyWith(
+                            fontWeight: FontWeight.w600,
+                            fontFamily: "Poppins",
+                            color: AppColors.primary,
+                            fontSize: 20.sp,
+                            height: 1,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                        textAlign: TextAlign.center,
-                      ),
-                      Gap(16.h),
-                      _containerItem(
-                        key: "VIN # :",
-                        value: vehical['vin_number'],
-                      ),
-                      _containerItem(
-                        key: "Year :",
-                        value: vehical['year'],
-                      ),
-                      _containerItem(
-                        key: "Make :",
-                        value: vehical['make'],
-                      ),
-                      _containerItem(
-                        key: "Model :",
-                        value: vehical['model'],
-                      ),
-                      vehical['body'] == null || vehical['body'] == ""
-                          ? Container()
-                          : _containerItem(
-                              key: "Body :",
-                              value: vehical['body'],
+                        Gap(16.h),
+                        _containerItem(
+                          key: "VIN # :",
+                          value: vehical['vin_number'],
+                        ),
+                        _containerItem(
+                          key: "Year :",
+                          value: vehical['year'],
+                        ),
+                        _containerItem(
+                          key: "Make :",
+                          value: vehical['make'],
+                        ),
+                        _containerItem(
+                          key: "Model :",
+                          value: vehical['model'],
+                        ),
+                        vehical['body'] == null || vehical['body'] == ""
+                            ? Container()
+                            : _containerItem(
+                                key: "Body :",
+                                value: vehical['body'],
+                              ),
+                        Gap(16.h),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SecondryButton(
+                              buttonText: "Edit",
+                              onTap: () {
+                                Get.toNamed(Routes.CAR_DETAILS, arguments: {
+                                  'isAddingManually': true,
+                                  'vinNumber': vehical['vin_number'],
+                                  'year': vehical['year'],
+                                  'make': vehical['make'],
+                                  'model': vehical['model'],
+                                  'body': vehical['body'],
+                                  'type': '1',
+                                  'vehical_id': vehical['id'],
+                                })?.then(
+                                  (value) {
+                                    if (value) {
+                                      controller.myFamilyAPI();
+                                    }
+                                  },
+                                );
+                              },
                             ),
-                      Gap(20.h),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SecondryButton(
-                            buttonText: "Edit",
-                            onTap: () {
-                              Get.toNamed(Routes.CAR_DETAILS, arguments: {
-                                'isAddingManually': true,
-                                'vinNumber': vehical['vin_number'],
-                                'year': vehical['year'],
-                                'make': vehical['make'],
-                                'model': vehical['model'],
-                                'body': vehical['body'],
-                                'type': '1',
-                                'vehical_id': vehical['id'],
-                              })?.then(
-                                (value) {
-                                  if (value) {
-                                    controller.myFamilyAPI();
-                                  }
-                                },
-                              );
-                            },
-                          ),
-                          SecondryButton(
-                            buttonText: "Remove",
-                            onTap: () {
-                              controller.deleteVehicleAPI(
-                                vehical['id'],
-                              );
-                            },
-                          ),
-                        ],
-                      ),
-                      Gap(8.h),
-                      SecondryButton(
-                        width: context.width,
-                        buttonText: "Connect car",
-                        onTap: () {
-                          Get.toNamed(
-                            Routes.CAR_DASHBOARD,
-                            arguments: {
-                              "id": vehical['id'],
-                              "type": "2",
-                            },
-                          );
-                        },
-                      ),
-                      Gap(8.h),
-                    ],
+                            Gap(16.h),
+                            SecondryButton(
+                              buttonText: "Remove",
+                              onTap: () {
+                                controller.deleteVehicleAPI(
+                                  vehical['id'],
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+
+                        /// Gap(8.h),
+                        // SecondryButton(
+                        //   width: context.width,
+                        //   buttonText: "Connect car",
+                        //   onTap: () {
+                        //     Get.toNamed(
+                        //       Routes.CAR_DASHBOARD,
+                        //       arguments: {
+                        //         "id": vehical['id'],
+                        //         "type": "2",
+                        //       },
+                        //     );
+                        //   },
+                        /// ),
+                        Gap(16.h),
+                      ],
+                    ),
                   ),
                 ),
-                Gap(20.h),
+                Gap(16.h),
               ],
             );
           }),

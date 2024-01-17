@@ -1,13 +1,8 @@
 import 'package:american_mile/app/modules/home/controllers/home_controller.dart';
-import 'package:american_mile/app/modules/profile/views/profile_view.dart';
-import 'package:american_mile/app/modules/user_profile/controllers/user_profile_controller.dart';
-import 'package:american_mile/app/modules/user_profile/views/user_profile_view.dart';
+import 'package:american_mile/app/ui/widgets/error_dialog.dart';
 import 'package:american_mile/common_lib.dart';
 import 'package:american_mile/core/utils/app_colors.dart';
 import 'package:flutter/services.dart';
-import 'package:get_storage/get_storage.dart';
-
-import '../../../../../core/helpers/device_helper.dart';
 import '../../../../../core/helpers/image_paths.dart';
 
 class Profile extends StatefulWidget {
@@ -19,25 +14,22 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   final controller = Get.find<HomeController>();
-
   bool active = false;
   @override
   Widget build(BuildContext context) {
-    // SystemChrome.setSystemUIOverlayStyle(
-    //   SystemUiOverlayStyle(
-    //     statusBarColor: AppColors.primary,
-    //   ),
-    // );
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: AppColors.primary,
+      ),
+    );
 
     return SafeArea(
       child: Obx(
         () => controller.isMyFamily.value
             ? Container(
+                alignment: Alignment.center,
                 height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.height,
-                child: const Center(
-                  child: CircularProgressIndicator(),
-                ),
+                child: const CircularProgressIndicator(),
               )
             : SingleChildScrollView(
                 child: Column(
@@ -72,19 +64,67 @@ class _ProfileState extends State<Profile> {
                             left: 25,
                             child: GestureDetector(
                               onTap: () {
-                                Get.toNamed(Routes.USER_PROFILE);
+                                Get.toNamed(Routes.USER_PROFILE,arguments: controller.isErrorOccured.value);
                               },
                               child: Row(
                                 children: [
+                                  if (controller.userData?['image'].isEmpty)
+                                    controller.userData != null &&
+                                            controller.userData!['image'] !=
+                                                null &&
+                                            controller.userData!['image'] != ""
+                                        ? CircleAvatar(
+                                            radius: 44.h,
+                                            backgroundColor: Colors.white,
+                                            child: CircleAvatar(
+                                              radius: 41.h,
+                                              foregroundImage: NetworkImage(
+                                                  controller.userData!['image']
+                                                      .toString()),
+                                            ),
+                                          )
+                                        : CircleAvatar(
+                                            radius: 44.h,
+                                            backgroundColor: Colors.white,
+                                            child: CircleAvatar(
+                                              radius: 41.h,
+                                              foregroundImage: NetworkImage(
+                                                  controller.userData!['image']
+                                                      .toString()),
+                                            ),
+                                          ),
                                   CircleAvatar(
                                     radius: 44.h,
                                     backgroundColor: Colors.white,
                                     child: CircleAvatar(
                                       radius: 41.h,
-                                      foregroundImage: const NetworkImage(
-                                          "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg"),
+                                      foregroundImage: controller
+                                              .isErrorOccured.value
+                                          ? const NetworkImage(
+                                              "https://americanmile.com/assets/images/no-image-icon.png")
+                                          : NetworkImage(controller
+                                              .userData!['image']
+                                              .toString()),
+                                      onForegroundImageError: (_, __) {
+                                        setState(() {
+                                          controller.isErrorOccured.value =
+                                              true;
+                                        });
+                                      },
                                     ),
                                   ),
+
+                                  /// my
+                                  // CircleAvatar(
+                                  //   radius: 44.h,
+                                  //   backgroundColor: Colors.white,
+                                  //   child: CircleAvatar(
+                                  //     radius: 41.h,
+                                  //     foregroundImage: NetworkImage(controller
+                                  //         .userData!['image']
+                                  //         .toString()),
+                                  //   ),
+                                  // ),
                                   Gap(10.h),
                                   Column(
                                     crossAxisAlignment:
@@ -119,15 +159,14 @@ class _ProfileState extends State<Profile> {
                               ),
                             ),
                           ),
-                          //  ),
 
                           Positioned(
                               top: 25,
                               right: 25,
                               child: GestureDetector(
                                 onTap: () {
-                                  DeviceHelper.removeUserId();
-                                  Get.offAllNamed(Routes.LOGIN);
+                                  logoutDialogNew(
+                                      message: null, context: context);
                                 },
                                 child: const Icon(
                                   Icons.logout_outlined,
@@ -388,7 +427,11 @@ class _ProfileState extends State<Profile> {
                                           },
                                         )?.then((value) {
                                           if (value) {
-                                            controller.myFamilyAPI();
+
+                                              controller.bottomNavIndex.value = 3;
+                                              controller.getData();
+                                              controller.getUserProfile();
+
                                           }
                                         });
                                       },
@@ -553,7 +596,9 @@ class _ProfileState extends State<Profile> {
                                             })?.then(
                                           (value) {
                                             if (value) {
-                                              controller.myFamilyAPI();
+                                              controller.bottomNavIndex.value = 3;
+                                              controller.getData();
+                                              controller.getUserProfile();
                                             }
                                           },
                                         );

@@ -3,6 +3,9 @@ import 'package:american_mile/app/modules/home/controllers/home_controller.dart'
 import 'package:american_mile/app/modules/my_family/controllers/my_family_controller.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import '../../../../common_lib.dart';
+import '../../../../core/components/rect_icon.dart';
+import '../../../../core/helpers/image_paths.dart';
+import '../../../../core/utils/app_colors.dart';
 import '../controllers/car_dashboard_controller.dart';
 
 class CarDashBoardWebView extends StatefulWidget {
@@ -14,6 +17,7 @@ class CarDashBoardWebView extends StatefulWidget {
   });
 
   final String webUrl;
+
   ///final String type;
 
   @override
@@ -35,7 +39,7 @@ class _CarDashBoardWebViewState extends State<CarDashBoardWebView> {
       //    myFamilyController.autoPolicyAPI();
       //    Get.back();
       //  }
-       //else if (widget.type == "2") {
+      //else if (widget.type == "2") {
       //   final HomeController myFamilyController = Get.find<HomeController>();
       //   myFamilyController.myFamilyAPI();
       //   Get.back();
@@ -43,7 +47,7 @@ class _CarDashBoardWebViewState extends State<CarDashBoardWebView> {
       //   final MyFamilyController myFamilyController =
       //       Get.find<MyFamilyController>();
       //   myFamilyController.myFamilyAPI();
-       //else{
+      //else{
       final CarDashboardController carDashboardController =
           Get.find<CarDashboardController>();
       carDashboardController.getData();
@@ -77,6 +81,29 @@ class _CarDashBoardWebViewState extends State<CarDashBoardWebView> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: WebViewWidget(controller: _controller));
+    return SafeArea(
+        child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Gap(10.h),
+        Padding(
+          padding: EdgeInsets.only(left: 10.w, right: 4.w, bottom: 5.h),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: RRectIcon(
+              backgroundColor: AppColors.primary.withOpacity(0.2),
+              image: ImagePaths.arrow,
+              onTap: () {
+                Get.back();
+              },
+            ),
+          ),
+        ),
+        Gap(10.h),
+        SizedBox(
+            height: MediaQuery.of(context).size.height - 150.h,
+            child: WebViewWidget(controller: _controller)),
+      ],
+    ));
   }
 }
